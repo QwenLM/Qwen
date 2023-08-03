@@ -95,7 +95,7 @@ print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 
 Running Qwen-7B-Chat is also simple. We provide you with an example of IPython to show how to interactive with the model.
 
-```ipython
+```python
 >>> from transformers import AutoModelForCausalLM, AutoTokenizer
 >>> from transformers.generation import GenerationConfig
 
