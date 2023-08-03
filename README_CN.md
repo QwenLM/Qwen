@@ -130,7 +130,7 @@ print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 
 魔搭（ModelScope）是开源的模型即服务共享平台，为泛AI开发者提供灵活、易用、低成本的一站式模型服务产品。使用ModelScope同样非常简单，代码如下所示：
 
-```
+```python
 import os
 from modelscope.pipelines import pipeline
 from modelscope.utils.constant import Tasks
