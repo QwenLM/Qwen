@@ -312,7 +312,7 @@ ReAct is also one of the main approaches used by the [LangChain](https://python.
 For how to write and use prompts for ReAct Prompting, please refer to [the ReAct examples](examples/react_prompt.md).
 In the soon-to-be-released evaluation benchmark for assessing tool usage capabilities, Qwen's performance is as follows:
 
-| Model       | Tool Selection (Acc.&uarr;) | Tool Input (Rouge-L&uarr;) | False Positive Error&darr; |
+| Model       | Tool Selection (Acc.↑)      | Tool Input (Rouge-L↑)      | False Positive Error↓      |
 | :---------- | --------------------------: | -------------------------: | -------------------------: |
 | GPT-4       |                         95% |                   **0.90** |                      15.0% |
 | GPT-3.5     |                         85% |                       0.88 |                      75.0% |
@@ -325,7 +325,7 @@ In the soon-to-be-released evaluation benchmark for assessing tool usage capabil
 Qwen also has the capability to be used as a [HuggingFace Agent](https://huggingface.co/docs/transformers/transformers_agents).
 Its performance on the benchmark provided by HuggingFace is as follows:
 
-| Model           | Tool Selection&uarr; | Tool Used&uarr; | Code&uarr; |
+| Model           | Tool Selection↑      | Tool Used↑      | Code↑      |
 | :-------------- | -------------------: | --------------: | ---------: |
 | GPT-4           |           **100.00** |      **100.00** |  **97.41** |
 | GPT-3.5         |                95.37 |           96.30 |      87.04 |
