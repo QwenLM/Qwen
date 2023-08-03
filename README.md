@@ -159,8 +159,12 @@ print(f'Response: {response}')
 
 ## Quantization
 
-To load the model in lower precision, e.g., 4 bits and 8 bits, we provide examples to show how to load by adding quantization configuration:
+We provide examples to show how to load models in `NF4` and `Int8`. For starters, make sure you have implemented `bitsandbytes`.
+```
+pip install bitsandbytes
+```
 
+Then you only need to add your quantization configuration to `AutoModelForCausalLM.from_pretrained`. See the example below:
 ```python
 from transformers import BitsAndBytesConfig
 
