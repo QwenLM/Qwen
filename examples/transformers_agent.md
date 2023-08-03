@@ -56,10 +56,16 @@ class QWenAgent(Agent):
         )
 
     def generate_one(self, prompt, stop):
+        # "Human:" 和 "Assistant:" 曾为通义千问的特殊保留字，需要替换为 "_HUMAN_:" 和 "_ASSISTANT_:"。这一问题将在未来版本修复。
+        prompt = prompt.replace("Human:", "_HUMAN_:").replace("Assistant:", "_ASSISTANT_:")
+        stop = [item.replace("Human:", "_HUMAN_:").replace("Assistant:", "_ASSISTANT_:") for item in stop]
+
         result, _ = self.model.chat(self.tokenizer, prompt, history=None)
         for stop_seq in stop:
             if result.endswith(stop_seq):
                 result = result[: -len(stop_seq)]
+
+        result = result.replace("_HUMAN_:", "Human:").replace("_ASSISTANT_:", "Assistant:")
         return result
 
 
