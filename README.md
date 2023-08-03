@@ -33,7 +33,7 @@ Qwen-7B is the 7B-parameter version of the large language model series, Qwen (ab
 In general, Qwen-7B outperforms the baseline models of a similar model size, and even outperform larger models of around 13B parameters, on a series of benchmark datasets, e.g., MMLU, C-Eval, GSM8K, HumanEval, and WMT22, etc., which evaluate the models' capabilities on natural language understanding, mathematic problem solving, coding, etc. See the results below.
 
 | Model             | MMLU           |         C-Eval |          GSM8K |      HumanEval |  WMT22 (en-zh) |
-| :---------------- | -------------- | -------------: | -------------: | -------------: | -------------: |
+| :---------------- | -------------: | -------------: | -------------: | -------------: | -------------: |
 | LLaMA-7B          | 35.1           |              - |           11.0 |           10.5 |            8.7 |
 | LLaMA 2-7B        | 45.3           |              - |           14.6 |           12.8 |           17.9 |
 | Baichuan-7B       | 42.3           |           42.8 |            9.7 |            9.2 |           26.6 |
@@ -239,7 +239,7 @@ To extend the context length and break the botteneck of training sequence length
 
 ## Reproduction
 
-For your reproduction of the model performance on benchmark datasets, we provide scripts for you to reproduce the results and improve your own model. Check [eval/EVALUATION.md](eval/EVALUATION.md) for more information.
+For your reproduction of the model performance on benchmark datasets, we provide scripts for you to reproduce the results. Check [eval/EVALUATION.md](eval/EVALUATION.md) for more information. Note that the reproduction may lead to slight differences from our reported results.
 
 ## License Agreement
 
