@@ -76,7 +76,7 @@ Now you can start with ModelScope or Transformers.
 
 #### 🤗 Transformers
 
-To use Qwen-7B-chat for the inference, all you need to do is to input a few lines of codes as demonstrated below:
+To use Qwen-7B-Chat for the inference, all you need to do is to input a few lines of codes as demonstrated below:
 
 ```python
 >>> from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -111,7 +111,7 @@ To use Qwen-7B-chat for the inference, all you need to do is to input a few line
 ```
 
 
-Running Qwen-7B is also simple. 
+Running Qwen-7B pretrained base model is also simple. 
 <details>
   <summary>Running Qwen-7B</summary>
     
