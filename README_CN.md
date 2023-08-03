@@ -160,7 +160,13 @@ print(f'Response: {response}')
 
 ## 量化
 
-如希望使用更低精度的量化模型，如4比特和8比特的模型，我们提供了简单的示例来说明如何快速使用量化模型：
+如希望使用更低精度的量化模型，如4比特和8比特的模型，我们提供了简单的示例来说明如何快速使用量化模型。在开始前，确保你已经安装了`bitsandbytes`。
+
+```bash
+pip install bitsandbytes
+```
+
+你只需要在`AutoModelForCausalLM.from_pretrained`中添加你的量化配置，即可使用量化模型。如下所示：
 
 ```python
 from transformers import BitsAndBytesConfig
