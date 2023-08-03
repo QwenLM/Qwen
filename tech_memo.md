@@ -146,7 +146,7 @@ We compared the code capabilities of pretrained models on [HumanEval](https://gi
 
 #### Math
 
-We compared the math capabilities of pretrained models on [GSM8K](https://github.com/openai/human-eval) (8-shot), and the results are as follows:
+We compared the math capabilities of pretrained models on [GSM8K](https://github.com/openai/grade-school-math) (8-shot), and the results are as follows:
 
 | Model        | Accuracy |
 | :----------- | -------: |
