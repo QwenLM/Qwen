@@ -94,7 +94,7 @@ print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 
 运行Qwen-7B-Chat同样非常简单。下面是一个IPython的示例来展示如何交互式地使用`Qwen-7B-Chat`。
 
-```ipython
+```python
 >>> from transformers import AutoModelForCausalLM, AutoTokenizer
 >>> from transformers.generation import GenerationConfig
 
