@@ -76,24 +76,7 @@ Now you can start with ModelScope or Transformers.
 
 #### 🤗 Transformers
 
-To use Qwen-7B for the inference, all you need to do is to input a few lines of codes as demonstrated below:
-
-```python
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from transformers.generation import GenerationConfig
-
-tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
-model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True).eval()
-model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
-
-inputs = tokenizer('蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是', return_tensors='pt')
-inputs = inputs.to('cuda:0')
-pred = model.generate(**inputs)
-print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
-# 蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是亚的斯亚贝巴（Addis Ababa）...
-```
-
-Running Qwen-7B-Chat is also simple. We provide you with an example of IPython to show how to interactive with the model.
+To use Qwen-7B-chat for the inference, all you need to do is to input a few lines of codes as demonstrated below:
 
 ```python
 >>> from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -126,6 +109,27 @@ Running Qwen-7B-Chat is also simple. We provide you with an example of IPython t
 >>> print(response)
 《奋斗创业：一个年轻人的成功之路》
 ```
+
+
+Running Qwen-7B is also simple. 
+<details>
+  <summary>Running Qwen-7B</summary>
+    
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers.generation import GenerationConfig
+
+tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True).eval()
+model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
+
+inputs = tokenizer('蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是', return_tensors='pt')
+inputs = inputs.to('cuda:0')
+pred = model.generate(**inputs)
+print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
+# 蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是亚的斯亚贝巴（Addis Ababa）...
+```
+</details>
 
 #### 🤖 ModelScope
 
