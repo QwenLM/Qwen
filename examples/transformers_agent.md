@@ -47,7 +47,7 @@ class QWenAgent(Agent):
         self.tokenizer = AutoTokenizer.from_pretrained(checkpoint, trust_remote_code=True)
         self.model = AutoModelForCausalLM.from_pretrained(checkpoint, device_map="auto", trust_remote_code=True).cuda().eval()
         self.model.generation_config = GenerationConfig.from_pretrained(checkpoint, trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
-        model.generation_config.do_sample = False  # greedy
+        self.model.generation_config.do_sample = False  # greedy
         
         super().__init__(
             chat_prompt_template=chat_prompt_template,
