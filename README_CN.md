@@ -14,19 +14,19 @@
 </p>
 <br><br>
 
-我们在🤖 **ModelScope**以及🤗 **Hugging Face**均开源了`Qwen-7B`系列模型。请在本文档顶部点击相关链接查看仓库信息。本仓库主要包括`Qwen-7B`的简介、使用指南、技术备忘等内容。想了解更多关于模型的信息，请点击[链接](tech_memo.md)查看我们的技术备忘录。
+我们在🤖 **ModelScope**以及🤗 **Hugging Face**均开源了**Qwen-7B**系列模型。请在本文档顶部点击相关链接查看仓库信息。本仓库主要包括Qwen-7B的简介、使用指南、技术备忘等内容。想了解更多关于模型的信息，请点击[链接](tech_memo.md)查看我们的技术备忘录。
 
-通义千问-7B（`Qwen-7B`） 是阿里云研发的通义千问大模型系列的70亿参数规模的模型。`Qwen-7B`是基于Transformer的大语言模型, 在超大规模的预训练数据上进行训练得到。预训练数据类型多样，覆盖广泛，包括大量网络文本、专业书籍、代码等。同时，在`Qwen-7B`的基础上，我们使用对齐机制打造了基于大语言模型的AI助手`Qwen-7B-Chat`。`Qwen-7B`系列模型的特点包括：
+通义千问-7B（Qwen-7B） 是阿里云研发的通义千问大模型系列的70亿参数规模的模型。Qwen-7B是基于Transformer的大语言模型, 在超大规模的预训练数据上进行训练得到。预训练数据类型多样，覆盖广泛，包括大量网络文本、专业书籍、代码等。同时，在Qwen-7B的基础上，我们使用对齐机制打造了基于大语言模型的AI助手Qwen-7B-Chat。Qwen-7B系列模型的特点包括：
 
 1. **大规模高质量预训练数据**：我们使用了超过2.2万亿token的自建大规模预训练数据集进行语言模型的预训练。数据集包括文本和代码等多种数据类型，覆盖通用领域和专业领域。
-2. **优秀的模型性能**：相比同规模的开源模型，`Qwen-7B`在多个评测数据集上具有显著优势，甚至超出12-13B等更大规模的模型。评测评估的能力范围包括自然语言理解与生成、数学运算解题、代码生成等。
+2. **优秀的模型性能**：相比同规模的开源模型，Qwen-7B在多个评测数据集上具有显著优势，甚至超出12-13B等更大规模的模型。评测评估的能力范围包括自然语言理解与生成、数学运算解题、代码生成等。
 3. **更好地支持多语言**：基于更大词表的分词器在分词上更高效，同时它对其他语言表现更加友好。用户可以在`Qwen-7B`的基础上更方便地训练特定语言的7B语言模型。
-4. **8K的上下文长度**：`Qwen-7B`及`Qwen-7B-Chat`均能支持8K的上下文长度, 允许用户输入更长的prompt。
-5. **支持插件调用**：`Qwen-7B-Chat`针对插件调用相关的对齐数据做了特定优化，当前模型能有效调用插件以及升级为Agent。
+4. **8K的上下文长度**：Qwen-7B及Qwen-7B-Chat均能支持8K的上下文长度, 允许用户输入更长的prompt。
+5. **支持插件调用**：Qwen-7B-Chat针对插件调用相关的对齐数据做了特定优化，当前模型能有效调用插件以及升级为Agent。
 
 ## 新闻
 
-* 2023年8月3日 在魔搭社区（ModelScope）和Hugging Face同步推出`Qwen-7B`和`Qwen-7B-Chat`模型。同时，我们发布了技术备忘录，介绍了相关的训练细节和模型表现。
+* 2023年8月3日 在魔搭社区（ModelScope）和Hugging Face同步推出Qwen-7B和Qwen-7B-Chat模型。同时，我们发布了技术备忘录，介绍了相关的训练细节和模型表现。
 
 ## 评测表现
 
@@ -45,11 +45,16 @@
 | ChatGLM2-12B | 56.2     | **61.6** |     40.9 |         - |             - |
 | **Qwen-7B**  | **56.7** |     59.6 | **51.6** |  **24.4** |      **30.6** |
 
+<p align="center">
+    <img src="assets/performance.png" width="1000"/>
+<p>
+<br>
+
 更多的实验结果和细节请查看我们的技术备忘录。点击[这里](techmemo-draft.md)。
 
 ## 快速使用
 
-我们提供简单的示例来说明如何利用🤖 ModelScope和🤗 Transformers快速使用`Qwen-7B`和`Qwen-7B-Chat`。
+我们提供简单的示例来说明如何利用🤖 ModelScope和🤗 Transformers快速使用Qwen-7B和Qwen-7B-Chat。
 
 在开始前，请确保你已经配置好环境并安装好相关的代码包。最重要的是，确保你的pytorch版本高于`1.12`，然后安装相关的依赖库。
 
@@ -70,7 +75,7 @@ pip install csrc/rotary
 
 #### 🤗 Transformers
 
-如希望使用`Qwen-7B`进行推理，所需要写的只是如下所示的数行代码：
+如希望使用Qwen-7B进行推理，所需要写的只是如下所示的数行代码：
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -186,7 +191,7 @@ model = AutoModelForCausalLM.from_pretrained(
 
 ## 工具调用
 
-`Qwen-7B-Chat` 针对包括API、数据库、模型等工具在内的调用进行了优化。用户可以开发基于`Qwen-7B`的LangChain、Agent甚至Code Interpreter。我们在内部的即将开源的评测数据集上测试模型的工具调用能力，并发现`Qwen-7B-Chat`能够取得稳定的表现。
+Qwen-7B-Chat针对包括API、数据库、模型等工具在内的调用进行了优化。用户可以开发基于Qwen-7B的LangChain、Agent甚至Code Interpreter。我们在内部的即将开源的评测数据集上测试模型的工具调用能力，并发现Qwen-7B-Chat能够取得稳定的表现。
 
 | Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑) | False Positive Error↓ |
 | ------------- | ------------------------- | ------------------------ | ------------------------ |
@@ -209,7 +214,7 @@ For how to write and use prompts for ReAct Prompting, please refer to [the ReAct
 
 ## 长文本理解
 
-我们引入了NTK插值、窗口注意力、LogN注意力缩放等技术来提升模型的上下文长度并突破训练序列长度的限制。我们的模型已经突破8K的序列长度。通过arXiv数据集上的语言模型实验，我们发现`Qwen-7B`能够在长序列的设置下取得不错的表现。
+我们引入了NTK插值、窗口注意力、LogN注意力缩放等技术来提升模型的上下文长度并突破训练序列长度的限制。我们的模型已经突破8K的序列长度。通过arXiv数据集上的语言模型实验，我们发现Qwen-7B能够在长序列的设置下取得不错的表现。
 
 <table>
     <tr>
@@ -238,7 +243,7 @@ For how to write and use prompts for ReAct Prompting, please refer to [the ReAct
 
 ## 使用协议
 
-研究人员与开发者可使用`Qwen-7B`和`Qwen-7B-Chat`或进行二次开发。我们同样允许商业使用，具体细节请查看[LICENSE](LICENSE)。
+研究人员与开发者可使用Qwen-7B和Qwen-7B-Chat或进行二次开发。我们同样允许商业使用，具体细节请查看[LICENSE](LICENSE)。
 
 ## 联系我们
 
