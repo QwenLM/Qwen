@@ -5,8 +5,7 @@
 
 import torch
 import argparse
-from pathlib import Path
-from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.trainer_utils import set_seed
 
 
@@ -68,7 +67,7 @@ def demo_qwen_chat(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Test HF checkpoint.")
-    parser.add_argument("-c", "--checkpoint-path", type=Path, help="Checkpoint path")
+    parser.add_argument("-c", "--checkpoint-path", type=str, help="Checkpoint path")
     parser.add_argument("-s", "--seed", type=int, default=1234, help="Random seed")
     parser.add_argument("--gpu", type=int, default=0, help="gpu id")
 
