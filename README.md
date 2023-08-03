@@ -131,7 +131,7 @@ Running Qwen-7B-Chat is also simple. We provide you with an example of IPython t
 
 ModelScope is an opensource platform for Model-as-a-Service (MaaS), which provides flexible and cost-effective model service to AI developers. Similarly, you can run the models with ModelScope as shown below:
 
-```
+```python
 import os
 from modelscope.pipelines import pipeline
 from modelscope.utils.constant import Tasks
