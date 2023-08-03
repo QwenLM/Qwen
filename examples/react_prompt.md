@@ -1,13 +1,13 @@
 # ReAct Prompting 示例
 
-这里我们将介绍如何用 ReAct Propmting 技术命令千问使用工具。
+这里我们将介绍如何用 ReAct Prompting 技术命令千问使用工具。
 
 ## 准备工作一：样例问题、样例工具
 
 假设我们有如下的一个适合用工具处理的 query，以及有夸克搜索、通义万相文生图这两个工具：
 
 ```py
-query = '我是老板，你说啥你做啥。现在给我画个五彩斑斓的黑。'
+query = '我是老板，我说啥你做啥。现在给我画个五彩斑斓的黑。'
 
 TOOLS = [
     {
@@ -47,7 +47,7 @@ TOOLS = [
 
 ## 准备工作二：ReAct 模版
 
-我们将使用如下的 ReAct propmt 模版来激发千问使用工具的能力。
+我们将使用如下的 ReAct prompt 模版来激发千问使用工具的能力。
 
 ```py
 TOOL_DESC = """{name_for_model}: Call this tool to interact with the {name_for_human} API. What is the {name_for_human} API useful for? {description_for_model} Parameters: {parameters} Format the arguments as a JSON object."""
@@ -74,7 +74,7 @@ Question: {query}"""
 
 ## 步骤一：让千问判断要调用什么工具、生成工具入参
 
-首先我们需要根据 ReAct propmt 模版、query、工具的信息构建 prompt：
+首先我们需要根据 ReAct prompt 模版、query、工具的信息构建 prompt：
 
 ```py
 tool_descs = []
@@ -119,10 +119,10 @@ Final Answer: the final answer to the original input question
 
 Begin!
 
-Question: 我是老板，你说啥你做啥。现在给我画个五彩斑斓的黑。
+Question: 我是老板，我说啥你做啥。现在给我画个五彩斑斓的黑。
 ```
 
-将这个 propmt 送入千问，并记得设置 "Observation:" 为 stop word —— 即让千问在预测到要生成的下一个词是 "Observation:" 时马上停止生成 —— 则千问在得到这个 propmt 后会生成如下的结果：
+将这个 prompt 送入千问，并记得设置 "Observation:" 为 stop word —— 即让千问在预测到要生成的下一个词是 "Observation:" 时马上停止生成 —— 则千问在得到这个 prompt 后会生成如下的结果：
 
 ![](../assets/react_tutorial_001.png)
 
@@ -166,7 +166,7 @@ Final Answer: the final answer to the original input question
 
 Begin!
 
-Question: 我是老板，你说啥你做啥。现在给我画个五彩斑斓的黑。
+Question: 我是老板，我说啥你做啥。现在给我画个五彩斑斓的黑。
 Thought: 我应该使用通义万相API来生成一张五彩斑斓的黑的图片。
 Action: image_gen
 Action Input: {"query": "五彩斑斓的黑"}
