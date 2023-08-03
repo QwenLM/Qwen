@@ -1,0 +1,11 @@
+__pycache__
+*.so
+build
+.coverage_*
+*.egg-info
+*~
+.vscode/
+.idea/
+.DS_Store
+
+/private/
