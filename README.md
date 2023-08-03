@@ -44,6 +44,12 @@ In general, Qwen-7B outperforms the baseline models of a similar model size, and
 | ChatGLM2-12B      | 56.2           |       **61.6** |           40.9 |              - |              - |
 | **Qwen-7B**       | **56.7**       |           59.6 |       **51.6** |       **24.4** |       **30.6** |
 
+<p align="center">
+    <img src="assets/performance.png" width="1000"/>
+<p>
+<br>
+
+
 For more experimental results (detailed model performance on more benchmark datasets) and details, please refer to our techinical memo by clicking [here](techmemo-draft.md).
 
 ## Quickstart
