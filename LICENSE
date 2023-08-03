@@ -6,13 +6,12 @@ By clicking to agree or by using or distributing any portion or element of the T
 
 1. Definitions
     a. This Tongyi Qianwen LICENSE AGREEMENT (this "Agreement") shall mean the terms and conditions for use, reproduction, distribution and modification of the Materials as defined by this Agreement.
-    b.  "We"(or "Us") shall mean Alibaba Cloud.
-    c.  "You" (or "Your") shall mean a natural person or legal entity exercising the rights granted by this Agreement and/or using the Materials for any purpose and in any field of use.
-    d.  "Third Parties" shall mean individuals or legal entities that are not under common control with Us or You.
-    e. "Tongyi Qianwen" shall mean the large language models (including Qwen-7b model and Qwen-7b-Chat model ), and software and
-algorithms, consisting of trained model weights, parameters (including optimizer states), machine-learning model code, inference-enabling code, training-enabling code, fine-tuning enabling code and other elements of the foregoing distributed by Us.
+    b. "We"(or "Us") shall mean Alibaba Cloud.
+    c. "You" (or "Your") shall mean a natural person or legal entity exercising the rights granted by this Agreement and/or using the Materials for any purpose and in any field of use.
+    d. "Third Parties" shall mean individuals or legal entities that are not under common control with Us or You.
+    e. "Tongyi Qianwen" shall mean the large language models (including Qwen-7B model and Qwen-7B-Chat model), and software and algorithms, consisting of trained model weights, parameters (including optimizer states), machine-learning model code, inference-enabling code, training-enabling code, fine-tuning enabling code and other elements of the foregoing distributed by Us.
     f. "Materials" shall mean, collectively, Alibaba Cloud's proprietary Tongyi Qianwen and Documentation (and any portion thereof) made available under this Agreement.
-    g.  "Source" form shall mean the preferred form for making modifications, including but not limited to model source code, documentation source, and configuration files.
+    g. "Source" form shall mean the preferred form for making modifications, including but not limited to model source code, documentation source, and configuration files.
     h. "Object" form shall mean any form resulting from mechanical transformation or translation of a Source form, including but not limited to compiled object code, generated documentation,
  and conversions to other media types.
 
@@ -23,7 +22,7 @@ You are granted a non-exclusive, worldwide, non-transferable and royalty-free li
 You may reproduce and distribute copies of the Materials or derivative works thereof in any medium, with or without modifications, and in Source or Object form, provided that You meet the following conditions:
     a. You shall give any other recipients of the Materials or derivative works a copy of this Agreement;
     b. You shall cause any modified files to carry prominent notices stating that You changed the files;
-    c. You shall retain in all copies of the Materials that You distribute the following attribution notices  within a "Notice" text file distributed as a part of such copies:"Tongyi Qianwen is licensed under the Tongyi Qianwen LICENSE AGREEMENT, Copyright (c) Alibaba Cloud. All Rights Reserved."; and
+    c. You shall retain in all copies of the Materials that You distribute the following attribution notices within a "Notice" text file distributed as a part of such copies: "Tongyi Qianwen is licensed under the Tongyi Qianwen LICENSE AGREEMENT, Copyright (c) Alibaba Cloud. All Rights Reserved."; and
     d. You may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions for use, reproduction, or distribution of Your modifications, or for any such derivative works as a whole, provided Your use, reproduction, and distribution of the work otherwise complies with the terms and conditions of this Agreement.
 
 4. Restrictions
@@ -40,10 +39,10 @@ If you are commercially using the Materials, and your product or service has mor
 
 7. Disclaimer of Warranty and Limitation of Liability
 
-    a. We are not obligated to support, update, provide training for, or develop any further version of the Tongyi  Qianwen Model or to grant any license thereto.
+    a. We are not obligated to support, update, provide training for, or develop any further version of the Tongyi Qianwen Materials or to grant any license thereto.
     b. THE MATERIALS ARE PROVIDED "AS IS" WITHOUT ANY EXPRESS OR IMPLIED WARRANTY OF ANY KIND INCLUDING WARRANTIES OF MERCHANTABILITY, NONINFRINGEMENT, OR FITNESS FOR A PARTICULAR PURPOSE. WE MAKE NO WARRANTY AND ASSUME NO RESPONSIBILITY FOR THE SAFETY OR STABILITY OF THE MATERIALS AND ANY OUTPUT THEREFROM.
     c. IN NO EVENT SHALL WE BE LIABLE TO YOU FOR ANY DAMAGES, INCLUDING, BUT NOT LIMITED TO ANY DIRECT, OR INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM YOUR USE OR INABILITY TO USE THE MATERIALS OR ANY OUTPUT OF IT, NO MATTER HOW IT’S CAUSED.
-    d. You will indemnify and hold armless Us from and against any claim by any third party arising out of or related to your use or distribution of the Materials.
+    d. You will defend, indemnify and hold harmless Us from and against any claim by any third party arising out of or related to your use or distribution of the Materials.
 
 8. Survival and Termination.
     a. The term of this Agreement shall commence upon your acceptance of this Agreement or access to the Materials and will continue in full force and effect until terminated in accordance with the terms and conditions herein.
