@@ -30,7 +30,7 @@
 
 ## 评测表现
 
-`Qwen-7B`在多个全面评估自然语言理解与生成、数学运算解题、代码生成等能力的评测数据集上，包括MMLU、C-Eval、GSM8K、HumanEval、WMT22等，均超出了同规模大语言模型的表现，甚至超出了如12-13B参数等更大规模的语言模型。
+Qwen-7B在多个全面评估自然语言理解与生成、数学运算解题、代码生成等能力的评测数据集上，包括MMLU、C-Eval、GSM8K、HumanEval、WMT22等，均超出了同规模大语言模型的表现，甚至超出了如12-13B参数等更大规模的语言模型。
 
 | Model        | MMLU     |   C-Eval |    GSM8K | HumanEval | WMT22 (en-zh) |
 | :------------- | ---------- | ---------: | ---------: | ----------: | --------------: |
@@ -78,35 +78,32 @@ pip install csrc/rotary
 如希望使用Qwen-7B-chat进行推理，所需要写的只是如下所示的数行代码：
 
 ```python
->>> from transformers import AutoModelForCausalLM, AutoTokenizer
->>> from transformers.generation import GenerationConfig
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers.generation import GenerationConfig
 
->>> tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
->>> model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True).eval()
->>> model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
+tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True).eval()
+model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
 
->>> # 第一轮对话 1st dialogue turn
->>> response, history = model.chat(tokenizer, "你好", history=None)
->>> print(response)
-你好！很高兴为你提供帮助。
->>> # 第二轮对话 2nd dialogue turn
->>> response, history = model.chat(tokenizer, "给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history) 
->>> print(response)
-这是一个关于一个年轻人奋斗创业最终取得成功的故事。
+# 第一轮对话 1st dialogue turn
+response, history = model.chat(tokenizer, "你好", history=None)
+print(response)
+# 你好！很高兴为你提供帮助。
 
-故事的主人公叫李明，他来自一个普通的家庭，父母都是普通的工人。从小，李明就立下了一个目标：要成为一名成功的企业家。
+# 第二轮对话 2nd dialogue turn
+response, history = model.chat(tokenizer, "给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history) 
+print(response)
+# 这是一个关于一个年轻人奋斗创业最终取得成功的故事。
+# 故事的主人公叫李明，他来自一个普通的家庭，父母都是普通的工人。从小，李明就立下了一个目标：要成为一名成功的企业家。
+# 为了实现这个目标，李明勤奋学习，考上了大学。在大学期间，他积极参加各种创业比赛，获得了不少奖项。他还利用课余时间去实习，积累了宝贵的经验。
+# 毕业后，李明决定开始自己的创业之路。他开始寻找投资机会，但多次都被拒绝了。然而，他并没有放弃。他继续努力，不断改进自己的创业计划，并寻找新的投资机会。
+# 最终，李明成功地获得了一笔投资，开始了自己的创业之路。他成立了一家科技公司，专注于开发新型软件。在他的领导下，公司迅速发展起来，成为了一家成功的科技企业。
+# 李明的成功并不是偶然的。他勤奋、坚韧、勇于冒险，不断学习和改进自己。他的成功也证明了，只要努力奋斗，任何人都有可能取得成功。
 
-为了实现这个目标，李明勤奋学习，考上了大学。在大学期间，他积极参加各种创业比赛，获得了不少奖项。他还利用课余时间去实习，积累了宝贵的经验。
-
-毕业后，李明决定开始自己的创业之路。他开始寻找投资机会，但多次都被拒绝了。然而，他并没有放弃。他继续努力，不断改进自己的创业计划，并寻找新的投资机会。
-
-最终，李明成功地获得了一笔投资，开始了自己的创业之路。他成立了一家科技公司，专注于开发新型软件。在他的领导下，公司迅速发展起来，成为了一家成功的科技企业。
-
-李明的成功并不是偶然的。他勤奋、坚韧、勇于冒险，不断学习和改进自己。他的成功也证明了，只要努力奋斗，任何人都有可能取得成功。
->>> # 第三轮对话 3rd dialogue turn
->>> response, history = model.chat(tokenizer, "给这个故事起一个标题", history=history)
->>> print(response)
-《奋斗创业：一个年轻人的成功之路》
+# 第三轮对话 3rd dialogue turn
+response, history = model.chat(tokenizer, "给这个故事起一个标题", history=history)
+print(response)
+# 《奋斗创业：一个年轻人的成功之路》
 ```
 
 运行Qwen-7B同样非常简单。
