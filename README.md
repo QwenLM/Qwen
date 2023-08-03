@@ -63,7 +63,7 @@ Before running the code, make sure you have setup the environment and installed 
 pip install transformers==4.31.0 accelerate tiktoken einops
 ```
 
-We recommend installing `flash-attention` for higher efficiency and lower memory usage.
+We recommend installing [flash-attention](https://github.com/Dao-AILab/flash-attention) for higher efficiency and lower memory usage.
 
 ```bash
 git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
