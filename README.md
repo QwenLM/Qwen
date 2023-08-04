@@ -50,7 +50,6 @@ In general, Qwen-7B outperforms the baseline models of a similar model size, and
 <p>
 <br>
 
-
 For more experimental results (detailed model performance on more benchmark datasets) and details, please refer to our technical memo by clicking [here](techmemo-draft.md).
 
 ## Quickstart
@@ -90,6 +89,8 @@ tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True, bf16=True).eval()
 ## use fp16
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True, fp16=True).eval()
+## use cpu only
+# model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
 # use fp32
 model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True).eval()
 model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
@@ -115,11 +116,11 @@ print(response)
 # 《奋斗创业：一个年轻人的成功之路》
 ```
 
+Running Qwen-7B pretrained base model is also simple.
 
-Running Qwen-7B pretrained base model is also simple. 
 <details>
   <summary>Running Qwen-7B</summary>
-    
+
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
@@ -129,6 +130,8 @@ tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True, bf16=True).eval()
 ## use fp16
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True, fp16=True).eval()
+## use cpu only
+# model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="cpu", trust_remote_code=True).eval()
 # use fp32
 model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True).eval()
 model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
@@ -139,6 +142,7 @@ pred = model.generate(**inputs)
 print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 # 蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是亚的斯亚贝巴（Addis Ababa）...
 ```
+
 </details>
 
 #### 🤖 ModelScope
@@ -173,11 +177,13 @@ print(f'Response: {response}')
 ## Quantization
 
 We provide examples to show how to load models in `NF4` and `Int8`. For starters, make sure you have implemented `bitsandbytes`.
+
 ```
 pip install bitsandbytes
 ```
 
 Then you only need to add your quantization configuration to `AutoModelForCausalLM.from_pretrained`. See the example below:
+
 ```python
 from transformers import BitsAndBytesConfig
 
@@ -266,4 +272,6 @@ Researchers and developers are free to use the codes and model weights of both Q
 ## Contact Us
 
 If you are interested to leave a message to either our research team or product team, feel free to send an email to qianwen_opensource@alibabacloud.com.
+
+
 
