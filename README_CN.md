@@ -86,6 +86,8 @@ tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True, bf16=True).eval()
 ## 打开fp16精度，V100、P100、T4等显卡建议启用以节省显存
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True, fp16=True).eval()
+## 使用CPU进行推理，需要约32GB内存
+# model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
 # 默认使用fp32精度
 model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True).eval()
 model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
@@ -124,6 +126,8 @@ tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True, bf16=True).eval()
 ## 打开fp16精度，V100、P100、T4等显卡建议启用以节省显存
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True, fp16=True).eval()
+## 使用CPU进行推理，需要约32GB内存
+# model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="cpu", trust_remote_code=True).eval()
 # 默认使用fp32精度
 model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True).eval()
 model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
