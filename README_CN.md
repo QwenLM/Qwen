@@ -62,7 +62,7 @@ Qwen-7B在多个全面评估自然语言理解与生成、数学运算解题、�
 pip install transformers==4.31.0 accelerate tiktoken einops
 ```
 
-我们还推荐安装[flash-attention](https://github.com/Dao-AILab/flash-attention)来提高你的运行效率以及降低显存占用。
+我们还推荐安装[flash-attention](https://github.com/Dao-AILab/flash-attention)来提高你的运行效率以及降低显存占用。(**flash-attention只是可选项，不安装也可正常运行该项目**)
 
 ```bash
 git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
