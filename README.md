@@ -82,6 +82,9 @@ To use Qwen-7B-Chat for the inference, all you need to do is to input a few line
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
+# Note: our tokenizer rejects attacks and so that you cannot input special tokens like <|endoftext|> or it will throw an error.
+# To remove the strategy, you can add `allowed_special`, which accepts the string "all" or a `set` of special tokens.
+# For example: tokens = tokenizer(text, allowed_special="all")
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 ## use bf16
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True, bf16=True).eval()
