@@ -36,6 +36,7 @@ It is pretrained on over 2.2 trillion tokens with 2048 context length from publi
 
 **Pretraining data**:
 Our training data includes a mix of data from publicly available sources, consisting mainly of web documents and code files.
+For math reasoning, we include RFT data from [gsm8k-ScRel](https://github.com/OFA-Sys/gsm8k-ScRel).
 Besides, the data are multilingual, with most of them in English and Chinese.
 We made an effort and employed an ensemble of models to exclude data of low quality or deemed unfit for pretraining, such as NSFW content.
 The final data underwent global fuzzy deduplication.
