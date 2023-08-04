@@ -287,7 +287,7 @@ The zero-shot Pass@1 of Qwen-7B-Chat on [HumanEval](https://github.com/openai/hu
 | InternLM-7B-Chat  |     14.0 |
 | Baichuan-13B-Chat |     16.5 |
 | LLaMA2-13B-Chat   |     18.9 |
-| **Qwen-7B-Chat**  | **21.3** |
+| **Qwen-7B-Chat**  | **24.4** |
 
 #### Math
 
