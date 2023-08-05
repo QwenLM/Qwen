@@ -122,7 +122,7 @@ Begin!
 Question: 我是老板，我说啥你做啥。现在给我画个五彩斑斓的黑。
 ```
 
-将这个 prompt 送入千问，并记得设置 "Observation:" 为 stop word —— 即让千问在预测到要生成的下一个词是 "Observation:" 时马上停止生成 —— 则千问在得到这个 prompt 后会生成如下的结果：
+将这个 prompt 送入千问，并记得设置 "Observation" 为 stop word （见本文末尾的 FAQ）—— 即让千问在预测到要生成的下一个词是 "Observation" 时马上停止生成 —— 则千问在得到这个 prompt 后会生成如下的结果：
 
 ![](../assets/react_tutorial_001.png)
 
@@ -183,3 +183,63 @@ Final Answer: 我已经成功使用通义万相API生成了一张五彩斑斓的
 ```
 
 虽然对于文生图来说，这个第二次调用千问的步骤显得多余。但是对于搜索插件、代码执行插件、计算器插件等别的插件来说，这个第二次调用千问的步骤给了千问提炼、总结插件返回结果的机会。
+
+## FAQ
+
+**怎么配置 "Observation" 这个 stop word？**
+
+通过 chat 接口的 stop_words_ids 指定：
+```py
+react_stop_words = [
+    # tokenizer.encode('Observation'),  # [37763, 367]
+    tokenizer.encode('Observation:'),  # [37763, 367, 25]
+    tokenizer.encode('Observation:\n'),  # [37763, 367, 510]
+]
+response, history = model.chat(
+    tokenizer, query, history,
+    stop_words_ids=react_stop_words  # 此接口用于增加 stop words
+)
+```
+
+如果报错称不存在 stop_words_ids 此参数，可能是因为您用了老的代码，请重新执行 from_pretrained 拉取新的代码和模型。
+
+需要注意的是，当前的 tokenizer 对 `\n` 有一系列较复杂的聚合操作。比如例子中的`:\n`这两个字符便被聚合成了一个 token。因此配置 stop words 需要非常细致地预估 tokenizer 的行为。
+
+**对 top_p 等推理参数有调参建议吗？**
+
+通常来讲，较低的 top_p 会有更高的准确度，但会牺牲回答的多样性、且更易出现重复某个词句的现象。
+
+可以按如下方式调整 top_p 为 0.5：
+```py
+model.generation_config.top_p = 0.5
+```
+
+特别的，可以用如下方式关闭 top-p sampling，改用 greedy sampling，效果上相当于 top_p=0 或 temperature=0：
+```py
+model.generation_config.do_sample = False  # greedy decoding
+```
+
+此外，我们在 `model.chat()` 接口也提供了调整 top_p 等参数的接口。
+
+**有解析Action、Action Input的参考代码吗？**
+
+有的，可以参考：
+```py
+def parse_latest_plugin_call(text: str) -> Tuple[str, str]:
+    i = text.rfind('\nAction:')
+    j = text.rfind('\nAction Input:')
+    k = text.rfind('\nObservation:')
+    if 0 <= i < j:  # If the text has `Action` and `Action input`,
+        if k < j:  # but does not contain `Observation`,
+            # then it is likely that `Observation` is ommited by the LLM,
+            # because the output text may have discarded the stop word.
+            text = text.rstrip() + '\nObservation:'  # Add it back.
+            k = text.rfind('\nObservation:')
+    if 0 <= i < j < k:
+        plugin_name = text[i + len('\nAction:'):j].strip()
+        plugin_args = text[j + len('\nAction Input:'):k].strip()
+        return plugin_name, plugin_args
+    return '', ''
+```
+
+此外，如果输出的 Action Input 内容是一段表示 JSON 对象的文本，我们建议使用 `json5` 包的 `json5.loads(...)` 方法加载。

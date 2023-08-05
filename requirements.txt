@@ -3,3 +3,4 @@ accelerate
 tiktoken
 einops
 transformers_stream_generator==0.0.4
+bitsandbytes
