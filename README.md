@@ -186,7 +186,7 @@ print(f'Response: {response}')
 
 ## Quantization
 
-We provide examples to show how to load models in `NF4` and `Int8`. For starters, make sure you have implemented `bitsandbytes`. Note that the requirements for `bitsandbytes` is:
+We provide examples to show how to load models in `NF4` and `Int8`. For starters, make sure you have implemented `bitsandbytes`. Note that the requirements for `bitsandbytes` are:
 
 ```
 **Requirements** Python >=3.8. Linux distribution (Ubuntu, MacOS, etc.) + CUDA > 10.0.
@@ -197,7 +197,7 @@ Windows users should find another option, which might be [bitsandbytes-windows-w
 Then you only need to add your quantization configuration to `AutoModelForCausalLM.from_pretrained`. See the example below:
 
 ```python
-from transformers import BitsAndBytesConfig
+from transformers import AutoModelForCausalLM, BitsAndBytesConfig
 
 # quantization configuration for NF4 (4 bits)
 quantization_config = BitsAndBytesConfig(

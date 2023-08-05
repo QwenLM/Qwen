@@ -188,13 +188,11 @@ print(f'Response: {response}')
 
 如希望使用更低精度的量化模型，如4比特和8比特的模型，我们提供了简单的示例来说明如何快速使用量化模型。在开始前，确保你已经安装了`bitsandbytes`。请注意，`bitsandbytes`的安装要求是：
 
-
 ```
 **Requirements** Python >=3.8. Linux distribution (Ubuntu, MacOS, etc.) + CUDA > 10.0.
 ```
 
 Windows用户需安装特定版本的`bitsandbytes`，可选项包括[bitsandbytes-windows-webui](https://github.com/jllllll/bitsandbytes-windows-webui/releases/tag/wheels)。
-
 
 你只需要在`AutoModelForCausalLM.from_pretrained`中添加你的量化配置，即可使用量化模型。如下所示：
 
