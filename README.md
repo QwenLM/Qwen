@@ -52,11 +52,17 @@ In general, Qwen-7B outperforms the baseline models of a similar model size, and
 
 For more experimental results (detailed model performance on more benchmark datasets) and details, please refer to our technical memo by clicking [here](techmemo-draft.md).
 
+## Requirements
+
+* python 3.8 and above
+* pytorch 1.12 and above, 2.0 and above are recommended
+* CUDA 11.4 and above are recommended (this is for GPU users, flash-attention users, etc.)
+
 ## Quickstart
 
 Below, we provide simple examples to show how to use Qwen-7B with 🤖 ModelScope and 🤗 Transformers.
 
-Before running the code, make sure you have setup the environment and installed the required packages. Make sure the pytorch version is higher than `1.12`, and then install the dependent libraries.
+Before running the code, make sure you have setup the environment and installed the required packages. Make sure you meet the above requirements, and then install the dependent libraries.
 
 ```bash
 pip install -r requirements.txt
@@ -84,18 +90,18 @@ from transformers.generation import GenerationConfig
 # Note: For tokenizer usage, please refer to examples/tokenizer_showcase.ipynb. 
 # The default behavior now has injection attack prevention off.
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
-# We recommend checking the support of BF16 first. Run the command below:
-# import torch
-# torch.cuda.is_bf16_supported()
+
 # use bf16
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True, bf16=True).eval()
 # use fp16
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True, fp16=True).eval()
 # use cpu only
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
-# use fp32
+# use auto mode, automatically select precision based on the device.
 model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True).eval()
-model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
+
+# Specify hyperparameters for generation
+model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
 # 第一轮对话 1st dialogue turn
 response, history = model.chat(tokenizer, "你好", history=None)
@@ -128,15 +134,17 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
-## use bf16
+# use bf16
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True, bf16=True).eval()
-## use fp16
+# use fp16
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True, fp16=True).eval()
-## use cpu only
+# use cpu only
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="cpu", trust_remote_code=True).eval()
-# use fp32
+# use auto mode, automatically select precision based on the device.
 model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True).eval()
-model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
+
+# Specify hyperparameters for generation
+model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
 
 inputs = tokenizer('蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是', return_tensors='pt')
 inputs = inputs.to('cuda:0')
@@ -178,11 +186,13 @@ print(f'Response: {response}')
 
 ## Quantization
 
-We provide examples to show how to load models in `NF4` and `Int8`. For starters, make sure you have implemented `bitsandbytes`.
+We provide examples to show how to load models in `NF4` and `Int8`. For starters, make sure you have implemented `bitsandbytes`. Note that the requirements for `bitsandbytes` is:
 
 ```
-pip install bitsandbytes
+**Requirements** Python >=3.8. Linux distribution (Ubuntu, MacOS, etc.) + CUDA > 10.0.
 ```
+
+Windows users should find another option, which might be [bitsandbytes-windows-webui](https://github.com/jllllll/bitsandbytes-windows-webui/releases/tag/wheels).
 
 Then you only need to add your quantization configuration to `AutoModelForCausalLM.from_pretrained`. See the example below:
 
@@ -215,6 +225,10 @@ With this method, it is available to load Qwen-7B in `NF4` and `Int8`, which sav
 |   BF16   |  56.7 |   16.2G |
 |   Int8   |  52.8 |   10.1G |
 |    NF4   |  48.9 |   7.4G |
+
+## CLI Demo
+
+We provide a CLI demo example in `cli_demo.py`, which supports streaming output for the generation. Users can interact with Qwen-7B-Chat by inputting prompts, and the model returns model outputs in the streaming mode.
 
 ## Tool Usage
 
