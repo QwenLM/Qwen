@@ -59,7 +59,7 @@ Below, we provide simple examples to show how to use Qwen-7B with 🤖 ModelScop
 Before running the code, make sure you have setup the environment and installed the required packages. Make sure the pytorch version is higher than `1.12`, and then install the dependent libraries.
 
 ```bash
-pip install transformers==4.31.0 accelerate tiktoken einops
+pip install -r requirements.txt
 ```
 
 If your device supports fp16 or bf16, we recommend installing [flash-attention](https://github.com/Dao-AILab/flash-attention) for higher efficiency and lower memory usage. (**flash-attention is optional and the project can run normally without installing it**)
@@ -81,9 +81,8 @@ To use Qwen-7B-Chat for the inference, all you need to do is to input a few line
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
-# Note: our tokenizer rejects attacks and so that you cannot input special tokens like <|endoftext|> or it will throw an error.
-# To remove the strategy, you can add `allowed_special`, which accepts the string "all" or a `set` of special tokens.
-# For example: tokens = tokenizer(text, allowed_special="all")
+# Note: For tokenizer usage, please refer to examples/tokenizer_showcase.ipynb. 
+# The default behavior now has injection attack prevention off.
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 # We recommend checking the support of BF16 first. Run the command below:
 # import torch
@@ -275,6 +274,4 @@ Researchers and developers are free to use the codes and model weights of both Q
 ## Contact Us
 
 If you are interested to leave a message to either our research team or product team, feel free to send an email to qianwen_opensource@alibabacloud.com.
-
-
 
