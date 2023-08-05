@@ -59,7 +59,7 @@ Qwen-7B在多个全面评估自然语言理解与生成、数学运算解题、�
 在开始前，请确保你已经配置好环境并安装好相关的代码包。最重要的是，确保你的pytorch版本高于`1.12`，然后安装相关的依赖库。
 
 ```bash
-pip install transformers==4.31.0 accelerate tiktoken einops
+pip install -r requirements.txt
 ```
 
 如果你的显卡支持fp16或bf16精度，我们还推荐安装[flash-attention](https://github.com/Dao-AILab/flash-attention)来提高你的运行效率以及降低显存占用。(**flash-attention只是可选项，不安装也可正常运行该项目**)
@@ -81,9 +81,7 @@ pip install csrc/rotary
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
-# 请注意：我们的分词器做了对特殊token攻击的特殊处理。因此，你不能输入诸如<|endoftext|>这样的token，会出现报错。
-# 如需移除此策略，你可以加入这个参数`allowed_special`，可以接收"all"这个字符串或者一个特殊tokens的`set`。
-# 举例: tokens = tokenizer(text, allowed_special="all")
+# 请注意：分词器默认行为已更改为默认关闭特殊token攻击防护。相关使用指引，请见examples/tokenizer_showcase.ipynb
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 # 建议先判断当前机器是否支持BF16，命令如下所示：
 # import torch
@@ -120,9 +118,10 @@ print(response)
 ```
 
 运行Qwen-7B同样非常简单。
+
 <details>
   <summary>运行Qwen-7B</summary>
-    
+
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
@@ -144,6 +143,7 @@ pred = model.generate(**inputs)
 print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 # 蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是亚的斯亚贝巴（Addis Ababa）...
 ```
+
 </details>
 
 #### 🤖 ModelScope
