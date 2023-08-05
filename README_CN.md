@@ -52,11 +52,17 @@ Qwen-7B在多个全面评估自然语言理解与生成、数学运算解题、�
 
 更多的实验结果和细节请查看我们的技术备忘录。点击[这里](techmemo-draft.md)。
 
+## 要求
+
+* python 3.8及以上版本
+* pytorch 1.12及以上版本，推荐2.0及以上版本
+* 建议使用CUDA 11.4及以上（GPU用户、flash-attention用户等需考虑此选项）
+
 ## 快速使用
 
 我们提供简单的示例来说明如何利用🤖 ModelScope和🤗 Transformers快速使用Qwen-7B和Qwen-7B-Chat。
 
-在开始前，请确保你已经配置好环境并安装好相关的代码包。最重要的是，确保你的pytorch版本高于`1.12`，然后安装相关的依赖库。
+在开始前，请确保你已经配置好环境并安装好相关的代码包。最重要的是，确保你满足上述要求，然后安装相关的依赖库。
 
 ```bash
 pip install -r requirements.txt
@@ -83,18 +89,18 @@ from transformers.generation import GenerationConfig
 
 # 请注意：分词器默认行为已更改为默认关闭特殊token攻击防护。相关使用指引，请见examples/tokenizer_showcase.ipynb
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
-# 建议先判断当前机器是否支持BF16，命令如下所示：
-# import torch
-# torch.cuda.is_bf16_supported()
+
 # 打开bf16精度，A100、H100、RTX3060、RTX3070等显卡建议启用以节省显存
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True, bf16=True).eval()
 # 打开fp16精度，V100、P100、T4等显卡建议启用以节省显存
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True, fp16=True).eval()
 # 使用CPU进行推理，需要约32GB内存
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
-# 默认使用fp32精度
+# 默认使用自动模式，根据设备自动选择精度
 model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True).eval()
-model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
+
+# 可指定不同的生成长度、top_p等相关超参
+model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
 # 第一轮对话 1st dialogue turn
 response, history = model.chat(tokenizer, "你好", history=None)
@@ -127,15 +133,18 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
-## 打开bf16精度，A100、H100、RTX3060、RTX3070等显卡建议启用以节省显存
+
+# 打开bf16精度，A100、H100、RTX3060、RTX3070等显卡建议启用以节省显存
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True, bf16=True).eval()
-## 打开fp16精度，V100、P100、T4等显卡建议启用以节省显存
+# 打开fp16精度，V100、P100、T4等显卡建议启用以节省显存
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True, fp16=True).eval()
-## 使用CPU进行推理，需要约32GB内存
+# 使用CPU进行推理，需要约32GB内存
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="cpu", trust_remote_code=True).eval()
-# 默认使用fp32精度
+# 默认使用自动模式，根据设备自动选择精度
 model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True).eval()
-model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
+
+# 可指定不同的生成长度、top_p等相关超参
+model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
 
 inputs = tokenizer('蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是', return_tensors='pt')
 inputs = inputs.to('cuda:0')
@@ -177,16 +186,20 @@ print(f'Response: {response}')
 
 ## 量化
 
-如希望使用更低精度的量化模型，如4比特和8比特的模型，我们提供了简单的示例来说明如何快速使用量化模型。在开始前，确保你已经安装了`bitsandbytes`。
+如希望使用更低精度的量化模型，如4比特和8比特的模型，我们提供了简单的示例来说明如何快速使用量化模型。在开始前，确保你已经安装了`bitsandbytes`。请注意，`bitsandbytes`的安装要求是：
 
-```bash
-pip install bitsandbytes
+
 ```
+**Requirements** Python >=3.8. Linux distribution (Ubuntu, MacOS, etc.) + CUDA > 10.0.
+```
+
+Windows用户需安装特定版本的`bitsandbytes`，可选项包括[bitsandbytes-windows-webui](https://github.com/jllllll/bitsandbytes-windows-webui/releases/tag/wheels)。
+
 
 你只需要在`AutoModelForCausalLM.from_pretrained`中添加你的量化配置，即可使用量化模型。如下所示：
 
 ```python
-from transformers import BitsAndBytesConfig
+from transformers import AutoModelForCausalLM, BitsAndBytesConfig
 
 # quantization configuration for NF4 (4 bits)
 quantization_config = BitsAndBytesConfig(
@@ -214,6 +227,10 @@ model = AutoModelForCausalLM.from_pretrained(
 |   BF16   |  56.7 |   16.2G |
 |   Int8   |  52.8 |   10.1G |
 |    NF4    |  48.9 |    7.4G |
+
+## 交互式Demo
+
+我们提供了一个简单的交互式Demo示例，请查看`cli_demo.py`。当前模型已经支持流式输出，用户可通过输入文字的方式和Qwen-7B-Chat交互，模型将流式输出返回结果。
 
 ## 工具调用
 
