@@ -71,10 +71,10 @@ pip install -r requirements.txt
 If your device supports fp16 or bf16, we recommend installing [flash-attention](https://github.com/Dao-AILab/flash-attention) for higher efficiency and lower memory usage. (**flash-attention is optional and the project can run normally without installing it**)
 
 ```bash
-git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
-cd flash-attention && pip install .
-pip install csrc/layer_norm
-pip install csrc/rotary
+pip install git+https://github.com/Dao-AILab/flash-attention@v1.0.8 \
+  git+https://github.com/Dao-AILab/flash-attention@v1.0.8#subdirectory=csrc/layer_norm \
+  git+https://github.com/Dao-AILab/flash-attention@v1.0.8#subdirectory=csrc/rotary \
+  -q
 ```
 
 Now you can start with ModelScope or Transformers.
