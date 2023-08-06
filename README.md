@@ -50,7 +50,7 @@ In general, Qwen-7B outperforms the baseline models of a similar model size, and
 <p>
 <br>
 
-For more experimental results (detailed model performance on more benchmark datasets) and details, please refer to our technical memo by clicking [here](techmemo-draft.md).
+For more experimental results (detailed model performance on more benchmark datasets) and details, please refer to our technical memo by clicking [here](tech_memo.md).
 
 ## Requirements
 
