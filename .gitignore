@@ -9,3 +9,4 @@ build
 .DS_Store
 
 /private/
+data/
