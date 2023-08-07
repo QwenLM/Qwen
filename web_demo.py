@@ -28,7 +28,7 @@ model = AutoModelForCausalLM.from_pretrained(
     device_map="auto",
     trust_remote_code=True,
     resume_download=True,
-    **{"revision": args.model_revision} if args.model_revision is not None and args.model_revision != "" else {},
+    **{"revision": args.model_revision} if args.model_revision is not None and args.model_revision != "" and args.model_revision != "None" else {},
 ).eval()
 
 model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True, resume_download=True)
