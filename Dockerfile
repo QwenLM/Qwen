@@ -64,9 +64,14 @@ RUN if [ -n "$BUNDLE_MODELS_REVISION" ] && [ "$BUNDLE_MODELS_REVISION" != "None"
 
 FROM bundle_models as final
 
+ARG BUNDLE_MODELS_REVISION="None"
+
 EXPOSE 80
 
-CMD ["./run_web_demo.sh", "--install-deps", "--install-flash-attn", "-", "--server_port", "80", "--server_name", "0.0.0.0", "--inbrowser", "--model_revision", "$BUNDLE_MODELS_REVISION"]
+WORKDIR /data/shared/Qwen-7B/
+RUN echo "bash ./run_web_demo.sh --install-deps --install-flash-attn - --server_port 80 --server_name 0.0.0.0 --inbrowser --model_revision $BUNDLE_MODELS_REVISION" > /data/shared/Qwen-7B/run.sh
+
+CMD ["bash", "/data/shared/Qwen-7B/run.sh"]
 
 ############  Usage ############
 
