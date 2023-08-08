@@ -111,9 +111,8 @@ def predict(query, chatbot):
 
     task_history.append((query, fullResponse))
     print("Qwen-7B-Chat: " + parse_text(fullResponse))
-    
 
-# Temporarily chat_stream does not support sampling, and thus regenerate does not work for now.
+
 def regenerate(chatbot):
     if not task_history:
         yield chatbot
@@ -139,20 +138,22 @@ with gr.Blocks() as demo:
         """<center><font size=3>This WebUI is based on Qwen-7B-Chat, developed by Alibaba Cloud. (本WebUI基于Qwen-7B-Chat打造，实现聊天机器人功能。)</center>"""
     )
     gr.Markdown(
-        """<center><font size=4>Qwen-7B <a href="https://modelscope.cn/models/qwen/Qwen-7B/summary">🤖 <a> | <a href="https://huggingface.co/Qwen/Qwen-7B">🤗</a>&nbsp ｜ Qwen-7B-Chat <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">🤖 <a>| <a href="https://huggingface.co/Qwen/Qwen-7B-Chat">🤗</a>&nbsp ｜ &nbsp<a href="https://github.com/QwenLM/Qwen-7B/blob/main/tech_memo.md">Report</a></center>"""
+        """<center><font size=4>Qwen-7B <a href="https://modelscope.cn/models/qwen/Qwen-7B/summary">🤖 <a> | <a href="https://huggingface.co/Qwen/Qwen-7B">🤗</a>&nbsp ｜ Qwen-7B-Chat <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">🤖 <a>| <a href="https://huggingface.co/Qwen/Qwen-7B-Chat">🤗</a>&nbsp ｜ &nbsp<a href="https://github.com/QwenLM/Qwen-7B">Github</a></center>"""
     )
-    
+
     chatbot = gr.Chatbot(lines=10, label='Qwen-7B-Chat', elem_classes="control-height")
     query = gr.Textbox(lines=2, label='Input')
 
     with gr.Row():
-        emptyBtn = gr.Button("🧹 Clear History (清除历史对话)")
+        emptyBtn = gr.Button("🧹 Clear History (清除历史)")
         submitBtn = gr.Button("🚀 Submit (发送)")
+        regenBtn = gr.Button("🤔️ Regenerate (重试)")
 
     submitBtn.click(predict, [query, chatbot], [chatbot], show_progress=True)
     submitBtn.click(reset_user_input, [], [query])
     emptyBtn.click(reset_state, outputs=[chatbot], show_progress=True)
-    
+    regenBtn.click(regenerate, [chatbot], [chatbot], show_progress=True)
+
     gr.Markdown(
         """<font size=2>Note: This demo is governed by the original license of Qwen-7B. We strongly advise users not to knowingly generate or allow others to knowingly generate harmful content, including hate speech, violence, pornography, deception, etc. (注：本演示受Qwen-7B的许可协议限制。我们强烈建议，用户不应传播及不应允许他人传播以下内容，包括但不限于仇恨言论、暴力、色情、欺诈相关的有害信息。)"""
     )
