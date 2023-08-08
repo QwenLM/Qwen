@@ -311,13 +311,13 @@ LLMs have shown capability in coordinating multiple external systems to achieve 
 Qwen supports calling plugins/tools/APIs through [ReAct Prompting](https://arxiv.org/abs/2210.03629).
 ReAct is also one of the main approaches used by the [LangChain](https://python.langchain.com/) framework.
 For how to write and use prompts for ReAct Prompting, please refer to [the ReAct examples](examples/react_prompt.md).
-In the soon-to-be-released evaluation benchmark for assessing tool usage capabilities, Qwen's performance is as follows:
+In our evaluation [benchmark](eval/EVALUATION.md) for assessing tool usage capabilities, Qwen's performance is as follows:
 
 | Model       | Tool Selection (Acc.↑)      | Tool Input (Rouge-L↑)      | False Positive Error↓      |
 | :---------- | --------------------------: | -------------------------: | -------------------------: |
 | GPT-4       |                         95% |                   **0.90** |                      15.0% |
 | GPT-3.5     |                         85% |                       0.88 |                      75.0% |
-| **Qwen-7B** |                     **99%** |                       0.89 |                   **8.5%** |
+| **Qwen-7B** |                     **99%** |                       0.89 |                   **9.7%** |
 
 > The plugins that appear in the evaluation set do not appear in the training set of Qwen.
 > This benchmark evaluates the accuracy of the model in selecting the correct plugin from multiple candidate plugins, the rationality of the parameters passed into the plugin, and the false positive rate.

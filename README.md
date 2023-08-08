@@ -1,4 +1,5 @@
 <br>
+
 <p align="center">
     <img src="assets/logo.jpg" width="400"/>
 <p>
@@ -50,7 +51,7 @@ In general, Qwen-7B outperforms the baseline models of a similar model size, and
 <p>
 <br>
 
-For more experimental results (detailed model performance on more benchmark datasets) and details, please refer to our technical memo by clicking [here](techmemo-draft.md).
+For more experimental results (detailed model performance on more benchmark datasets) and details, please refer to our technical memo by clicking [here](tech_memo.md).
 
 ## Requirements
 
@@ -73,6 +74,7 @@ If your device supports fp16 or bf16, we recommend installing [flash-attention](
 ```bash
 git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
 cd flash-attention && pip install .
+# Below are optional. Installing them might be slow.
 pip install csrc/layer_norm
 pip install csrc/rotary
 ```
@@ -87,8 +89,7 @@ To use Qwen-7B-Chat for the inference, all you need to do is to input a few line
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
-# Note: For tokenizer usage, please refer to examples/tokenizer_showcase.ipynb. 
-# The default behavior now has injection attack prevention off.
+# Note: The default behavior now has injection attack prevention off.
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
 # use bf16
@@ -109,7 +110,7 @@ print(response)
 # 你好！很高兴为你提供帮助。
 
 # 第二轮对话 2nd dialogue turn
-response, history = model.chat(tokenizer, "给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history) 
+response, history = model.chat(tokenizer, "给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history)
 print(response)
 # 这是一个关于一个年轻人奋斗创业最终取得成功的故事。
 # 故事的主人公叫李明，他来自一个普通的家庭，父母都是普通的工人。从小，李明就立下了一个目标：要成为一名成功的企业家。
@@ -147,7 +148,7 @@ model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", 
 model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
 
 inputs = tokenizer('蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是', return_tensors='pt')
-inputs = inputs.to('cuda:0')
+inputs = inputs.to(model.device)
 pred = model.generate(**inputs)
 print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 # 蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是亚的斯亚贝巴（Addis Ababa）...
@@ -183,6 +184,10 @@ results = pipe(text, history=history)
 response, history = results['response'], results['history']
 print(f'Response: {response}')
 ```
+
+## Tokenizer
+
+Our tokenizer based on tiktoken is different from other tokenizers, e.g., sentencepiece tokenizer. You need to pay attention to special tokens, especially in finetuning. For more detailed information on the tokenizer and related use in fine-tuning, please refer to the [documentation](tokenization_note.md).
 
 ## Quantization
 
@@ -232,14 +237,14 @@ We provide a CLI demo example in `cli_demo.py`, which supports streaming output 
 
 ## Tool Usage
 
-Qwen-7B-Chat is specifically optimized for tool usage, including API, database, models, etc., so that users can build their own Qwen-7B-based LangChain, Agent, and Code Interpreter. In the soon-to-be-released internal evaluation benchmark for assessing tool usage capabilities, we find that Qwen-7B reaches stable performance.
+Qwen-7B-Chat is specifically optimized for tool usage, including API, database, models, etc., so that users can build their own Qwen-7B-based LangChain, Agent, and Code Interpreter. In our evaluation [benchmark](eval/EVALUATION.md) for assessing tool usage capabilities, we find that Qwen-7B reaches stable performance.
 [](https://)
 
 | Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑) | False Positive Error↓ |
 |-------------|------------------------|-----------------------|-----------------------|
 | GPT-4       | 95%                    | **0.90**              | 15%                   |
 | GPT-3.5     | 85%                    | 0.88                  | 75%                   |
-| **Qwen-7B** | **99%**                | 0.89                  | **8.5%**              |
+| **Qwen-7B** | **99%**                | 0.89                  | **9.7%**              |
 
 For how to write and use prompts for ReAct Prompting, please refer to [the ReAct examples](examples/react_prompt.md). The use of tools can enable the model to better perform tasks.
 
@@ -288,4 +293,3 @@ Researchers and developers are free to use the codes and model weights of both Q
 ## Contact Us
 
 If you are interested to leave a message to either our research team or product team, feel free to send an email to qianwen_opensource@alibabacloud.com.
-

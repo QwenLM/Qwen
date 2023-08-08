@@ -1,4 +1,5 @@
 <br>
+
 <p align="center">
     <img src="assets/logo.jpg" width="400"/>
 <p>
@@ -50,7 +51,7 @@ Qwen-7B在多个全面评估自然语言理解与生成、数学运算解题、�
 <p>
 <br>
 
-更多的实验结果和细节请查看我们的技术备忘录。点击[这里](techmemo-draft.md)。
+更多的实验结果和细节请查看我们的技术备忘录。点击[这里](tech_memo.md)。
 
 ## 要求
 
@@ -73,6 +74,7 @@ pip install -r requirements.txt
 ```bash
 git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
 cd flash-attention && pip install .
+# 下方安装可选，安装可能比较缓慢。
 pip install csrc/layer_norm
 pip install csrc/rotary
 ```
@@ -87,7 +89,7 @@ pip install csrc/rotary
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
-# 请注意：分词器默认行为已更改为默认关闭特殊token攻击防护。相关使用指引，请见examples/tokenizer_showcase.ipynb
+# 请注意：分词器默认行为已更改为默认关闭特殊token攻击防护。
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
 # 打开bf16精度，A100、H100、RTX3060、RTX3070等显卡建议启用以节省显存
@@ -108,7 +110,7 @@ print(response)
 # 你好！很高兴为你提供帮助。
 
 # 第二轮对话 2nd dialogue turn
-response, history = model.chat(tokenizer, "给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history) 
+response, history = model.chat(tokenizer, "给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history)
 print(response)
 # 这是一个关于一个年轻人奋斗创业最终取得成功的故事。
 # 故事的主人公叫李明，他来自一个普通的家庭，父母都是普通的工人。从小，李明就立下了一个目标：要成为一名成功的企业家。
@@ -147,7 +149,7 @@ model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", 
 model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
 
 inputs = tokenizer('蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是', return_tensors='pt')
-inputs = inputs.to('cuda:0')
+inputs = inputs.to(model.device)
 pred = model.generate(**inputs)
 print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 # 蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是亚的斯亚贝巴（Addis Ababa）...
@@ -183,6 +185,13 @@ results = pipe(text, history=history)
 response, history = results['response'], results['history']
 print(f'Response: {response}')
 ```
+
+## Tokenization
+
+> 注：作为术语的“tokenization”在中文中尚无共识的概念对应，本文档采用英文表达以利说明。
+
+基于tiktoken的tokenizer有别于其他分词器，比如sentencepiece tokenizer。尤其在微调阶段，需要特别注意特殊token的使用。关于tokenizer的更多信息，以及微调时涉及的相关使用，请参阅[文档](tokenization_note_zh.md)。
+
 
 ## 量化
 
@@ -232,13 +241,13 @@ model = AutoModelForCausalLM.from_pretrained(
 
 ## 工具调用
 
-Qwen-7B-Chat针对包括API、数据库、模型等工具在内的调用进行了优化。用户可以开发基于Qwen-7B的LangChain、Agent甚至Code Interpreter。我们在内部的即将开源的评测数据集上测试模型的工具调用能力，并发现Qwen-7B-Chat能够取得稳定的表现。
+Qwen-7B-Chat针对包括API、数据库、模型等工具在内的调用进行了优化。用户可以开发基于Qwen-7B的LangChain、Agent甚至Code Interpreter。在我们开源的[评测数据集](eval/EVALUATION.md)上测试模型的工具调用能力，并发现Qwen-7B-Chat能够取得稳定的表现。
 
 | Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑) | False Positive Error↓ |
 | ------------- | ------------------------- | ------------------------ | ------------------------ |
 | GPT-4       | 95%                     | **0.90**               | 15%                    |
 | GPT-3.5     | 85%                     | 0.88                   | 75%                    |
-| **Qwen-7B** | **99%**                 | 0.89                   | **8.5%**               |
+| **Qwen-7B** | **99%**                 | 0.89                   | **9.7%**               |
 
 我们提供了文档说明如何根据ReAct Prompting的原则写作你的prompt。
 
@@ -289,4 +298,3 @@ For how to write and use prompts for ReAct Prompting, please refer to [the ReAct
 ## 联系我们
 
 如果你想给我们的研发团队和产品团队留言，请通过邮件（qianwen_opensource@alibabacloud.com）联系我们。
-

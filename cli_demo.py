@@ -177,7 +177,7 @@ def main():
         # Run chat.
         set_seed(seed)
         try:
-            for response in model.chat(tokenizer, query, history=history, stream=True):
+            for response in model.chat_stream(tokenizer, query, history=history):
                 _clear_screen()
                 print(f"\nUser: {query}")
                 print(f"\nQwen-7B: {response}")

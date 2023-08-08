@@ -1,41 +1,49 @@
 name: 🐞 Bug
-description: File a bug/issue
+description: 提交错误报告 | File a bug/issue
 title: "[BUG] <title>"
 labels: ["Bug"]
 body:
   - type: checkboxes
     attributes:
-      label: Is there an existing issue for this?
-      description: Please search to see if an issue already exists for the bug you encountered.
+      label: 是否已有关于该错误的issue？ | Is there an existing issue for this?
+      description: |
+        请先搜索您遇到的错误是否在已有的issues中提到过。
+        Please search to see if an issue already exists for the bug you encountered.
       options:
-        - label: I have searched the existing issues
+        - label: 我已经搜索过已有的issues | I have searched the existing issues
           required: true
   - type: textarea
     attributes:
-      label: Current Behavior
-      description: A concise description of what you're experiencing.
+      label: 当前行为 | Current Behavior
+      description: |
+        准确描述遇到的行为。
+        A concise description of what you're experiencing.
     validations:
       required: false
   - type: textarea
     attributes:
-      label: Expected Behavior
-      description: A concise description of what you expected to happen.
+      label: 期望行为 | Expected Behavior
+      description: |
+        准确描述预期的行为。
+        A concise description of what you expected to happen.
     validations:
       required: false
   - type: textarea
     attributes:
-      label: Steps To Reproduce
-      description: Steps to reproduce the behavior.
+      label: 复现方法 | Steps To Reproduce
+      description: |
+        复现当前行为的详细步骤。
+        Steps to reproduce the behavior.
       placeholder: |
         1. In this environment...
-        1. With this config...
-        1. Run '...'
-        1. See error...
+        2. With this config...
+        3. Run '...'
+        4. See error...
     validations:
       required: false
   - type: textarea
     attributes:
-      label: Environment
+      label: 运行环境 | Environment
       description: |
         examples:
           - **OS**: Ubuntu 20.04
@@ -54,8 +62,12 @@ body:
       required: false
   - type: textarea
     attributes:
-      label: Anything else?
+      label: 备注 | Anything else?
       description: |
+        您可以在这里补充其他关于该问题背景信息的描述、链接或引用等。
+        
+        您可以通过点击高亮此区域然后拖动文件的方式上传图片或日志文件。
+        
         Links? References? Anything that will give us more context about the issue you are encountering!
         
         Tip: You can attach images or log files by clicking this area to highlight it and then dragging files in.
