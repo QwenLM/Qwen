@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-""" Ref: https://github.com/THUDM/ChatGLM2-6B/blob/main/web_demo.py """
-
 from transformers import AutoTokenizer
 import gradio as gr
 import mdtex2html
@@ -58,7 +56,6 @@ gr.Chatbot.postprocess = postprocess
 
 
 def parse_text(text):
-    """copy from https://github.com/GaiZhenbiao/ChuanhuChatGPT/"""
     lines = text.split("\n")
     lines = [line for line in lines if line != ""]
     count = 0
