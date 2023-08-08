@@ -1,4 +1,5 @@
 <br>
+
 <p align="center">
     <img src="assets/logo.jpg" width="400"/>
 <p>
@@ -11,6 +12,10 @@
 
 <p align="center">
         <a href="README_CN.md">中文</a>&nbsp ｜ &nbsp<a href="README.md">English</a>&nbsp ｜ &nbsp日本語
+</p>
+<br><br>
+<p align="right">
+        Japanese document maintainer: Ikko Eltociear Ashimine
 </p>
 <br><br>
 
@@ -50,13 +55,19 @@ Qwen-7Bは、アリババクラウドが提唱する大規模言語モデルシ�
 <p>
 <br>
 
-より詳細な実験結果（より多くのベンチマークデータセットでの詳細なモデル性能）や詳細については、[こちら](techmemo-draft.md)をクリックして、我々の技術メモを参照してください。
+より詳細な実験結果（より多くのベンチマークデータセットでの詳細なモデル性能）や詳細については、[こちら](tech_memo.md)をクリックして技術メモを参照してください。
+
+## 必要条件
+
+* python 3.8 以上
+* pytorch 1.12 以上、2.0 以上を推奨
+* CUDA 11.4 以上を推奨（GPU ユーザー、フラッシュアテンションユーザー向けなど）
 
 ## クイックスタート
 
 以下では、Qwen-7B と 🤖 ModelScope と 🤗 Transformers の簡単な使用例を示します。
 
-コードを実行する前に、環境のセットアップと必要なパッケージのインストールが済んでいることを確認してください。pytorch のバージョンが `1.12` 以上であることを確認し、依存するライブラリをインストールします。
+コードを実行する前に、環境のセットアップと必要なパッケージのインストールが済んでいることを確認してください。上記の要件を満たしていることを確認してから、依存するライブラリをインストールしてください。
 
 ```bash
 pip install -r requirements.txt
@@ -67,6 +78,7 @@ pip install -r requirements.txt
 ```bash
 git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
 cd flash-attention && pip install .
+# 以下はオプションです。インストールに時間がかかる場合があります。
 pip install csrc/layer_norm
 pip install csrc/rotary
 ```
@@ -81,21 +93,20 @@ Qwen-7B-Chat を推論に使用するには、以下のように数行のコー�
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
-# 注: トークナイザーの使用法については、examples/tokenizer_showcase.ipynb を参照してください。
-# デフォルトの動作では、インジェクション攻撃防止機能がオフになりました。
+# 注: デフォルトの動作では、インジェクション攻撃防止機能がオフになっています。
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
-# まずは BF16 の対応を確認することをお勧めします。以下のコマンドを実行してください:
-# import torch
-# torch.cuda.is_bf16_supported()
-# use bf16
+
+# bf16 を使用
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True, bf16=True).eval()
-# use fp16
+# fp16 を使用
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True, fp16=True).eval()
-# use cpu only
+# CPU のみ使用
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
-# use fp32
+# オートモードを使用すると、デバイスに応じて自動的に精度が選択されます。
 model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True).eval()
-model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True) # 異なる世代の長さ、top_p、その他の関連するハイパーパラメータを指定することができます
+
+# 生成のためのハイパーパラメータを指定
+model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
 # 第一轮对话 第一回対話ターン
 response, history = model.chat(tokenizer, "你好", history=None)
@@ -128,18 +139,20 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
-## use bf16
+# bf16 を使用
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True, bf16=True).eval()
-## use fp16
+# fp16 を使用
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True, fp16=True).eval()
-## use cpu only
+# CPU のみ使用
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="cpu", trust_remote_code=True).eval()
-# use fp32
+# オートモードを使用すると、デバイスに応じて自動的に精度が選択されます。
 model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True).eval()
-model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True) # 異なる世代の長さ、top_p、その他の関連するハイパーパラメータを指定することができます
+
+# 生成のためのハイパーパラメータを指定
+model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
 
 inputs = tokenizer('モンゴルの首都はウランバートル（Ulaanbaatar）\nアイスランドの首都はレイキャビク（Reykjavik）\nエチオピアの首都は', return_tensors='pt')
-inputs = inputs.to('cuda:0')
+inputs = inputs.to(model.device)
 pred = model.generate(**inputs)
 print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 # モンゴルの首都はウランバートル（Ulaanbaatar）\nアイスランドの首都はレイキャビク（Reykjavik）\nエチオピアの首都はアディスアベバ（Addis Ababa）...
@@ -176,18 +189,24 @@ response, history = results['response'], results['history']
 print(f'Response: {response}')
 ```
 
+## トークナイザー
+
+tiktoken に基づくトークナイザーは、他のトークナイザー、例えばセンテンスピーストークナイザーとは異なります。特にファインチューニングの際には、特殊なトークンに注意を払う必要があります。トークナイザに関する詳細な情報や、ファインチューニングにおける使用方法については、[ドキュメント](tokenization_note.md)を参照してください。
+
 ## 量子化
 
-`NF4` と `Int8` のモデルをロードする方法を示す例を提供する。手始めに、`bitsandbytes` を実装していることを確認しよう。
+`NF4` と `Int8` のモデルをロードする方法を示す例を提供します。手始めに、`bitsandbytes` が実装されていることを確認して下さい。`bitsandbytes` の要件は以下の通りになります:
 
 ```
-pip install bitsandbytes
+**必要条件** Python >= 3.8。Linux ディストリビューション（Ubuntu、MacOS など）+ CUDA > 10.0。
 ```
 
-そして、量子化設定を `AutoModelForCausalLM.from_pretrained` に追加するだけでよいです。以下の例を参照してください:
+Windows ユーザは、[bitsandbytes-windows-webui](https://github.com/jllllll/bitsandbytes-windows-webui/releases/tag/wheels) という別のオプションを見つける必要があります。
+
+そして、量子化の設定を `AutoModelForCausalLM.from_pretrained` に追加するだけとなります。以下の例を参照してください:
 
 ```python
-from transformers import BitsAndBytesConfig
+from transformers import AutoModelForCausalLM, BitsAndBytesConfig
 
 # NF4（4ビット）の量子化設定
 quantization_config = BitsAndBytesConfig(
@@ -216,16 +235,20 @@ model = AutoModelForCausalLM.from_pretrained(
 |   Int8   |  52.8 |   10.1G |
 |    NF4   |  48.9 |   7.4G |
 
+## CLI デモ
+
+`cli_demo.py` に CLI のデモ例を用意しています。ユーザはプロンプトを入力することで Qwen-7B-Chat と対話することができ、モデルはストリーミングモードでモデルの出力を返します。
+
 ## ツールの使用
 
-Qwen-7B-Chat は、API、データベース、モデルなど、ツールの利用に特化して最適化されており、ユーザは独自の Qwen-7B ベースの LangChain、エージェント、コードインタプリタを構築することができます。近日公開予定のツール利用能力を評価するための内部評価ベンチマークでは、Qwen-7B は安定した性能に達していることがわかります。
+Qwen-7B-Chat は、API、データベース、モデルなど、ツールの利用に特化して最適化されており、ユーザは独自の Qwen-7B ベースの LangChain、エージェント、コードインタプリタを構築することができます。ツール利用能力を評価するための評価[ベンチマーク](eval/EVALUATION.md)では、Qwen-7B は安定した性能に達しています。
 [](https://)
 
 | Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑) | False Positive Error↓ |
 |-------------|------------------------|-----------------------|-----------------------|
 | GPT-4       | 95%                    | **0.90**              | 15%                   |
 | GPT-3.5     | 85%                    | 0.88                  | 75%                   |
-| **Qwen-7B** | **99%**                | 0.89                  | **8.5%**              |
+| **Qwen-7B** | **99%**                | 0.89                  | **9.7%**              |
 
 ReAct プロンプトの書き方や使い方については、[ReAct の例](examples/react_prompt.md)を参照してください。ツールを使用することで、モデルがよりよいタスクを実行できるようになります。
 
@@ -274,4 +297,3 @@ Qwen-7B と Qwen-7B-Chat のコードとモデルウェイトは、研究者や�
 ## お問い合わせ
 
 研究チームまたは製品チームへのメッセージは、qianwen_opensource@alibabacloud.com までお気軽にお送りください。
-
