@@ -1,4 +1,5 @@
 <br>
+
 <p align="center">
     <img src="assets/logo.jpg" width="400"/>
 <p>
@@ -73,6 +74,7 @@ pip install -r requirements.txt
 ```bash
 git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
 cd flash-attention && pip install .
+# 下方安装可选，安装可能比较缓慢。
 pip install csrc/layer_norm
 pip install csrc/rotary
 ```
@@ -87,7 +89,7 @@ pip install csrc/rotary
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
-# 请注意：分词器默认行为已更改为默认关闭特殊token攻击防护。相关使用指引，请见examples/tokenizer_showcase.ipynb
+# 请注意：分词器默认行为已更改为默认关闭特殊token攻击防护。
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
 # 打开bf16精度，A100、H100、RTX3060、RTX3070等显卡建议启用以节省显存
@@ -147,7 +149,7 @@ model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", 
 model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
 
 inputs = tokenizer('蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是', return_tensors='pt')
-inputs = inputs.to('cuda:0')
+inputs = inputs.to(model.device)
 pred = model.generate(**inputs)
 print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 # 蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是亚的斯亚贝巴（Addis Ababa）...
@@ -183,6 +185,13 @@ results = pipe(text, history=history)
 response, history = results['response'], results['history']
 print(f'Response: {response}')
 ```
+
+## Tokenization
+
+> 注：作为术语的“tokenization”在中文中尚无共识的概念对应，本文档采用英文表达以利说明。
+
+基于tiktoken的tokenizer有别于其他分词器，比如sentencepiece tokenizer。尤其在微调阶段，需要特别注意特殊token的使用。关于tokenizer的更多信息，以及微调时涉及的相关使用，请参阅[文档](tokenization_note_zh.md)。
+
 
 ## 量化
 
