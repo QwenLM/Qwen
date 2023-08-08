@@ -110,7 +110,7 @@ print(response)
 # 你好！很高兴为你提供帮助。
 
 # 第二轮对话 2nd dialogue turn
-response, history = model.chat(tokenizer, "给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history) 
+response, history = model.chat(tokenizer, "给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history)
 print(response)
 # 这是一个关于一个年轻人奋斗创业最终取得成功的故事。
 # 故事的主人公叫李明，他来自一个普通的家庭，父母都是普通的工人。从小，李明就立下了一个目标：要成为一名成功的企业家。
@@ -241,13 +241,13 @@ model = AutoModelForCausalLM.from_pretrained(
 
 ## 工具调用
 
-Qwen-7B-Chat针对包括API、数据库、模型等工具在内的调用进行了优化。用户可以开发基于Qwen-7B的LangChain、Agent甚至Code Interpreter。我们在内部的即将开源的评测数据集上测试模型的工具调用能力，并发现Qwen-7B-Chat能够取得稳定的表现。
+Qwen-7B-Chat针对包括API、数据库、模型等工具在内的调用进行了优化。用户可以开发基于Qwen-7B的LangChain、Agent甚至Code Interpreter。在我们开源的[评测数据集](eval/EVALUATION.md)上测试模型的工具调用能力，并发现Qwen-7B-Chat能够取得稳定的表现。
 
 | Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑) | False Positive Error↓ |
 | ------------- | ------------------------- | ------------------------ | ------------------------ |
 | GPT-4       | 95%                     | **0.90**               | 15%                    |
 | GPT-3.5     | 85%                     | 0.88                   | 75%                    |
-| **Qwen-7B** | **99%**                 | 0.89                   | **8.5%**               |
+| **Qwen-7B** | **99%**                 | 0.89                   | **9.7%**               |
 
 我们提供了文档说明如何根据ReAct Prompting的原则写作你的prompt。
 
@@ -298,4 +298,3 @@ For how to write and use prompts for ReAct Prompting, please refer to [the ReAct
 ## 联系我们
 
 如果你想给我们的研发团队和产品团队留言，请通过邮件（qianwen_opensource@alibabacloud.com）联系我们。
-

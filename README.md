@@ -110,7 +110,7 @@ print(response)
 # 你好！很高兴为你提供帮助。
 
 # 第二轮对话 2nd dialogue turn
-response, history = model.chat(tokenizer, "给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history) 
+response, history = model.chat(tokenizer, "给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history)
 print(response)
 # 这是一个关于一个年轻人奋斗创业最终取得成功的故事。
 # 故事的主人公叫李明，他来自一个普通的家庭，父母都是普通的工人。从小，李明就立下了一个目标：要成为一名成功的企业家。
@@ -237,14 +237,14 @@ We provide a CLI demo example in `cli_demo.py`, which supports streaming output 
 
 ## Tool Usage
 
-Qwen-7B-Chat is specifically optimized for tool usage, including API, database, models, etc., so that users can build their own Qwen-7B-based LangChain, Agent, and Code Interpreter. In the soon-to-be-released internal evaluation benchmark for assessing tool usage capabilities, we find that Qwen-7B reaches stable performance.
+Qwen-7B-Chat is specifically optimized for tool usage, including API, database, models, etc., so that users can build their own Qwen-7B-based LangChain, Agent, and Code Interpreter. In our evaluation [benchmark](eval/EVALUATION.md) for assessing tool usage capabilities, we find that Qwen-7B reaches stable performance.
 [](https://)
 
 | Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑) | False Positive Error↓ |
 |-------------|------------------------|-----------------------|-----------------------|
 | GPT-4       | 95%                    | **0.90**              | 15%                   |
 | GPT-3.5     | 85%                    | 0.88                  | 75%                   |
-| **Qwen-7B** | **99%**                | 0.89                  | **8.5%**              |
+| **Qwen-7B** | **99%**                | 0.89                  | **9.7%**              |
 
 For how to write and use prompts for ReAct Prompting, please refer to [the ReAct examples](examples/react_prompt.md). The use of tools can enable the model to better perform tasks.
 
@@ -293,4 +293,3 @@ Researchers and developers are free to use the codes and model weights of both Q
 ## Contact Us
 
 If you are interested to leave a message to either our research team or product team, feel free to send an email to qianwen_opensource@alibabacloud.com.
-
