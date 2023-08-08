@@ -11,7 +11,7 @@
 <br>
 
 <p align="center">
-        中文</a>&nbsp ｜ &nbsp<a href="READM.md">English</a>
+        中文</a>&nbsp ｜ &nbsp<a href="README.md">English</a>&nbsp ｜ &nbsp<a href="README_JA.md">日本語</a>
 </p>
 <br><br>
 
