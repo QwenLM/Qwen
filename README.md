@@ -34,7 +34,7 @@ Qwen-7B is the 7B-parameter version of the large language model series, Qwen (ab
 In general, Qwen-7B outperforms the baseline models of a similar model size, and even outperforms larger models of around 13B parameters, on a series of benchmark datasets, e.g., MMLU, C-Eval, GSM8K, HumanEval, and WMT22, etc., which evaluate the models' capabilities on natural language understanding, mathematic problem solving, coding, etc. See the results below.
 
 | Model             | MMLU           |         C-Eval |          GSM8K |      HumanEval |  WMT22 (en-zh) |
-| :---------------- | -------------: | -------------: | -------------: | -------------: | -------------: |
+| :---------------- | :------------: | :------------: | :------------: | :------------: | :------------: |
 | LLaMA-7B          | 35.1           |              - |           11.0 |           10.5 |            8.7 |
 | LLaMA 2-7B        | 45.3           |              - |           14.6 |           12.8 |           17.9 |
 | Baichuan-7B       | 42.3           |           42.8 |            9.7 |            9.2 |           26.6 |
@@ -83,7 +83,7 @@ Now you can start with ModelScope or Transformers.
 
 #### 🤗 Transformers
 
-To use Qwen-7B-Chat for the inference, all you need to do is to input a few lines of codes as demonstrated below:
+To use Qwen-7B-Chat for the inference, all you need to do is to input a few lines of codes as demonstrated below. However, **please make sure that you are using the latest code.**
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -197,6 +197,12 @@ We provide examples to show how to load models in `NF4` and `Int8`. For starters
 **Requirements** Python >=3.8. Linux distribution (Ubuntu, MacOS, etc.) + CUDA > 10.0.
 ```
 
+Then run the following command to install `bitsandbytes`:
+
+```
+pip install bitsandbytes
+```
+
 Windows users should find another option, which might be [bitsandbytes-windows-webui](https://github.com/jllllll/bitsandbytes-windows-webui/releases/tag/wheels).
 
 Then you only need to add your quantization configuration to `AutoModelForCausalLM.from_pretrained`. See the example below:
@@ -226,36 +232,55 @@ model = AutoModelForCausalLM.from_pretrained(
 With this method, it is available to load Qwen-7B in `NF4` and `Int8`, which saves you memory usage. We provide related statistics of model performance below. We find that the quantization downgrades the effectiveness slightly but significantly increases inference efficiency and reduces memory costs.
 
 | Precision   |   MMLU   |  Memory  |
-| :---------: | -------: | -------: |
-|   BF16   |  56.7 |   16.2G |
-|   Int8   |  52.8 |   10.1G |
-|    NF4   |  48.9 |   7.4G |
+| :---------: | :------: | :------: |
+|   BF16      |   56.7   |   16.2G  |
+|   Int8      |   52.8   |   10.1G  |
+|    NF4      |   48.9   |   7.4G   |
 
-## CLI Demo
+## Demo
 
-We provide a CLI demo example in `cli_demo.py`, which supports streaming output for the generation. Users can interact with Qwen-7B-Chat by inputting prompts, and the model returns model outputs in the streaming mode.
+### CLI Demo
+
+We provide a CLI demo example in `cli_demo.py`, which supports streaming output for the generation. Users can interact with Qwen-7B-Chat by inputting prompts, and the model returns model outputs in the streaming mode. Run the command below:
+
+```
+python cli_demo.py
+```
+
+### Web UI
+
+We provide code for users to build a web UI demo (thanks to @wysiad). Before you start, make sure you install the following packages:
+
+```
+pip install gradio mdtex2html
+```
+
+Then run the command below and click on the generated link:
+
+```
+python web_demo.py
+```
 
 ## Tool Usage
 
 Qwen-7B-Chat is specifically optimized for tool usage, including API, database, models, etc., so that users can build their own Qwen-7B-based LangChain, Agent, and Code Interpreter. In our evaluation [benchmark](eval/EVALUATION.md) for assessing tool usage capabilities, we find that Qwen-7B reaches stable performance.
-[](https://)
 
-| Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑) | False Positive Error↓ |
-|-------------|------------------------|-----------------------|-----------------------|
-| GPT-4       | 95%                    | **0.90**              | 15%                   |
-| GPT-3.5     | 85%                    | 0.88                  | 75%                   |
-| **Qwen-7B** | **99%**                | 0.89                  | **9.7%**              |
+| Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑)  | False Positive Error↓  |
+|:------------|:----------------------:|:----------------------:|:----------------------:|
+| GPT-4       | 95%                    | **0.90**               | 15%                    |
+| GPT-3.5     | 85%                    | 0.88                   | 75%                    |
+| **Qwen-7B** | **99%**                | 0.89                   | **9.7%**               |
 
 For how to write and use prompts for ReAct Prompting, please refer to [the ReAct examples](examples/react_prompt.md). The use of tools can enable the model to better perform tasks.
 
 Additionally, we provide experimental results to show its capabilities of playing as an agent. See [Hugging Face Agent](https://huggingface.co/docs/transformers/transformers_agents) for more information. Its performance on the run-mode benchmark provided by Hugging Face is as follows:
 
-| Model | Tool Selection↑ | Tool Used↑ | Code↑ |
-|-|-|-|-|
-|GPT-4 | **100** | **100** | **97.41** |
-|GPT-3.5 | 95.37 | 96.30 | 87.04 |
-|StarCoder-15.5B | 87.04 | 87.96 | 68.89 |
-| **Qwen-7B** | 90.74 | 92.59 | 74.07 |
+| Model          | Tool Selection↑ | Tool Used↑  |   Code↑   |
+|:---------------|:---------------:|:-----------:|:---------:|
+|GPT-4           |     **100**     |   **100**   | **97.41** |
+|GPT-3.5         |      95.37      |    96.30    |   87.04   |
+|StarCoder-15.5B |      87.04      |    87.96    |   68.89   |
+| **Qwen-7B**    |      90.74      |    92.59    |   74.07   |
 
 ## Long-Context Understanding
 
@@ -293,3 +318,4 @@ Researchers and developers are free to use the codes and model weights of both Q
 ## Contact Us
 
 If you are interested to leave a message to either our research team or product team, feel free to send an email to qianwen_opensource@alibabacloud.com.
+
