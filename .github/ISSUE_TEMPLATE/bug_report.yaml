@@ -1,7 +1,7 @@
 name: 🐞 Bug
 description: 提交错误报告 | File a bug/issue
 title: "[BUG] <title>"
-labels: ["Bug"]
+labels: ["bug"]
 body:
   - type: checkboxes
     attributes:
