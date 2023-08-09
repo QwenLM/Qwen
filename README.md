@@ -75,8 +75,8 @@ If your device supports fp16 or bf16, we recommend installing [flash-attention](
 git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
 cd flash-attention && pip install .
 # Below are optional. Installing them might be slow.
-pip install csrc/layer_norm
-pip install csrc/rotary
+# pip install csrc/layer_norm
+# pip install csrc/rotary
 ```
 
 Now you can start with ModelScope or Transformers.

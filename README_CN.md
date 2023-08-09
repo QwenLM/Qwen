@@ -75,8 +75,8 @@ pip install -r requirements.txt
 git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
 cd flash-attention && pip install .
 # 下方安装可选，安装可能比较缓慢。
-pip install csrc/layer_norm
-pip install csrc/rotary
+# pip install csrc/layer_norm
+# pip install csrc/rotary
 ```
 
 接下来你可以开始使用Transformers或者ModelScope来使用我们的模型。
