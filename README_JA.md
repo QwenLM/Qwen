@@ -231,9 +231,9 @@ model = AutoModelForCausalLM.from_pretrained(
 
 | Precision   |   MMLU   |  Memory  |
 | :---------: | -------: | -------: |
-|   BF16   |  56.7 |   16.2G |
-|   Int8   |  52.8 |   10.1G |
-|    NF4   |  48.9 |   7.4G |
+|   BF16      |  56.7    |   16.2G  |
+|   Int8      |  52.8    |   10.1G  |
+|    NF4      |  48.9    |   7.4G   |
 
 ## CLI デモ
 
@@ -254,12 +254,12 @@ ReAct プロンプトの書き方や使い方については、[ReAct の例](ex
 
 さらに、エージェントとしての能力を示す実験結果を提供する。詳細は [Hugging Face Agent](https://huggingface.co/docs/transformers/transformers_agents) を参照。Hugging Face が提供するランモードベンチマークでの性能は以下の通りです:
 
-| Model | Tool Selection↑ | Tool Used↑ | Code↑ |
-|-|-|-|-|
-|GPT-4 | **100** | **100** | **97.41** |
-|GPT-3.5 | 95.37 | 96.30 | 87.04 |
-|StarCoder-15.5B | 87.04 | 87.96 | 68.89 |
-| **Qwen-7B** | 90.74 | 92.59 | 74.07 |
+| Model           | Tool Selection↑  | Tool Used↑ | Code↑     |
+| --------------- | ---------------- | ---------- | --------- |
+| GPT-4           | **100**          | **100**    | **97.41** |
+| GPT-3.5         | 95.37            | 96.30      | 87.04     |
+| StarCoder-15.5B | 87.04            | 87.96      | 68.89     |
+| **Qwen-7B**     | 90.74            | 92.59      | 74.07     |
 
 ## 長い文脈の理解
 
