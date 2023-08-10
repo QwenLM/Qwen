@@ -58,7 +58,7 @@ Qwen当前支持流式推理。见位于`modeling_qwen.py`的`chat_stream`函数
 
 这一问题已经在最新版本中修复。请更新到最新代码。
 
-#### 处理长序列时效果有问题**
+#### 处理长序列时效果有问题
 
 请确认是否开启ntk。若要启用这些技巧，请将`config.json`里的`use_dynamc_ntk`和`use_logn_attn`设置为`true`。最新代码默认为`true`。
 <br><br>
