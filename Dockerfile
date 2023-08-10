@@ -6,6 +6,8 @@ ARG from=nvidia/cuda:11.7.1-cudnn8-devel-ubuntu20.04
 FROM ${from} as base
 
 ###### options to build the image
+# BUNDLE_REQUIREMENTS: whether to install requirements.txt when docker build
+# BUNDLE_FLASH_ATTENTION: whether to install flash-attention when docker build
 
 ARG from
 
