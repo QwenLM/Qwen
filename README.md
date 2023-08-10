@@ -313,7 +313,7 @@ For your reproduction of the model performance on benchmark datasets, we provide
 
 ## FAQ
 
-If you meet problems, please refer to [FAQ](FQA.md) and the issues first to search a solution before you launch a new issue.
+If you meet problems, please refer to [FAQ](FAQ.md) and the issues first to search a solution before you launch a new issue.
 
 ## License Agreement
 
