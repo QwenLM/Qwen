@@ -5,14 +5,14 @@ labels: []
 body:
   - type: checkboxes
     attributes:
-      label: 是否已有关于该错误的issue或discussion？ | Is there an existing issue / discussion for this?
+      label: 是否已有关于该错误的issue或讨论？ | Is there an existing issue / discussion for this?
       description: |
-        请先搜索您遇到的错误是否在已有的issues/discussion中提到过。
+        请先搜索您遇到的错误是否在已有的issues或讨论中提到过。
         Please search to see if an issue / discussion already exists for the bug you encountered.
-        <https://github.com/QwenLM/Qwen-7B/issues>
-        <https://github.com/QwenLM/Qwen-7B/discussions>
+        [Issues](https://github.com/QwenLM/Qwen-7B/issues)
+        [Discussions](https://github.com/QwenLM/Qwen-7B/discussions)
       options:
-        - label: 我已经搜索过已有的issues / discussions | I have searched the existing issues / discussions
+        - label: 我已经搜索过已有的issues和讨论 | I have searched the existing issues / discussions
           required: true
   - type: checkboxes
     attributes:
@@ -20,8 +20,8 @@ body:
       description: |
         请先搜索您遇到的错误是否已在FAQ中有相关解答。
         Please search to see if an answer already exists in FAQ for the bug you encountered.
-        <https://github.com/QwenLM/Qwen-7B/blob/main/FAQ.md>
-        <https://github.com/QwenLM/Qwen-7B/blob/main/FAQ_zh.md>
+        [FAQ-en](https://github.com/QwenLM/Qwen-7B/blob/main/FAQ.md)
+        [FAQ-zh](https://github.com/QwenLM/Qwen-7B/blob/main/FAQ_zh.md)
       options:
         - label: 我已经搜索过FAQ | I have searched FAQ
           required: true
