@@ -25,6 +25,9 @@ Qwen-7B is the 7B-parameter version of the large language model series, Qwen (ab
 4. **Support of 8K Context Length**. Both Qwen-7B and Qwen-7B-Chat support the context length of 8K, which allows inputs with long contexts.
 5. **Support of Plugins**. Qwen-7B-Chat is trained with plugin-related alignment data, and thus it is capable of using tools, including APIs, models, databases, etc., and it is capable of playing as an agent.
 
+The following sections include information that you might find it helpful. Specifically, we advise you to read the FAQ section before you launch issues.
+
+
 ## News
 
 * 2023.8.3 We release both Qwen-7B and Qwen-7B-Chat on ModelScope and Hugging Face. We also provide a technical memo for more details about the model, including training details and model performance.
@@ -50,6 +53,8 @@ In general, Qwen-7B outperforms the baseline models of a similar model size, and
     <img src="assets/performance.png" width="1000"/>
 <p>
 <br>
+
+Additionally, according to the third-party evaluation of large language models, conducted by [OpenCompass](https://opencompass.org.cn/leaderboard-llm), Qwen-7B and Qwen-7B-Chat are the top 7B-parameter models. This evaluation consists of a large amount of public benchmarks for the evaluation of language understanding and generation, coding, mathematics, reasoning, etc.
 
 For more experimental results (detailed model performance on more benchmark datasets) and details, please refer to our technical memo by clicking [here](tech_memo.md).
 
