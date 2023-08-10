@@ -21,6 +21,9 @@ This is the merge file of the tokenizer. You have to download it. Note that if y
 #### transformers_stream_generator/tiktoken/accelerate not found
 
 Run the command `pip install -r requirements.txt`. You can find the file at [https://github.com/QwenLM/Qwen-7B/blob/main/requirements.txt](https://github.com/QwenLM/Qwen-7B/blob/main/requirements.txt).
+<br><br>
+
+
 
 ## Demo & Inference
 
@@ -61,12 +64,18 @@ We solved this problem. Updating the code to the latest version can help.
 #### Unsatisfactory performance in processing long sequences
 
 Please ensure that NTK is applied. `use_dynamc_ntk` and `use_logn_attn` in `config.json` should be set to `true` (`true` by default).
+<br><br>
+
+
 
 ## Finetuning
 
 #### Can Qwen support SFT or even RLHF?
 
 We do not provide finetuning or RLHF codes for now. However, some projects have supported finetuning, see [FastChat](**[https://github.com/lm-sys/FastChat](https://github.com/lm-sys/FastChat)), [Firefly]([https://github.com/yangjianxin1/Firefly](https://github.com/yangjianxin1/Firefly)), [**LLaMA Efficient Tuning**]([https://github.com/hiyouga/LLaMA-Efficient-Tuning](https://github.com/hiyouga/LLaMA-Efficient-Tuning)), etc. We will soon update the relevant codes.
+<br><br>
+
+
 
 ## Tokenizer
 

@@ -21,6 +21,8 @@ flash attention是一个用于加速模型训练推理的可选项，且仅适�
 #### transformers_stream_generator/tiktoken/accelerate，这几个库提示找不到，怎么办？
 
 运行如下命令：`pip install -r requirements.txt`。相关依赖库在[https://github.com/QwenLM/Qwen-7B/blob/main/requirements.txt](https://github.com/QwenLM/Qwen-7B/blob/main/requirements.txt) 可以找到。
+<br><br>
+
 
 ## Demo & 推理
 
@@ -59,6 +61,7 @@ Qwen当前支持流式推理。见位于`modeling_qwen.py`的`chat_stream`函数
 #### 处理长序列时效果有问题**
 
 请确认是否开启ntk。若要启用这些技巧，请将`config.json`里的`use_dynamc_ntk`和`use_logn_attn`设置为`true`。最新代码默认为`true`。
+<br><br>
 
 
 ## 微调
@@ -66,6 +69,7 @@ Qwen当前支持流式推理。见位于`modeling_qwen.py`的`chat_stream`函数
 #### 当前是否支持SFT和RLHF？
 
 我们目前未提供SFT和RLHF代码。当前有多个外部项目已实现支持，如[FastChat](**[https://github.com/lm-sys/FastChat](https://github.com/lm-sys/FastChat))、[Firefly]([https://github.com/yangjianxin1/Firefly](https://github.com/yangjianxin1/Firefly))、[**LLaMA Efficient Tuning**]([https://github.com/hiyouga/LLaMA-Efficient-Tuning](https://github.com/hiyouga/LLaMA-Efficient-Tuning))等。我们会尽快更新这部分代码和说明。
+<br><br>
 
 
 ## Tokenizer
