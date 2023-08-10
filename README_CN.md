@@ -259,7 +259,7 @@ python cli_demo.py
 我们提供了Web UI的demo供用户使用 (感谢 @wysiad 支持)。在开始前，确保已经安装如下代码库：
 
 ```
-pip install gradio mdtex2html
+pip install -r requirements_web_demo.txt
 ```
 
 随后运行如下命令，并点击生成链接：

@@ -38,7 +38,7 @@ Commands:
 
 def _load_model_tokenizer(args):
     tokenizer = AutoTokenizer.from_pretrained(
-        args.checkpoint_path, trust_remote_code=True,
+        args.checkpoint_path, trust_remote_code=True, resume_download=True,
     )
 
     if args.cpu_only:
@@ -50,9 +50,11 @@ def _load_model_tokenizer(args):
         args.checkpoint_path,
         device_map=device_map,
         trust_remote_code=True,
+        resume_download=True,
     ).eval()
-    model.generation_config = GenerationConfig.from_pretrained(args.checkpoint_path, trust_remote_code=True)
-
+    model.generation_config = GenerationConfig.from_pretrained(
+        args.checkpoint_path, trust_remote_code=True, resume_download=True,
+    )
     return model, tokenizer
 
 

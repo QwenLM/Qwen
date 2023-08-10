@@ -264,7 +264,7 @@ python cli_demo.py
 ウェブUIデモを構築するためのコードを提供します（@wysiadに感謝）。始める前に、以下のパッケージがインストールされていることを確認してください：
 
 ```
-pip install gradio mdtex2html
+pip install -r requirements_web_demo.txt
 ```
 
 そして、以下のコマンドを実行し、生成されたリンクをクリックする：
