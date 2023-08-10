@@ -34,48 +34,91 @@ FROM dev as bundle_req
 
 ARG BUNDLE_REQUIREMENTS=false
 
-RUN if [ "$BUNDLE_REQUIREMENTS" = "true" ]; then \
-    cd /data/shared/Qwen-7B; \
-    pip3 install -r requirements.txt; \
-    pip3 install gradio mdtex2html scipy argparse; \
-    fi
+RUN <<EOF
+if [ "$BUNDLE_REQUIREMENTS" = "true" ]; then 
+    cd /data/shared/Qwen-7B
+    pip3 install -r requirements.txt
+    pip3 install gradio mdtex2html scipy argparse
+fi
+EOF
 
 FROM bundle_req as bundle_flash_attention
 ARG BUNDLE_FLASH_ATTENTION=false
 
-RUN if [ "$BUNDLE_FLASH_ATTENTION" = "true" ]; then \
-    cd /data/shared/Qwen-7B; \
-    test -d flash-attention || git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention; \
-    cd /data/shared/Qwen-7B/flash-attention; \
-    pip3 install .; \
-    pip3 install csrc/layer_norm; \
-    pip3 install csrc/rotary; \
+RUN <<EOF 
+if [ "$BUNDLE_FLASH_ATTENTION" = "true" ]; then
+    cd /data/shared/Qwen-7B 
+    test -d flash-attention || git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
+    cd /data/shared/Qwen-7B/flash-attention &&
+        pip3 install . &&
+        pip3 install csrc/layer_norm &&
+        pip3 install csrc/rotary
     fi
+EOF
 
-FROM bundle_flash_attention as bundle_models
+FROM bundle_flash_attention as final
 
-# the revision of the models to be bundled
-ARG BUNDLE_MODELS_REVISION="None"
-
-RUN if [ -n "$BUNDLE_MODELS_REVISION" ] && [ "$BUNDLE_MODELS_REVISION" != "None" ]; then \
-    cd /data/shared/Qwen-7B; \
-    python3 web_demo.py --exit --model_revision $BUNDLE_MODELS_REVISION; \
-    fi
-
-FROM bundle_models as final
-
-ARG BUNDLE_MODELS_REVISION="None"
 ARG from
 
 EXPOSE 80
 
 WORKDIR /data/shared/Qwen-7B/
-RUN echo "bash ./run_web_demo.sh --install-deps $(test "${from#*devel}" != "$from" && echo --install-flash-attn) - --server_port 80 --server_name 0.0.0.0 --inbrowser --model_revision $BUNDLE_MODELS_REVISION" > /data/shared/Qwen-7B/run.sh
+
+COPY <<EOF ./run_web_demo.sh
+#!/usr/bin/env bash
+
+thisDir=\$(pwd)
+
+FROM_IMAGE=$from # from base image
+export INSTALL_DEPS=true
+export INSTALL_FLASH_ATTN=\$(test "\${FROM_IMAGE#*devel}" != "\$FROM_IMAGE" && echo true)
+declare -a WEB_DEMO_ARGS=(--server-port 80 --server-name 0.0.0.0 --inbrowser)
+
+
+echo "INSTALL_DEPS: \$INSTALL_DEPS"
+echo "INSTALL_FLASH_ATTN: \$INSTALL_FLASH_ATTN"
+echo "WEB_DEMO_ARGS: \${WEB_DEMO_ARGS[@]}"
+
+function performInstall() {
+
+    pushd "\$thisDir"
+    pip3 install -r requirements.txt
+    pip3 install gradio mdtex2html scipy argparse
+
+    if \$INSTALL_FLASH_ATTN; then
+        if [[ ! -d flash-attention ]]; then
+            if ! git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention; then
+                echo "Clone flash-attention failed, please install it manually."
+                return 0
+            fi
+        fi
+
+        cd flash-attention &&
+            pip3 install . &&
+            pip3 install csrc/layer_norm &&
+            pip3 install csrc/rotary ||
+            echo "Install flash-attention failed, please install it manually."
+    fi
+
+    popd
+}
+
+echo "Starting WebUI..."
+
+if ! python3 web_demo.py \${WEB_DEMO_ARGS[@]}; then
+    if \$INSTALL_DEPS; then
+        echo "Installing deps, and try again..."
+        performInstall && python3 web_demo.py \${WEB_DEMO_ARGS[@]}
+    else
+        echo "Please install deps manually, or use --install-deps to install deps automatically."
+    fi
+fi
+EOF
 
 # See the result when building the image
-RUN cat /data/shared/Qwen-7B/run.sh
+RUN cat run_web_demo.sh
 
-CMD ["bash", "/data/shared/Qwen-7B/run.sh"]
+CMD ["bash", "run_web_demo.sh"]
 
 ############  Usage ############
 
