@@ -311,9 +311,13 @@ To extend the context length and break the bottleneck of training sequence lengt
 
 For your reproduction of the model performance on benchmark datasets, we provide scripts for you to reproduce the results. Check [eval/EVALUATION.md](eval/EVALUATION.md) for more information. Note that the reproduction may lead to slight differences from our reported results.
 
+## FAQ
+
+If you meet problems, please refer to [FAQ](FQA.md) and the issues first to search a solution before you launch a new issue.
+
 ## License Agreement
 
-Researchers and developers are free to use the codes and model weights of both Qwen-7B and Qwen-7B-Chat. We also allow their commercial use. Check our license at [LICENSE](LICENSE) for more details.
+Researchers and developers are free to use the codes and model weights of both Qwen-7B and Qwen-7B-Chat. We also allow their commercial use. Check our license at [LICENSE](LICENSE) for more details. If you have requirements for commercial use, please fill out the [form](https://dashscope.console.aliyun.com/openModelApply/qianwen) to apply.
 
 ## Contact Us
 
