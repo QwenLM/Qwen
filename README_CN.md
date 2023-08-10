@@ -1,4 +1,5 @@
 <br>
+
 <p align="center">
     <img src="assets/logo.jpg" width="400"/>
 <p>
@@ -10,7 +11,7 @@
 <br>
 
 <p align="center">
-        中文</a>&nbsp ｜ &nbsp<a href="READM.md">English</a>
+        中文</a>&nbsp ｜ &nbsp<a href="README.md">English</a>&nbsp ｜ &nbsp<a href="README_JA.md">日本語</a>
 </p>
 <br><br>
 
@@ -24,6 +25,8 @@
 4. **8K的上下文长度**：Qwen-7B及Qwen-7B-Chat均能支持8K的上下文长度, 允许用户输入更长的prompt。
 5. **支持插件调用**：Qwen-7B-Chat针对插件调用相关的对齐数据做了特定优化，当前模型能有效调用插件以及升级为Agent。
 
+以下章节的信息可能对你有帮助，建议阅读。如果你在使用过程遇到问题，建议先查询FAQ，如仍无法解决再提交issue。
+
 ## 新闻
 
 * 2023年8月3日 在魔搭社区（ModelScope）和Hugging Face同步推出Qwen-7B和Qwen-7B-Chat模型。同时，我们发布了技术备忘录，介绍了相关的训练细节和模型表现。
@@ -32,25 +35,27 @@
 
 Qwen-7B在多个全面评估自然语言理解与生成、数学运算解题、代码生成等能力的评测数据集上，包括MMLU、C-Eval、GSM8K、HumanEval、WMT22等，均超出了同规模大语言模型的表现，甚至超出了如12-13B参数等更大规模的语言模型。
 
-| Model        | MMLU     |   C-Eval |    GSM8K | HumanEval | WMT22 (en-zh) |
-| :------------- | ---------- | ---------: | ---------: | ----------: | --------------: |
-| LLaMA-7B     | 35.1     |        - |     11.0 |      10.5 |           8.7 |
-| LLaMA 2-7B   | 45.3     |        - |     14.6 |      12.8 |          17.9 |
-| Baichuan-7B  | 42.3     |     42.8 |      9.7 |       9.2 |          26.6 |
-| ChatGLM2-6B  | 47.9     |     51.7 |     32.4 |       9.2 |             - |
-| InternLM-7B  | 51.0     |     52.8 |     31.2 |      10.4 |          14.8 |
-| Baichuan-13B | 51.6     |     53.6 |     26.6 |      12.8 |          30.0 |
-| LLaMA-13B    | 46.9     |     35.5 |     17.8 |      15.8 |          12.0 |
-| LLaMA 2-13B  | 54.8     |        - |     28.7 |      18.3 |          24.2 |
-| ChatGLM2-12B | 56.2     | **61.6** |     40.9 |         - |             - |
-| **Qwen-7B**  | **56.7** |     59.6 | **51.6** |  **24.4** |      **30.6** |
+| Model             | MMLU           |         C-Eval |          GSM8K |      HumanEval |  WMT22 (en-zh) |
+| :---------------- | :------------: | :------------: | :------------: | :------------: | :------------: |
+| LLaMA-7B          | 35.1           |              - |           11.0 |           10.5 |            8.7 |
+| LLaMA 2-7B        | 45.3           |              - |           14.6 |           12.8 |           17.9 |
+| Baichuan-7B       | 42.3           |           42.8 |            9.7 |            9.2 |           26.6 |
+| ChatGLM2-6B       | 47.9           |           51.7 |           32.4 |            9.2 |              - |
+| InternLM-7B       | 51.0           |           52.8 |           31.2 |           10.4 |           14.8 |
+| Baichuan-13B      | 51.6           |           53.6 |           26.6 |           12.8 |           30.0 |
+| LLaMA-13B         | 46.9           |           35.5 |           17.8 |           15.8 |           12.0 |
+| LLaMA 2-13B       | 54.8           |              - |           28.7 |           18.3 |           24.2 |
+| ChatGLM2-12B      | 56.2           |       **61.6** |           40.9 |              - |              - |
+| **Qwen-7B**       | **56.7**       |           59.6 |       **51.6** |       **24.4** |       **30.6** |
 
 <p align="center">
     <img src="assets/performance.png" width="1000"/>
 <p>
 <br>
 
-更多的实验结果和细节请查看我们的技术备忘录。点击[这里](techmemo-draft.md)。
+此外，根据[OpenCompass](https://opencompass.org.cn/leaderboard-llm)进行的大型语言模型第三方评估，Qwen-7B 和 Qwen-7B-Chat 是其中表现最优的7B参数模型。该评估由大量公开基准组成，用于评估语言理解和生成、代码生成、数学、推理等。
+
+更多的实验结果和细节请查看我们的技术备忘录。点击[这里](tech_memo.md)。
 
 ## 要求
 
@@ -73,21 +78,22 @@ pip install -r requirements.txt
 ```bash
 git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
 cd flash-attention && pip install .
-pip install csrc/layer_norm
-pip install csrc/rotary
+# 下方安装可选，安装可能比较缓慢。
+# pip install csrc/layer_norm
+# pip install csrc/rotary
 ```
 
 接下来你可以开始使用Transformers或者ModelScope来使用我们的模型。
 
 #### 🤗 Transformers
 
-如希望使用Qwen-7B-chat进行推理，所需要写的只是如下所示的数行代码：
+如希望使用Qwen-7B-chat进行推理，所需要写的只是如下所示的数行代码。**请确保你使用的是最新代码。**
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
-# 请注意：分词器默认行为已更改为默认关闭特殊token攻击防护。相关使用指引，请见examples/tokenizer_showcase.ipynb
+# 请注意：分词器默认行为已更改为默认关闭特殊token攻击防护。
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
 # 打开bf16精度，A100、H100、RTX3060、RTX3070等显卡建议启用以节省显存
@@ -108,7 +114,7 @@ print(response)
 # 你好！很高兴为你提供帮助。
 
 # 第二轮对话 2nd dialogue turn
-response, history = model.chat(tokenizer, "给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history) 
+response, history = model.chat(tokenizer, "给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history)
 print(response)
 # 这是一个关于一个年轻人奋斗创业最终取得成功的故事。
 # 故事的主人公叫李明，他来自一个普通的家庭，父母都是普通的工人。从小，李明就立下了一个目标：要成为一名成功的企业家。
@@ -147,7 +153,7 @@ model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", 
 model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
 
 inputs = tokenizer('蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是', return_tensors='pt')
-inputs = inputs.to('cuda:0')
+inputs = inputs.to(model.device)
 pred = model.generate(**inputs)
 print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 # 蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是亚的斯亚贝巴（Addis Ababa）...
@@ -184,12 +190,24 @@ response, history = results['response'], results['history']
 print(f'Response: {response}')
 ```
 
+## Tokenization
+
+> 注：作为术语的“tokenization”在中文中尚无共识的概念对应，本文档采用英文表达以利说明。
+
+基于tiktoken的tokenizer有别于其他分词器，比如sentencepiece tokenizer。尤其在微调阶段，需要特别注意特殊token的使用。关于tokenizer的更多信息，以及微调时涉及的相关使用，请参阅[文档](tokenization_note_zh.md)。
+
 ## 量化
 
 如希望使用更低精度的量化模型，如4比特和8比特的模型，我们提供了简单的示例来说明如何快速使用量化模型。在开始前，确保你已经安装了`bitsandbytes`。请注意，`bitsandbytes`的安装要求是：
 
 ```
 **Requirements** Python >=3.8. Linux distribution (Ubuntu, MacOS, etc.) + CUDA > 10.0.
+```
+
+随后运行如下命令安装`bitsandbytes`:
+
+```
+pip install bitsandbytes
 ```
 
 Windows用户需安装特定版本的`bitsandbytes`，可选项包括[bitsandbytes-windows-webui](https://github.com/jllllll/bitsandbytes-windows-webui/releases/tag/wheels)。
@@ -220,25 +238,45 @@ model = AutoModelForCausalLM.from_pretrained(
 
 上述方法可以让我们将模型量化成`NF4`和`Int8`精度的模型进行读取，帮助我们节省显存开销。我们也提供了相关性能数据。我们发现尽管模型在效果上存在损失，但模型的显存开销大幅降低。
 
-| Precision | MMLU | Memory |
-| :---------: | -------: | -----: |
-|   BF16   |  56.7 |   16.2G |
-|   Int8   |  52.8 |   10.1G |
-|    NF4    |  48.9 |    7.4G |
+| Precision   |   MMLU   |  Memory  |
+| :---------: | :------: | :------: |
+|   BF16      |   56.7   |   16.2G  |
+|   Int8      |   52.8   |   10.1G  |
+|    NF4      |   48.9   |   7.4G   |
 
-## 交互式Demo
+## Demo
 
-我们提供了一个简单的交互式Demo示例，请查看`cli_demo.py`。当前模型已经支持流式输出，用户可通过输入文字的方式和Qwen-7B-Chat交互，模型将流式输出返回结果。
+### 交互式Demo
+
+我们提供了一个简单的交互式Demo示例，请查看`cli_demo.py`。当前模型已经支持流式输出，用户可通过输入文字的方式和Qwen-7B-Chat交互，模型将流式输出返回结果。运行如下命令：
+
+```
+python cli_demo.py
+```
+
+### Web UI
+
+我们提供了Web UI的demo供用户使用 (感谢 @wysiad 支持)。在开始前，确保已经安装如下代码库：
+
+```
+pip install -r requirements_web_demo.txt
+```
+
+随后运行如下命令，并点击生成链接：
+
+```
+python web_demo.py
+```
 
 ## 工具调用
 
-Qwen-7B-Chat针对包括API、数据库、模型等工具在内的调用进行了优化。用户可以开发基于Qwen-7B的LangChain、Agent甚至Code Interpreter。我们在内部的即将开源的评测数据集上测试模型的工具调用能力，并发现Qwen-7B-Chat能够取得稳定的表现。
+Qwen-7B-Chat针对包括API、数据库、模型等工具在内的调用进行了优化。用户可以开发基于Qwen-7B的LangChain、Agent甚至Code Interpreter。在我们开源的[评测数据集](eval/EVALUATION.md)上测试模型的工具调用能力，并发现Qwen-7B-Chat能够取得稳定的表现。
 
-| Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑) | False Positive Error↓ |
-| ------------- | ------------------------- | ------------------------ | ------------------------ |
-| GPT-4       | 95%                     | **0.90**               | 15%                    |
-| GPT-3.5     | 85%                     | 0.88                   | 75%                    |
-| **Qwen-7B** | **99%**                 | 0.89                   | **8.5%**               |
+| Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑)  | False Positive Error↓  |
+|:------------|:----------------------:|:----------------------:|:----------------------:|
+| GPT-4       | 95%                    | **0.90**               | 15%                    |
+| GPT-3.5     | 85%                    | 0.88                   | 75%                    |
+| **Qwen-7B** | **99%**                | 0.89                   | **9.7%**               |
 
 我们提供了文档说明如何根据ReAct Prompting的原则写作你的prompt。
 
@@ -246,12 +284,12 @@ For how to write and use prompts for ReAct Prompting, please refer to [the ReAct
 
 此外，我们还提供了实验结果表明我们的模型扮演Agent的能力。请阅读相关文档[链接](https://huggingface.co/docs/transformers/transformers_agents)了解更多信息。模型在Hugging Face提供的评测数据集上表现如下：
 
-| Model           | Tool Selection↑ | Tool Used↑ | Code↑    |
-| ----------------- | ------------------ | ------------- | ----------- |
-| GPT-4           | **100**          | **100**     | **97.41** |
-| GPT-3.5         | 95.37            | 96.30       | 87.04     |
-| StarCoder-15.5B | 87.04            | 87.96       | 68.89     |
-| **Qwen-7B**     | 90.74            | 92.59       | 74.07     |
+| Model          | Tool Selection↑ | Tool Used↑  |   Code↑   |
+|:---------------|:---------------:|:-----------:|:---------:|
+|GPT-4           |     **100**     |   **100**   | **97.41** |
+|GPT-3.5         |      95.37      |    96.30    |   87.04   |
+|StarCoder-15.5B |      87.04      |    87.96    |   68.89   |
+| **Qwen-7B**    |      90.74      |    92.59    |   74.07   |
 
 ## 长文本理解
 
@@ -282,9 +320,14 @@ For how to write and use prompts for ReAct Prompting, please refer to [the ReAct
 
 我们提供了评测脚本以供复现我们的实验结果。注意，由于内部代码和开源代码存在少许差异，评测结果可能与汇报结果存在细微的结果不一致。请阅读[eval/EVALUATION.md](eval/EVALUATION.md)了解更多信息。
 
+## FAQ
+
+如遇到问题，敬请查阅[FAQ](FAQ_zh.md)以及issue区，如仍无法解决再提交issue。
+
+
 ## 使用协议
 
-研究人员与开发者可使用Qwen-7B和Qwen-7B-Chat或进行二次开发。我们同样允许商业使用，具体细节请查看[LICENSE](LICENSE)。
+研究人员与开发者可使用Qwen-7B和Qwen-7B-Chat或进行二次开发。我们同样允许商业使用，具体细节请查看[LICENSE](LICENSE)。如需商用，请填写[问卷](https://dashscope.console.aliyun.com/openModelApply/qianwen)申请。
 
 ## 联系我们
 
