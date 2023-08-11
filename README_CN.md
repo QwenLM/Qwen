@@ -256,7 +256,7 @@ python cli_demo.py
 
 ### Web UI
 
-我们提供了Web UI的demo供用户使用 (感谢 @wysiad 支持)。在开始前，确保已经安装如下代码库：
+我们提供了Web UI的demo供用户使用 (感谢 @wysaid 支持)。在开始前，确保已经安装如下代码库：
 
 ```
 pip install -r requirements_web_demo.txt

@@ -254,7 +254,7 @@ python cli_demo.py
 
 ### Web UI
 
-We provide code for users to build a web UI demo (thanks to @wysiad). Before you start, make sure you install the following packages:
+We provide code for users to build a web UI demo (thanks to @wysaid). Before you start, make sure you install the following packages:
 
 ```
 pip install -r requirements_web_demo.txt
