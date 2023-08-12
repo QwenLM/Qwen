@@ -234,13 +234,51 @@ model = AutoModelForCausalLM.from_pretrained(
 ).eval()
 ```
 
-With this method, it is available to load Qwen-7B in `NF4` and `Int8`, which saves you memory usage. We provide related statistics of model performance below. We find that the quantization downgrades the effectiveness slightly but significantly increases inference efficiency and reduces memory costs.
+With this method, it is available to load Qwen-7B in `NF4` and `Int8`, which saves you memory usage. We provide related statistics of model performance below. We find that the quantization downgrades the effectiveness slightly but significantly reduces memory costs.
 
-| Precision   |   MMLU   |  Memory  |
-| :---------: | :------: | :------: |
-|   BF16      |   56.7   |   16.2G  |
-|   Int8      |   52.8   |   10.1G  |
-|    NF4      |   48.9   |   7.4G   |
+| Precision   |   MMLU   |  GPU Memory for Loading Model |
+| ----------- | :------: | :---------------------------: |
+|   BF16      |   56.7   |             16.38G            |
+|   Int8      |   52.8   |             10.44G            |
+|    NF4      |   48.9   |             7.79G             |
+
+Note: The GPU memory usage profiling in the above table is performed on single A100-SXM4-80G GPU, PyTorch 2.0.1 and cuda 11.8, with flash attention used.
+
+## Inference Efficiency
+
+### Inference Speed
+
+We measured the average inference speed of generating 2K tokens under BF16 precision and Int8 or NF4 quantization levels, respectively.
+
+| Quantization Level | Inference Speed with flash_attn (tokens/s) | Inference Speed w/o flash_attn (tokens/s) |
+| ------ | :---------------------------: | :---------------------------: |
+| BF16 (no quantization) | 30.06 | 27.55 |
+| Int8 (bnb) | 7.94 | 7.86 |
+| NF4 (bnb) | 21.43 | 20.37 |
+
+In detail, the setting of profiling is generating 2048 new tokens with 1 context token. The profiling runs on single A100-SXM4-80G GPU with PyTorch 2.0.1 and cuda 11.8. The inference speed is averaged over the generated 2048 tokens.
+
+### GPU Memory Usage
+
+We also profile the peak GPU memory usage for encoding 2048 tokens as context (and generating single token) and generating 8192 tokens (with single token as context) under BF16 or Int8/NF4 quantization levels, respectively. The results are shown below
+
+When using flash attention, the memory usage is:
+
+| Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
+| --- | :---: | :---: |
+| BF16 | 18.11GB | 23.52GB |
+| Int8 | 12.17GB | 17.60GB |
+| NF4 | 9.52GB | 14.93GB |
+
+When not using flash attention, the memory usage is:
+
+| Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
+| --- | :---: | :---: |
+| BF16 | 18.11GB | 24.40GB |
+| Int8 | 12.18GB | 18.47GB |
+| NF4 | 9.52GB | 15.81GB |
+
+The above speed and memory profiling are conducted using [this script](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py).
 
 ## Demo
 
