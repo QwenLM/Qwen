@@ -34,20 +34,20 @@ The following sections include information that you might find it helpful. Speci
 
 ## Performance
 
-In general, Qwen-7B outperforms the baseline models of a similar model size, and even outperforms larger models of around 13B parameters, on a series of benchmark datasets, e.g., MMLU, C-Eval, GSM8K, HumanEval, and WMT22, etc., which evaluate the models' capabilities on natural language understanding, mathematic problem solving, coding, etc. See the results below.
+In general, Qwen-7B outperforms the baseline models of a similar model size, and even outperforms larger models of around 13B parameters, on a series of benchmark datasets, e.g., MMLU, C-Eval, GSM8K, HumanEval, and WMT22, CMMLU, etc., which evaluate the models' capabilities on natural language understanding, mathematic problem solving, coding, etc. See the results below.
 
-| Model             | MMLU           |         C-Eval |          GSM8K |      HumanEval |  WMT22 (en-zh) |
-| :---------------- | :------------: | :------------: | :------------: | :------------: | :------------: |
-| LLaMA-7B          | 35.1           |              - |           11.0 |           10.5 |            8.7 |
-| LLaMA 2-7B        | 45.3           |              - |           14.6 |           12.8 |           17.9 |
-| Baichuan-7B       | 42.3           |           42.8 |            9.7 |            9.2 |           26.6 |
-| ChatGLM2-6B       | 47.9           |           51.7 |           32.4 |            9.2 |              - |
-| InternLM-7B       | 51.0           |           52.8 |           31.2 |           10.4 |           14.8 |
-| Baichuan-13B      | 51.6           |           53.6 |           26.6 |           12.8 |           30.0 |
-| LLaMA-13B         | 46.9           |           35.5 |           17.8 |           15.8 |           12.0 |
-| LLaMA 2-13B       | 54.8           |              - |           28.7 |           18.3 |           24.2 |
-| ChatGLM2-12B      | 56.2           |       **61.6** |           40.9 |              - |              - |
-| **Qwen-7B**       | **56.7**       |           59.6 |       **51.6** |       **24.4** |       **30.6** |
+| Model             | MMLU           |         C-Eval |          GSM8K |      HumanEval |  WMT22 (en-zh) |         CMMLU |
+| :---------------- | :------------: | :------------: | :------------: | :------------: | :------------: |:------------: |
+| LLaMA-7B          | 35.1           |              - |           11.0 |           10.5 |            8.7 |             - |
+| LLaMA 2-7B        | 45.3           |              - |           14.6 |           12.8 |           17.9 |             - |
+| Baichuan-7B       | 42.3           |           42.8 |            9.7 |            9.2 |           26.6 |          44.4 |
+| ChatGLM2-6B       | 47.9           |           51.7 |           32.4 |            9.2 |              - |          48.8 |
+| InternLM-7B       | 51.0           |           52.8 |           31.2 |           10.4 |           14.8 |             - |
+| Baichuan-13B      | 51.6           |           53.6 |           26.6 |           12.8 |           30.0 |          55.8 |
+| LLaMA-13B         | 46.9           |           35.5 |           17.8 |           15.8 |           12.0 |             - |
+| LLaMA 2-13B       | 54.8           |              - |           28.7 |           18.3 |           24.2 |             - |
+| ChatGLM2-12B      | 56.2           |       **61.6** |           40.9 |              - |              - |             - |
+| **Qwen-7B**       | **56.7**       |           59.6 |       **51.6** |       **24.4** |       **30.6** |      **58.8** |
 
 <p align="center">
     <img src="assets/performance.png" width="1000"/>
