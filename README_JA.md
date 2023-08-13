@@ -239,15 +239,49 @@ model = AutoModelForCausalLM.from_pretrained(
 
 この方法では、Qwen-7B を `NF4` と `Int8` でロードすることができ、メモリ使用量を節約できる。以下にモデル性能の関連統計量を示します。量子化により、有効性は若干低下するが、推論効率は大幅に向上し、メモリコストが削減されることがわかります。
 
-| Precision   |   MMLU   |  Memory  |
-| :---------: | :------: | :------: |
-|   BF16      |   56.7   |   16.2G  |
-|   Int8      |   52.8   |   10.1G  |
-|    NF4      |   48.9   |   7.4G   |
+| Precision   |   MMLU   |  GPU Memory for Loading Model |
+| ----------- | :------: | :---------------------------: |
+|   BF16      |   56.7   |             16.38G            |
+|   Int8      |   52.8   |             10.44G            |
+|    NF4      |   48.9   |             7.79G             |
 
-## 
+注：上表のGPUメモリ使用量プロファイリングは、シングルA100-SXM4-80G GPU、PyTorch 2.0.1、CUDA 11.8、フラッシュアテンション使用で実行されています。
 
-`cli_demo.py` に CLI のデモ例を用意しています。ユーザはプロンプトを入力することで Qwen-7B-Chat と対話することができ、モデルはストリーミングモードでモデルの出力を返します。
+## 推論効率
+
+### 推論スピード
+
+BF16精度、量子化レベルInt8またはNF4で、それぞれ2Kトークンを生成する平均推論速度を測定した。
+
+| Quantization Level | Inference Speed with flash_attn (tokens/s) | Inference Speed w/o flash_attn (tokens/s) |
+| ------ | :---------------------------: | :---------------------------: |
+| BF16 (no quantization) | 30.06 | 27.55 |
+| Int8 (bnb) | 7.94 | 7.86 |
+| NF4 (bnb) | 21.43 | 20.37 |
+
+詳細には、プロファイリングの設定は、1コンテクスト・トークンで2048の新しいトークンを生成している。プロファイリングは、PyTorch 2.0.1とCUDA 11.8を搭載したシングルA100-SXM4-80G GPUで実行される。推論速度は生成された2048個のトークンの平均です。
+
+### GPUメモリ使用量
+
+また、BF16またはInt8/NF4量子化レベルの下で、2048個のトークンをコンテキストとしてエンコードした場合（および単一のトークンを生成した場合）と、8192個のトークンを生成した場合（単一のトークンをコンテキストとして生成した場合）のGPUメモリ使用量のピーク値をそれぞれプロファイリングしました。結果を以下に示す。
+
+Flash attentionを使用した場合のメモリ使用量は以下の通りである：
+
+| Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
+| --- | :---: | :---: |
+| BF16 | 18.11GB | 23.52GB |
+| Int8 | 12.17GB | 17.60GB |
+| NF4 | 9.52GB | 14.93GB |
+
+Flash attentionを使用しない場合、メモリ使用量は次のようになる：
+
+| Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
+| --- | :---: | :---: |
+| BF16 | 18.11GB | 24.40GB |
+| Int8 | 12.18GB | 18.47GB |
+| NF4 | 9.52GB | 15.81GB |
+
+上記のスピードとメモリーのプロファイリングは、[このスクリプト](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)を使って行われた。
 
 ## デモ
 
