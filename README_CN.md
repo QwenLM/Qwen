@@ -244,7 +244,7 @@ model = AutoModelForCausalLM.from_pretrained(
 |   Int8      |   52.8   |             10.44G            |
 |    NF4      |   48.9   |             7.79G             |
 
-注：表中显存占用的测试环境为A100-SXM4-80G单卡，PyTorch 2.0.1，cuda11.8，开启flash attention
+注：表中显存占用的测试环境为A100-SXM4-80G单卡，PyTorch 2.0.1，CUDA 11.8，开启flash attention
 
 ## 推理性能
 
@@ -258,7 +258,7 @@ model = AutoModelForCausalLM.from_pretrained(
 | Int8 (bnb) | 7.94 | 7.86 |
 | NF4 (bnb) | 21.43 | 20.37 |
 
-具体的评测方式为：指定输入context长度为1，生成长度为2048；测试硬件为A100-SXM4-80G单卡，软件环境为PyTorch 2.0.1，cuda版本11.8，计算生成该2048序列的平均速度
+具体的评测方式为：指定输入context长度为1，生成长度为2048；测试硬件为A100-SXM4-80G单卡，软件环境为PyTorch 2.0.1，CUDA版本11.8，计算生成该2048序列的平均速度
 
 ### 显存占用
 
