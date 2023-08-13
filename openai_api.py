@@ -113,6 +113,10 @@ async def create_chat_completion(request: ChatCompletionRequest):
         for i in range(0, len(prev_messages), 2):
             if prev_messages[i].role == "user" and prev_messages[i+1].role == "assistant":
                 history.append([prev_messages[i].content, prev_messages[i+1].content])
+            else:
+                raise HTTPException(status_code=400, detail="Invalid request.")
+    else:
+        raise HTTPException(status_code=400, detail="Invalid request.")
 
     if request.stream:
         generate = predict(query, history, request.model)
