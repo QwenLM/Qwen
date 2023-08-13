@@ -242,7 +242,7 @@ With this method, it is available to load Qwen-7B in `NF4` and `Int8`, which sav
 |   Int8      |   52.8   |             10.44G            |
 |    NF4      |   48.9   |             7.79G             |
 
-Note: The GPU memory usage profiling in the above table is performed on single A100-SXM4-80G GPU, PyTorch 2.0.1 and cuda 11.8, with flash attention used.
+Note: The GPU memory usage profiling in the above table is performed on single A100-SXM4-80G GPU, PyTorch 2.0.1 and CUDA 11.8, with flash attention used.
 
 ## Inference Efficiency
 
@@ -256,11 +256,11 @@ We measured the average inference speed of generating 2K tokens under BF16 preci
 | Int8 (bnb) | 7.94 | 7.86 |
 | NF4 (bnb) | 21.43 | 20.37 |
 
-In detail, the setting of profiling is generating 2048 new tokens with 1 context token. The profiling runs on single A100-SXM4-80G GPU with PyTorch 2.0.1 and cuda 11.8. The inference speed is averaged over the generated 2048 tokens.
+In detail, the setting of profiling is generating 2048 new tokens with 1 context token. The profiling runs on single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.8. The inference speed is averaged over the generated 2048 tokens.
 
 ### GPU Memory Usage
 
-We also profile the peak GPU memory usage for encoding 2048 tokens as context (and generating single token) and generating 8192 tokens (with single token as context) under BF16 or Int8/NF4 quantization levels, respectively. The results are shown below
+We also profile the peak GPU memory usage for encoding 2048 tokens as context (and generating single token) and generating 8192 tokens (with single token as context) under BF16 or Int8/NF4 quantization levels, respectively. The results are shown below.
 
 When using flash attention, the memory usage is:
 
