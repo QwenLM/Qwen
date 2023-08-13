@@ -269,18 +269,18 @@ python web_demo.py
 ## API
 We provide methods to deploy local API based on OpenAI API (thanks to @hanpenggit). Before you start, install the required packages:
 
-```
+```bash
 pip install fastapi uvicorn openai pydantic sse_starlette
 ```
 Then run the command to deploy your API:
-```
+```bash
 python openai_api.py
 ```
 You can change your arguments, e.g., `-c` for checkpoint name or path, `--cpu-only` for CPU deployment, etc. If you meet problems launching your API deployment, updating the packages to the latest version can probably solve them.
 
 Using the API is also simple. See the example below:
 
-```
+```python
 import openai
 openai.api_base = "http://localhost:8000/v1"
 openai.api_key = "none"
