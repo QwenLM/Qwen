@@ -105,8 +105,9 @@ async def create_chat_completion(request: ChatCompletionRequest):
     query = request.messages[-1].content
 
     prev_messages = request.messages[:-1]
-    if len(prev_messages) > 0 and prev_messages[0].role == "system":
-        query = prev_messages.pop(0).content + query
+    # Temporarily, the system role does not work as expected. We advise that you write the setups for role-play in your query.
+    # if len(prev_messages) > 0 and prev_messages[0].role == "system":
+    #     query = prev_messages.pop(0).content + query
 
     history = []
     if len(prev_messages) % 2 == 0:
