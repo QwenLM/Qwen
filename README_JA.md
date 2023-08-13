@@ -273,6 +273,38 @@ pip install -r requirements_web_demo.txt
 python web_demo.py
 ```
 
+## API
+OpenAI APIをベースにローカルAPIをデプロイする方法を提供する（@hanpenggitに感謝）。始める前に、必要なパッケージをインストールしてください：
+
+```bash
+pip install fastapi uvicorn openai pydantic sse_starlette
+```
+
+それから、APIをデプロイするコマンドを実行する：
+
+```bash
+python openai_api.py
+```
+
+チェックポイント名やパスには `-c` 、CPU デプロイメントには `--cpu-only` など、引数を変更できます。APIデプロイメントを起動する際に問題が発生した場合は、パッケージを最新バージョンに更新することで解決できる可能性があります。
+
+APIの使い方も簡単だ。以下の例をご覧ください：
+
+```python
+import openai
+openai.api_base = "http://localhost:8000/v1"
+openai.api_key = "none"
+for chunk in openai.ChatCompletion.create(
+    model="Qwen-7B",
+    messages=[
+        {"role": "user", "content": "你好"}
+    ],
+    stream=True
+):
+    if hasattr(chunk.choices[0].delta, "content"):
+        print(chunk.choices[0].delta.content, end="", flush=True)
+```
+
 ## ツールの使用
 
 Qwen-7B-Chat は、API、データベース、モデルなど、ツールの利用に特化して最適化されており、ユーザは独自の Qwen-7B ベースの LangChain、エージェント、コードインタプリタを構築することができます。ツール利用能力を評価するための評価[ベンチマーク](eval/EVALUATION.md)では、Qwen-7B は安定した性能に達しています。

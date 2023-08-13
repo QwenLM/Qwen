@@ -307,6 +307,36 @@ pip install -r requirements_web_demo.txt
 python web_demo.py
 ```
 
+## API
+我们提供了OpenAI API格式的本地API部署方法（感谢@hanpenggit）。在开始之前先安装必要的代码库：
+
+```bash
+pip install fastapi uvicorn openai pydantic sse_starlette
+```
+随后即可运行以下命令部署你的本地API：
+```bash
+python openai_api.py
+```
+你也可以修改参数，比如`-c`来修改模型名称或路径, `--cpu-only`改为CPU部署等等。如果部署出现问题，更新上述代码库往往可以解决大多数问题。
+
+使用API同样非常简单，示例如下：
+
+```python
+import openai
+openai.api_base = "http://localhost:8000/v1"
+openai.api_key = "none"
+for chunk in openai.ChatCompletion.create(
+    model="Qwen-7B",
+    messages=[
+        {"role": "user", "content": "你好"}
+    ],
+    stream=True
+):
+    if hasattr(chunk.choices[0].delta, "content"):
+        print(chunk.choices[0].delta.content, end="", flush=True)
+```
+
+
 ## 工具调用
 
 Qwen-7B-Chat针对包括API、数据库、模型等工具在内的调用进行了优化。用户可以开发基于Qwen-7B的LangChain、Agent甚至Code Interpreter。在我们开源的[评测数据集](eval/EVALUATION.md)上测试模型的工具调用能力，并发现Qwen-7B-Chat能够取得稳定的表现。
