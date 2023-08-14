@@ -234,13 +234,51 @@ model = AutoModelForCausalLM.from_pretrained(
 ).eval()
 ```
 
-With this method, it is available to load Qwen-7B in `NF4` and `Int8`, which saves you memory usage. We provide related statistics of model performance below. We find that the quantization downgrades the effectiveness slightly but significantly increases inference efficiency and reduces memory costs.
+With this method, it is available to load Qwen-7B in `NF4` and `Int8`, which saves you memory usage. We provide related statistics of model performance below. We find that the quantization downgrades the effectiveness slightly but significantly reduces memory costs.
 
-| Precision   |   MMLU   |  Memory  |
-| :---------: | :------: | :------: |
-|   BF16      |   56.7   |   16.2G  |
-|   Int8      |   52.8   |   10.1G  |
-|    NF4      |   48.9   |   7.4G   |
+| Precision   |   MMLU   |  GPU Memory for Loading Model |
+| ----------- | :------: | :---------------------------: |
+|   BF16      |   56.7   |             16.38G            |
+|   Int8      |   52.8   |             10.44G            |
+|    NF4      |   48.9   |             7.79G             |
+
+Note: The GPU memory usage profiling in the above table is performed on single A100-SXM4-80G GPU, PyTorch 2.0.1 and CUDA 11.8, with flash attention used.
+
+## Inference Efficiency
+
+### Inference Speed
+
+We measured the average inference speed of generating 2K tokens under BF16 precision and Int8 or NF4 quantization levels, respectively.
+
+| Quantization Level | Inference Speed with flash_attn (tokens/s) | Inference Speed w/o flash_attn (tokens/s) |
+| ------ | :---------------------------: | :---------------------------: |
+| BF16 (no quantization) | 30.06 | 27.55 |
+| Int8 (bnb) | 7.94 | 7.86 |
+| NF4 (bnb) | 21.43 | 20.37 |
+
+In detail, the setting of profiling is generating 2048 new tokens with 1 context token. The profiling runs on single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.8. The inference speed is averaged over the generated 2048 tokens.
+
+### GPU Memory Usage
+
+We also profile the peak GPU memory usage for encoding 2048 tokens as context (and generating single token) and generating 8192 tokens (with single token as context) under BF16 or Int8/NF4 quantization levels, respectively. The results are shown below.
+
+When using flash attention, the memory usage is:
+
+| Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
+| --- | :---: | :---: |
+| BF16 | 18.11GB | 23.52GB |
+| Int8 | 12.17GB | 17.60GB |
+| NF4 | 9.52GB | 14.93GB |
+
+When not using flash attention, the memory usage is:
+
+| Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
+| --- | :---: | :---: |
+| BF16 | 18.11GB | 24.40GB |
+| Int8 | 12.18GB | 18.47GB |
+| NF4 | 9.52GB | 15.81GB |
+
+The above speed and memory profiling are conducted using [this script](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py).
 
 ## Demo
 
@@ -254,7 +292,7 @@ python cli_demo.py
 
 ### Web UI
 
-We provide code for users to build a web UI demo (thanks to @wysiad). Before you start, make sure you install the following packages:
+We provide code for users to build a web UI demo (thanks to @wysaid). Before you start, make sure you install the following packages:
 
 ```
 pip install -r requirements_web_demo.txt
@@ -265,6 +303,36 @@ Then run the command below and click on the generated link:
 ```
 python web_demo.py
 ```
+
+## API
+We provide methods to deploy local API based on OpenAI API (thanks to @hanpenggit). Before you start, install the required packages:
+
+```bash
+pip install fastapi uvicorn openai pydantic sse_starlette
+```
+Then run the command to deploy your API:
+```bash
+python openai_api.py
+```
+You can change your arguments, e.g., `-c` for checkpoint name or path, `--cpu-only` for CPU deployment, etc. If you meet problems launching your API deployment, updating the packages to the latest version can probably solve them.
+
+Using the API is also simple. See the example below:
+
+```python
+import openai
+openai.api_base = "http://localhost:8000/v1"
+openai.api_key = "none"
+for chunk in openai.ChatCompletion.create(
+    model="Qwen-7B",
+    messages=[
+        {"role": "user", "content": "你好"}
+    ],
+    stream=True
+):
+    if hasattr(chunk.choices[0].delta, "content"):
+        print(chunk.choices[0].delta.content, end="", flush=True)
+```
+
 
 ## Tool Usage
 

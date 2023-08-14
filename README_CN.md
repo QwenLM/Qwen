@@ -238,11 +238,50 @@ model = AutoModelForCausalLM.from_pretrained(
 
 上述方法可以让我们将模型量化成`NF4`和`Int8`精度的模型进行读取，帮助我们节省显存开销。我们也提供了相关性能数据。我们发现尽管模型在效果上存在损失，但模型的显存开销大幅降低。
 
-| Precision   |   MMLU   |  Memory  |
-| :---------: | :------: | :------: |
-|   BF16      |   56.7   |   16.2G  |
-|   Int8      |   52.8   |   10.1G  |
-|    NF4      |   48.9   |   7.4G   |
+| Precision   |   MMLU   |  GPU Memory for Loading Model |
+| ----------- | :------: | :---------------------------: |
+|   BF16      |   56.7   |             16.38G            |
+|   Int8      |   52.8   |             10.44G            |
+|    NF4      |   48.9   |             7.79G             |
+
+注：表中显存占用的测试环境为A100-SXM4-80G单卡，PyTorch 2.0.1，CUDA 11.8，开启flash attention
+
+## 推理性能
+
+### 推理速度
+
+我们分别测试了BF16和量化条件下，模型生成2K tokens的平均推理速度，结果如下
+
+| 量化等级  | 开flash_attn的推理速度 (字符/秒) | 关flash_attn的推理速度 (字符/秒) |
+| ------ | :---------------------------: | :---------------------------: |
+| BF16 (无量化) | 30.06 | 27.55 |
+| Int8 (bnb) | 7.94 | 7.86 |
+| NF4 (bnb) | 21.43 | 20.37 |
+
+具体的评测方式为：指定输入context长度为1，生成长度为2048；测试硬件为A100-SXM4-80G单卡，软件环境为PyTorch 2.0.1，CUDA版本11.8，计算生成该2048序列的平均速度
+
+### 显存占用
+
+在BF16和不同量化条件下，我们分别测算了模型编码2048长度序列（并生成1个token），和生成8192长度序列（编码1个token作为context）的峰值显存占用。结果如下
+
+打开flash attention时
+
+| 量化等级 | 编码 2048 长度的峰值显存 | 生成 8192 长度的峰值显存 |
+| --- | :---: | :---: |
+| BF16 | 18.11GB | 23.52GB |
+| Int8 | 12.17GB | 17.60GB |
+| NF4 | 9.52GB | 14.93GB |
+
+关闭flash attention时
+
+| 量化等级 | 编码 2048 长度的峰值显存 | 生成 8192 长度的峰值显存 |
+| --- | :---: | :---: |
+| BF16 | 18.11GB | 24.40GB |
+| Int8 | 12.18GB | 18.47GB |
+| NF4 | 9.52GB | 15.81GB |
+
+
+以上测速和显存占用情况，均可通过该[评测脚本](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)测算得到。
 
 ## Demo
 
@@ -256,7 +295,7 @@ python cli_demo.py
 
 ### Web UI
 
-我们提供了Web UI的demo供用户使用 (感谢 @wysiad 支持)。在开始前，确保已经安装如下代码库：
+我们提供了Web UI的demo供用户使用 (感谢 @wysaid 支持)。在开始前，确保已经安装如下代码库：
 
 ```
 pip install -r requirements_web_demo.txt
@@ -267,6 +306,36 @@ pip install -r requirements_web_demo.txt
 ```
 python web_demo.py
 ```
+
+## API
+我们提供了OpenAI API格式的本地API部署方法（感谢@hanpenggit）。在开始之前先安装必要的代码库：
+
+```bash
+pip install fastapi uvicorn openai pydantic sse_starlette
+```
+随后即可运行以下命令部署你的本地API：
+```bash
+python openai_api.py
+```
+你也可以修改参数，比如`-c`来修改模型名称或路径, `--cpu-only`改为CPU部署等等。如果部署出现问题，更新上述代码库往往可以解决大多数问题。
+
+使用API同样非常简单，示例如下：
+
+```python
+import openai
+openai.api_base = "http://localhost:8000/v1"
+openai.api_key = "none"
+for chunk in openai.ChatCompletion.create(
+    model="Qwen-7B",
+    messages=[
+        {"role": "user", "content": "你好"}
+    ],
+    stream=True
+):
+    if hasattr(chunk.choices[0].delta, "content"):
+        print(chunk.choices[0].delta.content, end="", flush=True)
+```
+
 
 ## 工具调用
 
