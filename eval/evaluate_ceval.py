@@ -80,7 +80,7 @@ def eval_subject(
     score = []
 
     few_shot_prompt = generate_few_shot_prompt(
-        k, subject_name, dev_df) if few_shot else []
+        k, subject_name, dev_df) if few_shot else ''
     all_probs = {'prob_A': [], 'prob_B': [], 'prob_C': [], 'prob_D': []}
     if args.debug: print(f"few_shot_prompt: {few_shot_prompt}")
 
