@@ -1,6 +1,10 @@
 # ReAct Prompting 示例
 
-这里我们将介绍如何用 ReAct Prompting 技术命令千问使用工具。
+本文档将介绍如何用 ReAct Prompting 技术命令千问使用工具。
+
+本文档主要基本的原理概念介绍，并在文末附上了一些具体实现相关的 FAQ，但不含被调用插件的实际实现。如果您更喜欢一边调试实际可执行的代码、一边理解原理，可以转而阅读整合了 LangChain 常用工具的这个 [ipython notebook](https://github.com/QwenLM/Qwen-7B/blob/main/examples/langchain_tooluse.ipynb)。
+
+此外，本文档和前述的 ipython notebook 都仅介绍单轮对话的实现。如果想了解多轮对话下的实现，可参见 [react_demo.py](https://github.com/QwenLM/Qwen-7B/blob/main/examples/react_demo.py)。
 
 ## 准备工作一：样例问题、样例工具
 
