@@ -123,11 +123,10 @@ async def create_chat_completion(request: ChatCompletionRequest):
         generate = predict(query, history, request.model)
         return EventSourceResponse(generate, media_type="text/event-stream")
 
-    responses = [resp for resp in model.chat_stream(tokenizer, query, history=history)]
-    combined_response = ''.join(responses)
+    response, _ = model.chat_stream(tokenizer, query, history=history)
     choice_data = ChatCompletionResponseChoice(
         index=0,
-        message=ChatMessage(role="assistant", content=combined_response),
+        message=ChatMessage(role="assistant", content=response),
         finish_reason="stop"
     )
 
