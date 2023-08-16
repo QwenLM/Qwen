@@ -280,18 +280,9 @@ model = AutoModelForCausalLM.from_pretrained(
 | Int8 | 12.18GB | 18.47GB |
 | NF4 | 9.52GB | 15.81GB |
 
-
 以上测速和显存占用情况，均可通过该[评测脚本](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)测算得到。
 
 ## Demo
-
-### 交互式Demo
-
-我们提供了一个简单的交互式Demo示例，请查看`cli_demo.py`。当前模型已经支持流式输出，用户可通过输入文字的方式和Qwen-7B-Chat交互，模型将流式输出返回结果。运行如下命令：
-
-```
-python cli_demo.py
-```
 
 ### Web UI
 
@@ -307,16 +298,41 @@ pip install -r requirements_web_demo.txt
 python web_demo.py
 ```
 
+<p align="center">
+    <br>
+    <img src="assets/web_demo.gif" width="600" />
+    <br>
+<p>
+
+
+### 交互式Demo
+
+我们提供了一个简单的交互式Demo示例，请查看`cli_demo.py`。当前模型已经支持流式输出，用户可通过输入文字的方式和Qwen-7B-Chat交互，模型将流式输出返回结果。运行如下命令：
+
+```
+python cli_demo.py
+```
+
+<p align="center">
+    <br>
+    <img src="assets/cli_demo.gif" width="600" />
+    <br>
+<p>
+
 ## API
+
 我们提供了OpenAI API格式的本地API部署方法（感谢@hanpenggit）。在开始之前先安装必要的代码库：
 
 ```bash
 pip install fastapi uvicorn openai pydantic sse_starlette
 ```
+
 随后即可运行以下命令部署你的本地API：
+
 ```bash
 python openai_api.py
 ```
+
 你也可以修改参数，比如`-c`来修改模型名称或路径, `--cpu-only`改为CPU部署等等。如果部署出现问题，更新上述代码库往往可以解决大多数问题。
 
 使用API同样非常简单，示例如下：
@@ -348,6 +364,11 @@ response = openai.ChatCompletion.create(
 print(response.choices[0].message.content)
 ```
 
+<p align="center">
+    <br>
+    <img src="assets/openai_api.gif" width="600" />
+    <br>
+<p>
 
 ## 工具调用
 
@@ -404,7 +425,6 @@ For how to write and use prompts for ReAct Prompting, please refer to [the ReAct
 ## FAQ
 
 如遇到问题，敬请查阅[FAQ](FAQ_zh.md)以及issue区，如仍无法解决再提交issue。
-
 
 ## 使用协议
 
