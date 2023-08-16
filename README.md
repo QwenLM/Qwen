@@ -27,7 +27,6 @@ Qwen-7B is the 7B-parameter version of the large language model series, Qwen (ab
 
 The following sections include information that you might find it helpful. Specifically, we advise you to read the FAQ section before you launch issues.
 
-
 ## News
 
 * 2023.8.3 We release both Qwen-7B and Qwen-7B-Chat on ModelScope and Hugging Face. We also provide a technical memo for more details about the model, including training details and model performance.
@@ -250,11 +249,11 @@ Note: The GPU memory usage profiling in the above table is performed on single A
 
 We measured the average inference speed of generating 2K tokens under BF16 precision and Int8 or NF4 quantization levels, respectively.
 
-| Quantization Level | Inference Speed with flash_attn (tokens/s) | Inference Speed w/o flash_attn (tokens/s) |
-| ------ | :---------------------------: | :---------------------------: |
-| BF16 (no quantization) | 30.06 | 27.55 |
-| Int8 (bnb) | 7.94 | 7.86 |
-| NF4 (bnb) | 21.43 | 20.37 |
+| Quantization Level     | Inference Speed with flash_attn (tokens/s) | Inference Speed w/o flash_attn (tokens/s) |
+| ---------------------- | :----------------------------------------: | :---------------------------------------: |
+| BF16 (no quantization) |                   30.06                    |                   27.55                   |
+| Int8 (bnb)             |                    7.94                    |                   7.86                    |
+| NF4 (bnb)              |                   21.43                    |                   20.37                   |
 
 In detail, the setting of profiling is generating 2048 new tokens with 1 context token. The profiling runs on single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.8. The inference speed is averaged over the generated 2048 tokens.
 
@@ -265,30 +264,23 @@ We also profile the peak GPU memory usage for encoding 2048 tokens as context (a
 When using flash attention, the memory usage is:
 
 | Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
-| --- | :---: | :---: |
-| BF16 | 18.11GB | 23.52GB |
-| Int8 | 12.17GB | 17.60GB |
-| NF4 | 9.52GB | 14.93GB |
+| ------------------ | :---------------------------------: | :-----------------------------------: |
+| BF16               |               18.11GB               |                23.52GB                |
+| Int8               |               12.17GB               |                17.60GB                |
+| NF4                |               9.52GB                |                14.93GB                |
 
 When not using flash attention, the memory usage is:
 
 | Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
-| --- | :---: | :---: |
-| BF16 | 18.11GB | 24.40GB |
-| Int8 | 12.18GB | 18.47GB |
-| NF4 | 9.52GB | 15.81GB |
+| ------------------ | :---------------------------------: | :-----------------------------------: |
+| BF16               |               18.11GB               |                24.40GB                |
+| Int8               |               12.18GB               |                18.47GB                |
+| NF4                |               9.52GB                |                15.81GB                |
 
 The above speed and memory profiling are conducted using [this script](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py).
 
 ## Demo
 
-### CLI Demo
-
-We provide a CLI demo example in `cli_demo.py`, which supports streaming output for the generation. Users can interact with Qwen-7B-Chat by inputting prompts, and the model returns model outputs in the streaming mode. Run the command below:
-
-```
-python cli_demo.py
-```
 
 ### Web UI
 
@@ -304,16 +296,40 @@ Then run the command below and click on the generated link:
 python web_demo.py
 ```
 
+<p align="center">
+    <br>
+    <img src="assets/web_demo.gif" width="600" />
+    <br>
+<p>
+
+### CLI Demo
+
+We provide a CLI demo example in `cli_demo.py`, which supports streaming output for the generation. Users can interact with Qwen-7B-Chat by inputting prompts, and the model returns model outputs in the streaming mode. Run the command below:
+
+```
+python cli_demo.py
+```
+
+<p align="center">
+    <br>
+    <img src="assets/cli_demo.gif" width="600" />
+    <br>
+<p>
+
 ## API
+
 We provide methods to deploy local API based on OpenAI API (thanks to @hanpenggit). Before you start, install the required packages:
 
 ```bash
 pip install fastapi uvicorn openai pydantic sse_starlette
 ```
+
 Then run the command to deploy your API:
+
 ```bash
 python openai_api.py
 ```
+
 You can change your arguments, e.g., `-c` for checkpoint name or path, `--cpu-only` for CPU deployment, etc. If you meet problems launching your API deployment, updating the packages to the latest version can probably solve them.
 
 Using the API is also simple. See the example below:
@@ -345,6 +361,11 @@ response = openai.ChatCompletion.create(
 print(response.choices[0].message.content)
 ```
 
+<p align="center">
+    <br>
+    <img src="assets/openai_api.gif" width="600" />
+    <br>
+<p>
 
 ## Tool Usage
 

@@ -285,14 +285,6 @@ Flash attentionを使用しない場合、メモリ使用量は次のように�
 
 ## デモ
 
-### CLI デモ
-
-`cli_demo.py` に CLI のデモ例を用意しています。ユーザはプロンプトを入力することで Qwen-7B-Chat と対話することができ、モデルはストリーミングモードでモデルの出力を返します。以下のコマンドを実行する：
-
-```
-python cli_demo.py
-```
-
 ### ウェブ UI
 
 ウェブUIデモを構築するためのコードを提供します（@wysaidに感謝）。始める前に、以下のパッケージがインストールされていることを確認してください：
@@ -307,7 +299,28 @@ pip install -r requirements_web_demo.txt
 python web_demo.py
 ```
 
+<p align="center">
+    <br>
+    <img src="assets/web_demo.gif" width="600" />
+    <br>
+<p>
+
+### CLI デモ
+
+`cli_demo.py` に CLI のデモ例を用意しています。ユーザはプロンプトを入力することで Qwen-7B-Chat と対話することができ、モデルはストリーミングモードでモデルの出力を返します。以下のコマンドを実行する：
+
+```
+python cli_demo.py
+```
+
+<p align="center">
+    <br>
+    <img src="assets/cli_demo.gif" width="600" />
+    <br>
+<p>
+
 ## API
+
 OpenAI APIをベースにローカルAPIをデプロイする方法を提供する（@hanpenggitに感謝）。始める前に、必要なパッケージをインストールしてください：
 
 ```bash
@@ -350,6 +363,12 @@ response = openai.ChatCompletion.create(
 )
 print(response.choices[0].message.content)
 ```
+
+<p align="center">
+    <br>
+    <img src="assets/openai_api.gif" width="600" />
+    <br>
+<p>
 
 ## ツールの使用
 
