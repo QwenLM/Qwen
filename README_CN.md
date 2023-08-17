@@ -362,6 +362,13 @@ response = openai.ChatCompletion.create(
     stream=False
 )
 print(response.choices[0].message.content)
+
+# 创建输入文本的嵌入向量
+response = openai.Embedding.create(
+    model="text-embedding-ada-002",
+    input="你好"
+)
+print(response.data[0].embedding)
 ```
 
 <p align="center">
