@@ -104,35 +104,35 @@ def _parse_text(text):
 
 
 def _launch_demo(args, model, tokenizer):
-    task_history = []
 
-    def predict(_query, _chatbot):
-        print("User: " + _parse_text(_query))
+    def predict(_query, _chatbot, _task_history):
+        print(f"User: {_parse_text(_query)}")
         _chatbot.append((_parse_text(_query), ""))
         full_response = ""
 
-        for response in model.chat_stream(tokenizer, _query, history=task_history):
+        for response in model.chat_stream(tokenizer, _query, history=_task_history):
             _chatbot[-1] = (_parse_text(_query), _parse_text(response))
 
             yield _chatbot
             full_response = _parse_text(response)
 
-        task_history.append((_query, full_response))
-        print("Qwen-7B-Chat: " + _parse_text(full_response))
+        print(f"History: {_task_history}")
+        _task_history.append((_query, full_response))
+        print(f"Qwen-7B-Chat: {_parse_text(full_response)}")
 
-    def regenerate(_chatbot):
-        if not task_history:
+    def regenerate(_chatbot, _task_history):
+        if not _task_history:
             yield _chatbot
             return
-        item = task_history.pop(-1)
+        item = _task_history.pop(-1)
         _chatbot.pop(-1)
-        yield from predict(item[0], _chatbot)
+        yield from predict(item[0], _chatbot, _task_history)
 
     def reset_user_input():
         return gr.update(value="")
 
-    def reset_state():
-        task_history.clear()
+    def reset_state(_task_history):
+        _task_history.clear()
         return []
 
     with gr.Blocks() as demo:
@@ -153,16 +153,17 @@ Qwen-7B-Chat <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">�
 
         chatbot = gr.Chatbot(label='Qwen-7B-Chat', elem_classes="control-height")
         query = gr.Textbox(lines=2, label='Input')
+        task_history = gr.State([])
 
         with gr.Row():
             empty_btn = gr.Button("🧹 Clear History (清除历史)")
             submit_btn = gr.Button("🚀 Submit (发送)")
             regen_btn = gr.Button("🤔️ Regenerate (重试)")
 
-        submit_btn.click(predict, [query, chatbot], [chatbot], show_progress=True)
+        submit_btn.click(predict, [query, chatbot, task_history], [chatbot], show_progress=True)
         submit_btn.click(reset_user_input, [], [query])
-        empty_btn.click(reset_state, outputs=[chatbot], show_progress=True)
-        regen_btn.click(regenerate, [chatbot], [chatbot], show_progress=True)
+        empty_btn.click(reset_state, [task_history], outputs=[chatbot], show_progress=True)
+        regen_btn.click(regenerate, [chatbot, task_history], [chatbot], show_progress=True)
 
         gr.Markdown("""\
 <font size=2>Note: This demo is governed by the original license of Qwen-7B. \
