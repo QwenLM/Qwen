@@ -395,7 +395,7 @@ For how to write and use prompts for ReAct Prompting, please refer to [the ReAct
 
 ## 长文本理解
 
-我们引入了NTK插值、窗口注意力、LogN注意力缩放等技术来提升模型的上下文长度并突破训练序列长度的限制。我们的模型已经突破8K的序列长度。通过arXiv数据集上的语言模型实验，我们发现Qwen-7B能够在长序列的设置下取得不错的表现。
+我们引入了NTK插值、窗口注意力、LogN注意力缩放等技术来提升模型的上下文长度并突破训练序列长度的限制。我们的模型已经突破8K的序列长度。通过arXiv数据集上的语言模型实验（使用的指标为PPL），我们发现Qwen-7B能够在长序列的设置下取得不错的表现。
 
 <table>
     <tr>
