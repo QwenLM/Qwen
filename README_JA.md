@@ -15,21 +15,21 @@
 </p>
 <br><br>
 <p align="right">
-        Japanese document maintainer: Ikko Eltociear Ashimine
+        日本語ドキュメントメンテナー: <a href="https://github.com/eltociear">Ikko Eltociear Ashimine</a>
 </p>
 <br><br>
 
 私たちは、**Qwen-7B** と **Qwen-7B-Chat** を **🤖 ModelScope** と **🤗 Hugging Face** の両方でオープンソース化しています(上部のロゴをクリックすると、コードとチェックポイントのあるリポジトリに移動します)。このレポには、Qwen-7B の簡単な紹介と、使い方の手引き、さらに詳しい情報を提供する技術メモ [link](tech_memo.md) が含まれています。
 
-Qwen-7Bは、アリババクラウドが提唱する大規模言語モデルシリーズQwen（略称：Tongyi Qianwen）の7Bパラメータ版です。Qwen-7BはTransformerベースの大規模言語モデルであり、ウェブテキスト、書籍、コードなどを含む大量のデータで事前学習される。さらに、事前学習されたQwen-7Bをベースに、アライメント技術で学習された大規模モデルベースのAIアシスタントであるQwen-7B-Chatをリリースする。Qwen-7Bシリーズの特徴は以下の通りです:
+Qwen-7B は、アリババクラウドが提唱する大規模言語モデルシリーズ Qwen（略称：Tongyi Qianwen）の7Bパラメータ版になります。Qwen-7B は Transformer ベースの大規模言語モデルであり、ウェブテキスト、書籍、コードなどを含む大量のデータで事前学習されています。さらに、事前学習された Qwen-7B をベースに、アライメント技術で学習された大規模モデルベースの AI アシスタントである Qwen-7B-Chat をリリースします。Qwen-7B シリーズの特徴は以下の通りです:
 
-1. **高品質な事前トレーニングデータでトレーニング**。Qwen-7B は 2.2 兆以上のトークンを含む大規模で高品質なデータセットに対して事前学習を行った。このデータセットには平文とコードが含まれ、一般的なドメインデータと専門的なドメインデータを含む幅広いドメインをカバーしている。
+1. **高品質な事前トレーニングデータでトレーニング**。Qwen-7B は 2.2 兆以上のトークンを含む大規模で高品質なデータセットに対して事前学習を行っっています。このデータセットには平文とコードが含まれ、一般的なドメインデータと専門的なドメインデータを含む幅広いドメインをカバーしている。
 2. **強いパフォーマンス**。自然言語理解、数学、コーディングなどを評価する一連のベンチマークデータセットにおいて、同程度のモデルサイズのモデルと比較して、競合他社を凌駕しています。
-3. **言語サポートの向上**。Qwen-7B のトークナイザは、15 万以上のトークンの語彙をベースにしており、他のトークナイザに比べて効率的です。多くの言語に対応しており、ユーザが特定の言語を理解するために Qwen-7B をさらに微調整するのに役立ちます。
+3. **言語サポートの向上**。Qwen-7B のトークナイザは、15 万以上のトークンの語彙をベースにしており、他のトークナイザに比べて効率的です。多くの言語に対応しており、ユーザが特定の言語を理解するために Qwen-7B をさらにファインチューニングするのに役立ちます。
 4. **8K コンテキスト長をサポート**。Qwen-7B と Qwen-7B-Chat はともに 8K のコンテキスト長をサポートしており、長いコンテキストでの入力を可能にしている。
 5. **プラグインのサポート**。Qwen-7B-Chat は、プラグイン関連のアライメントデータでトレーニングされているため、API、モデル、データベースなどのツールを使用することができ、エージェントとしてプレイすることができる。
 
-以下のセクションには、参考になる情報が記載されています。特に、issueを立ち上げる前にFAQセクションをお読みになることをお勧めします。
+以下のセクションには、参考になる情報が記載されています。特に、issue を立ち上げる前に FAQ セクションをお読みになることをお勧めします。
 
 ## ニュース
 
@@ -37,7 +37,7 @@ Qwen-7Bは、アリババクラウドが提唱する大規模言語モデルシ�
 
 ## パフォーマンス
 
-一般的に、Qwen-7B は、MMLU、C-Eval、GSM8K、HumanEval、WMT22、CMMLU などの自然言語理解、数学的問題解決、コーディングなどに関するモデルの能力を評価する一連のベンチマークデータセットにおいて、同程度のモデルサイズのベースラインモデルを凌駕し、さらには 13B 程度のパラメータを持つより大規模なモデルをも凌駕している。以下の結果をご覧ください。
+一般的に、Qwen-7B は、MMLU、C-Eval、GSM8K、HumanEval、WMT22、CMMLU など、自然言語理解、数学的問題解決、コーディングなどに関するモデルの能力を評価する一連のベンチマークデータセットにおいて、同程度のモデルサイズのベースラインモデルを凌駕しており、さらには 13B 程度のパラメータを持つより大規模なモデルをも凌駕しています。以下の結果をご覧ください。
 
 | Model             | MMLU           |         C-Eval |          GSM8K |      HumanEval |  WMT22 (en-zh) |         CMMLU |
 | :---------------- | :------------: | :------------: | :------------: | :------------: | :------------: |:------------: |
@@ -57,7 +57,7 @@ Qwen-7Bは、アリババクラウドが提唱する大規模言語モデルシ�
 <p>
 <br>
 
-さらに、[OpenCompass](https://opencompass.org.cn/leaderboard-llm)が実施した大規模言語モデルの第三者評価によると、Qwen-7BとQwen-7B-Chatは7Bパラメータモデルのトップである。この評価は、言語理解・生成、コーディング、数学、推論などの評価のための大量の公開ベンチマークで構成されている。
+さらに、[OpenCompass](https://opencompass.org.cn/leaderboard-llm) が実施した大規模言語モデルの第三者評価によると、Qwen-7B と Qwen-7B-Chat は 7B パラメータモデルのトップになります。この評価は、言語理解・生成、コーディング、数学、推論などの評価のための大量の公開ベンチマークで構成されています。
 
 より詳細な実験結果（より多くのベンチマークデータセットでの詳細なモデル性能）や詳細については、[こちら](tech_memo.md)をクリックして技術メモを参照してください。
 
@@ -195,7 +195,7 @@ print(f'Response: {response}')
 
 ## トークナイザー
 
-tiktoken に基づくトークナイザーは、他のトークナイザー、例えばセンテンスピーストークナイザーとは異なります。特にファインチューニングの際には、特殊なトークンに注意を払う必要があります。トークナイザに関する詳細な情報や、ファインチューニングにおける使用方法については、[ドキュメント](tokenization_note.md)を参照してください。
+tiktoken に基づくトークナイザーは、他のトークナイザー、例えばセンテンスピーストークナイザーとは異なります。特にファインチューニングの際には、特殊なトークンに注意を払う必要があります。トークナイザに関する詳細な情報や、ファインチューニングにおける使用方法については、[ドキュメント](tokenization_note_ja.md)を参照してください。
 
 ## 量子化
 
@@ -218,14 +218,14 @@ Windows ユーザは、[bitsandbytes-windows-webui](https://github.com/jllllll/b
 ```python
 from transformers import AutoModelForCausalLM, BitsAndBytesConfig
 
-# NF4（4ビット）の量子化設定
+# NF4（4 ビット）の量子化設定
 quantization_config = BitsAndBytesConfig(
     load_in_4bit=True,
     bnb_4bit_quant_type='nf4',
     bnb_4bit_compute_dtype=torch.bfloat16
 )
 
-# Int8（8ビット）の量子化設定
+# Int8（8 ビット）の量子化設定
 quantization_config = BitsAndBytesConfig(load_in_8bit=True)
 
 model = AutoModelForCausalLM.from_pretrained(
@@ -245,49 +245,49 @@ model = AutoModelForCausalLM.from_pretrained(
 |   Int8      |   52.8   |             10.44G            |
 |    NF4      |   48.9   |             7.79G             |
 
-注：上表のGPUメモリ使用量プロファイリングは、シングルA100-SXM4-80G GPU、PyTorch 2.0.1、CUDA 11.8、フラッシュアテンション使用で実行されています。
+注: 上表の GPU メモリ使用量プロファイリングは、シングル A100-SXM4-80G GPU、PyTorch 2.0.1、CUDA 11.8、flash attention 使用で実行されています。
 
 ## 推論効率
 
 ### 推論スピード
 
-BF16精度、量子化レベルInt8またはNF4で、それぞれ2Kトークンを生成する平均推論速度を測定した。
+BF16 精度、量子化レベル Int8 または NF4 で、それぞれ2Kトークンを生成する平均推論速度を測定しました。
 
-| Quantization Level | Inference Speed with flash_attn (tokens/s) | Inference Speed w/o flash_attn (tokens/s) |
+| 量子化レベル | flash_attn による推論速度（トークン/秒） | flash_attn を使用しない場合の推論速度（トークン/秒） |
 | ------ | :---------------------------: | :---------------------------: |
 | BF16 (no quantization) | 30.06 | 27.55 |
 | Int8 (bnb) | 7.94 | 7.86 |
 | NF4 (bnb) | 21.43 | 20.37 |
 
-詳細には、プロファイリングの設定は、1コンテクスト・トークンで2048の新しいトークンを生成している。プロファイリングは、PyTorch 2.0.1とCUDA 11.8を搭載したシングルA100-SXM4-80G GPUで実行される。推論速度は生成された2048個のトークンの平均です。
+詳細には、プロファイリングの設定は、1 コンテクスト・トークンで 2048 の新しいトークンを生成している。プロファイリングは、PyTorch 2.0.1 と CUDA 11.8 を搭載したシングル A100-SXM4-80G GPU で実行される。推論速度は生成された 2048 個のトークンの平均です。
 
-### GPUメモリ使用量
+### GPU メモリ使用量
 
-また、BF16またはInt8/NF4量子化レベルの下で、2048個のトークンをコンテキストとしてエンコードした場合（および単一のトークンを生成した場合）と、8192個のトークンを生成した場合（単一のトークンをコンテキストとして生成した場合）のGPUメモリ使用量のピーク値をそれぞれプロファイリングしました。結果を以下に示す。
+また、BF16 または Int8/NF4 量子化レベルの下で、2048 個のトークンをコンテキストとしてエンコードした場合（および単一のトークンを生成した場合）と、8192 個のトークンを生成した場合（単一のトークンをコンテキストとして生成した場合）の GPU メモリ使用量のピーク値をそれぞれプロファイリングしました。結果を以下に示す。
 
-Flash attentionを使用した場合のメモリ使用量は以下の通りである：
+Flash attention を使用した場合のメモリ使用量は以下の通りである：
 
-| Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
+| 量子化レベル | 2048 トークンをエンコードする際のピーク使用量 | 8192 トークン生成のピーク使用量 |
 | --- | :---: | :---: |
 | BF16 | 18.11GB | 23.52GB |
 | Int8 | 12.17GB | 17.60GB |
 | NF4 | 9.52GB | 14.93GB |
 
-Flash attentionを使用しない場合、メモリ使用量は次のようになる：
+Flash attention を使用しない場合、メモリ使用量は次のようになる：
 
-| Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
+| 量子化レベル | 2048 トークンをエンコードする際のピーク使用量 | 8192 トークン生成のピーク使用量 |
 | --- | :---: | :---: |
 | BF16 | 18.11GB | 24.40GB |
 | Int8 | 12.18GB | 18.47GB |
 | NF4 | 9.52GB | 15.81GB |
 
-上記のスピードとメモリーのプロファイリングは、[このスクリプト](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)を使って行われた。
+上記のスピードとメモリーのプロファイリングは、[このスクリプト](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)を使って行われました。
 
 ## デモ
 
 ### ウェブ UI
 
-ウェブUIデモを構築するためのコードを提供します（@wysaidに感謝）。始める前に、以下のパッケージがインストールされていることを確認してください：
+ウェブ UI デモを構築するためのコードを提供します（@wysaid に感謝）。始める前に、以下のパッケージがインストールされていることを確認してください:
 
 ```
 pip install -r requirements_web_demo.txt
@@ -307,7 +307,7 @@ python web_demo.py
 
 ### CLI デモ
 
-`cli_demo.py` に CLI のデモ例を用意しています。ユーザはプロンプトを入力することで Qwen-7B-Chat と対話することができ、モデルはストリーミングモードでモデルの出力を返します。以下のコマンドを実行する：
+`cli_demo.py` に CLI のデモ例を用意しています。ユーザはプロンプトを入力することで Qwen-7B-Chat と対話することができ、モデルはストリーミングモードでモデルの出力を返します。以下のコマンドを実行する:
 
 ```
 python cli_demo.py
@@ -321,28 +321,28 @@ python cli_demo.py
 
 ## API
 
-OpenAI APIをベースにローカルAPIをデプロイする方法を提供する（@hanpenggitに感謝）。始める前に、必要なパッケージをインストールしてください：
+OpenAI API をベースにローカルAPIをデプロイする方法を提供する（@hanpenggit に感謝）。始める前に、必要なパッケージをインストールしてください:
 
 ```bash
 pip install fastapi uvicorn openai pydantic sse_starlette
 ```
 
-それから、APIをデプロイするコマンドを実行する：
+それから、API をデプロイするコマンドを実行します:
 
 ```bash
 python openai_api.py
 ```
 
-チェックポイント名やパスには `-c` 、CPU デプロイメントには `--cpu-only` など、引数を変更できます。APIデプロイメントを起動する際に問題が発生した場合は、パッケージを最新バージョンに更新することで解決できる可能性があります。
+チェックポイント名やパスには `-c`、CPU デプロイメントには `--cpu-only` など、引数を変更できます。API デプロイメントを起動する際に問題が発生した場合は、パッケージを最新バージョンに更新することで解決できる可能性があります。
 
-APIの使い方も簡単だ。以下の例をご覧ください：
+API の使い方も簡単です。以下の例をご覧ください:
 
 ```python
 import openai
 openai.api_base = "http://localhost:8000/v1"
 openai.api_key = "none"
 
-# create a request activating streaming response
+# ストリーミングレスポンスを有効化するリクエストを作成する
 for chunk in openai.ChatCompletion.create(
     model="Qwen-7B",
     messages=[
@@ -353,7 +353,7 @@ for chunk in openai.ChatCompletion.create(
     if hasattr(chunk.choices[0].delta, "content"):
         print(chunk.choices[0].delta.content, end="", flush=True)
 
-# create a request not activating streaming response
+# ストリーミングレスポンスを有効化しないリクエストを作成する
 response = openai.ChatCompletion.create(
     model="Qwen-7B",
     messages=[
@@ -373,7 +373,6 @@ print(response.choices[0].message.content)
 ## ツールの使用
 
 Qwen-7B-Chat は、API、データベース、モデルなど、ツールの利用に特化して最適化されており、ユーザは独自の Qwen-7B ベースの LangChain、エージェント、コードインタプリタを構築することができます。ツール利用能力を評価するための評価[ベンチマーク](eval/EVALUATION.md)では、Qwen-7B は安定した性能に達しています。
-[](https://)
 
 | Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑)  | False Positive Error↓  |
 |:------------|:----------------------:|:----------------------:|:----------------------:|
@@ -423,7 +422,7 @@ ReAct プロンプトの書き方や使い方については、[ReAct の例](ex
 
 ## FAQ
 
-問題が発生した場合は、[FAQ](FAQ.md)やissueを参照し、新しいissueを立ち上げる前に解決策を探してください。
+問題が発生した場合は、[FAQ](FAQ_ja.md) や issue を参照し、新しい issue を立ち上げる前に解決策を探してください。
 
 ## ライセンス契約
 
