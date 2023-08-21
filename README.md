@@ -1,4 +1,4 @@
-<br>
+span
 
 <p align="center">
     <img src="assets/logo.jpg" width="400"/>
@@ -6,7 +6,7 @@
 <br>
 
 <p align="center">
-        Qwen-7B <a href="https://modelscope.cn/models/qwen/Qwen-7B/summary">🤖 <a> | <a href="https://huggingface.co/Qwen/Qwen-7B">🤗</a>&nbsp ｜ Qwen-7B-Chat <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">🤖 <a>| <a href="https://huggingface.co/Qwen/Qwen-7B-Chat">🤗</a>&nbsp ｜ &nbsp<a href="https://modelscope.cn/studios/qwen/Qwen-7B-Chat-Demo/summary">Demo</a>&nbsp ｜ &nbsp<a href="https://github.com/QwenLM/Qwen-7B/blob/main/tech_memo.md">Report</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/9bjvspyu">Discord</a>
+        Qwen-7B <a href="https://modelscope.cn/models/qwen/Qwen-7B/summary">🤖 <a> | <a href="https://huggingface.co/Qwen/Qwen-7B">🤗</a>&nbsp ｜ Qwen-7B-Chat <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">🤖 <a>| <a href="https://huggingface.co/Qwen/Qwen-7B-Chat">🤗</a>&nbsp | Qwen-7B-Chat-Int4 <a href="https://huggingface.co/Qwen/Qwen-7B-Chat-Int4">🤗</a>&nbsp ｜ &nbsp<a href="https://modelscope.cn/studios/qwen/Qwen-7B-Chat-Demo/summary">Demo</a>&nbsp ｜ &nbsp<a href="https://github.com/QwenLM/Qwen-7B/blob/main/tech_memo.md">Report</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/9bjvspyu">Discord</a>
 </p>
 <br>
 
@@ -27,26 +27,27 @@ Qwen-7B is the 7B-parameter version of the large language model series, Qwen (ab
 
 The following sections include information that you might find it helpful. Specifically, we advise you to read the FAQ section before you launch issues.
 
-## News
+## News and Updates
 
-* 2023.8.3 We release both Qwen-7B and Qwen-7B-Chat on ModelScope and Hugging Face. We also provide a technical memo for more details about the model, including training details and model performance.
+* 2023.8.21 We release the Int4 quantized model for Qwen-7B-Chat, **Qwen-7B-Chat-Int4**, which requires low memory costs but achieves improved inference speed. Besides, there is no significant performance degradation on the benchmark evaluation.
+* 2023.8.3 We release both **Qwen-7B** and **Qwen-7B-Chat** on ModelScope and Hugging Face. We also provide a technical memo for more details about the model, including training details and model performance.
 
 ## Performance
 
 In general, Qwen-7B outperforms the baseline models of a similar model size, and even outperforms larger models of around 13B parameters, on a series of benchmark datasets, e.g., MMLU, C-Eval, GSM8K, HumanEval, and WMT22, CMMLU, etc., which evaluate the models' capabilities on natural language understanding, mathematic problem solving, coding, etc. See the results below.
 
-| Model             | MMLU           |         C-Eval |          GSM8K |      HumanEval |  WMT22 (en-zh) |         CMMLU |
-| :---------------- | :------------: | :------------: | :------------: | :------------: | :------------: |:------------: |
-| LLaMA-7B          | 35.1           |              - |           11.0 |           10.5 |            8.7 |             - |
-| LLaMA 2-7B        | 45.3           |              - |           14.6 |           12.8 |           17.9 |             - |
-| Baichuan-7B       | 42.3           |           42.8 |            9.7 |            9.2 |           26.6 |          44.4 |
-| ChatGLM2-6B       | 47.9           |           51.7 |           32.4 |            9.2 |              - |          48.8 |
-| InternLM-7B       | 51.0           |           52.8 |           31.2 |           10.4 |           14.8 |             - |
-| Baichuan-13B      | 51.6           |           53.6 |           26.6 |           12.8 |           30.0 |          55.8 |
-| LLaMA-13B         | 46.9           |           35.5 |           17.8 |           15.8 |           12.0 |             - |
-| LLaMA 2-13B       | 54.8           |              - |           28.7 |           18.3 |           24.2 |             - |
-| ChatGLM2-12B      | 56.2           |       **61.6** |           40.9 |              - |              - |             - |
-| **Qwen-7B**       | **56.7**       |           59.6 |       **51.6** |       **24.4** |       **30.6** |      **58.8** |
+| Model        |   MMLU   |  C-Eval  |  GSM8K  | HumanEval | WMT22 (en-zh) |  CMMLU  |
+| :------------- | :--------: | :--------: | :--------: | :---------: | :-------------: | :--------: |
+| LLaMA-7B     |   35.1   |    -    |   11.0   |   10.5   |      8.7      |    -    |
+| LLaMA 2-7B   |   45.3   |    -    |   14.6   |   12.8   |     17.9     |    -    |
+| Baichuan-7B  |   42.3   |   42.8   |   9.7   |    9.2    |     26.6     |   44.4   |
+| ChatGLM2-6B  |   47.9   |   51.7   |   32.4   |    9.2    |       -       |   48.8   |
+| InternLM-7B  |   51.0   |   52.8   |   31.2   |   10.4   |     14.8     |    -    |
+| Baichuan-13B |   51.6   |   53.6   |   26.6   |   12.8   |     30.0     |   55.8   |
+| LLaMA-13B    |   46.9   |   35.5   |   17.8   |   15.8   |     12.0     |    -    |
+| LLaMA 2-13B  |   54.8   |    -    |   28.7   |   18.3   |     24.2     |    -    |
+| ChatGLM2-12B |   56.2   | **61.6** |   40.9   |     -     |       -       |    -    |
+| **Qwen-7B**  | **56.7** |   59.6   | **51.6** | **24.4** |   **30.6**   | **58.8** |
 
 <p align="center">
     <img src="assets/performance.png" width="1000"/>
@@ -195,92 +196,64 @@ Our tokenizer based on tiktoken is different from other tokenizers, e.g., senten
 
 ## Quantization
 
-We provide examples to show how to load models in `NF4` and `Int8`. For starters, make sure you have implemented `bitsandbytes`. Note that the requirements for `bitsandbytes` are:
+### Usage
 
+**Note: we provide a new solution based on [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ), and release an Int4 quantized model for Qwen-7B-Chat [Click here](https://huggingface.co/Qwen/Qwen-7B-Chat-Int4), which achieves nearly lossless model effects but improved performance on both memory costs and inference speed, in comparison with the previous solution.**
+
+Here we demonstrate how to use our provided quantized models for inference. Before you start, make sure you meet the requirements of AutoGPTQ and install it from source (temporarily the codes for Qwen are not yet released in the latest version of PyPI package):
+
+```bash
+git clone https://github.com/PanQiWei/AutoGPTQ.git && cd AutoGPTQ
+pip install .
 ```
-**Requirements** Python >=3.8. Linux distribution (Ubuntu, MacOS, etc.) + CUDA > 10.0.
-```
 
-Then run the following command to install `bitsandbytes`:
-
-```
-pip install bitsandbytes
-```
-
-Windows users should find another option, which might be [bitsandbytes-windows-webui](https://github.com/jllllll/bitsandbytes-windows-webui/releases/tag/wheels).
-
-Then you only need to add your quantization configuration to `AutoModelForCausalLM.from_pretrained`. See the example below:
+Then you can load the quantized model easily as shown below:
 
 ```python
-from transformers import AutoModelForCausalLM, BitsAndBytesConfig
-
-# quantization configuration for NF4 (4 bits)
-quantization_config = BitsAndBytesConfig(
-    load_in_4bit=True,
-    bnb_4bit_quant_type='nf4',
-    bnb_4bit_compute_dtype=torch.bfloat16
-)
-
-# quantization configuration for Int8 (8 bits)
-quantization_config = BitsAndBytesConfig(load_in_8bit=True)
-
-model = AutoModelForCausalLM.from_pretrained(
-    args.checkpoint_path,
-    device_map="cuda:0",
-    quantization_config=quantization_config,
-    max_memory=max_memory,
-    trust_remote_code=True,
-).eval()
+from auto_gptq import AutoGPTQForCausalLM
+model = AutoGPTQForCausalLM.from_quantized("Qwen/Qwen-7B-Chat-Int4", device_map="auto", trust_remote_code=True, use_safetensors=True).eval()
 ```
 
-With this method, it is available to load Qwen-7B in `NF4` and `Int8`, which saves you memory usage. We provide related statistics of model performance below. We find that the quantization downgrades the effectiveness slightly but significantly reduces memory costs.
+To run inference, it is similar to the basic usage demonstrated above, but remember to pass in the generation configuration explicitly:
 
-| Precision   |   MMLU   |  GPU Memory for Loading Model |
-| ----------- | :------: | :---------------------------: |
-|   BF16      |   56.7   |             16.38G            |
-|   Int8      |   52.8   |             10.44G            |
-|    NF4      |   48.9   |             7.79G             |
+```python
+from transformers import GenerationConfig
+config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat-Int4", trust_remote_code=True)
+response, history = model.chat(tokenizer, "Hi", history=None, generation_config=config)
+```
 
-Note: The GPU memory usage profiling in the above table is performed on single A100-SXM4-80G GPU, PyTorch 2.0.1 and CUDA 11.8, with flash attention used.
+### Performance
 
-## Inference Efficiency
+We illustrate the model performance of both BF16 and Int4 models on the benchmark, and we find that the quantized model does not suffer from significant performance degradation. Results are shown below:
+
+| Quantization | MMLU | CEval (val) | GSM8K | Humaneval |
+| -------------- | :----: | :-----------: | :-----: | :---------: |
+| BF16         | 53.9 |    54.2    | 41.1 |   24.4   |
+| Int4         | 52.6 |    52.9    | 38.1 |   23.8   |
 
 ### Inference Speed
 
-We measured the average inference speed of generating 2K tokens under BF16 precision and Int8 or NF4 quantization levels, respectively.
+We measured the average inference speed (tokens/s) of generating 2048 and 8192 tokens under BF16 precision and Int4 quantization, respectively.
 
-| Quantization Level     | Inference Speed with flash_attn (tokens/s) | Inference Speed w/o flash_attn (tokens/s) |
-| ---------------------- | :----------------------------------------: | :---------------------------------------: |
-| BF16 (no quantization) |                   30.06                    |                   27.55                   |
-| Int8 (bnb)             |                    7.94                    |                   7.86                    |
-| NF4 (bnb)              |                   21.43                    |                   20.37                   |
+| Quantization | Speed (2048 tokens) | Speed (8192 tokens) |
+| -------------- | :-------------------: | :-------------------: |
+| BF16         |        30.53        |        28.51        |
+| Int4         |        45.60        |        33.83        |
 
-In detail, the setting of profiling is generating 2048 new tokens with 1 context token. The profiling runs on single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.8. The inference speed is averaged over the generated 2048 tokens.
+In detail, the setting of profiling is generating 8192 new tokens with 1 context token. The profiling runs on a single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.4. The inference speed is averaged over the generated 8192 tokens.
 
 ### GPU Memory Usage
 
-We also profile the peak GPU memory usage for encoding 2048 tokens as context (and generating single token) and generating 8192 tokens (with single token as context) under BF16 or Int8/NF4 quantization levels, respectively. The results are shown below.
+We also profile the peak GPU memory usage for encoding 2048 tokens as context (and generating single token) and generating 8192 tokens (with single token as context) under BF16 or Int4 quantization level, respectively. The results are shown below.
 
-When using flash attention, the memory usage is:
-
-| Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
-| ------------------ | :---------------------------------: | :-----------------------------------: |
-| BF16               |               18.11GB               |                23.52GB                |
-| Int8               |               12.17GB               |                17.60GB                |
-| NF4                |               9.52GB                |                14.93GB                |
-
-When not using flash attention, the memory usage is:
-
-| Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
-| ------------------ | :---------------------------------: | :-----------------------------------: |
-| BF16               |               18.11GB               |                24.40GB                |
-| Int8               |               12.18GB               |                18.47GB                |
-| NF4                |               9.52GB                |                15.81GB                |
+| Quantization | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
+| -------------- | :-----------------------------------: | :-------------------------------------: |
+| BF16         |               18.99GB               |                24.40GB                |
+| In4          |               10.20GB               |                15.61GB                |
 
 The above speed and memory profiling are conducted using [this script](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py).
 
 ## Demo
-
 
 ### Web UI
 
@@ -371,22 +344,22 @@ print(response.choices[0].message.content)
 
 Qwen-7B-Chat is specifically optimized for tool usage, including API, database, models, etc., so that users can build their own Qwen-7B-based LangChain, Agent, and Code Interpreter. In our evaluation [benchmark](eval/EVALUATION.md) for assessing tool usage capabilities, we find that Qwen-7B reaches stable performance.
 
-| Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑)  | False Positive Error↓  |
-|:------------|:----------------------:|:----------------------:|:----------------------:|
-| GPT-4       | 95%                    | **0.90**               | 15%                    |
-| GPT-3.5     | 85%                    | 0.88                   | 75%                    |
-| **Qwen-7B** | **99%**                | 0.89                   | **9.7%**               |
+| Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑) | False Positive Error↓ |
+| :------------ | :-----------------------: | :----------------------: | :----------------------: |
+| GPT-4       |           95%           |        **0.90**        |          15%          |
+| GPT-3.5     |           85%           |          0.88          |          75%          |
+| **Qwen-7B** |         **99%**         |          0.89          |        **9.7%**        |
 
 For how to write and use prompts for ReAct Prompting, please refer to [the ReAct examples](examples/react_prompt.md). The use of tools can enable the model to better perform tasks.
 
 Additionally, we provide experimental results to show its capabilities of playing as an agent. See [Hugging Face Agent](https://huggingface.co/docs/transformers/transformers_agents) for more information. Its performance on the run-mode benchmark provided by Hugging Face is as follows:
 
-| Model          | Tool Selection↑ | Tool Used↑  |   Code↑   |
-|:---------------|:---------------:|:-----------:|:---------:|
-|GPT-4           |     **100**     |   **100**   | **97.41** |
-|GPT-3.5         |      95.37      |    96.30    |   87.04   |
-|StarCoder-15.5B |      87.04      |    87.96    |   68.89   |
-| **Qwen-7B**    |      90.74      |    92.59    |   74.07   |
+| Model           | Tool Selection↑ | Tool Used↑ |  Code↑  |
+| :---------------- | :----------------: | :-----------: | :---------: |
+| GPT-4           |     **100**     |   **100**   | **97.41** |
+| GPT-3.5         |      95.37      |    96.30    |   87.04   |
+| StarCoder-15.5B |      87.04      |    87.96    |   68.89   |
+| **Qwen-7B**     |      90.74      |    92.59    |   74.07   |
 
 ## Long-Context Understanding
 
