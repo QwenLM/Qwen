@@ -249,7 +249,7 @@ We also profile the peak GPU memory usage for encoding 2048 tokens as context (a
 | Quantization | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
 | -------------- | :-----------------------------------: | :-------------------------------------: |
 | BF16         |               18.99GB               |                24.40GB                |
-| In4          |               10.20GB               |                15.61GB                |
+| Int4         |               10.20GB               |                15.61GB                |
 
 The above speed and memory profiling are conducted using [this script](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py).
 
