@@ -253,7 +253,7 @@ response, history = model.chat(tokenizer, "Hi", history=None, generation_config=
 | Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
 | ------------------ | :---------------------------------: | :-----------------------------------: |
 | BF16               |               18.99GB               |                24.40GB                |
-| In4                |               10.20GB                |                15.61GB                |
+| Int4               |               10.20GB                |                15.61GB                |
 
 上述性能测算使用[此脚本](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)完成。
 
