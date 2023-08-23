@@ -318,7 +318,8 @@ for chunk in openai.ChatCompletion.create(
     messages=[
         {"role": "user", "content": "你好"}
     ],
-    stream=True
+    stream=True 
+    # Specifying stop words in streaming output format is not yet supported and is under development.
 ):
     if hasattr(chunk.choices[0].delta, "content"):
         print(chunk.choices[0].delta.content, end="", flush=True)
@@ -329,7 +330,8 @@ response = openai.ChatCompletion.create(
     messages=[
         {"role": "user", "content": "你好"}
     ],
-    stream=False
+    stream=False,
+    stop=[] # You can add custom stop words here, e.g., stop=["Observation:"] for ReAct prompting.
 )
 print(response.choices[0].message.content)
 ```
