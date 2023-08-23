@@ -332,6 +332,13 @@ response = openai.ChatCompletion.create(
     stream=False
 )
 print(response.choices[0].message.content)
+
+# creates an embedding vector representing the input text
+response = openai.Embedding.create(
+    model="text-embedding-ada-002",
+    input="你好"
+)
+print(response.data[0].embedding)
 ```
 
 <p align="center">

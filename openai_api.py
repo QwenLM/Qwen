@@ -5,6 +5,7 @@
 
 from argparse import ArgumentParser
 import time
+import tiktoken
 import torch
 import uvicorn
 from pydantic import BaseModel, Field
@@ -15,6 +16,7 @@ from typing import Any, Dict, List, Literal, Optional, Union
 from transformers import AutoTokenizer, AutoModel, AutoModelForCausalLM
 from transformers.generation import GenerationConfig
 from sse_starlette.sse import ServerSentEvent, EventSourceResponse
+import torch.nn.functional as F
 
 
 @asynccontextmanager
@@ -49,6 +51,12 @@ class ModelCard(BaseModel):
 class ModelList(BaseModel):
     object: str = "list"
     data: List[ModelCard] = []
+
+
+class UsageInfo(BaseModel):
+    prompt_tokens: int = 0
+    total_tokens: int = 0
+    completion_tokens: Optional[int] = 0
 
 
 class ChatMessage(BaseModel):
@@ -87,6 +95,20 @@ class ChatCompletionResponse(BaseModel):
     object: Literal["chat.completion", "chat.completion.chunk"]
     choices: List[Union[ChatCompletionResponseChoice, ChatCompletionResponseStreamChoice]]
     created: Optional[int] = Field(default_factory=lambda: int(time.time()))
+
+
+class EmbeddingsRequest(BaseModel):
+    model: Optional[str] = None
+    engine: Optional[str] = None
+    input: Union[str, List[Any]]
+    user: Optional[str] = None
+
+
+class EmbeddingsResponse(BaseModel):
+    object: str = "list"
+    data: List[Dict[str, Any]]
+    model: str
+    usage: UsageInfo
 
 
 @app.get("/v1/models", response_model=ModelList)
@@ -131,6 +153,66 @@ async def create_chat_completion(request: ChatCompletionRequest):
     )
 
     return ChatCompletionResponse(model=request.model, choices=[choice_data], object="chat.completion")
+
+
+@app.post("/v1/embeddings", response_model=EmbeddingsResponse)
+async def create_embeddings(request: EmbeddingsRequest):
+    global model, tokenizer
+    input = request.input
+
+    # Decode inputs with different encodings into a string for subsequent model encoding.
+    if isinstance(input, str):
+        input = [input]
+    elif isinstance(input, list):
+        if isinstance(input[0], int):
+            decoding = tiktoken.model.encoding_for_model(request.model)
+            input = [decoding.decode(input)]
+        elif isinstance(input[0], list):
+            decoding = tiktoken.model.encoding_for_model(request.model)
+            input = [decoding.decode(text) for text in input]
+
+    embedding_data = []
+    total_tokens = 0
+    batch_size = 4
+    batches = [
+        input[i: min(i + batch_size, len(input))]
+        for i in range(0, len(input), batch_size)
+    ]
+
+    # Multi input batch processing
+    for num_batch, batch in enumerate(batches):
+        embedding = []
+        token_num = 0
+
+        for text in batch:
+            input_ids = tokenizer.encode(text, return_tensors="pt").to(
+                model.device
+            )
+            model_output = model(input_ids, output_hidden_states=True)
+            data = model_output.hidden_states[-1][0]
+            data = F.normalize(torch.mean(data, dim=0), p=2, dim=0)
+            embedding.append(data.tolist())
+            token_num += len(input_ids[0])
+
+        embedding_data += [
+            {
+                "object": "embedding",
+                "embedding": emb,
+                "index": num_batch * batch_size + i,
+            }
+            for i, emb in enumerate(embedding)
+        ]
+        total_tokens += token_num
+
+    return EmbeddingsResponse(
+        data=embedding_data,
+        model=request.model,
+        usage=UsageInfo(
+            prompt_tokens=token_num,
+            total_tokens=token_num,
+            completion_tokens=None,
+        ),
+    ).dict(exclude_none=True)
 
 
 async def predict(query: str, history: List[List[str]], model_id: str):
