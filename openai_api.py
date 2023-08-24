@@ -202,7 +202,7 @@ def _get_args():
 
 if __name__ == "__main__":
     args = _get_args()
-    
+
     tokenizer = AutoTokenizer.from_pretrained(
         args.checkpoint_path, trust_remote_code=True, resume_download=True,
     )
@@ -218,7 +218,7 @@ if __name__ == "__main__":
         trust_remote_code=True,
         resume_download=True,
     ).eval()
-    
+
     model.generation_config = GenerationConfig.from_pretrained(
         args.checkpoint_path, trust_remote_code=True, resume_download=True,
     )
