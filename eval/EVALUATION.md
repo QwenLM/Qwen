@@ -34,6 +34,19 @@ pip install thefuzz
 python evaluate_chat_mmlu.py -d data/mmlu/data/
 ```
 
+- CMMLU
+
+```Shell
+wget https://huggingface.co/datasets/haonan-li/cmmlu/resolve/main/cmmlu_v1_0_1.zip
+mkdir data/cmmlu
+mv cmmlu_v1_0_1.zip data/cmmlu
+cd data/cmmlu; unzip cmmlu_v1_0_1.zip
+cd ../../
+
+# Qwen-7B
+python evaluate_cmmlu.py -d data/cmmlu/
+```
+
 - HumanEval
 
 Get the HumanEval.jsonl file from [here](https://github.com/openai/human-eval/tree/master/data)
