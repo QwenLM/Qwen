@@ -9,7 +9,8 @@ from argparse import ArgumentParser
 
 import gradio as gr
 import mdtex2html
-import torch.cuda
+
+import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
