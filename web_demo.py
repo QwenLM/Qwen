@@ -9,6 +9,8 @@ from argparse import ArgumentParser
 
 import gradio as gr
 import mdtex2html
+
+import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
@@ -143,9 +145,13 @@ def _launch_demo(args, model, tokenizer, config):
     def reset_user_input():
         return gr.update(value="")
 
-    def reset_state(_task_history):
+    def reset_state(_chatbot, _task_history):
         _task_history.clear()
-        return []
+        _chatbot.clear()
+        import gc
+        gc.collect()
+        torch.cuda.empty_cache()
+        return _chatbot
 
     with gr.Blocks() as demo:
         gr.Markdown("""\
@@ -174,7 +180,7 @@ Qwen-7B-Chat <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">ðŸ
 
         submit_btn.click(predict, [query, chatbot, task_history], [chatbot], show_progress=True)
         submit_btn.click(reset_user_input, [], [query])
-        empty_btn.click(reset_state, [task_history], outputs=[chatbot], show_progress=True)
+        empty_btn.click(reset_state, [chatbot, task_history], outputs=[chatbot], show_progress=True)
         regen_btn.click(regenerate, [chatbot, task_history], [chatbot], show_progress=True)
 
         gr.Markdown("""\
