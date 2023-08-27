@@ -4,15 +4,18 @@
 # LICENSE file in the root directory of this source tree.
 
 """A simple web interactive chat demo based on gradio."""
-
+import os
 from argparse import ArgumentParser
 
 import gradio as gr
 import mdtex2html
+
+import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
-DEFAULT_CKPT_PATH = 'QWen/QWen-7B-Chat'
+
+DEFAULT_CKPT_PATH = 'Qwen/Qwen-7B-Chat'
 
 
 def _get_args():
@@ -44,17 +47,29 @@ def _load_model_tokenizer(args):
     else:
         device_map = "auto"
 
-    model = AutoModelForCausalLM.from_pretrained(
-        args.checkpoint_path,
-        device_map=device_map,
-        trust_remote_code=True,
-        resume_download=True,
-    ).eval()
-    model.generation_config = GenerationConfig.from_pretrained(
+    qconfig_path = os.path.join(args.checkpoint_path, 'quantize_config.json')
+    if os.path.exists(qconfig_path):
+        from auto_gptq import AutoGPTQForCausalLM
+        model = AutoGPTQForCausalLM.from_quantized(
+            args.checkpoint_path,
+            device_map=device_map,
+            trust_remote_code=True,
+            resume_download=True,
+            use_safetensors=True,
+        ).eval()
+    else:
+        model = AutoModelForCausalLM.from_pretrained(
+            args.checkpoint_path,
+            device_map=device_map,
+            trust_remote_code=True,
+            resume_download=True,
+        ).eval()
+
+    config = GenerationConfig.from_pretrained(
         args.checkpoint_path, trust_remote_code=True, resume_download=True,
     )
 
-    return model, tokenizer
+    return model, tokenizer, config
 
 
 def postprocess(self, y):
@@ -103,14 +118,14 @@ def _parse_text(text):
     return text
 
 
-def _launch_demo(args, model, tokenizer):
+def _launch_demo(args, model, tokenizer, config):
 
     def predict(_query, _chatbot, _task_history):
         print(f"User: {_parse_text(_query)}")
         _chatbot.append((_parse_text(_query), ""))
         full_response = ""
 
-        for response in model.chat_stream(tokenizer, _query, history=_task_history):
+        for response in model.chat_stream(tokenizer, _query, history=_task_history, generation_config=config):
             _chatbot[-1] = (_parse_text(_query), _parse_text(response))
 
             yield _chatbot
@@ -131,9 +146,13 @@ def _launch_demo(args, model, tokenizer):
     def reset_user_input():
         return gr.update(value="")
 
-    def reset_state(_task_history):
+    def reset_state(_chatbot, _task_history):
         _task_history.clear()
-        return []
+        _chatbot.clear()
+        import gc
+        gc.collect()
+        torch.cuda.empty_cache()
+        return _chatbot
 
     with gr.Blocks() as demo:
         gr.Markdown("""\
@@ -162,7 +181,7 @@ Qwen-7B-Chat <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">ðŸ
 
         submit_btn.click(predict, [query, chatbot, task_history], [chatbot], show_progress=True)
         submit_btn.click(reset_user_input, [], [query])
-        empty_btn.click(reset_state, [task_history], outputs=[chatbot], show_progress=True)
+        empty_btn.click(reset_state, [chatbot, task_history], outputs=[chatbot], show_progress=True)
         regen_btn.click(regenerate, [chatbot, task_history], [chatbot], show_progress=True)
 
         gr.Markdown("""\
@@ -183,9 +202,9 @@ including hate speech, violence, pornography, deception, etc. \
 def main():
     args = _get_args()
 
-    model, tokenizer = _load_model_tokenizer(args)
+    model, tokenizer, config = _load_model_tokenizer(args)
 
-    _launch_demo(args, model, tokenizer)
+    _launch_demo(args, model, tokenizer, config)
 
 
 if __name__ == '__main__':
