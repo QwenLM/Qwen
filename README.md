@@ -237,8 +237,8 @@ We measured the average inference speed (tokens/s) of generating 2048 and 8192 t
 
 | Quantization | Speed (2048 tokens) | Speed (8192 tokens) |
 | -------------- | :-------------------: | :-------------------: |
-| BF16         |        30.53        |        28.51        |
-| Int4         |        45.60        |        33.83        |
+| BF16         |        30.34        |        29.32        |
+| Int4         |        43.56        |        33.92        |
 
 In detail, the setting of profiling is generating 8192 new tokens with 1 context token. The profiling runs on a single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.4. The inference speed is averaged over the generated 8192 tokens.
 
@@ -248,8 +248,8 @@ We also profile the peak GPU memory usage for encoding 2048 tokens as context (a
 
 | Quantization | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
 | -------------- | :-----------------------------------: | :-------------------------------------: |
-| BF16         |               18.99GB               |                24.40GB                |
-| Int4         |               10.20GB               |                15.61GB                |
+| BF16         |               17.66GB               |                22.58GB                |
+| Int4         |               8.21GB                |                13.62GB                |
 
 The above speed and memory profiling are conducted using [this script](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py).
 
