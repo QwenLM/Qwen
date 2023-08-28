@@ -242,8 +242,8 @@ response, history = model.chat(tokenizer, "Hi", history=None, generation_config=
 
 |  Quantization | Speed (2048 tokens) | Speed (8192 tokens) |
 | ------------- | :------------------:| :------------------:|
-|      BF16     | 30.53               | 28.51               |
-|      Int4     | 45.60               | 33.83               |
+|      BF16     | 30.34               | 29.32               |
+|      Int4     | 43.56               | 33.92               |
 
 具体而言，我们记录在长度为1的上下文的条件下生成8192个token的性能。评测运行于单张A100-SXM4-80G GPU，使用PyTorch 2.0.1和CUDA 11.4。推理速度是生成8192个token的速度均值。
 
@@ -253,8 +253,8 @@ response, history = model.chat(tokenizer, "Hi", history=None, generation_config=
 
 | Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
 | ------------------ | :---------------------------------: | :-----------------------------------: |
-| BF16               |               18.99GB               |                24.40GB                |
-| Int4               |               10.20GB                |                15.61GB                |
+| BF16               |               17.66GB               |                22.58GB                |
+| Int4               |               8.21GB                |                13.62GB                |
 
 上述性能测算使用[此脚本](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)完成。
 
