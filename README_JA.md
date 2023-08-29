@@ -6,6 +6,7 @@
 <p align="center">
     <img src="assets/logo.jpg" width="400"/>
 <p>
+<br>
 
 <p align="center">
         Qwen-7B <a href="https://modelscope.cn/models/qwen/Qwen-7B/summary">🤖 <a> | <a href="https://huggingface.co/Qwen/Qwen-7B">🤗</a>&nbsp ｜ Qwen-7B-Chat <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">🤖 <a> | <a href="https://huggingface.co/Qwen/Qwen-7B-Chat">🤗</a>&nbsp | Qwen-7B-Chat-Int4 <a href="https://huggingface.co/Qwen/Qwen-7B-Chat-Int4">🤗</a>
@@ -32,10 +33,10 @@ Qwen-7B は、アリババクラウドが提唱する大規模言語モデルシ
 以下のセクションには、参考になる情報が記載されています。特に、issue を立ち上げる前に FAQ セクションをお読みになることをお勧めします。
 <br>
 
-## ニュース
+## ニュースとアップデート
 
-* 2023.8.21 Qwen-7B-Chat 用 Int4 量子化モデル(**Qwen-7B-Chat-Int4**)をリリースしました。メモリコストは低いが、推論速度は向上している。また、ベンチマーク評価において大きな性能劣化はありません。
-* 2023.8.3 Qwen-7B と Qwen-7B-Chat を ModelScope と Hugging Face で公開。また、トレーニングの詳細やモデルの性能など、モデルの詳細についてはテクニカルメモを提供しています。
+* 2023.8.21 Qwen-7B-Chat 用 Int4 量子化モデル **Qwen-7B-Chat-Int4** をリリースしました。また、ベンチマーク評価においても大きな性能低下は見られませんでした。
+* 2023.8.3 ModelScope と Hugging Face 上で **Qwen-7B** と **Qwen-7B-Chat** をリリースしました。また、トレーニングの詳細やモデルの性能など、モデルの詳細については技術メモを提供しています。
 
 <br>
 
@@ -43,18 +44,18 @@ Qwen-7B は、アリババクラウドが提唱する大規模言語モデルシ
 
 一般的に、Qwen-7B は、MMLU、C-Eval、GSM8K、HumanEval、WMT22、CMMLU など、自然言語理解、数学的問題解決、コーディングなどに関するモデルの能力を評価する一連のベンチマークデータセットにおいて、同程度のモデルサイズのベースラインモデルを凌駕しており、さらには 13B 程度のパラメータを持つより大規模なモデルをも凌駕しています。以下の結果をご覧ください。
 
-| Model             | MMLU           |         C-Eval |          GSM8K |      HumanEval |  WMT22 (en-zh) |         CMMLU |
-| :---------------- | :------------: | :------------: | :------------: | :------------: | :------------: |:------------: |
-| LLaMA-7B          | 35.1           |              - |           11.0 |           10.5 |            8.7 |             - |
-| LLaMA 2-7B        | 45.3           |              - |           14.6 |           12.8 |           17.9 |             - |
-| Baichuan-7B       | 42.3           |           42.8 |            9.7 |            9.2 |           26.6 |          44.4 |
-| ChatGLM2-6B       | 47.9           |           51.7 |           32.4 |            9.2 |              - |          48.8 |
-| InternLM-7B       | 51.0           |           52.8 |           31.2 |           10.4 |           14.8 |             - |
-| Baichuan-13B      | 51.6           |           53.6 |           26.6 |           12.8 |           30.0 |          55.8 |
-| LLaMA-13B         | 46.9           |           35.5 |           17.8 |           15.8 |           12.0 |             - |
-| LLaMA 2-13B       | 54.8           |              - |           28.7 |           18.3 |           24.2 |             - |
-| ChatGLM2-12B      | 56.2           |       **61.6** |           40.9 |              - |              - |             - |
-| **Qwen-7B**       | **56.7**       |           59.6 |       **51.6** |       **24.4** |       **30.6** |      **58.8** |
+| Model        |   MMLU   |  C-Eval  |  GSM8K  | HumanEval | WMT22 (en-zh) |  CMMLU  |
+| :------------- | :--------: | :--------: | :--------: | :---------: | :-------------: | :--------: |
+| LLaMA-7B     |   35.1   |    -    |   11.0   |   10.5   |      8.7      |    -    |
+| LLaMA 2-7B   |   45.3   |    -    |   14.6   |   12.8   |     17.9     |    -    |
+| Baichuan-7B  |   42.3   |   42.8   |   9.7   |    9.2    |     26.6     |   44.4   |
+| ChatGLM2-6B  |   47.9   |   51.7   |   32.4   |    9.2    |       -       |   48.8   |
+| InternLM-7B  |   51.0   |   52.8   |   31.2   |   10.4   |     14.8     |    -    |
+| Baichuan-13B |   51.6   |   53.6   |   26.6   |   12.8   |     30.0     |   55.8   |
+| LLaMA-13B    |   46.9   |   35.5   |   17.8   |   15.8   |     12.0     |    -    |
+| LLaMA 2-13B  |   54.8   |    -    |   28.7   |   18.3   |     24.2     |    -    |
+| ChatGLM2-12B |   56.2   | **61.6** |   40.9   |     -     |       -       |    -    |
+| **Qwen-7B**  | **56.7** |   59.6   | **51.6** | **24.4** |   **30.6**   | **58.8** |
 
 <p align="center">
     <img src="assets/performance.png" width="1000"/>
@@ -64,7 +65,6 @@ Qwen-7B は、アリババクラウドが提唱する大規模言語モデルシ
 さらに、[OpenCompass](https://opencompass.org.cn/leaderboard-llm) が実施した大規模言語モデルの第三者評価によると、Qwen-7B と Qwen-7B-Chat は 7B パラメータモデルのトップになります。この評価は、言語理解・生成、コーディング、数学、推論などの評価のための大量の公開ベンチマークで構成されています。
 
 より詳細な実験結果（より多くのベンチマークデータセットでの詳細なモデル性能）や詳細については、[こちら](tech_memo.md)をクリックして技術メモを参照してください。
-
 <br>
 
 ## 必要条件
@@ -72,7 +72,6 @@ Qwen-7B は、アリババクラウドが提唱する大規模言語モデルシ
 * python 3.8 以上
 * pytorch 1.12 以上、2.0 以上を推奨
 * CUDA 11.4 以上を推奨（GPU ユーザー、フラッシュアテンションユーザー向けなど）
-
 <br>
 
 ## クイックスタート
@@ -206,30 +205,29 @@ print(f'Response: {response}')
 ## トークナイザー
 
 tiktoken に基づくトークナイザーは、他のトークナイザー、例えばセンテンスピーストークナイザーとは異なります。特にファインチューニングの際には、特殊なトークンに注意を払う必要があります。トークナイザに関する詳細な情報や、ファインチューニングにおける使用方法については、[ドキュメント](tokenization_note_ja.md)を参照してください。
-
 <br>
 
 ## 量子化
 
 ### 使用方法
 
-**注：[AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ)に基づく新しい解決策を提供し、Qwen-7B-Chat用のInt4量子化モデル[ここをクリック](https://huggingface.co/Qwen/Qwen-7B-Chat-Int4)をリリースしました。このモデルは、従来の解決策と比較して、ほぼ無損失のモデル効果を達成しつつ、メモリコストと推論速度の両方で性能が向上しています**。
+**注: [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ) に基づく新しい解決策を提供し、Qwen-7B-Chat 用の Int4 量子化モデル[ここをクリック](https://huggingface.co/Qwen/Qwen-7B-Chat-Int4)をリリースしました。このモデルは、従来の解決策と比較して、ほぼ無損失のモデル効果を達成しつつ、メモリコストと推論速度の両方で性能が向上しています。**
 
-ここでは、量子化されたモデルを推論に使用する方法を示します。始める前に、AutoGPTQの要件を満たしていることを確認し、ソースからインストールしてください（一時的にQwenのコードは最新版のPyPIパッケージではまだリリースされていません）：
+ここでは、量子化されたモデルを推論に使用する方法を示します。始める前に、AutoGPTQ の要件を満たしていることを確認し、ソースからインストールしてください（一時的に Qwen のコードは最新版の PyPI パッケージではまだリリースされていません）:
 
 ```bash
 git clone https://github.com/PanQiWei/AutoGPTQ.git && cd AutoGPTQ
 pip install .
 ```
 
-そうすれば、以下のように簡単に量子化モデルを読み込むことができる。
+そうすれば、以下のように簡単に量子化モデルを読み込むことができます:
 
 ```python
 from auto_gptq import AutoGPTQForCausalLM
 model = AutoGPTQForCausalLM.from_quantized("Qwen/Qwen-7B-Chat-Int4", device_map="auto", trust_remote_code=True, use_safetensors=True).eval()
 ```
 
-推論を実行するには、上で示した基本的な使い方に似ているが、generation configurationを明示的に渡すことを忘れないこと：
+推論を実行するには、上で示した基本的な使い方に似ていますが、generation configuration を明示的に渡すことを忘れないで下さい:
 
 ```python
 from transformers import GenerationConfig
@@ -239,50 +237,49 @@ response, history = model.chat(tokenizer, "Hi", history=None, generation_config=
 
 ### 性能
 
-ベンチマークにおけるBF16モデルとInt4モデルの性能について説明する。結果を以下に示します：
+ベンチマークにおける BF16 モデルと Int4 モデルの性能について説明します。その結果は以下に示します：
 
-|  Quantization |   MMLU     |  CEval (val) |  GSM8K |  Humaneval |
-| ------------- | :--------: | :----------: | :----: | :--------: |
-| BF16          |    53.9    |     54.2     |  41.1  |    24.4    |
-| Int4          |    52.6    |     52.9     |  38.1  |    23.8    |
+| Quantization | MMLU | CEval (val) | GSM8K | Humaneval |
+| -------------- | :----: | :-----------: | :-----: | :---------: |
+| BF16         | 53.9 |    54.2    | 41.1 |   24.4   |
+| Int4         | 52.6 |    52.9    | 38.1 |   23.8   |
 
 ### 推論スピード
 
-BF16の精度とInt4の量子化レベルの下で、それぞれ2048個と8192個のトークンを生成する平均推論速度(tokens/s)を測定した。
+BF16 の精度と Int4 の量子化レベルの下で、それぞれ 2048 個と 8192 個のトークンを生成する平均推論速度(tokens/s)を測定しました。
 
-|  Quantization | Speed (2048 tokens) | Speed (8192 tokens) |
-| ------------- | :------------------:| :------------------:|
-|      BF16     | 30.34               | 29.32               |
-|      Int4     | 43.56               | 33.92               |
+| Quantization | Speed (2048 tokens) | Speed (8192 tokens) |
+| -------------- | :-------------------: | :-------------------: |
+| BF16         |        30.34        |        29.32        |
+| Int4         |        43.56        |        33.92        |
 
-詳細には、プロファイリングの設定は、1コンテクスト・トークンで8192個の新しいトークンを生成している。プロファイリングは、PyTorch 2.0.1とCUDA 11.4を搭載したシングルA100-SXM4-80G GPUで実行される。推論速度は生成された8192個のトークンの平均値です。
+詳細には、プロファイリングの設定は、1 コンテクストトークンで 8192 個の新しいトークンを生成しています。プロファイリングは、PyTorch 2.0.1 と CUDA 11.4 を搭載したシングル A100-SXM4-80G GPU で実行されました。推論速度は生成された 8192 個のトークンの平均値となります。
 
 ### GPU メモリ使用量
 
 また、BF16またはInt4の量子化レベルで、それぞれ2048トークンをコンテキストとしてエンコードした場合（および単一のトークンを生成した場合）と、8192トークンを生成した場合（単一のトークンをコンテキストとして生成した場合）のGPUメモリ使用量のピーク値をプロファイリングしました。その結果を以下に示します。
 
-| Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
-| ------------------ | :---------------------------------: | :-----------------------------------: |
-| BF16               |               17.66GB               |                22.58GB                |
-| Int4               |               8.21GB                |                13.62GB                |
+| Quantization | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
+| -------------- | :-----------------------------------: | :-------------------------------------: |
+| BF16         |               17.66GB               |                22.58GB                |
+| Int4         |               8.21GB                |                13.62GB                |
 
 上記のスピードとメモリーのプロファイリングは、[このスクリプト](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)を使用しています。
-
 <br>
 
 ## デモ
 
 ### ウェブ UI
 
-ウェブ UI デモを構築するためのコードを提供します（@wysaid に感謝）。始める前に、以下のパッケージがインストールされていることを確認してください:
+ウェブ UI デモを構築するためのコードを提供します（@wysaid に感謝）。これを始める前に、以下のパッケージがインストールされていることを確認してください:
 
-```
+```bash
 pip install -r requirements_web_demo.txt
 ```
 
-そして、以下のコマンドを実行し、生成されたリンクをクリックする：
+そして、以下のコマンドを実行し、生成されたリンクをクリックします:
 
-```
+```bash
 python web_demo.py
 ```
 
@@ -336,6 +333,7 @@ for chunk in openai.ChatCompletion.create(
         {"role": "user", "content": "你好"}
     ],
     stream=True
+    # ストリーミング出力形式でのストップワードの指定はまだサポートされておらず、開発中です。
 ):
     if hasattr(chunk.choices[0].delta, "content"):
         print(chunk.choices[0].delta.content, end="", flush=True)
@@ -346,7 +344,8 @@ response = openai.ChatCompletion.create(
     messages=[
         {"role": "user", "content": "你好"}
     ],
-    stream=False
+    stream=False,
+    stop=[] # 例えば、stop=["Observation:"] (ReAct プロンプトの場合)。
 )
 print(response.choices[0].message.content)
 ```
@@ -357,45 +356,44 @@ print(response.choices[0].message.content)
     <br>
 <p>
 
-## Deployment
+## デプロイ
 
-CPU上でモデルを実行するのは簡単で、以下のようにデバイスを指定する必要がある：
+CPU 上でモデルを実行するのは簡単であり、以下のようにデバイスを指定する必要があります:
 
 ```python
 model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
 ```
 
-```
-メモリ不足に悩まされ、複数のGPUにモデルをデプロイしたい場合は、``utils.py`で提供されているスクリプトを使うことができます：
+メモリ不足に悩まされ、複数の GPU にモデルをデプロイしたい場合は、`utils.py` で提供されているスクリプトを使うことができます:
 
 ```python
 from utils import load_model_on_gpus
 model = load_model_on_gpus('Qwen/Qwen-7B-Chat', num_gpus=2)
 ```
 
-7Bチャットモデルの推論を2GPUで実行できます。
+7B チャットモデルの推論を 2GPU で実行できます。
 <br>
 
 ## ツールの使用
 
 Qwen-7B-Chat は、API、データベース、モデルなど、ツールの利用に特化して最適化されており、ユーザは独自の Qwen-7B ベースの LangChain、エージェント、コードインタプリタを構築することができます。ツール利用能力を評価するための評価[ベンチマーク](eval/EVALUATION.md)では、Qwen-7B は安定した性能に達しています。
 
-| Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑)  | False Positive Error↓  |
-|:------------|:----------------------:|:----------------------:|:----------------------:|
-| GPT-4       | 95%                    | **0.90**               | 15%                    |
-| GPT-3.5     | 85%                    | 0.88                   | 75%                    |
-| **Qwen-7B** | **99%**                | 0.89                   | **9.7%**               |
+| Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑) | False Positive Error↓ |
+| :------------ | :-----------------------: | :----------------------: | :----------------------: |
+| GPT-4       |           95%           |        **0.90**        |          15%          |
+| GPT-3.5     |           85%           |          0.88          |          75%          |
+| **Qwen-7B** |         **99%**         |          0.89          |        **9.7%**        |
 
 ReAct プロンプトの書き方や使い方については、[ReAct の例](examples/react_prompt.md)を参照してください。ツールを使用することで、モデルがよりよいタスクを実行できるようになります。
 
-さらに、エージェントとしての能力を示す実験結果を提供する。詳細は [Hugging Face Agent](https://huggingface.co/docs/transformers/transformers_agents) を参照。Hugging Face が提供するランモードベンチマークでの性能は以下の通りです:
+さらに、エージェントとしての能力を示す実験結果を提供する。詳細は [Hugging Face Agent](https://huggingface.co/docs/transformers/transformers_agents) を参照して下さい。Hugging Face が提供するランモードベンチマークでの性能は以下の通りです:
 
-| Model          | Tool Selection↑ | Tool Used↑  |   Code↑   |
-|:---------------|:---------------:|:-----------:|:---------:|
-|GPT-4           |     **100**     |   **100**   | **97.41** |
-|GPT-3.5         |      95.37      |    96.30    |   87.04   |
-|StarCoder-15.5B |      87.04      |    87.96    |   68.89   |
-| **Qwen-7B**    |      90.74      |    92.59    |   74.07   |
+| Model           | Tool Selection↑ | Tool Used↑ |  Code↑  |
+| :---------------- | :----------------: | :-----------: | :---------: |
+| GPT-4           |     **100**     |   **100**   | **97.41** |
+| GPT-3.5         |      95.37      |    96.30    |   87.04   |
+| StarCoder-15.5B |      87.04      |    87.96    |   68.89   |
+| **Qwen-7B**     |      90.74      |    92.59    |   74.07   |
 
 <br>
 
@@ -424,17 +422,17 @@ ReAct プロンプトの書き方や使い方については、[ReAct の例](ex
     </tr>
 </table>
 
-<br>
+<br><br>
 
 ## 再現
 
-ベンチマークデータセットでのモデル性能の再現のために、結果を再現するスクリプトを提供しています。詳しくは [eval/EVALUATION.md](eval/EVALUATION.md) を確認してください。なお、再現の結果、我々の報告結果と若干異なる場合がある。
+ベンチマークデータセットでのモデル性能の再現のために、結果を再現するスクリプトを提供しています。詳しくは [eval/EVALUATION.md](eval/EVALUATION.md) を確認してください。なお、再現の結果、我々の報告結果と若干異なる場合があります。
 
 <br>
 
 ## FAQ
 
-問題が発生した場合は、[FAQ](FAQ_ja.md) や issue を参照し、新しい issue を立ち上げる前に解決策を探してください。
+問題が発生した場合は、まずは [FAQ](FAQ_ja.md) や issue を参照し、新しい issue を立ち上げる前に解決策を探してください。
 
 <br>
 
