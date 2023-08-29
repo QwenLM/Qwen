@@ -11,7 +11,7 @@
 <p align="center">
         Qwen-7B <a href="https://modelscope.cn/models/qwen/Qwen-7B/summary">🤖 <a> | <a href="https://huggingface.co/Qwen/Qwen-7B">🤗</a>&nbsp ｜ Qwen-7B-Chat <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">🤖 <a> | <a href="https://huggingface.co/Qwen/Qwen-7B-Chat">🤗</a>&nbsp | Qwen-7B-Chat-Int4 <a href="https://huggingface.co/Qwen/Qwen-7B-Chat-Int4">🤗</a>
 <br>
-<a href="https://qianwen-res.oss-cn-beijing.aliyuncs.com/qwen_wechat_group.PNG">WeChat</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/z3GAxXZ9Ce">Discord</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://modelscope.cn/studios/qwen/Qwen-7B-Chat-Demo/summary">Demo</a>&nbsp ｜ &nbsp<a href="https://github.com/QwenLM/Qwen-7B/blob/main/tech_memo.md">Report</a>
+<a href="assets/wechat.png">WeChat</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/z3GAxXZ9Ce">Discord</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://modelscope.cn/studios/qwen/Qwen-7B-Chat-Demo/summary">Demo</a>&nbsp ｜ &nbsp<a href="https://github.com/QwenLM/Qwen-7B/blob/main/tech_memo.md">Report</a>
 </p>
 <br><br>
 
@@ -26,6 +26,7 @@ Qwen-7B is the 7B-parameter version of the large language model series, Qwen (ab
 5. **Support of Plugins**. Qwen-7B-Chat is trained with plugin-related alignment data, and thus it is capable of using tools, including APIs, models, databases, etc., and it is capable of playing as an agent.
 
 The following sections include information that you might find it helpful. Specifically, we advise you to read the FAQ section before you launch issues.
+<br>
 
 ## News and Updates
 
@@ -57,12 +58,14 @@ In general, Qwen-7B outperforms the baseline models of a similar model size, and
 Additionally, according to the third-party evaluation of large language models, conducted by [OpenCompass](https://opencompass.org.cn/leaderboard-llm), Qwen-7B and Qwen-7B-Chat are the top 7B-parameter models. This evaluation consists of a large amount of public benchmarks for the evaluation of language understanding and generation, coding, mathematics, reasoning, etc.
 
 For more experimental results (detailed model performance on more benchmark datasets) and details, please refer to our technical memo by clicking [here](tech_memo.md).
+<br>
 
 ## Requirements
 
 * python 3.8 and above
 * pytorch 1.12 and above, 2.0 and above are recommended
 * CUDA 11.4 and above are recommended (this is for GPU users, flash-attention users, etc.)
+  <br>
 
 ## Quickstart
 
@@ -190,9 +193,12 @@ response, history = results['response'], results['history']
 print(f'Response: {response}')
 ```
 
+<br>
+
 ## Tokenizer
 
 Our tokenizer based on tiktoken is different from other tokenizers, e.g., sentencepiece tokenizer. You need to pay attention to special tokens, especially in finetuning. For more detailed information on the tokenizer and related use in fine-tuning, please refer to the [documentation](tokenization_note.md).
+<br>
 
 ## Quantization
 
@@ -237,8 +243,8 @@ We measured the average inference speed (tokens/s) of generating 2048 and 8192 t
 
 | Quantization | Speed (2048 tokens) | Speed (8192 tokens) |
 | -------------- | :-------------------: | :-------------------: |
-| BF16         |        30.53        |        28.51        |
-| Int4         |        45.60        |        33.83        |
+| BF16         |        30.34        |        29.32        |
+| Int4         |        43.56        |        33.92        |
 
 In detail, the setting of profiling is generating 8192 new tokens with 1 context token. The profiling runs on a single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.4. The inference speed is averaged over the generated 8192 tokens.
 
@@ -248,10 +254,11 @@ We also profile the peak GPU memory usage for encoding 2048 tokens as context (a
 
 | Quantization | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
 | -------------- | :-----------------------------------: | :-------------------------------------: |
-| BF16         |               18.99GB               |                24.40GB                |
-| Int4         |               10.20GB               |                15.61GB                |
+| BF16         |               17.66GB               |                22.58GB                |
+| Int4         |               8.21GB                |                13.62GB                |
 
 The above speed and memory profiling are conducted using [this script](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py).
+<br>
 
 ## Demo
 
@@ -342,6 +349,24 @@ print(response.choices[0].message.content)
     <br>
 <p>
 
+## Deployment
+
+It is simple to run the model on CPU, which requires your specification of device:
+
+```python
+model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
+```
+
+If you suffer from lack of GPU memory and you would like to run the model on more than 1 GPU, you can use our provided script `utils.py`:
+
+```python[](https://)
+from utils import load_model_on_gpus
+model = load_model_on_gpus('Qwen/Qwen-7B-Chat', num_gpus=2)
+```
+
+Then you can run the 7B chat model on 2 GPUs using the above scripts.
+<br>
+
 ## Tool Usage
 
 Qwen-7B-Chat is specifically optimized for tool usage, including API, database, models, etc., so that users can build their own Qwen-7B-based LangChain, Agent, and Code Interpreter. In our evaluation [benchmark](eval/EVALUATION.md) for assessing tool usage capabilities, we find that Qwen-7B reaches stable performance.
@@ -362,6 +387,8 @@ Additionally, we provide experimental results to show its capabilities of playin
 | GPT-3.5         |      95.37      |    96.30    |   87.04   |
 | StarCoder-15.5B |      87.04      |    87.96    |   68.89   |
 | **Qwen-7B**     |      90.74      |    92.59    |   74.07   |
+
+<br>
 
 ## Long-Context Understanding
 
@@ -388,17 +415,25 @@ To extend the context length and break the bottleneck of training sequence lengt
     </tr>
 </table>
 
+<br><br>
+
 ## Reproduction
 
 For your reproduction of the model performance on benchmark datasets, we provide scripts for you to reproduce the results. Check [eval/EVALUATION.md](eval/EVALUATION.md) for more information. Note that the reproduction may lead to slight differences from our reported results.
+
+<br>
 
 ## FAQ
 
 If you meet problems, please refer to [FAQ](FAQ.md) and the issues first to search a solution before you launch a new issue.
 
+<br>
+
 ## License Agreement
 
 Researchers and developers are free to use the codes and model weights of both Qwen-7B and Qwen-7B-Chat. We also allow their commercial use. Check our license at [LICENSE](LICENSE) for more details. If you have requirements for commercial use, please fill out the [form](https://dashscope.console.aliyun.com/openModelApply/qianwen) to apply.
+
+<br>
 
 ## Contact Us
 

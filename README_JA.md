@@ -10,7 +10,7 @@
 <p align="center">
         Qwen-7B <a href="https://modelscope.cn/models/qwen/Qwen-7B/summary">🤖 <a> | <a href="https://huggingface.co/Qwen/Qwen-7B">🤗</a>&nbsp ｜ Qwen-7B-Chat <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">🤖 <a> | <a href="https://huggingface.co/Qwen/Qwen-7B-Chat">🤗</a>&nbsp | Qwen-7B-Chat-Int4 <a href="https://huggingface.co/Qwen/Qwen-7B-Chat-Int4">🤗</a>
 <br>
-<a href="https://qianwen-res.oss-cn-beijing.aliyuncs.com/qwen_wechat_group.PNG">WeChat</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/z3GAxXZ9Ce">Discord</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://modelscope.cn/studios/qwen/Qwen-7B-Chat-Demo/summary">Demo</a>&nbsp ｜ &nbsp<a href="https://github.com/QwenLM/Qwen-7B/blob/main/tech_memo.md">Report</a>
+<a href="assets/wechat.png">WeChat</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/z3GAxXZ9Ce">Discord</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://modelscope.cn/studios/qwen/Qwen-7B-Chat-Demo/summary">Demo</a>&nbsp ｜ &nbsp<a href="https://github.com/QwenLM/Qwen-7B/blob/main/tech_memo.md">Report</a>
 </p>
 <br>
 
@@ -30,11 +30,14 @@ Qwen-7B は、アリババクラウドが提唱する大規模言語モデルシ
 5. **プラグインのサポート**。Qwen-7B-Chat は、プラグイン関連のアライメントデータでトレーニングされているため、API、モデル、データベースなどのツールを使用することができ、エージェントとしてプレイすることができる。
 
 以下のセクションには、参考になる情報が記載されています。特に、issue を立ち上げる前に FAQ セクションをお読みになることをお勧めします。
+<br>
 
 ## ニュース
 
 * 2023.8.21 Qwen-7B-Chat 用 Int4 量子化モデル(**Qwen-7B-Chat-Int4**)をリリースしました。メモリコストは低いが、推論速度は向上している。また、ベンチマーク評価において大きな性能劣化はありません。
 * 2023.8.3 Qwen-7B と Qwen-7B-Chat を ModelScope と Hugging Face で公開。また、トレーニングの詳細やモデルの性能など、モデルの詳細についてはテクニカルメモを提供しています。
+
+<br>
 
 ## パフォーマンス
 
@@ -62,11 +65,15 @@ Qwen-7B は、アリババクラウドが提唱する大規模言語モデルシ
 
 より詳細な実験結果（より多くのベンチマークデータセットでの詳細なモデル性能）や詳細については、[こちら](tech_memo.md)をクリックして技術メモを参照してください。
 
+<br>
+
 ## 必要条件
 
 * python 3.8 以上
 * pytorch 1.12 以上、2.0 以上を推奨
 * CUDA 11.4 以上を推奨（GPU ユーザー、フラッシュアテンションユーザー向けなど）
+
+<br>
 
 ## クイックスタート
 
@@ -194,9 +201,13 @@ response, history = results['response'], results['history']
 print(f'Response: {response}')
 ```
 
+<br>
+
 ## トークナイザー
 
 tiktoken に基づくトークナイザーは、他のトークナイザー、例えばセンテンスピーストークナイザーとは異なります。特にファインチューニングの際には、特殊なトークンに注意を払う必要があります。トークナイザに関する詳細な情報や、ファインチューニングにおける使用方法については、[ドキュメント](tokenization_note_ja.md)を参照してください。
+
+<br>
 
 ## 量子化
 
@@ -241,8 +252,8 @@ BF16の精度とInt4の量子化レベルの下で、それぞれ2048個と8192�
 
 |  Quantization | Speed (2048 tokens) | Speed (8192 tokens) |
 | ------------- | :------------------:| :------------------:|
-|      BF16     | 30.53               | 28.51               |
-|      Int4     | 45.60               | 33.83               |
+|      BF16     | 30.34               | 29.32               |
+|      Int4     | 43.56               | 33.92               |
 
 詳細には、プロファイリングの設定は、1コンテクスト・トークンで8192個の新しいトークンを生成している。プロファイリングは、PyTorch 2.0.1とCUDA 11.4を搭載したシングルA100-SXM4-80G GPUで実行される。推論速度は生成された8192個のトークンの平均値です。
 
@@ -252,10 +263,12 @@ BF16の精度とInt4の量子化レベルの下で、それぞれ2048個と8192�
 
 | Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
 | ------------------ | :---------------------------------: | :-----------------------------------: |
-| BF16               |               18.99GB               |                24.40GB                |
-| Int4               |               10.20GB                |                15.61GB                |
+| BF16               |               17.66GB               |                22.58GB                |
+| Int4               |               8.21GB                |                13.62GB                |
 
 上記のスピードとメモリーのプロファイリングは、[このスクリプト](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)を使用しています。
+
+<br>
 
 ## デモ
 
@@ -344,6 +357,25 @@ print(response.choices[0].message.content)
     <br>
 <p>
 
+## Deployment
+
+CPU上でモデルを実行するのは簡単で、以下のようにデバイスを指定する必要がある：
+
+```python
+model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
+```
+
+```
+メモリ不足に悩まされ、複数のGPUにモデルをデプロイしたい場合は、``utils.py`で提供されているスクリプトを使うことができます：
+
+```python
+from utils import load_model_on_gpus
+model = load_model_on_gpus('Qwen/Qwen-7B-Chat', num_gpus=2)
+```
+
+7Bチャットモデルの推論を2GPUで実行できます。
+<br>
+
 ## ツールの使用
 
 Qwen-7B-Chat は、API、データベース、モデルなど、ツールの利用に特化して最適化されており、ユーザは独自の Qwen-7B ベースの LangChain、エージェント、コードインタプリタを構築することができます。ツール利用能力を評価するための評価[ベンチマーク](eval/EVALUATION.md)では、Qwen-7B は安定した性能に達しています。
@@ -364,6 +396,8 @@ ReAct プロンプトの書き方や使い方については、[ReAct の例](ex
 |GPT-3.5         |      95.37      |    96.30    |   87.04   |
 |StarCoder-15.5B |      87.04      |    87.96    |   68.89   |
 | **Qwen-7B**    |      90.74      |    92.59    |   74.07   |
+
+<br>
 
 ## 長い文脈の理解
 
@@ -390,17 +424,25 @@ ReAct プロンプトの書き方や使い方については、[ReAct の例](ex
     </tr>
 </table>
 
+<br>
+
 ## 再現
 
 ベンチマークデータセットでのモデル性能の再現のために、結果を再現するスクリプトを提供しています。詳しくは [eval/EVALUATION.md](eval/EVALUATION.md) を確認してください。なお、再現の結果、我々の報告結果と若干異なる場合がある。
+
+<br>
 
 ## FAQ
 
 問題が発生した場合は、[FAQ](FAQ_ja.md) や issue を参照し、新しい issue を立ち上げる前に解決策を探してください。
 
+<br>
+
 ## ライセンス契約
 
 Qwen-7B と Qwen-7B-Chat のコードとモデルウェイトは、研究者や開発者が自由に使用することができます。また、商用利用も可能です。詳しくは [LICENSE](LICENSE) をご覧ください。商用利用を希望される方は、[リクエストフォーム](https://dashscope.console.aliyun.com/openModelApply/qianwen)に必要事項をご記入の上、お申し込みください。
+
+<br>
 
 ## お問い合わせ
 
