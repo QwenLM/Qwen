@@ -35,7 +35,7 @@ Flash attention は、トレーニングと推論を加速するオプション�
 
 #### CPU のみを使うことはできますか？
 
-はい、`python cli_demo.py --cpu_only` を実行すると、CPU のみでモデルと推論をロードします。
+はい、`python cli_demo.py --cpu-only` を実行すると、CPU のみでモデルと推論をロードします。
 
 #### Qwen はストリーミングに対応していますか？
 
