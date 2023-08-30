@@ -321,7 +321,7 @@ openai.api_key = "none"
 
 # create a request activating streaming response
 for chunk in openai.ChatCompletion.create(
-    model="Qwen-7B",
+    model="Qwen",
     messages=[
         {"role": "user", "content": "你好"}
     ],
@@ -333,7 +333,7 @@ for chunk in openai.ChatCompletion.create(
 
 # create a request not activating streaming response
 response = openai.ChatCompletion.create(
-    model="Qwen-7B",
+    model="Qwen",
     messages=[
         {"role": "user", "content": "你好"}
     ],
@@ -348,6 +348,8 @@ print(response.choices[0].message.content)
     <img src="assets/openai_api.gif" width="600" />
     <br>
 <p>
+
+Function calling is also supported (but only when `stream=False` for the moment). See the [example usage](examples/function_call_examples.py) here.
 
 ## Deployment
 
@@ -371,22 +373,22 @@ Then you can run the 7B chat model on 2 GPUs using the above scripts.
 
 Qwen-7B-Chat is specifically optimized for tool usage, including API, database, models, etc., so that users can build their own Qwen-7B-based LangChain, Agent, and Code Interpreter. In our evaluation [benchmark](eval/EVALUATION.md) for assessing tool usage capabilities, we find that Qwen-7B reaches stable performance.
 
-| Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑) | False Positive Error↓ |
-| :------------ | :-----------------------: | :----------------------: | :----------------------: |
-| GPT-4       |           95%           |        **0.90**        |          15%          |
-| GPT-3.5     |           85%           |          0.88          |          75%          |
-| **Qwen-7B** |         **99%**         |          0.89          |        **9.7%**        |
+| Model            | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑) | False Positive Error↓ |
+|:-----------------| :-----------------------: | :----------------------: | :----------------------: |
+| GPT-4            |           95%           |        **0.90**        |          15%          |
+| GPT-3.5          |           85%           |          0.88          |          75%          |
+| **Qwen-7B-Chat** |         **99%**         |          0.89          |        **9.7%**        |
 
 For how to write and use prompts for ReAct Prompting, please refer to [the ReAct examples](examples/react_prompt.md). The use of tools can enable the model to better perform tasks.
 
 Additionally, we provide experimental results to show its capabilities of playing as an agent. See [Hugging Face Agent](https://huggingface.co/docs/transformers/transformers_agents) for more information. Its performance on the run-mode benchmark provided by Hugging Face is as follows:
 
-| Model           | Tool Selection↑ | Tool Used↑ |  Code↑  |
-| :---------------- | :----------------: | :-----------: | :---------: |
-| GPT-4           |     **100**     |   **100**   | **97.41** |
-| GPT-3.5         |      95.37      |    96.30    |   87.04   |
-| StarCoder-15.5B |      87.04      |    87.96    |   68.89   |
-| **Qwen-7B**     |      90.74      |    92.59    |   74.07   |
+| Model            | Tool Selection↑ | Tool Used↑ |  Code↑  |
+|:-----------------| :----------------: | :-----------: | :---------: |
+| GPT-4            |     **100**     |   **100**   | **97.41** |
+| GPT-3.5          |      95.37      |    96.30    |   87.04   |
+| StarCoder-15.5B  |      87.04      |    87.96    |   68.89   |
+| **Qwen-7B-Chat** |      90.74      |    92.59    |   74.07   |
 
 <br>
 

@@ -331,7 +331,7 @@ openai.api_key = "none"
 
 # create a request activating streaming response
 for chunk in openai.ChatCompletion.create(
-    model="Qwen-7B",
+    model="Qwen",
     messages=[
         {"role": "user", "content": "你好"}
     ],
@@ -342,7 +342,7 @@ for chunk in openai.ChatCompletion.create(
 
 # create a request not activating streaming response
 response = openai.ChatCompletion.create(
-    model="Qwen-7B",
+    model="Qwen",
     messages=[
         {"role": "user", "content": "你好"}
     ],
@@ -381,22 +381,22 @@ model = load_model_on_gpus('Qwen/Qwen-7B-Chat', num_gpus=2)
 Qwen-7B-Chat は、API、データベース、モデルなど、ツールの利用に特化して最適化されており、ユーザは独自の Qwen-7B ベースの LangChain、エージェント、コードインタプリタを構築することができます。ツール利用能力を評価するための評価[ベンチマーク](eval/EVALUATION.md)では、Qwen-7B は安定した性能に達しています。
 [](https://)
 
-| Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑)  | False Positive Error↓  |
-|:------------|:----------------------:|:----------------------:|:----------------------:|
-| GPT-4       | 95%                    | **0.90**               | 15%                    |
-| GPT-3.5     | 85%                    | 0.88                   | 75%                    |
-| **Qwen-7B** | **99%**                | 0.89                   | **9.7%**               |
+| Model            | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑)  | False Positive Error↓  |
+|:-----------------|:----------------------:|:----------------------:|:----------------------:|
+| GPT-4            | 95%                    | **0.90**               | 15%                    |
+| GPT-3.5          | 85%                    | 0.88                   | 75%                    |
+| **Qwen-7B-Chat** | **99%**                | 0.89                   | **9.7%**               |
 
 ReAct プロンプトの書き方や使い方については、[ReAct の例](examples/react_prompt.md)を参照してください。ツールを使用することで、モデルがよりよいタスクを実行できるようになります。
 
 さらに、エージェントとしての能力を示す実験結果を提供する。詳細は [Hugging Face Agent](https://huggingface.co/docs/transformers/transformers_agents) を参照。Hugging Face が提供するランモードベンチマークでの性能は以下の通りです:
 
-| Model          | Tool Selection↑ | Tool Used↑  |   Code↑   |
-|:---------------|:---------------:|:-----------:|:---------:|
-|GPT-4           |     **100**     |   **100**   | **97.41** |
-|GPT-3.5         |      95.37      |    96.30    |   87.04   |
-|StarCoder-15.5B |      87.04      |    87.96    |   68.89   |
-| **Qwen-7B**    |      90.74      |    92.59    |   74.07   |
+| Model            | Tool Selection↑ | Tool Used↑  |   Code↑   |
+|:-----------------|:---------------:|:-----------:|:---------:|
+| GPT-4            |     **100**     |   **100**   | **97.41** |
+| GPT-3.5          |      95.37      |    96.30    |   87.04   |
+| StarCoder-15.5B  |      87.04      |    87.96    |   68.89   |
+| **Qwen-7B-Chat** |      90.74      |    92.59    |   74.07   |
 
 <br>
 
