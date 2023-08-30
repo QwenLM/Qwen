@@ -16,7 +16,7 @@
 <br>
 
 <p align="left">
-        日本語ドキュメントメンテナー: <a href="https://github.com/eltociear">Ikko Eltociear Ashimine</a>
+        日本語ドキュメントメンテナー: <a href="https://github.com/eltociear">Ikko Eltociear Ashimine</a> & Junyang Lin
 </p>
 <br>
 
