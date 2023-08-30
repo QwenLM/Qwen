@@ -327,7 +327,7 @@ openai.api_key = "none"
 
 # 使用流式回复的请求
 for chunk in openai.ChatCompletion.create(
-    model="Qwen-7B",
+    model="Qwen",
     messages=[
         {"role": "user", "content": "你好"}
     ],
@@ -339,7 +339,7 @@ for chunk in openai.ChatCompletion.create(
 
 # 不使用流式回复的请求
 response = openai.ChatCompletion.create(
-    model="Qwen-7B",
+    model="Qwen",
     messages=[
         {"role": "user", "content": "你好"}
     ],
@@ -354,6 +354,8 @@ print(response.choices[0].message.content)
     <img src="assets/openai_api.gif" width="600" />
     <br>
 <p>
+
+该接口也支持函数调用（Function Calling），但暂时仅限 `stream=False` 时能生效。用法见[函数调用示例](examples/function_call_examples.py)。
 
 ## 部署
 
@@ -377,11 +379,11 @@ model = load_model_on_gpus('Qwen/Qwen-7B-Chat', num_gpus=2)
 
 Qwen-7B-Chat针对包括API、数据库、模型等工具在内的调用进行了优化。用户可以开发基于Qwen-7B的LangChain、Agent甚至Code Interpreter。在我们开源的[评测数据集](eval/EVALUATION.md)上测试模型的工具调用能力，并发现Qwen-7B-Chat能够取得稳定的表现。
 
-| Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑)  | False Positive Error↓  |
-|:------------|:----------------------:|:----------------------:|:----------------------:|
-| GPT-4       | 95%                    | **0.90**               | 15%                    |
-| GPT-3.5     | 85%                    | 0.88                   | 75%                    |
-| **Qwen-7B** | **99%**                | 0.89                   | **9.7%**               |
+| Model            | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑)  | False Positive Error↓  |
+|:-----------------|:----------------------:|:----------------------:|:----------------------:|
+| GPT-4            | 95%                    | **0.90**               | 15%                    |
+| GPT-3.5          | 85%                    | 0.88                   | 75%                    |
+| **Qwen-7B-Chat** | **99%**                | 0.89                   | **9.7%**               |
 
 我们提供了文档说明如何根据ReAct Prompting的原则写作你的prompt。
 
@@ -389,12 +391,12 @@ For how to write and use prompts for ReAct Prompting, please refer to [the ReAct
 
 此外，我们还提供了实验结果表明我们的模型扮演Agent的能力。请阅读相关文档[链接](https://huggingface.co/docs/transformers/transformers_agents)了解更多信息。模型在Hugging Face提供的评测数据集上表现如下：
 
-| Model          | Tool Selection↑ | Tool Used↑  |   Code↑   |
-|:---------------|:---------------:|:-----------:|:---------:|
-|GPT-4           |     **100**     |   **100**   | **97.41** |
-|GPT-3.5         |      95.37      |    96.30    |   87.04   |
-|StarCoder-15.5B |      87.04      |    87.96    |   68.89   |
-| **Qwen-7B**    |      90.74      |    92.59    |   74.07   |
+| Model            | Tool Selection↑ | Tool Used↑  |   Code↑   |
+|:-----------------|:---------------:|:-----------:|:---------:|
+| GPT-4            |     **100**     |   **100**   | **97.41** |
+| GPT-3.5          |      95.37      |    96.30    |   87.04   |
+| StarCoder-15.5B  |      87.04      |    87.96    |   68.89   |
+| **Qwen-7B-Chat** |      90.74      |    92.59    |   74.07   |
 
 <br>
 
