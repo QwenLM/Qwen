@@ -35,7 +35,7 @@ Yes, see `web_demo.py` for web demo and `cli_demo.py` for CLI demo. See README f
 
 #### Can I use CPU only?
 
-Yes, run `python  cli_demo.py --cpu_only` will load the model and inference on CPU only.
+Yes, run `python  cli_demo.py --cpu-only` will load the model and inference on CPU only.
 
 #### Can Qwen support streaming?
 
