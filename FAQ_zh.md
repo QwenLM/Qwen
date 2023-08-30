@@ -32,7 +32,7 @@ flash attention是一个用于加速模型训练推理的可选项，且仅适�
 
 #### 我没有GPU，只用CPU运行CLI demo可以吗？
 
-可以的，运行`python  cli_demo.py --cpu_only`命令即可将模型读取到CPU并使用CPU进行推理。
+可以的，运行`python  cli_demo.py --cpu-only`命令即可将模型读取到CPU并使用CPU进行推理。
 
 #### Qwen支持流式推理吗？
 
