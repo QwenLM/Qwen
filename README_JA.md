@@ -37,12 +37,11 @@ Qwen-7B は、アリババクラウドが提唱する大規模言語モデルシ
 
 * 2023.8.21 Qwen-7B-Chat 用 Int4 量子化モデル **Qwen-7B-Chat-Int4** をリリースしました。また、ベンチマーク評価においても大きな性能低下は見られませんでした。
 * 2023.8.3 ModelScope と Hugging Face 上で **Qwen-7B** と **Qwen-7B-Chat** をリリースしました。また、トレーニングの詳細やモデルの性能など、モデルの詳細については技術メモを提供しています。
-
 <br>
 
-## パフォーマンス
+## 性能
 
-一般的に、Qwen-7B は、MMLU、C-Eval、GSM8K、HumanEval、WMT22、CMMLU など、自然言語理解、数学的問題解決、コーディングなどに関するモデルの能力を評価する一連のベンチマークデータセットにおいて、同程度のモデルサイズのベースラインモデルを凌駕しており、さらには 13B 程度のパラメータを持つより大規模なモデルをも凌駕しています。以下の結果をご覧ください。
+Qwen-7B は、MMLU、C-Eval、GSM8K、HumanEval、WMT22、CMMLU など、自然言語理解、数学的問題解決、コーディングなどに関するモデルの能力を評価する一連のベンチマークデータセットにおいて、同程度のモデルサイズのベースラインモデルを凌駕しており、さらには 13B 程度のパラメータを持つより大規模なモデルをも凌駕しています。以下の結果をご覧ください。
 
 | Model             | MMLU           |         C-Eval |          GSM8K |      HumanEval |  WMT22 (en-zh) |         CMMLU |
 | :---------------- | :------------: | :------------: | :------------: | :------------: | :------------: |:------------: |
@@ -119,25 +118,25 @@ model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="au
 # 生成のためのハイパーパラメータを指定
 model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
-# 第一轮对话 第一回対話ターン
+# 第一回対話ターン
 response, history = model.chat(tokenizer, "你好", history=None)
 print(response)
-# こんにちは！ お役に立ててうれしいです。
+# 你好！很高兴为你提供帮助。
 
-# 第二轮对话 第二回対話ターン
+# 第二回対話ターン
 response, history = model.chat(tokenizer, "给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history)
 print(response)
-# これは、自分のビジネスを始めようと奮闘し、やがて成功する若者の物語である。
-# この物語の主人公は、平凡な家庭に生まれ、平凡な労働者である両親を持つ李明である。 李明は子供の頃から起業家として成功することを目標としていた。
-# この目標を達成するため、李明は猛勉強して大学に入った。 大学時代には、さまざまな起業家コンテストに積極的に参加し、多くの賞を獲得した。 また、余暇を利用してインターンシップにも参加し、貴重な経験を積んだ。
-# 卒業後、李明は起業を決意した。 投資先を探し始めたが、何度も断られた。 しかし、彼はあきらめなかった。 彼は懸命に働き続け、ビジネスプランを改善し、新たな投資機会を探した。
-# やがて李明は投資を受けることに成功し、自分のビジネスを始めた。 彼は新しいタイプのソフトウェアの開発に焦点を当てたテクノロジー会社を設立した。 彼のリーダーシップの下、会社は急速に成長し、テクノロジー企業として成功を収めた。
-# 李明の成功は偶然ではない。 彼は勤勉で、たくましく、冒険好きで、常に学び、自分を高めている。 彼の成功はまた、努力すれば誰でも成功できることを証明している。
+# 这是一个关于一个年轻人奋斗创业最终取得成功的故事。
+# 故事的主人公叫李明，他来自一个普通的家庭，父母都是普通的工人。从小，李明就立下了一个目标：要成为一名成功的企业家。
+# 为了实现这个目标，李明勤奋学习，考上了大学。在大学期间，他积极参加各种创业比赛，获得了不少奖项。他还利用课余时间去实习，积累了宝贵的经验。
+# 毕业后，李明决定开始自己的创业之路。他开始寻找投资机会，但多次都被拒绝了。然而，他并没有放弃。他继续努力，不断改进自己的创业计划，并寻找新的投资机会。
+# 最终，李明成功地获得了一笔投资，开始了自己的创业之路。他成立了一家科技公司，专注于开发新型软件。在他的领导下，公司迅速发展起来，成为了一家成功的科技企业。
+# 李明的成功并不是偶然的。他勤奋、坚韧、勇于冒险，不断学习和改进自己。他的成功也证明了，只要努力奋斗，任何人都有可能取得成功。
 
 # 第三轮对话 第三回対話ターン
 response, history = model.chat(tokenizer, "给这个故事起一个标题", history=history)
 print(response)
-# 《起業への奮闘：ある若者の成功への道》
+# 《奋斗创业：一个年轻人的成功之路》
 ```
 
 Qwen-7B の学習済みベースモデルの実行も簡単です。
@@ -162,11 +161,11 @@ model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", 
 # 生成のためのハイパーパラメータを指定
 model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
 
-inputs = tokenizer('モンゴルの首都はウランバートル（Ulaanbaatar）\nアイスランドの首都はレイキャビク（Reykjavik）\nエチオピアの首都は', return_tensors='pt')
+inputs = tokenizer('蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是', return_tensors='pt')
 inputs = inputs.to(model.device)
 pred = model.generate(**inputs)
 print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
-# モンゴルの首都はウランバートル（Ulaanbaatar）\nアイスランドの首都はレイキャビク（Reykjavik）\nエチオピアの首都はアディスアベバ（Addis Ababa）...
+# 蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是亚的斯亚贝巴（Addis Ababa）...
 ```
 
 </details>
@@ -421,25 +420,21 @@ ReAct プロンプトの書き方や使い方については、[ReAct の例](ex
         <td>+ dynamic_ntk + logn + window_attn</td><td align="center"><b>4.23</b></td><td align="center"><b>3.78</b></td><td align="center"><b>3.58</b></td><td align="center"><b>3.49</b></td><td align="center"><b>4.32</b></td>
     </tr>
 </table>
-
-<br><br>
+<br>
 
 ## 再現
 
 ベンチマークデータセットでのモデル性能の再現のために、結果を再現するスクリプトを提供しています。詳しくは [eval/EVALUATION.md](eval/EVALUATION.md) を確認してください。なお、再現の結果、我々の報告結果と若干異なる場合があります。
-
 <br>
 
 ## FAQ
 
 問題が発生した場合は、まずは [FAQ](FAQ_ja.md) や issue を参照し、新しい issue を立ち上げる前に解決策を探してください。
-
 <br>
 
 ## ライセンス契約
 
 Qwen-7B と Qwen-7B-Chat のコードとモデルウェイトは、研究者や開発者が自由に使用することができます。また、商用利用も可能です。詳しくは [LICENSE](LICENSE) をご覧ください。商用利用を希望される方は、[リクエストフォーム](https://dashscope.console.aliyun.com/openModelApply/qianwen)に必要事項をご記入の上、お申し込みください。
-
 <br>
 
 ## お問い合わせ

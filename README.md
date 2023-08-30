@@ -32,6 +32,7 @@ The following sections include information that you might find it helpful. Speci
 
 * 2023.8.21 We release the Int4 quantized model for Qwen-7B-Chat, **Qwen-7B-Chat-Int4**, which requires low memory costs but achieves improved inference speed. Besides, there is no significant performance degradation on the benchmark evaluation.
 * 2023.8.3 We release both **Qwen-7B** and **Qwen-7B-Chat** on ModelScope and Hugging Face. We also provide a technical memo for more details about the model, including training details and model performance.
+<br>
 
 ## Performance
 
@@ -112,12 +113,12 @@ model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="au
 # Specify hyperparameters for generation
 model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
-# 第一轮对话 1st dialogue turn
+# 1st dialogue turn
 response, history = model.chat(tokenizer, "你好", history=None)
 print(response)
 # 你好！很高兴为你提供帮助。
 
-# 第二轮对话 2nd dialogue turn
+# 2nd dialogue turn
 response, history = model.chat(tokenizer, "给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history)
 print(response)
 # 这是一个关于一个年轻人奋斗创业最终取得成功的故事。
@@ -127,7 +128,7 @@ print(response)
 # 最终，李明成功地获得了一笔投资，开始了自己的创业之路。他成立了一家科技公司，专注于开发新型软件。在他的领导下，公司迅速发展起来，成为了一家成功的科技企业。
 # 李明的成功并不是偶然的。他勤奋、坚韧、勇于冒险，不断学习和改进自己。他的成功也证明了，只要努力奋斗，任何人都有可能取得成功。
 
-# 第三轮对话 3rd dialogue turn
+# 3rd dialogue turn
 response, history = model.chat(tokenizer, "给这个故事起一个标题", history=history)
 print(response)
 # 《奋斗创业：一个年轻人的成功之路》
@@ -350,6 +351,7 @@ print(response.choices[0].message.content)
 <p>
 
 Function calling is also supported (but only when `stream=False` for the moment). See the [example usage](examples/function_call_examples.py) here.
+<br>
 
 ## Deployment
 
@@ -416,25 +418,21 @@ To extend the context length and break the bottleneck of training sequence lengt
         <td>+ dynamic_ntk + logn + window_attn</td><td align="center"><b>4.23</b></td><td align="center"><b>3.78</b></td><td align="center"><b>3.58</b></td><td align="center"><b>3.49</b></td><td align="center"><b>4.32</b></td>
     </tr>
 </table>
-
-<br><br>
+<br>
 
 ## Reproduction
 
 For your reproduction of the model performance on benchmark datasets, we provide scripts for you to reproduce the results. Check [eval/EVALUATION.md](eval/EVALUATION.md) for more information. Note that the reproduction may lead to slight differences from our reported results.
-
 <br>
 
 ## FAQ
 
 If you meet problems, please refer to [FAQ](FAQ.md) and the issues first to search a solution before you launch a new issue.
-
 <br>
 
 ## License Agreement
 
 Researchers and developers are free to use the codes and model weights of both Qwen-7B and Qwen-7B-Chat. We also allow their commercial use. Check our license at [LICENSE](LICENSE) for more details. If you have requirements for commercial use, please fill out the [form](https://dashscope.console.aliyun.com/openModelApply/qianwen) to apply.
-
 <br>
 
 ## Contact Us
