@@ -26,7 +26,6 @@
 5. **支持插件调用**：Qwen-7B-Chat针对插件调用相关的对齐数据做了特定优化，当前模型能有效调用插件以及升级为Agent。
 
 以下章节的信息可能对你有帮助，建议阅读。如果你在使用过程遇到问题，建议先查询FAQ，如仍无法解决再提交issue。
-
 <br>
 
 ## 新闻
@@ -60,7 +59,6 @@ Qwen-7B在多个全面评估自然语言理解与生成、数学运算解题、�
 此外，根据[OpenCompass](https://opencompass.org.cn/leaderboard-llm)进行的大型语言模型第三方评估，Qwen-7B 和 Qwen-7B-Chat 是其中表现最优的7B参数模型。该评估由大量公开基准组成，用于评估语言理解和生成、代码生成、数学、推理等。
 
 更多的实验结果和细节请查看我们的技术备忘录。点击[这里](tech_memo.md)。
-
 <br>
 
 ## 要求
@@ -115,12 +113,12 @@ model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="au
 # 可指定不同的生成长度、top_p等相关超参
 model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
-# 第一轮对话 1st dialogue turn
+# 第一轮对话
 response, history = model.chat(tokenizer, "你好", history=None)
 print(response)
 # 你好！很高兴为你提供帮助。
 
-# 第二轮对话 2nd dialogue turn
+# 第二轮对话
 response, history = model.chat(tokenizer, "给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history)
 print(response)
 # 这是一个关于一个年轻人奋斗创业最终取得成功的故事。
@@ -130,7 +128,7 @@ print(response)
 # 最终，李明成功地获得了一笔投资，开始了自己的创业之路。他成立了一家科技公司，专注于开发新型软件。在他的领导下，公司迅速发展起来，成为了一家成功的科技企业。
 # 李明的成功并不是偶然的。他勤奋、坚韧、勇于冒险，不断学习和改进自己。他的成功也证明了，只要努力奋斗，任何人都有可能取得成功。
 
-# 第三轮对话 3rd dialogue turn
+# 第三轮对话
 response, history = model.chat(tokenizer, "给这个故事起一个标题", history=history)
 print(response)
 # 《奋斗创业：一个年轻人的成功之路》
@@ -196,7 +194,6 @@ results = pipe(text, history=history)
 response, history = results['response'], results['history']
 print(f'Response: {response}')
 ```
-
 <br>
 
 ## Tokenization
@@ -356,6 +353,7 @@ print(response.choices[0].message.content)
 <p>
 
 该接口也支持函数调用（Function Calling），但暂时仅限 `stream=False` 时能生效。用法见[函数调用示例](examples/function_call_examples.py)。
+<br>
 
 ## 部署
 
@@ -424,25 +422,21 @@ For how to write and use prompts for ReAct Prompting, please refer to [the ReAct
         <td>+ dynamic_ntk + logn + local_attn</td><td align="center"><b>4.23</b></td><td align="center"><b>3.78</b></td><td align="center"><b>3.58</b></td><td align="center"><b>3.49</b></td><td align="center"><b>4.32</b></td>
     </tr>
 </table>
-
 <br>
 
 ## 复现
 
 我们提供了评测脚本以供复现我们的实验结果。注意，由于内部代码和开源代码存在少许差异，评测结果可能与汇报结果存在细微的结果不一致。请阅读[eval/EVALUATION.md](eval/EVALUATION.md)了解更多信息。
-
 <br>
 
 ## FAQ
 
 如遇到问题，敬请查阅[FAQ](FAQ_zh.md)以及issue区，如仍无法解决再提交issue。
-
 <br>
 
 ## 使用协议
 
 研究人员与开发者可使用Qwen-7B和Qwen-7B-Chat或进行二次开发。我们同样允许商业使用，具体细节请查看[LICENSE](LICENSE)。如需商用，请填写[问卷](https://dashscope.console.aliyun.com/openModelApply/qianwen)申请。
-
 <br>
 
 ## 联系我们
