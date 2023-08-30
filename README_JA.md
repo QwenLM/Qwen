@@ -239,10 +239,10 @@ response, history = model.chat(tokenizer, "Hi", history=None, generation_config=
 
 ベンチマークにおける BF16 モデルと Int4 モデルの性能について説明します。その結果は以下に示します：
 
-| Quantization | MMLU | CEval (val) | GSM8K | Humaneval |
-| -------------- | :----: | :-----------: | :-----: | :---------: |
-| BF16         | 53.9 |    54.2    | 41.1 |   24.4   |
-| Int4         | 52.6 |    52.9    | 38.1 |   23.8   |
+|  Quantization |   MMLU     |  CEval (val) |  GSM8K |  Humaneval |
+| ------------- | :--------: | :----------: | :----: | :--------: |
+| BF16          |    53.9    |     54.2     |  41.1  |    24.4    |
+| Int4          |    52.6    |     52.9     |  38.1  |    23.8    |
 
 ### 推論スピード
 
