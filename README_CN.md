@@ -209,28 +209,24 @@ print(f'Response: {response}')
 
 **请注意：我们更新量化方案为基于[AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ)的量化，提供Qwen-7B-Chat的Int4量化模型[点击这里](https://huggingface.co/Qwen/Qwen-7B-Chat-Int4)。相比此前方案，该方案在模型评测效果几乎无损，且存储需求更低，推理速度更优。**
 
-以下我们提供示例说明如何使用Int4量化模型。在开始使用前，请先保证满足AutoGPTQ的要求，并使用源代码安装（由于最新支持Qwen的代码未发布到PyPI）：
+以下我们提供示例说明如何使用Int4量化模型。在开始使用前，请先保证满足要求（如torch 2.0及以上，transformers版本为4.32.0及以上，等等），并安装所需安装包：
 
 ```bash
-git clone https://github.com/PanQiWei/AutoGPTQ.git && cd AutoGPTQ
-pip install .
+pip install auto-gptq optimum
 ```
 
-随后便能轻松读取量化模型：
+如安装`auto-gptq`遇到问题，我们建议您到官方[repo](https://github.com/PanQiWei/AutoGPTQ)搜索合适的wheel。
+
+随后即可使用和上述一致的用法调用量化模型：
 
 ```python
-from auto_gptq import AutoGPTQForCausalLM
-model = AutoGPTQForCausalLM.from_quantized("Qwen/Qwen-7B-Chat-Int4", device_map="auto", trust_remote_code=True, use_safetensors=True).eval()
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen-7B-Chat-Int4",
+    device_map="auto",
+    trust_remote_code=True
+).eval()
+response, history = model.chat(tokenizer, "Hi", history=None)
 ```
-
-推理方法和基础用法类似，但注意需要从外部传入generation config：
-
-```python
-from transformers import GenerationConfig
-config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat-Int4", trust_remote_code=True)
-response, history = model.chat(tokenizer, "Hi", history=None, generation_config=config)
-```
-
 ### 效果评测
 
 我们对BF16和Int4模型在基准评测上做了测试，发现量化模型效果损失较小，结果如下所示：

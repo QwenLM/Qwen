@@ -37,7 +37,7 @@ Qwen-7B は、アリババクラウドが提唱する大規模言語モデルシ
 
 * 2023.8.21 Qwen-7B-Chat 用 Int4 量子化モデル **Qwen-7B-Chat-Int4** をリリースしました。また、ベンチマーク評価においても大きな性能低下は見られませんでした。
 * 2023.8.3 ModelScope と Hugging Face 上で **Qwen-7B** と **Qwen-7B-Chat** をリリースしました。また、トレーニングの詳細やモデルの性能など、モデルの詳細については技術メモを提供しています。
-<br>
+  <br>
 
 ## 性能
 
@@ -71,7 +71,7 @@ Qwen-7B は、MMLU、C-Eval、GSM8K、HumanEval、WMT22、CMMLU など、自然�
 * python 3.8 以上
 * pytorch 1.12 以上、2.0 以上を推奨
 * CUDA 11.4 以上を推奨（GPU ユーザー、フラッシュアテンションユーザー向けなど）
-<br>
+  <br>
 
 ## クイックスタート
 
@@ -212,26 +212,23 @@ tiktoken に基づくトークナイザーは、他のトークナイザー、�
 
 **注: [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ) に基づく新しい解決策を提供し、Qwen-7B-Chat 用の Int4 量子化モデル[ここをクリック](https://huggingface.co/Qwen/Qwen-7B-Chat-Int4)をリリースしました。このモデルは、従来の解決策と比較して、ほぼ無損失のモデル効果を達成しつつ、メモリコストと推論速度の両方で性能が向上しています。**
 
-ここでは、量子化されたモデルを推論に使用する方法を示します。始める前に、AutoGPTQ の要件を満たしていることを確認し、ソースからインストールしてください（一時的に Qwen のコードは最新版の PyPI パッケージではまだリリースされていません）:
+ここでは、量子化されたモデルを推論に使用する方法を説明する。始める前に、auto-gptqの要件を満たしていることを確認し（例：torch 2.0以上、transformers 4.32.0以上など）、必要なパッケージをインストールしてください：
 
 ```bash
-git clone https://github.com/PanQiWei/AutoGPTQ.git && cd AutoGPTQ
-pip install .
+pip install auto-gptq optimum
 ```
 
-そうすれば、以下のように簡単に量子化モデルを読み込むことができます:
+auto-gptq`のインストールに問題がある場合は、公式の[repo](https://github.com/PanQiWei/AutoGPTQ)をチェックして、ホイールを見つけることをお勧めする。
+
+そうすれば、量子化されたモデルを簡単にロードすることができ、いつもと同じように推論を実行することができる：
 
 ```python
-from auto_gptq import AutoGPTQForCausalLM
-model = AutoGPTQForCausalLM.from_quantized("Qwen/Qwen-7B-Chat-Int4", device_map="auto", trust_remote_code=True, use_safetensors=True).eval()
-```
-
-推論を実行するには、上で示した基本的な使い方に似ていますが、generation configuration を明示的に渡すことを忘れないで下さい:
-
-```python
-from transformers import GenerationConfig
-config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat-Int4", trust_remote_code=True)
-response, history = model.chat(tokenizer, "Hi", history=None, generation_config=config)
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen-7B-Chat-Int4",
+    device_map="auto",
+    trust_remote_code=True
+).eval()
+response, history = model.chat(tokenizer, "Hi", history=None)
 ```
 
 ### 性能

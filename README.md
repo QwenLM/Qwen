@@ -66,7 +66,7 @@ For more experimental results (detailed model performance on more benchmark data
 * python 3.8 and above
 * pytorch 1.12 and above, 2.0 and above are recommended
 * CUDA 11.4 and above are recommended (this is for GPU users, flash-attention users, etc.)
-  <br>
+<br>
 
 ## Quickstart
 
@@ -108,10 +108,14 @@ tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code
 # use cpu only
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
 # use auto mode, automatically select precision based on the device.
-model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True).eval()
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen-7B-Chat",
+    device_map="auto",
+    trust_remote_code=True
+).eval()
 
-# Specify hyperparameters for generation
-model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
+# Specify hyperparameters for generation. But if you use transformers>=4.32.0, there is no need to do this.
+# model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
 # 1st dialogue turn
 response, history = model.chat(tokenizer, "你好", history=None)
@@ -151,10 +155,14 @@ tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True
 # use cpu only
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="cpu", trust_remote_code=True).eval()
 # use auto mode, automatically select precision based on the device.
-model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True).eval()
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen-7B",
+    device_map="auto",
+    trust_remote_code=True
+).eval()
 
-# Specify hyperparameters for generation
-model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
+# Specify hyperparameters for generation. But if you use transformers>=4.32.0, there is no need to do this.
+# model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
 
 inputs = tokenizer('蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是', return_tensors='pt')
 inputs = inputs.to(model.device)
@@ -193,7 +201,6 @@ results = pipe(text, history=history)
 response, history = results['response'], results['history']
 print(f'Response: {response}')
 ```
-
 <br>
 
 ## Tokenizer
@@ -207,28 +214,24 @@ Our tokenizer based on tiktoken is different from other tokenizers, e.g., senten
 
 **Note: we provide a new solution based on [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ), and release an Int4 quantized model for Qwen-7B-Chat [Click here](https://huggingface.co/Qwen/Qwen-7B-Chat-Int4), which achieves nearly lossless model effects but improved performance on both memory costs and inference speed, in comparison with the previous solution.**
 
-Here we demonstrate how to use our provided quantized models for inference. Before you start, make sure you meet the requirements of AutoGPTQ and install it from source (temporarily the codes for Qwen are not yet released in the latest version of PyPI package):
+Here we demonstrate how to use our provided quantized models for inference. Before you start, make sure you meet the requirements of auto-gptq (e.g., torch 2.0 and above, transformers 4.32.0 and above, etc.) and install the required packages:
 
 ```bash
-git clone https://github.com/PanQiWei/AutoGPTQ.git && cd AutoGPTQ
-pip install .
+pip install auto-gptq optimum
 ```
 
-Then you can load the quantized model easily as shown below:
+If you meet problems installing `auto-gptq`, we advise you to check out the official [repo](https://github.com/PanQiWei/AutoGPTQ) to find a wheel.
+
+Then you can load the quantized model easily and run inference as same as usual:
 
 ```python
-from auto_gptq import AutoGPTQForCausalLM
-model = AutoGPTQForCausalLM.from_quantized("Qwen/Qwen-7B-Chat-Int4", device_map="auto", trust_remote_code=True, use_safetensors=True).eval()
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen-7B-Chat-Int4",
+    device_map="auto",
+    trust_remote_code=True
+).eval()
+response, history = model.chat(tokenizer, "Hi", history=None)
 ```
-
-To run inference, it is similar to the basic usage demonstrated above, but remember to pass in the generation configuration explicitly:
-
-```python
-from transformers import GenerationConfig
-config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat-Int4", trust_remote_code=True)
-response, history = model.chat(tokenizer, "Hi", history=None, generation_config=config)
-```
-
 ### Performance
 
 We illustrate the model performance of both BF16 and Int4 models on the benchmark, and we find that the quantized model does not suffer from significant performance degradation. Results are shown below:
