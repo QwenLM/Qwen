@@ -129,7 +129,7 @@ def trim_stop_words(response, stop_words):
 
 TOOL_DESC = """{name_for_model}: Call this tool to interact with the {name_for_human} API. What is the {name_for_human} API useful for? {description_for_model} Parameters: {parameters}"""
 
-REACT_INSTRUCTION = """Answer the following questions as best you can. You have acesss to the following APIs:
+REACT_INSTRUCTION = """Answer the following questions as best you can. You have access to the following APIs:
 
 {tools_text}
 
@@ -459,7 +459,11 @@ def _get_args():
         "--server-port", type=int, default=8000, help="Demo server port."
     )
     parser.add_argument(
-        "--server-name", type=str, default="127.0.0.1", help="Demo server name."
+        "--server-name",
+        type=str,
+        default="127.0.0.1",
+        help="Demo server name. Default: 127.0.0.1, which is only visible from the local computer."
+        " If you want other computers to access your server, use 0.0.0.0 instead.",
     )
 
     args = parser.parse_args()
