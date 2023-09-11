@@ -26,10 +26,11 @@ Qwen-7B is the 7B-parameter version of the large language model series, Qwen (ab
 5. **Support of Plugins**. Qwen-7B-Chat is trained with plugin-related alignment data, and thus it is capable of using tools, including APIs, models, databases, etc., and it is capable of playing as an agent.
 
 The following sections include information that you might find it helpful. Specifically, we advise you to read the FAQ section before you launch issues.
-<br>
+<br><br>
 
 ## News and Updates
 
+* 2023.9.12 We now support finetuning on the Qwen-7B models, including full-parameter finetuning, LoRA and Q-LoRA.
 * 2023.8.21 We release the Int4 quantized model for Qwen-7B-Chat, **Qwen-7B-Chat-Int4**, which requires low memory costs but achieves improved inference speed. Besides, there is no significant performance degradation on the benchmark evaluation.
 * 2023.8.3 We release both **Qwen-7B** and **Qwen-7B-Chat** on ModelScope and Hugging Face. We also provide a technical memo for more details about the model, including training details and model performance.
 <br>
@@ -59,7 +60,7 @@ In general, Qwen-7B outperforms the baseline models of a similar model size, and
 Additionally, according to the third-party evaluation of large language models, conducted by [OpenCompass](https://opencompass.org.cn/leaderboard-llm), Qwen-7B and Qwen-7B-Chat are the top 7B-parameter models. This evaluation consists of a large amount of public benchmarks for the evaluation of language understanding and generation, coding, mathematics, reasoning, etc.
 
 For more experimental results (detailed model performance on more benchmark datasets) and details, please refer to our technical memo by clicking [here](tech_memo.md).
-<br>
+<br><br>
 
 ## Requirements
 
@@ -207,7 +208,7 @@ print(f'Response: {response}')
 ## Tokenizer
 
 Our tokenizer based on tiktoken is different from other tokenizers, e.g., sentencepiece tokenizer. You need to pay attention to special tokens, especially in finetuning. For more detailed information on the tokenizer and related use in fine-tuning, please refer to the [documentation](tokenization_note.md).
-<br>
+<br><br>
 
 ## Quantization
 
@@ -263,7 +264,7 @@ We also profile the peak GPU memory usage for encoding 2048 tokens as context (a
 | Int4         |               8.21GB                |                13.62GB                |
 
 The above speed and memory profiling are conducted using [this script](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py).
-<br>
+<br><br>
 
 ## Finetuning
 
@@ -337,7 +338,7 @@ model = AutoPeftModelForCausalLM.from_pretrained(
 ```
 
 The shell scripts uses `torchrun` to run single-GPU or multi-GPU training. For multi-GPU training, you need to specify the proper hyperparameters for distributed training based on your machine. 
-
+<br><br>
 
 ## Demo
 
@@ -374,6 +375,7 @@ python cli_demo.py
     <img src="assets/cli_demo.gif" width="600" />
     <br>
 <p>
+<br>
 
 ## API
 
@@ -429,7 +431,7 @@ print(response.choices[0].message.content)
 <p>
 
 Function calling is also supported (but only when `stream=False` for the moment). See the [example usage](examples/function_call_examples.py) here.
-<br>
+<br><br>
 
 ## Deployment
 
@@ -447,7 +449,7 @@ model = load_model_on_gpus('Qwen/Qwen-7B-Chat', num_gpus=2)
 ```
 
 Then you can run the 7B chat model on 2 GPUs using the above scripts.
-<br>
+<br><br>
 
 ## Tool Usage
 
@@ -501,17 +503,17 @@ To extend the context length and break the bottleneck of training sequence lengt
 ## Reproduction
 
 For your reproduction of the model performance on benchmark datasets, we provide scripts for you to reproduce the results. Check [eval/EVALUATION.md](eval/EVALUATION.md) for more information. Note that the reproduction may lead to slight differences from our reported results.
-<br>
+<br><br>
 
 ## FAQ
 
 If you meet problems, please refer to [FAQ](FAQ.md) and the issues first to search a solution before you launch a new issue.
-<br>
+<br><br>
 
 ## License Agreement
 
 Researchers and developers are free to use the codes and model weights of both Qwen-7B and Qwen-7B-Chat. We also allow their commercial use. Check our license at [LICENSE](LICENSE) for more details. If you have requirements for commercial use, please fill out the [form](https://dashscope.console.aliyun.com/openModelApply/qianwen) to apply.
-<br>
+<br><br>
 
 ## Contact Us
 

@@ -31,13 +31,14 @@ Qwen-7B は、アリババクラウドが提唱する大規模言語モデルシ
 5. **プラグインのサポート**。Qwen-7B-Chat は、プラグイン関連のアライメントデータでトレーニングされているため、API、モデル、データベースなどのツールを使用することができ、エージェントとしてプレイすることができる。
 
 以下のセクションには、参考になる情報が記載されています。特に、issue を立ち上げる前に FAQ セクションをお読みになることをお勧めします。
-<br>
+<br><br>
 
 ## ニュースとアップデート
 
+* 2023.9.12 Qwen-7Bモデルにおいて、フルパラメーター・ファインチューニング、LoRA、Q-LoRAを含むファインチューニングをサポートしました。
 * 2023.8.21 Qwen-7B-Chat 用 Int4 量子化モデル **Qwen-7B-Chat-Int4** をリリースしました。また、ベンチマーク評価においても大きな性能低下は見られませんでした。
 * 2023.8.3 ModelScope と Hugging Face 上で **Qwen-7B** と **Qwen-7B-Chat** をリリースしました。また、トレーニングの詳細やモデルの性能など、モデルの詳細については技術メモを提供しています。
-  <br>
+<br>
 
 ## 性能
 
@@ -64,14 +65,14 @@ Qwen-7B は、MMLU、C-Eval、GSM8K、HumanEval、WMT22、CMMLU など、自然�
 さらに、[OpenCompass](https://opencompass.org.cn/leaderboard-llm) が実施した大規模言語モデルの第三者評価によると、Qwen-7B と Qwen-7B-Chat は 7B パラメータモデルのトップになります。この評価は、言語理解・生成、コーディング、数学、推論などの評価のための大量の公開ベンチマークで構成されています。
 
 より詳細な実験結果（より多くのベンチマークデータセットでの詳細なモデル性能）や詳細については、[こちら](tech_memo.md)をクリックして技術メモを参照してください。
-<br>
+<br><br>
 
 ## 必要条件
 
 * python 3.8 以上
 * pytorch 1.12 以上、2.0 以上を推奨
 * CUDA 11.4 以上を推奨（GPU ユーザー、フラッシュアテンションユーザー向けなど）
-  <br>
+<br>
 
 ## クイックスタート
 
@@ -198,13 +199,12 @@ results = pipe(text, history=history)
 response, history = results['response'], results['history']
 print(f'Response: {response}')
 ```
-
 <br>
 
 ## トークナイザー
 
 tiktoken に基づくトークナイザーは、他のトークナイザー、例えばセンテンスピーストークナイザーとは異なります。特にファインチューニングの際には、特殊なトークンに注意を払う必要があります。トークナイザに関する詳細な情報や、ファインチューニングにおける使用方法については、[ドキュメント](tokenization_note_ja.md)を参照してください。
-<br>
+<br><br>
 
 ## 量子化
 
@@ -261,7 +261,7 @@ BF16 の精度と Int4 の量子化レベルの下で、それぞれ 2048 個と
 | Int4               |               8.21GB                |                13.62GB                |
 
 上記のスピードとメモリーのプロファイリングは、[このスクリプト](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)を使用しています。
-<br>
+<br><br>
 
 ## ファインチューニング
 
@@ -336,6 +336,7 @@ model = AutoPeftModelForCausalLM.from_pretrained(
 ```
 
 シェルスクリプトは`torchrun`を使用してシングルGPUまたはマルチGPUトレーニングを実行します。そのため、分散トレーニングのための適切なハイパーパラメータをマシンに応じて指定する必要があります。
+<br><br>
 
 ## デモ
 
@@ -372,6 +373,7 @@ python cli_demo.py
     <img src="assets/cli_demo.gif" width="600" />
     <br>
 <p>
+<br>
 
 ## API
 
@@ -425,6 +427,7 @@ print(response.choices[0].message.content)
     <img src="assets/openai_api.gif" width="600" />
     <br>
 <p>
+<br>
 
 ## デプロイ
 
@@ -496,17 +499,17 @@ ReAct プロンプトの書き方や使い方については、[ReAct の例](ex
 ## 再現
 
 ベンチマークデータセットでのモデル性能の再現のために、結果を再現するスクリプトを提供しています。詳しくは [eval/EVALUATION.md](eval/EVALUATION.md) を確認してください。なお、再現の結果、我々の報告結果と若干異なる場合があります。
-<br>
+<br><br>
 
 ## FAQ
 
 問題が発生した場合は、まずは [FAQ](FAQ_ja.md) や issue を参照し、新しい issue を立ち上げる前に解決策を探してください。
-<br>
+<br><br>
 
 ## ライセンス契約
 
 Qwen-7B と Qwen-7B-Chat のコードとモデルウェイトは、研究者や開発者が自由に使用することができます。また、商用利用も可能です。詳しくは [LICENSE](LICENSE) をご覧ください。商用利用を希望される方は、[リクエストフォーム](https://dashscope.console.aliyun.com/openModelApply/qianwen)に必要事項をご記入の上、お申し込みください。
-<br>
+<br><br>
 
 ## お問い合わせ
 
