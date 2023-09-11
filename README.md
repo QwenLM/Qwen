@@ -38,18 +38,18 @@ The following sections include information that you might find it helpful. Speci
 
 In general, Qwen-7B outperforms the baseline models of a similar model size, and even outperforms larger models of around 13B parameters, on a series of benchmark datasets, e.g., MMLU, C-Eval, GSM8K, HumanEval, and WMT22, CMMLU, etc., which evaluate the models' capabilities on natural language understanding, mathematic problem solving, coding, etc. See the results below.
 
-| Model        |   MMLU   |  C-Eval  |  GSM8K  | HumanEval | WMT22 (en-zh) |  CMMLU  |
-| :------------- | :--------: | :--------: | :--------: | :---------: | :-------------: | :--------: |
-| LLaMA-7B     |   35.1   |    -    |   11.0   |   10.5   |      8.7      |    -    |
-| LLaMA 2-7B   |   45.3   |    -    |   14.6   |   12.8   |     17.9     |    -    |
-| Baichuan-7B  |   42.3   |   42.8   |   9.7   |    9.2    |     26.6     |   44.4   |
-| ChatGLM2-6B  |   47.9   |   51.7   |   32.4   |    9.2    |       -       |   48.8   |
-| InternLM-7B  |   51.0   |   52.8   |   31.2   |   10.4   |     14.8     |    -    |
-| Baichuan-13B |   51.6   |   53.6   |   26.6   |   12.8   |     30.0     |   55.8   |
-| LLaMA-13B    |   46.9   |   35.5   |   17.8   |   15.8   |     12.0     |    -    |
-| LLaMA 2-13B  |   54.8   |    -    |   28.7   |   18.3   |     24.2     |    -    |
-| ChatGLM2-12B |   56.2   | **61.6** |   40.9   |     -     |       -       |    -    |
-| **Qwen-7B**  | **56.7** |   59.6   | **51.6** | **24.4** |   **30.6**   | **58.8** |
+| Model             |   MMLU   |  C-Eval  |  GSM8K   | HumanEval | WMT22 (en-zh) |  CMMLU   |
+|:------------------|:--------:|:--------:|:--------:|:---------:|:-------------:|:--------:|
+| LLaMA-7B          |   35.1   |    -     |   11.0   |   10.5    |      8.7      |    -     |
+| LLaMA 2-7B        |   45.3   |    -     |   14.6   |   12.8    |     17.9      |    -     |
+| Baichuan-7B       |   42.3   |   42.8   |   9.7    |    9.2    |     26.6      |   44.4   |
+| ChatGLM2-6B       |   47.9   |   51.7   |   32.4   |    9.2    |       -       |   48.8   |
+| InternLM-7B       |   51.0   |   52.8   |   31.2   |   10.4    |     14.8      |    -     |
+| Baichuan-13B      |   51.6   |   53.6   |   26.6   |   12.8    |     30.0      |   55.8   |
+| LLaMA-13B         |   46.9   |   35.5   |   17.8   |   15.8    |     12.0      |    -     |
+| LLaMA 2-13B       |   54.8   |    -     |   28.7   |   18.3    |     24.2      |    -     |
+| ChatGLM2-12B      |   56.2   | **61.6** |   40.9   |     -     |       -       |    -     |
+| **Qwen-7B**       | **56.7** |   59.6   | **51.6** | **24.4**  |   **30.6**    | **58.8** |
 
 <p align="center">
     <img src="assets/performance.png" width="1000"/>
@@ -65,6 +65,7 @@ For more experimental results (detailed model performance on more benchmark data
 
 * python 3.8 and above
 * pytorch 1.12 and above, 2.0 and above are recommended
+* transformers 4.32 and above
 * CUDA 11.4 and above are recommended (this is for GPU users, flash-attention users, etc.)
 <br>
 
@@ -237,16 +238,16 @@ response, history = model.chat(tokenizer, "Hi", history=None)
 We illustrate the model performance of both BF16 and Int4 models on the benchmark, and we find that the quantized model does not suffer from significant performance degradation. Results are shown below:
 
 | Quantization | MMLU | CEval (val) | GSM8K | Humaneval |
-| -------------- | :----: | :-----------: | :-----: | :---------: |
-| BF16         | 53.9 |    54.2    | 41.1 |   24.4   |
-| Int4         | 52.6 |    52.9    | 38.1 |   23.8   |
+|--------------|:----:|:-----------:|:-----:|:---------:|
+| BF16         | 53.9 |    54.2     | 41.1  |   24.4    |
+| Int4         | 52.6 |    52.9     | 38.1  |   23.8    |
 
 ### Inference Speed
 
 We measured the average inference speed (tokens/s) of generating 2048 and 8192 tokens under BF16 precision and Int4 quantization, respectively.
 
 | Quantization | Speed (2048 tokens) | Speed (8192 tokens) |
-| -------------- | :-------------------: | :-------------------: |
+|--------------|:-------------------:|:-------------------:|
 | BF16         |        30.34        |        29.32        |
 | Int4         |        43.56        |        33.92        |
 
@@ -257,12 +258,86 @@ In detail, the setting of profiling is generating 8192 new tokens with 1 context
 We also profile the peak GPU memory usage for encoding 2048 tokens as context (and generating single token) and generating 8192 tokens (with single token as context) under BF16 or Int4 quantization level, respectively. The results are shown below.
 
 | Quantization | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
-| -------------- | :-----------------------------------: | :-------------------------------------: |
+|--------------|:-----------------------------------:|:-------------------------------------:|
 | BF16         |               17.66GB               |                22.58GB                |
 | Int4         |               8.21GB                |                13.62GB                |
 
 The above speed and memory profiling are conducted using [this script](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py).
 <br>
+
+## Finetuning
+
+Now we provide the official training script, `finetune.py`, for users to finetune the pretrained model for downstream applications in a simple fashion. Additionally, we provide shell scripts to launch finetuning with no worries. This script supports the training with [DeepSpeed](https://github.com/microsoft/DeepSpeed) and [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/). The shell scripts that we provide use DeepSpeed, and thus we advise you to install DeepSpeed before you start.
+
+To prepare your training data, you need to put all the samples into a list and save it to a json file. Each sample is a dictionary consisting of an id and a list for conversation. Below is a simple example list with 1 sample:
+```json
+[
+  {
+    "id": "identity_0",
+    "conversations": [
+      {
+        "from": "user",
+        "value": "你好",
+      },
+      {
+        "from": "assistant",
+        "value": "我是一个语言模型，我叫通义千问。"
+      }
+    ]
+  }
+]
+```
+
+After data preparation, you can use the provided shell scripts to run finetuning. Remember to specify the path to the data file, `$DATA`.
+
+The finetuning scripts allow you to perform:
+- Full-parameter finetuning
+- LoRA
+- Q-LoRA
+
+Full-parameter parameter finetuning requires updating all parameters in the whole training process. To launch your training, run the following script:
+
+```bash
+# Distributed training. We do not provide single-GPU training script as the insufficient GPU memory will break down the training.
+sh finetune/finetune_ds.sh
+```
+
+Remember to specify the correct model name or path, the data path, as well as the output directory in the shell scripts. Another thing to notice is that we use DeepSpeed ZeRO 3 in this script. If you want to make changes, just remove the argument `--deepspeed` or make changes in the DeepSpeed configuration json file based on your requirements. Additionally, this script supports mixed-precision training, and thus you can use `--bf16 True` or `--fp16 True`. Empirically we advise you to use bf16 to make your training consistent with our pretraining and alignment if your machine supports bf16, and thus we use it by default.
+
+Similarly, to run LoRA, use another script to run as shown below. Before you start, make sure that you have installed `peft`. Also, you need to specify your paths to your model, data, and output. We advise you to use absolute path for your pretrained model. This is because LoRA only saves the adapter and the absolute path in the adapter configuration json file is used for finding out the pretrained model to load. Also, this script support both bf16 and fp16.
+
+```bash
+# Single GPU training
+sh finetune/finetune_lora_single_gpu.sh
+# Distributed training
+sh finetune/finetune_lora_ds.sh
+```
+
+In comparison with full-parameter finetuning, LoRA ([paper](https://arxiv.org/abs/2106.09685)) only updates the parameters of adapter layers but keeps the original large language model layers frozen. This allows much fewer memory costs and thus fewer computation costs. However, if you still suffer from insufficient memory, you can consider Q-LoRA ([paper](https://arxiv.org/abs/2305.14314)), which uses the quantized large language model and other techniques such as paged attention to allow even fewer memory costs. To run Q-LoRA, directly run the following script:
+
+```bash
+# Single GPU training
+sh finetune/finetune_qlora_single_gpu.sh
+# Distributed training
+sh finetune/finetune_qlora_ds.sh
+```
+
+For Q-LoRA, we advise you to load our provided quantized model, e.g., Qwen-7B-Chat-Int4. However, different from full-parameter finetuning and LoRA, only fp16 is supported for Q-LoRA.
+
+Different from full-parameter finetuning, the training of both LoRA and Q-LoRA only saves the adapter parameters. Suppose your training starts from Qwen-7B, you can load the finetuned model for inference as shown below:
+
+```python
+from peft import AutoPeftModelForCausalLM
+
+model = AutoPeftModelForCausalLM.from_pretrained(
+    path_to_adapter, # path to the output directory
+    device_map="auto",
+    trust_remote_code=True
+).eval()
+```
+
+The shell scripts uses `torchrun` to run single-GPU or multi-GPU training. For multi-GPU training, you need to specify the proper hyperparameters for distributed training based on your machine. 
+
 
 ## Demo
 
@@ -379,21 +454,21 @@ Then you can run the 7B chat model on 2 GPUs using the above scripts.
 Qwen-7B-Chat is specifically optimized for tool usage, including API, database, models, etc., so that users can build their own Qwen-7B-based LangChain, Agent, and Code Interpreter. In our evaluation [benchmark](eval/EVALUATION.md) for assessing tool usage capabilities, we find that Qwen-7B reaches stable performance.
 
 | Model            | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑) | False Positive Error↓ |
-|:-----------------| :-----------------------: | :----------------------: | :----------------------: |
-| GPT-4            |           95%           |        **0.90**        |          15%          |
-| GPT-3.5          |           85%           |          0.88          |          75%          |
-| **Qwen-7B-Chat** |         **99%**         |          0.89          |        **9.7%**        |
+|:-----------------|:----------------------:|:---------------------:|:---------------------:|
+| GPT-4            |          95%           |       **0.90**        |          15%          |
+| GPT-3.5          |          85%           |         0.88          |          75%          |
+| **Qwen-7B-Chat** |        **99%**         |         0.89          |       **9.7%**        |
 
 For how to write and use prompts for ReAct Prompting, please refer to [the ReAct examples](examples/react_prompt.md). The use of tools can enable the model to better perform tasks.
 
 Additionally, we provide experimental results to show its capabilities of playing as an agent. See [Hugging Face Agent](https://huggingface.co/docs/transformers/transformers_agents) for more information. Its performance on the run-mode benchmark provided by Hugging Face is as follows:
 
-| Model            | Tool Selection↑ | Tool Used↑ |  Code↑  |
-|:-----------------| :----------------: | :-----------: | :---------: |
-| GPT-4            |     **100**     |   **100**   | **97.41** |
-| GPT-3.5          |      95.37      |    96.30    |   87.04   |
-| StarCoder-15.5B  |      87.04      |    87.96    |   68.89   |
-| **Qwen-7B-Chat** |      90.74      |    92.59    |   74.07   |
+| Model            | Tool Selection↑ | Tool Used↑ |   Code↑   |
+|:-----------------|:---------------:|:----------:|:---------:|
+| GPT-4            |     **100**     |  **100**   | **97.41** |
+| GPT-3.5          |      95.37      |   96.30    |   87.04   |
+| StarCoder-15.5B  |      87.04      |   87.96    |   68.89   |
+| **Qwen-7B-Chat** |      90.74      |   92.59    |   74.07   |
 
 <br>
 
