@@ -38,7 +38,7 @@ The following sections include information that you might find it helpful. Speci
 
 In general, Qwen-7B outperforms the baseline models of a similar model size, and even outperforms larger models of around 13B parameters, on a series of benchmark datasets, e.g., MMLU, C-Eval, GSM8K, HumanEval, and WMT22, CMMLU, etc., which evaluate the models' capabilities on natural language understanding, mathematic problem solving, coding, etc. See the results below.
 
-Ω| Model             |   MMLU   |  C-Eval  |  GSM8K   | HumanEval | WMT22 (en-zh) |  CMMLU   |
+| Model             |   MMLU   |  C-Eval  |  GSM8K   | HumanEval | WMT22 (en-zh) |  CMMLU   |
 |:------------------|:--------:|:--------:|:--------:|:---------:|:-------------:|:--------:|
 | LLaMA-7B          |   35.1   |    -     |   11.0   |   10.5    |      8.7      |    -     |
 | LLaMA 2-7B        |   45.3   |    -     |   14.6   |   12.8    |     17.9      |    -     |
