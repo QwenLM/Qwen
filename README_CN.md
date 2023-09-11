@@ -259,19 +259,94 @@ response, history = model.chat(tokenizer, "Hi", history=None)
 上述性能测算使用[此脚本](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)完成。
 <br>
 
+
+## 微调
+
+我们提供了`finetune.py`这个脚本供用户实现在自己的数据上进行微调的功能，以接入下游任务。此外，我们还提供了shell脚本减少用户的工作量。这个脚本支持 [DeepSpeed](https://github.com/microsoft/DeepSpeed) 和 [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/) 。我们提供的shell脚本使用了DeepSpeed，因此建议您确保已经安装DeepSpeed。
+
+首先，你需要准备你的训练数据。你需要将所有样本放到一个列表中并存入json文件中。每个样本对应一个字典，包含id和conversation，其中后者为一个列表。示例如下所示：
+```json
+[
+  {
+    "id": "identity_0",
+    "conversations": [
+      {
+        "from": "user",
+        "value": "你好",
+      },
+      {
+        "from": "assistant",
+        "value": "我是一个语言模型，我叫通义千问。"
+      }
+    ]
+  }
+]
+```
+
+准备好数据后，你可以使用我们提供的shell脚本实现微调。注意，你需要在脚本中指定你的数据的路径。
+
+微调脚本能够帮你实现：
+- 全参数微调
+- LoRA
+- Q-LoRA
+
+全参数微调在训练过程中更新所有参数。你可以运行这个脚本开始训练：
+
+```bash
+# 分布式训练。由于显存限制将导致单卡训练失败，我们不提供单卡训练脚本。
+sh finetune/finetune_ds.sh
+```
+
+尤其注意，你需要在脚本中指定正确的模型名称或路径、数据路径、以及模型输出的文件夹路径。在这个脚本中我们使用了DeepSpeed ZeRO 3。如果你想修改这个配置，可以删除掉`--deepspeed`这个输入或者自行根据需求修改DeepSpeed配置json文件。此外，我们支持混合精度训练，因此你可以设置`--bf16 True`或者`--fp16 True`。经验上，如果你的机器支持bf16，我们建议使用bf16，这样可以和我们的预训练和对齐训练保持一致，这也是为什么我们把默认配置设为它的原因。
+
+运行LoRA的方法类似全参数微调。但在开始前，请确保已经安装`peft`代码库。另外，记住要设置正确的模型、数据和输出路径。我们建议你为模型路径使用绝对路径。这是因为LoRA仅存储adapter部分参数，而adapter配置json文件记录了预训练模型的路径，用于读取预训练模型权重。同样，你可以设置bf16或者fp16。
+
+```bash
+# 单卡训练
+sh finetune/finetune_lora_single_gpu.sh
+# 分布式训练
+sh finetune/finetune_lora_ds.sh
+```
+
+与全参数微调不同，LoRA ([论文](https://arxiv.org/abs/2106.09685)) 只更新adapter层的参数而无需更新原有语言模型的参数。这种方法允许用户用更低的显存开销来训练模型，也意味着更小的计算开销。然而，如果你依然遇到显存不足的问题，可以考虑使用Q-LoRA ([论文](https://arxiv.org/abs/2305.14314))。该方法使用4比特量化模型以及paged attention等技术实现更小的显存开销。运行Q-LoRA你只需运行如下脚本：
+
+```bash
+# 单卡训练
+sh finetune/finetune_qlora_single_gpu.sh
+# 分布式训练
+sh finetune/finetune_qlora_ds.sh
+```
+
+我们建议你使用我们提供的Int4量化模型进行训练，即Qwen-7B-Chat-Int4。然而，与全参数微调以及LoRA不同，Q-LoRA仅支持fp16。
+
+与全参数微调不同，LoRA和Q-LoRA的训练只需存储adapter部分的参数。假如你需要使用LoRA训练后的模型，你需要使用如下方法。假设你使用Qwen-7B训练模型，你可以用如下代码读取模型：
+
+```python
+from peft import AutoPeftModelForCausalLM
+
+model = AutoPeftModelForCausalLM.from_pretrained(
+    path_to_adapter, # path to the output directory
+    device_map="auto",
+    trust_remote_code=True
+).eval()
+```
+
+上述shell脚本使用`torchrun`来运行单GPU和多GPU训练。分布式训练需要根据你的需求和机器指定正确的分布式训练超参数。
+
+
 ## Demo
 
 ### Web UI
 
 我们提供了Web UI的demo供用户使用 (感谢 @wysaid 支持)。在开始前，确保已经安装如下代码库：
 
-```
+```bash
 pip install -r requirements_web_demo.txt
 ```
 
 随后运行如下命令，并点击生成链接：
 
-```
+```bash
 python web_demo.py
 ```
 
