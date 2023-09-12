@@ -44,4 +44,5 @@ torchrun $DISTRIBUTED_ARGS finetune.py \
     --model_max_length 2048 \
     --lazy_preprocess True \
     --use_lora \
+    --gradient_checkpointing \
     --deepspeed finetune/ds_config_zero2.json

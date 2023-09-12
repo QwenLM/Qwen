@@ -46,4 +46,5 @@ torchrun $DISTRIBUTED_ARGS finetune.py \
     --lazy_preprocess True \
     --use_lora \
     --q_lora \
+    --gradient_checkpointing \
     --deepspeed finetune/ds_config_zero2.json

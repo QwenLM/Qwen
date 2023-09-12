@@ -32,4 +32,5 @@ python finetune.py \
   --report_to "none" \
   --model_max_length 2048 \
   --lazy_preprocess True \
+  --gradient_checkpointing \
   --use_lora
