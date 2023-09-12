@@ -8,7 +8,7 @@ Flash attention is an option for accelerating training and inference. Only NVIDI
 
 #### Which version of transformers should I use?
 
-4.31.0 is preferred.
+4.32.0 is preferred.
 
 #### I downloaded the codes and checkpoints but I can't load the model locally. What should I do?
 
