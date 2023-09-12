@@ -180,28 +180,19 @@ print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 ModelScope is an opensource platform for Model-as-a-Service (MaaS), which provides flexible and cost-effective model service to AI developers. Similarly, you can run the models with ModelScope as shown below:
 
 ```python
-import os
-from modelscope.pipelines import pipeline
-from modelscope.utils.constant import Tasks
-from modelscope import snapshot_download
+from modelscope import AutoModelForCausalLM, AutoTokenizer
+from modelscope import GenerationConfig
 
-model_id = 'QWen/qwen-7b-chat'
-revision = 'v1.0.0'
+tokenizer = AutoTokenizer.from_pretrained("qwen/Qwen-7B-Chat", revision = 'v1.0.5',trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained("qwen/Qwen-7B-Chat", revision = 'v1.0.5',device_map="auto", trust_remote_code=True,fp16 = True).eval()
+model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat",revision = 'v1.0.5', trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
 
-model_dir = snapshot_download(model_id, revision)
-
-pipe = pipeline(
-task=Tasks.chat, model=model_dir, device_map='auto')
-history = None
-
-text = '浙江的省会在哪里？'
-results = pipe(text, history=history)
-response, history = results['response'], results['history']
-print(f'Response: {response}')
-text = '它有什么好玩的地方呢？'
-results = pipe(text, history=history)
-response, history = results['response'], results['history']
-print(f'Response: {response}')
+response, history = model.chat(tokenizer, "你好", history=None)
+print(response)
+response, history = model.chat(tokenizer, "浙江的省会在哪里？", history=history) 
+print(response)
+response, history = model.chat(tokenizer, "它有什么好玩的景点", history=history)
+print(response)
 ```
 <br>
 
