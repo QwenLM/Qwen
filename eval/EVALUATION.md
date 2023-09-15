@@ -59,7 +59,7 @@ pip install -e human-eval
 python evaluate_humaneval.py -f HumanEval.jsonl -o HumanEval_res.jsonl
 evaluate_functional_correctness HumanEval_res.jsonl
 # Qwen-7B-Chat
-python evaluate_chat_mmlu.py -f HumanEval.jsonl -o HumanEval_res_chat.jsonl
+python evaluate_chat_humaneval.py -f HumanEval.jsonl -o HumanEval_res_chat.jsonl
 evaluate_functional_correctness HumanEval_res_chat.jsonl
 ```
 
