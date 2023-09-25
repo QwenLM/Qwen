@@ -44,8 +44,8 @@ Would like to chat with us or date us coffee time? Welcome to our Discord or WeC
 
 ## News and Updates
 
-* 2023.9.25 🔥 We release [qwen.cpp](https://github.com/QwenLM/qwen.cpp), a C++ implementation of Qwen-LM.
-* 2023.9.25 🔥 We release both **Qwen-14B** and **Qwen-14B-Chat** on ModelScope and Hugging Face. At the same time, we update **Qwen-7B** and **Qwen-7B-Chat**. Compared to **Qwen-7B** (original), **Qwen-7B** uses more training tokens, increasing from 2.2T tokens to 2.4T tokens, while the context length extends from 2048 to 8192. The Chinese knowledge and coding ability of **Qwen-7B** have been further improved. **PLEASE MAKE SURE YOU ARE USING THE LATEST CODES AND CHECKPOINTS!**
+* 2023.9.25 🔥 We release **Qwen-14B** and **Qwen-14B-Chat** on ModelScope and Hugging Face, along with [qwen.cpp](https://github.com/QwenLM/qwen.cpp) and [Qwen-Agent](https://github.com/QwenLM/Qwen-Agent). Codes and checkpoints of **Qwen-7B** and **Qwen-7B-Chat** are also updated. **PLEASE PULL THE LATEST VERSION!**
+    - Compared to **Qwen-7B** (original), **Qwen-7B** uses more training tokens, increasing from 2.2T tokens to 2.4T tokens, while the context length extends from 2048 to 8192. The Chinese knowledge and coding ability of **Qwen-7B** have been further improved.
 * 2023.9.12 We now support finetuning on the Qwen-7B models, including full-parameter finetuning, LoRA and Q-LoRA.
 * 2023.8.21 We release the Int4 quantized model for Qwen-7B-Chat, **Qwen-7B-Chat-Int4**, which requires low memory costs but achieves improved inference speed. Besides, there is no significant performance degradation on the benchmark evaluation.
 * 2023.8.3 We release both **Qwen-7B** and **Qwen-7B-Chat** on ModelScope and Hugging Face. We also provide a technical memo for more details about the model, including training details and model performance.
@@ -280,6 +280,70 @@ We also profile the peak GPU memory usage for encoding 2048 tokens as context (a
 The above speed and memory profiling are conducted using [this script](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py).
 <br><br>
 
+## Quantization of KV cache
+Attention KV cache can be quantized and compressed for storage, to get a higher sample throughput.
+### Usage
+The parameters of 'use_cache_quantization' and 'use_cache_kernel' are provided to control kv-cache-quantization behavior
+When use_cache_quantization=True and use_cache_kernel=True, kv-cache-quantization will be enabled.
+The specific use method is as follows:
+```python
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen-7B-Chat",
+     device_map="auto",
+     trust_remote_code=True,
+     use_cache_quantization=True,
+     use_cache_kernel=True,
+     use_flash_attn=False
+)
+```
+Attention:
+Currently, kv-cache-quantization and flash attn cannot be turned on at the same time.
+If you enable kv cache quantization and use_flash_attn at the same time (use_flash_attn=True, use_cache_quantization=True, use_cache_kernel=True), use_flash_attn is disabled by default(use_flash_attn=false).
+### Comparative Results
+#### Results
+We have verified that the use of the quantized int8-kvcache model does not suffer from significant performance degradation.
+#### memory usage comparison
+The profiling runs on a single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.4. 
+We use BF16 models, and generate 1024 tokens (seq-length=1024) by default, and oom indicates out of memory.
+
+With kv-cache quantization turned on, we can run a larger batch size(bs).
+
+| USE KVCache | bs=1 | bs=4 | bs=16 | bs=32 | bs=64 | bs=100 |
+| --- | :---: | :---: | :---: | :---: | :---: | :---: |
+| no | 16.3GB | 24.1GB | 31.7GB | 48.7GB   | oom  |  oom |
+| yes | 15.5GB | 17.2GB | 22.3GB | 30.2GB  | 48.2GB  |  72.4GB |
+
+With kv-cache quantization turned on, the model can save more memory when generate longer seq-length (sl, number of tokens generated) at infer.
+
+| USE KVCache | sl=512 | sl=1024 | sl=2048 | sl=4096 | sl=8192 |
+| --- | :---: | :---: | :---: | :---: | :---: |
+| no | 15.2GB | 16.3GB | 17.6GB | 19.5GB  | 23.2GB  |
+| yes | 15GB | 15.5GB | 15.8GB | 16.6GB  | 17.6GB  |
+
+### Difference of Storage in layer-past
+The model which turn on the kv-cache quantization will convert the format of layer-past from float to int8, meanwhile the quantianted layer-past will also store quantiantion parameters of current value.
+Specific steps are as follows:
+1、Quantize key/value
+```
+    qv,scale,zero_point=quantize_cache_v(v)
+```
+2、Store into layer_past
+
+Following is the format of quantized layer_past:
+```
+    layer_past=((q_key,key_scale,key_zero_point),
+                (q_value,value_scale,value_zero_point))
+```
+Bascial format of layer_past:
+```
+    layer_past=(key,value)
+```
+If you want to use the attention KV which is quantized, 
+you can use the dequantization operation to convert the int8 key/value back to the float format as following:
+```
+    v=dequantize_cache_torch(qv,scale,zero_point)
+```
+
 ## Finetuning
 
 Now we provide the official training script, `finetune.py`, for users to finetune the pretrained model for downstream applications in a simple fashion. Additionally, we provide shell scripts to launch finetuning with no worries. This script supports the training with [DeepSpeed](https://github.com/microsoft/DeepSpeed) and [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/). The shell scripts that we provide use DeepSpeed (Note: this may have conflicts with the latest version of pydantic) and Peft. You can install them by:
@@ -369,7 +433,7 @@ pip install -r requirements_web_demo.txt
 
 Then run the command below and click on the generated link:
 
-```
+```bash
 python web_demo.py
 ```
 
@@ -383,7 +447,7 @@ python web_demo.py
 
 We provide a CLI demo example in `cli_demo.py`, which supports streaming output for the generation. Users can interact with Qwen-7B-Chat by inputting prompts, and the model returns model outputs in the streaming mode. Run the command below:
 
-```
+```bash
 python cli_demo.py
 ```
 

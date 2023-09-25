@@ -42,9 +42,8 @@
 
 ## 新闻
 
-
-* 2023年9月25日 🔥 开源了[qwen.cpp](https://github.com/QwenLM/qwen.cpp)，Qwen-LM的C++实现。
-* 2023年9月25日 🔥 在魔搭社区（ModelScope）和Hugging Face推出**Qwen-14B**和**Qwen-14B-Cha**t模型，并同步更新**Qwen-7B**和**Qwen-7B-Chat**模型。相比原版Qwen-7B，新版用了更多训练数据（2.4T token），序列长度从2048扩展至8192。整体中文能力以及代码能力提升较多。**请确保你使用的是最新的代码和模型！**
+* 2023年9月25日 🔥 在魔搭社区（ModelScope）和Hugging Face推出**Qwen-14B**和**Qwen-14B-Chat**模型，并开源 [qwen.cpp](https://github.com/QwenLM/qwen.cpp) 和 [Qwen-Agent](https://github.com/QwenLM/Qwen-Agent)。**Qwen-7B**和**Qwen-7B-Chat**的代码和模型也同步得到更新。**请使用最新的代码和模型！**
+    - 相比原版Qwen-7B，新版用了更多训练数据（从2.2T增加到2.4T tokens），序列长度从2048扩展至8192。整体中文能力以及代码能力均有所提升。
 * 2023年9月12日 支持Qwen-7B和Qwen-7B-Chat的微调，其中包括全参数微调、LoRA以及Q-LoRA。
 * 2023年8月21日 发布Qwen-7B-Chat的Int4量化模型，Qwen-7B-Chat-Int4。该模型显存占用低，推理速度相比半精度模型显著提升，在基准评测上效果损失较小。
 * 2023年8月3日 在魔搭社区（ModelScope）和Hugging Face同步推出Qwen-7B和Qwen-7B-Chat模型。同时，我们发布了技术备忘录，介绍了相关的训练细节和模型表现。
@@ -271,6 +270,68 @@ response, history = model.chat(tokenizer, "Hi", history=None)
 上述性能测算使用[此脚本](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)完成。
 <br><br>
 
+## KV cache量化
+
+在模型infer时，可以将中间结果key以及value的值量化后压缩存储，这样便可以在相同的卡上存储更多的key以及value，增加样本吞吐。
+
+### 使用方法
+提供use_cache_quantization以及use_cache_kernel两个参数对模型控制，当use_cache_quantization以及use_cache_kernel均开启时，将启动kv-cache量化的功能。具体使用如下：
+```python
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen-7B-Chat",
+     device_map="auto",
+     trust_remote_code=True,
+     use_cache_quantization=True,
+     use_cache_kernel=True,
+     use_flash_attn=False
+)
+```
+注意：当前该功能目前不支持与flash attn同时开启，如果你开了kv cache量化的同时又开了flash attn（use_flash_attn=True， use_cache_quantization=True, use_cache_kernel=True），会默认将use flash attn关闭。
+
+### 结果对比
+#### 效果
+我们验证过int8 kvcache的使用对模型整体的精度指标基本无损。
+
+#### 显存对比
+本次评测运行于单张A100-SXM4-80G GPU，模型默认使用BF16格式，默认生成的seq-length=1024（生成1024个token），其中oom表示out of memory。
+
+开启了kv-cache量化之后，模型在infer的时候可以开启更大的batch size(bs)
+
+| USE KVCache | bs=1 | bs=4 | bs=16 | bs=32 | bs=64 | bs=100 |
+| --- | :---: | :---: | :---: | :---: | :---: | :---: |
+| no | 16.3GB | 24.1GB | 31.7GB | 48.7GB   | oom  |  oom |
+| yes | 15.5GB | 17.2GB | 22.3GB | 30.2GB  | 48.2GB  |  72.4GB |
+
+
+开启了kv-cache量化之后，模型在infer时预测更长的seq-length（sl，生成的token数）结果时，可以节约更多的显存。
+
+| USE KVCache | sl=512 | sl=1024 | sl=2048 | sl=4096 | sl=8192 |
+| --- | :---: | :---: | :---: | :---: | :---: |
+| no | 15.2GB | 16.3GB | 17.6GB | 19.5GB  | 23.2GB  |
+| yes | 15GB | 15.5GB | 15.8GB | 16.6GB  | 17.6GB  |
+
+
+### 存储格式区别
+模型开启kv cache量化后再模型infer的时候，会将原始存进layer_past的float格式的key/value变成int8格式的qkey/qvalue和相对应的量化参数。
+具体操作如下：
+1、将key/value进行量化操作
+```
+    qv,scale,zero_point=quantize_cache_v(v)
+```
+2、存入layer_past中:
+量化格式的layer_past:
+```
+    layer_past=((q_key,key_scale,key_zero_point),
+                (q_value,value_scale,value_zero_point))
+```
+原始格式的layer_past:
+```
+    layer_past=(key,value)
+```
+如果需要将layer_past中存好的key，value直接取出使用，可以使用反量化操作将int8格式的key/value转回float格式：
+```
+    v=dequantize_cache_torch(qv,scale,zero_point)
+```
 
 ## 微调
 
@@ -372,7 +433,7 @@ python web_demo.py
 
 我们提供了一个简单的交互式Demo示例，请查看`cli_demo.py`。当前模型已经支持流式输出，用户可通过输入文字的方式和Qwen-7B-Chat交互，模型将流式输出返回结果。运行如下命令：
 
-```
+```bash
 python cli_demo.py
 ```
 
