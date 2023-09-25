@@ -44,6 +44,7 @@ Would like to chat with us or date us coffee time? Welcome to our Discord or WeC
 
 ## News and Updates
 
+* 2023.9.25 🔥 We release [qwen.cpp](https://github.com/QwenLM/qwen.cpp), a C++ implementation of Qwen-LM.
 * 2023.9.25 🔥 We release both **Qwen-14B** and **Qwen-14B-Chat** on ModelScope and Hugging Face. At the same time, we update **Qwen-7B** and **Qwen-7B-Chat**. Compared to **Qwen-7B** (original), **Qwen-7B** uses more training tokens, increasing from 2.2T tokens to 2.4T tokens, while the context length extends from 2048 to 8192. The Chinese knowledge and coding ability of **Qwen-7B** have been further improved. **PLEASE MAKE SURE YOU ARE USING THE LATEST CODES AND CHECKPOINTS!**
 * 2023.9.12 We now support finetuning on the Qwen-7B models, including full-parameter finetuning, LoRA and Q-LoRA.
 * 2023.8.21 We release the Int4 quantized model for Qwen-7B-Chat, **Qwen-7B-Chat-Int4**, which requires low memory costs but achieves improved inference speed. Besides, there is no significant performance degradation on the benchmark evaluation.

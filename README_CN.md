@@ -43,6 +43,7 @@
 ## 新闻
 
 
+* 2023年9月25日 🔥 开源了[qwen.cpp](https://github.com/QwenLM/qwen.cpp)，Qwen-LM的C++实现。
 * 2023年9月25日 🔥 在魔搭社区（ModelScope）和Hugging Face推出**Qwen-14B**和**Qwen-14B-Cha**t模型，并同步更新**Qwen-7B**和**Qwen-7B-Chat**模型。相比原版Qwen-7B，新版用了更多训练数据（2.4T token），序列长度从2048扩展至8192。整体中文能力以及代码能力提升较多。**请确保你使用的是最新的代码和模型！**
 * 2023年9月12日 支持Qwen-7B和Qwen-7B-Chat的微调，其中包括全参数微调、LoRA以及Q-LoRA。
 * 2023年8月21日 发布Qwen-7B-Chat的Int4量化模型，Qwen-7B-Chat-Int4。该模型显存占用低，推理速度相比半精度模型显著提升，在基准评测上效果损失较小。
