@@ -4,38 +4,52 @@
 <br><br>
 
 <p align="center">
-    <img src="assets/logo.jpg" width="400"/>
+    <img src="assets/logoqwen.jpg" width="400"/>
 <p>
 <br>
 
 <p align="center">
-        Qwen-7B <a href="https://modelscope.cn/models/qwen/Qwen-7B/summary">🤖 <a> | <a href="https://huggingface.co/Qwen/Qwen-7B">🤗</a>&nbsp ｜ Qwen-7B-Chat <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">🤖 <a> | <a href="https://huggingface.co/Qwen/Qwen-7B-Chat">🤗</a>&nbsp | Qwen-7B-Chat-Int4 <a href="https://huggingface.co/Qwen/Qwen-7B-Chat-Int4">🤗</a>
+        🤗 <a href="https://huggingface.co/Qwen">Hugging Face</a>&nbsp&nbsp | &nbsp&nbsp🤖 <a href="https://modelscope.cn/models/qwen">ModelScope<a>&nbsp&nbsp | &nbsp&nbsp 📑 Paper&nbsp&nbsp ｜ &nbsp&nbsp🖥️ <a href="https://modelscope.cn/studios/qwen/Qwen-7B-Chat-Demo/summary">Demo</a>
 <br>
-<a href="assets/wechat.png">WeChat</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/z3GAxXZ9Ce">Discord</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://modelscope.cn/studios/qwen/Qwen-7B-Chat-Demo/summary">Demo</a>&nbsp ｜ &nbsp<a href="https://github.com/QwenLM/Qwen-7B/blob/main/tech_memo.md">Report</a>
+<a href="assets/wechat.png">WeChat (微信)</a>&nbsp&nbsp ｜ &nbsp&nbsp DingTalk (钉钉) &nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/z3GAxXZ9Ce">Discord</a>&nbsp&nbsp
 </p>
-<br>
+<br><br>
 
 <p align="left">
         日本語ドキュメントメンテナー: <a href="https://github.com/eltociear">Ikko Eltociear Ashimine</a> & Junyang Lin
 </p>
 <br>
 
-私たちは、**Qwen-7B** と **Qwen-7B-Chat** を **🤖 ModelScope** と **🤗 Hugging Face** の両方でオープンソース化しています(上部のロゴをクリックすると、コードとチェックポイントのあるリポジトリに移動します)。このレポには、Qwen-7B の簡単な紹介と、使い方の手引き、さらに詳しい情報を提供する技術メモ [link](tech_memo.md) が含まれています。
+|    |                                                              Qwen-Chat                                                               |                                                                Qwen-Chat (Int4)                                                                |                                                            Qwen                                                            |
+|----|:------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------:|
+| 7B |  <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">🤖 <a>  <a href="https://huggingface.co/Qwen/Qwen-7B-Chat">🤗</a>  |  <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat-Int4/summary">🤖 <a>  <a href="https://huggingface.co/Qwen/Qwen-7B-Chat-Int4">🤗</a>  |  <a href="https://modelscope.cn/models/qwen/Qwen-7B/summary">🤖 <a>  <a href="https://huggingface.co/Qwen/Qwen-7B">🤗</a>  |
+| 14B | <a href="https://modelscope.cn/models/qwen/Qwen-14B-Chat/summary">🤖 <a>  <a href="https://huggingface.co/Qwen/Qwen-14B-Chat">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-14B-Chat-Int4/summary">🤖 <a>  <a href="https://huggingface.co/Qwen/Qwen-14B-Chat-Int4">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-14B/summary">🤖 <a>  <a href="https://huggingface.co/Qwen/Qwen-14B">🤗</a> |
 
-Qwen-7B は、アリババクラウドが提唱する大規模言語モデルシリーズ Qwen（略称：Tongyi Qianwen）の7Bパラメータ版になります。Qwen-7B は Transformer ベースの大規模言語モデルであり、ウェブテキスト、書籍、コードなどを含む大量のデータで事前学習されています。さらに、事前学習された Qwen-7B をベースに、アライメント技術で学習された大規模モデルベースの AI アシスタントである Qwen-7B-Chat をリリースします。Qwen-7B シリーズの特徴は以下の通りです:
 
-1. **高品質な事前トレーニングデータでトレーニング**。Qwen-7B は 2.2 兆以上のトークンを含む大規模で高品質なデータセットに対して事前学習を行っっています。このデータセットには平文とコードが含まれ、一般的なドメインデータと専門的なドメインデータを含む幅広いドメインをカバーしている。
-2. **強いパフォーマンス**。自然言語理解、数学、コーディングなどを評価する一連のベンチマークデータセットにおいて、同程度のモデルサイズのモデルと比較して、競合他社を凌駕しています。
-3. **言語サポートの向上**。Qwen-7B のトークナイザは、15 万以上のトークンの語彙をベースにしており、他のトークナイザに比べて効率的です。多くの言語に対応しており、ユーザが特定の言語を理解するために Qwen-7B をさらにファインチューニングするのに役立ちます。
-4. **8K コンテキスト長をサポート**。Qwen-7B と Qwen-7B-Chat はともに 8K のコンテキスト長をサポートしており、長いコンテキストでの入力を可能にしている。
-5. **プラグインのサポート**。Qwen-7B-Chat は、プラグイン関連のアライメントデータでトレーニングされているため、API、モデル、データベースなどのツールを使用することができ、エージェントとしてプレイすることができる。
 
-以下のセクションには、参考になる情報が記載されています。特に、issue を立ち上げる前に FAQ セクションをお読みになることをお勧めします。
+Qwen-7B**と**Qwen-14B**の**Qwen**シリーズと、**Qwen-7B-Chat**と**Qwen-14B-Chat**の**Qwen-Chat**シリーズをオープンソース化しました。上の表にリンクがあります。クリックしてモデルカードをご確認ください。また、テクニカルレポートも公開しました。論文リンクをクリックしてご覧ください！
+
+簡単に説明すると、私たちは、ドメインや言語（中国語と英語を中心に）などを幅広くカバーする最大3兆トークンの多言語データに対して安定的に事前学習された強力なベース言語モデルを持っています。これらのモデルは、ベンチマークデータセットにおいて競争力のあるパフォーマンスを達成することができます。さらに、SFTとRLHFに基づく人間の嗜好に沿ったチャットモデル（まだリリースされていません）があり、チャット、コンテンツ作成、情報抽出、要約、翻訳、コーディング、数学の問題を解くなどが可能で、ツールを使ったり、エージェントとして遊んだり、コードインタプリタとして遊んだりすることもできます。
+
+このレポでは、それを把握することができる：
+
+* Qwenのクイックスタート。
+* 量子化モデルの詳細（使用量、メモリ、推論速度など）。比較のために、BF16モデルの統計も提供します。
+* フルパラメーターチューニング、LoRA、Q-LoRAを含む、微調整に関するチュートリアル。
+* WebUI、CLIデモなど、デモの構築に関する説明。
+* ツール使用、エージェント、コードインタプリタの Qwen の詳細。
+* ロングコンテクスト理解評価の統計
+* ライセンス契約
+* ...
+
+また、困ったことがあれば、まずは[FAQ](FAQ.md)を参照してほしい。まだ悩んでいますか？遠慮なく私たちに問題を送ってください（より多くの人が理解できるように、英語で）！私たちを助けたいなら、遠慮なくプルリクエストを送ってください！
+
+私たちとチャットしたいですか？私たちのDiscordまたはWeChatグループへようこそ！
 <br><br>
 
 ## ニュースとアップデート
 
-* 2023.9.25 ModelScope と Hugging Face 上で **Qwen-14B** と **Qwen-14B-Chat** をリリースしました。
+* 2023.9.25 🔥 Qwen-14BとQwen-14B-ChatをModelScopeとHugging Faceでリリースしました。同時に、Qwen-7B と Qwen-7B-Chat も更新しました。Qwen-7B（オリジナル）と比較して、Qwen-7Bはより多くの学習トークンを使用し、2.2Tトークンから2.4Tトークンに増加し、コンテキスト長は2048から8192に拡張された。Qwen-7Bの中国語知識とコーディング能力はさらに向上しています。最新のコードとチェックポイントをお使いください！
 * 2023.9.12 Qwen-7Bモデルにおいて、フルパラメーター・ファインチューニング、LoRA、Q-LoRAを含むファインチューニングをサポートしました。
 * 2023.8.21 Qwen-7B-Chat 用 Int4 量子化モデル **Qwen-7B-Chat-Int4** をリリースしました。また、ベンチマーク評価においても大きな性能低下は見られませんでした。
 * 2023.8.3 ModelScope と Hugging Face 上で **Qwen-7B** と **Qwen-7B-Chat** をリリースしました。また、トレーニングの詳細やモデルの性能など、モデルの詳細については技術メモを提供しています。
@@ -43,22 +57,27 @@ Qwen-7B は、アリババクラウドが提唱する大規模言語モデルシ
 
 ## 性能
 
-Qwen-14B は、MMLU、C-Eval、GSM8K、HumanEval、CMMLU など、自然言語理解、数学的問題解決、コーディングなどに関するモデルの能力を評価する一連のベンチマークデータセットにおいて、同程度のモデルサイズのベースラインモデルを凌駕しており。以下の結果をご覧ください。
+Qwen-14BとQwen-7B（これは、より多くのトークンで学習され、コンテキストの長さが2048から8192に拡張された新バージョン）は、自然言語理解、数学的問題解決、コーディングなどに関するモデルの能力を評価する一連のベンチマークデータセット、例えばMMLU、C-Eval、GSM8K、MATH、HumanEval、MBPP、BBHなどにおいて、同様のモデルサイズのベースラインモデルを上回る。しかし、Qwen-14BでもGPT-4はおろかGPT-3.5にも大きく遅れをとっています。以下の結果をご覧ください。
 
-| Model             |   MMLU   |  C-Eval  |  GSM8K   |    MATH  | HumanEval |    MBPP   |    BBH   |  CMMLU   |
-|:------------------|:--------:|:--------:|:--------:|:--------:|:---------:|:---------:|:--------:|:--------:|
-|                   |   5-shot |  5-shot  | 8-shot   |   4-shot | 0-shot    |    3-shot | 3-shot   |  5-shot  |
-| LLaMA2-7B         |   46.8   |   32.5   |   16.7   |   3.3    |   12.8    |   20.8    |   38.2   |   31.8   |
-| LLaMA2-13B        |   55.0   |   41.4   |   29.6   |   5.0    |   18.9    |   30.3    |   45.6   |   38.4   |
-| LLaMA2-34B        |   62.6   |   -      |   42.2   |   6.2    |   22.6    |   33.0    |   44.1   |   -      |
-| ChatGLM2-6B       |   47.9   |   51.7   |   32.4   |   6.5    |   -       |   -       |   33.7   |   -      |
-| InternLM-7B       |   51.0   |   52.8   |   31.2   |   6.3    |   10.4    |   14.0    |   37.0   |   51.8   |
-| InternLM-20B      |   62.1   |   58.8   |   52.6   |   7.9    |   25.6    |   35.6    |   52.5   |   59.0   |
-| Baichuan2-7B      |   54.2   |   54.0   |   24.5   |   5.6    |   18.3    |   24.2    |   41.6   |   57.1   |
-| Baichuan2-13B     |   59.2   |   58.1   |   52.8   |   10.1   |   17.1    |   30.2    |   48.8   |   62.0   |
-| **Qwen-7B**       |   56.7   |   59.6   |   51.6   |   -      |   24.4    |   31.2    |   40.6   |   58.8   |
-| **Qwen-7B v1.1**  |   58.2   |   63.5   |   51.7   |   11.6   |   29.9    |   31.6    |   45.0   |   62.2   |
-| **Qwen-14B**      | **66.3** | **72.1** | **61.3** | **24.8** | **32.3**  | **40.8**  | **53.4** | **71.0** |
+<p align="left">
+    <img src="assets/radar_14b.jpg" width="600"/>
+<p>
+<br>
+
+| Model              |   MMLU   |  C-Eval  |  GSM8K   |   MATH   | HumanEval |   MBPP    |   BBH    |  CMMLU   |
+|:-------------------|:--------:|:--------:|:--------:|:--------:|:---------:|:---------:|:--------:|:--------:|
+|                    |  5-shot  |  5-shot  |  8-shot  |  4-shot  |  0-shot   |  3-shot   |  3-shot  |  5-shot  |
+| LLaMA2-7B          |   46.8   |   32.5   |   16.7   |   3.3    |   12.8    |   20.8    |   38.2   |   31.8   |
+| LLaMA2-13B         |   55.0   |   41.4   |   29.6   |   5.0    |   18.9    |   30.3    |   45.6   |   38.4   |
+| LLaMA2-34B         |   62.6   |    -     |   42.2   |   6.2    |   22.6    |   33.0    |   44.1   |    -     |
+| ChatGLM2-6B        |   47.9   |   51.7   |   32.4   |   6.5    |     -     |     -     |   33.7   |    -     |
+| InternLM-7B        |   51.0   |   52.8   |   31.2   |   6.3    |   10.4    |   14.0    |   37.0   |   51.8   |
+| InternLM-20B       |   62.1   |   58.8   |   52.6   |   7.9    |   25.6    |   35.6    |   52.5   |   59.0   |
+| Baichuan2-7B       |   54.2   |   54.0   |   24.5   |   5.6    |   18.3    |   24.2    |   41.6   |   57.1   |
+| Baichuan2-13B      |   59.2   |   58.1   |   52.8   |   10.1   |   17.1    |   30.2    |   48.8   |   62.0   |
+| Qwen-7B (original) |   56.7   |   59.6   |   51.6   |   10.4    |   24.4    |   31.2    |   40.6   |   58.8   |
+| **Qwen-7B**        |   58.2   |   63.5   |   51.7   |   11.6   |   29.9    |   31.6    |   45.0   |   62.2   |
+| **Qwen-14B**       | **66.3** | **72.1** | **61.3** | **24.8** | **32.3**  | **40.8**  | **53.4** | **71.0** |
 
 
 比較されたすべてのモデルについて、公式に報告された結果と[OpenCompass](https://opencompass.org.cn/leaderboard-llm) の間の最高スコアを報告します。
@@ -75,7 +94,7 @@ Qwen-14B は、MMLU、C-Eval、GSM8K、HumanEval、CMMLU など、自然言語�
 
 ## クイックスタート
 
-以下では、Qwen-7B と 🤖 ModelScope と 🤗 Transformers の簡単な使用例を示します。
+以下では、Qwen-Chat と 🤖 ModelScope と 🤗 Transformers の簡単な使用例を示します。
 
 コードを実行する前に、環境のセットアップと必要なパッケージのインストールが済んでいることを確認してください。上記の要件を満たしていることを確認してから、依存するライブラリをインストールしてください。
 
@@ -97,13 +116,13 @@ cd flash-attention && pip install .
 
 #### 🤗 Transformers
 
-Qwen-7B-Chat を推論に使用するには、以下のように数行のコードを入力するだけです。**最新のコードを使用していることを確認してください。**
+Qwen-Chat を推論に使用するには、以下のように数行のコードを入力するだけです。**最新のコードを使用していることを確認してください。**
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
-# 注: デフォルトの動作では、インジェクション攻撃防止機能がオフになっています。
+# Model names："Qwen/Qwen-7B-Chat"、"Qwen/Qwen-14B-Chat"
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
 # bf16 を使用
@@ -139,15 +158,16 @@ print(response)
 # 《奋斗创业：一个年轻人的成功之路》
 ```
 
-Qwen-7B の学習済みベースモデルの実行も簡単です。
+Qwen の学習済みベースモデルの実行も簡単です。
 
 <details>
-  <summary>Qwen-7B の実行</summary>
+  <summary>Qwen の実行</summary>
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
+# Model names："Qwen/Qwen-7B"、"Qwen/Qwen-14B"
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
 # bf16 を使用
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True, bf16=True).eval()
@@ -178,6 +198,7 @@ ModelScope は、MaaS（Model-as-a-Service） のためのオープンソース�
 from modelscope import AutoModelForCausalLM, AutoTokenizer
 from modelscope import GenerationConfig
 
+# Model names："Qwen/Qwen-7B-Chat"、"Qwen/Qwen-14B-Chat"
 tokenizer = AutoTokenizer.from_pretrained("qwen/Qwen-7B-Chat", revision='v1.0.5', trust_remote_code=True)
 model = AutoModelForCausalLM.from_pretrained("qwen/Qwen-7B-Chat", revision='v1.0.5', device_map="auto", trust_remote_code=True, fp16=True).eval()
 model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", revision='v1.0.5', trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
@@ -191,16 +212,11 @@ print(response)
 ```
 <br>
 
-## トークナイザー
-
-tiktoken に基づくトークナイザーは、他のトークナイザー、例えばセンテンスピーストークナイザーとは異なります。特にファインチューニングの際には、特殊なトークンに注意を払う必要があります。トークナイザに関する詳細な情報や、ファインチューニングにおける使用方法については、[ドキュメント](tokenization_note_ja.md)を参照してください。
-<br><br>
-
 ## 量子化
 
 ### 使用方法
 
-**注: [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ) に基づく新しい解決策を提供し、Qwen-7B-Chat 用の Int4 量子化モデル[ここをクリック](https://huggingface.co/Qwen/Qwen-7B-Chat-Int4)をリリースしました。このモデルは、従来の解決策と比較して、ほぼ無損失のモデル効果を達成しつつ、メモリコストと推論速度の両方で性能が向上しています。**
+**注: [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ) に基づく新しい解決策を提供し、Qwen-Chat 用の Int4 量子化モデル[ここをクリック](https://huggingface.co/Qwen/Qwen-7B-Chat-Int4)をリリースしました。このモデルは、従来の解決策と比較して、ほぼ無損失のモデル効果を達成しつつ、メモリコストと推論速度の両方で性能が向上しています。**
 
 ここでは、量子化されたモデルを推論に使用する方法を説明する。始める前に、auto-gptqの要件を満たしていることを確認し（例：torch 2.0以上、transformers 4.32.0以上など）、必要なパッケージをインストールしてください：
 
@@ -225,19 +241,23 @@ response, history = model.chat(tokenizer, "Hi", history=None)
 
 ベンチマークにおける BF16 モデルと Int4 モデルの性能について説明します。その結果は以下に示します：
 
-|  Quantization |   MMLU     |  CEval (val) |  GSM8K |  Humaneval |
-| ------------- | :--------: | :----------: | :----: | :--------: |
-| BF16          |    53.9    |     54.2     |  41.1  |    24.4    |
-| Int4          |    52.6    |     52.9     |  38.1  |    23.8    |
+| Quantization         | MMLU | CEval (val) | GSM8K | Humaneval |
+|----------------------|:----:|:-----------:|:-----:|:---------:|
+| Qwen-7B-Chat (BF16)  | 53.9 |    54.2     | 41.1  |   24.4    |
+| Qwen-7B-Chat (Int4)  | 52.6 |    52.9     | 38.1  |   23.8    |
+| Qwen-14B-Chat (BF16) | 64.6 |    69.8     | 61.0  |   43.9    |
+| Qwen-14B-Chat (Int4) | 63.3 |    69.0     | 59.8  |   45.7    |
 
 ### 推論スピード
 
 BF16 の精度と Int4 の量子化レベルの下で、それぞれ 2048 個と 8192 個のトークンを生成する平均推論速度(tokens/s)を測定しました。
 
-|  Quantization | Speed (2048 tokens) | Speed (8192 tokens) |
-| ------------- | :------------------:| :------------------:|
-|      BF16     | 30.34               | 29.32               |
-|      Int4     | 43.56               | 33.92               |
+| Quantization         | Speed (2048 tokens) | Speed (8192 tokens) |
+|----------------------|:-------------------:|:-------------------:|
+| Qwen-7B-Chat (BF16)  |        30.34        |        29.32        |
+| Qwen-7B-Chat (Int4)  |        43.56        |        33.92        |
+| Qwen-14B-Chat (BF16) |        30.70        |        21.73        |
+| Qwen-14B-Chat (Int4) |        37.11        |        26.11        |
 
 詳細には、プロファイリングの設定は、1 コンテクストトークンで 8192 個の新しいトークンを生成しています。プロファイリングは、PyTorch 2.0.1 と CUDA 11.4 を搭載したシングル A100-SXM4-80G GPU で実行されました。推論速度は生成された 8192 個のトークンの平均値となります。
 
@@ -245,17 +265,22 @@ BF16 の精度と Int4 の量子化レベルの下で、それぞれ 2048 個と
 
 また、BF16またはInt4の量子化レベルで、それぞれ2048トークンをコンテキストとしてエンコードした場合（および単一のトークンを生成した場合）と、8192トークンを生成した場合（単一のトークンをコンテキストとして生成した場合）のGPUメモリ使用量のピーク値をプロファイリングしました。その結果を以下に示します。
 
-| Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
-| ------------------ | :---------------------------------: | :-----------------------------------: |
-| BF16               |               17.66GB               |                22.58GB                |
-| Int4               |               8.21GB                |                13.62GB                |
+| Quantization         | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
+|----------------------|:-----------------------------------:|:-------------------------------------:|
+| Qwen-7B-Chat (BF16)  |               17.66GB               |                22.58GB                |
+| Qwen-7B-Chat (Int4)  |               8.21GB                |                13.62GB                |
+| Qwen-14B-Chat (BF16) |               30.15GB                 |                38.94GB                  |
+| Qwen-14B-Chat (Int4) |               13.00GB                 |                21.79GB                  |
 
 上記のスピードとメモリーのプロファイリングは、[このスクリプト](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)を使用しています。
 <br><br>
 
 ## ファインチューニング
 
-現在、公式のトレーニングスクリプト `finetune.py` を提供しています。さらに、finetune.pyのシェルスクリプトを提供し、finetune.pyを実行することで、finetune.pyを起動することができる。さらに、安心してファインチューニングを開始するためのシェルスクリプトも提供しています。このスクリプトは、[DeepSpeed](https://github.com/microsoft/DeepSpeed) および [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/) を使用したトレーニングをサポートします。弊社が提供するシェル・スクリプトは DeepSpeed を使用するため、事前に DeepSpeed をインストールすることをお勧めします：
+現在、公式のトレーニングスクリプト `finetune.py` を提供しています。さらに、finetune.pyのシェルスクリプトを提供し、finetune.pyを実行することで、finetune.pyを起動することができる。さらに、安心してファインチューニングを開始するためのシェルスクリプトも提供しています。このスクリプトは、[DeepSpeed](https://github.com/microsoft/DeepSpeed) および [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/) を使用したトレーニングをサポートします。弊社が提供するシェル・スクリプトは DeepSpeed と Peft を使用するため、事前に DeepSpeed と Peft をインストールすることをお勧めします：
+```bash
+pip install -r requirements_finetune.txt
+```
 
 学習データを準備するには、すべてのサンプルをリストにまとめ、jsonファイルに保存する必要があります。各サンプルはidと会話リストで構成される辞書です。以下は1つのサンプルを含む単純なリストの例です：
 
@@ -696,6 +721,11 @@ ReAct プロンプトの書き方や使い方については、[ReAct の例](ex
     </tr>
 </table>
 
+## トークナイザー
+
+tiktoken に基づくトークナイザーは、他のトークナイザー、例えばセンテンスピーストークナイザーとは異なります。特にファインチューニングの際には、特殊なトークンに注意を払う必要があります。トークナイザに関する詳細な情報や、ファインチューニングにおける使用方法については、[ドキュメント](tokenization_note_ja.md)を参照してください。
+<br><br>
+
 ## 再現
 
 ベンチマークデータセットでのモデル性能の再現のために、結果を再現するスクリプトを提供しています。詳しくは [eval/EVALUATION.md](eval/EVALUATION.md) を確認してください。なお、再現の結果、我々の報告結果と若干異なる場合があります。
@@ -708,7 +738,7 @@ ReAct プロンプトの書き方や使い方については、[ReAct の例](ex
 
 ## ライセンス契約
 
-Qwen-7B と Qwen-7B-Chat のコードとモデルウェイトは、研究者や開発者が自由に使用することができます。また、商用利用も可能です。詳しくは [LICENSE](LICENSE) をご覧ください。商用利用を希望される方は、[リクエストフォーム](https://dashscope.console.aliyun.com/openModelApply/qianwen)に必要事項をご記入の上、お申し込みください。
+Qwen と Qwen-Chat のコードとモデルウェイトは、研究者や開発者が自由に使用することができます。また、商用利用も可能です。詳しくは [LICENSE](LICENSE) をご覧ください。商用利用を希望される方は、[リクエストフォーム](https://dashscope.console.aliyun.com/openModelApply/qianwen)に必要事項をご記入の上、お申し込みください。
 <br><br>
 
 ## お問い合わせ
