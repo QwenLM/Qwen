@@ -22,7 +22,7 @@
 
 
 
-We opensource our **Qwen** series, now including **Qwen**, the base language models, namely **Qwen-7B** and **Qwen-14B**, as well as **Qwen-Chat**, the chat models, namely **Qwen-7B-Chat** and **Qwen-14B-Chat**. Links are on the above table. Click them and check the model cards.
+We opensource our **Qwen** series, now including **Qwen**, the base language models, namely **Qwen-7B** and **Qwen-14B**, as well as **Qwen-Chat**, the chat models, namely **Qwen-7B-Chat** and **Qwen-14B-Chat**. Links are on the above table. Click them and check the model cards. Also, we relase the **technical report**. Please click the paper link and check it out!
 
 In brief, we have strong base language models, which have been stably pretrained for up to 3 trillion tokens of multilingual data with a wide coverage of domains, languages (with a focus on Chinese and English), etc. They are able to achieve competitive performance on benchmark datasets. Additionally, we have chat models that are aligned with human preference based on SFT and RLHF (not released yet), which are able to chat, create content, extract information, summarize, translate, code, solve math problems, and so on, and are able to use tools, play as agents, or even play as code interpreters, etc.
 
