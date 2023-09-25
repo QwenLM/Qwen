@@ -275,6 +275,68 @@ BF16 の精度と Int4 の量子化レベルの下で、それぞれ 2048 個と
 上記のスピードとメモリーのプロファイリングは、[このスクリプト](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)を使用しています。
 <br><br>
 
+## KVキャッシュ量子化
+
+モデルの推論の時に、中間結果のKeyとValueを量子化して圧縮保存することができます。これにより、同じGPUでより多くのKeyとValueを保存することができ、サンプルのスピードを増やすことができます。
+
+### 使い方
+use_cache_quantizationとuse_cache_kernelという2つのパラメータを提供します。use_cache_quantizationとuse_cache_kernelを両方ONにした場合、KVキャッシュ量子化の機能が有効になります。具体的な使い方は：
+```python
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen-7B-Chat",
+     device_map="auto",
+     trust_remote_code=True,
+     use_cache_quantization=True,
+     use_cache_kernel=True,
+     use_flash_attn=False
+)
+```
+現在、この機能はflash attnと同時に使用することはできません。use_flash_attnをTrueにしてKVキャッシュ量子化とflash attnを同時に有効にした場合、use_flash_attnはデフォルトで無効になります。
+
+### 結果の比較
+#### 効果
+int8 KVキャッシュ量子化の使用によるモデルの性能の影響はほとんどありませんでした。
+
+#### VRAMの比較
+この評価は単一のA100-SXM4-80G GPUで実行され、モデルはデフォルトでBF16形式を使用し、生成される文章の長さは1024です。oomはメモリ不足を示します。
+
+KVキャッシュ量子化を有効にすると、推論の時により大きなバッチサイズ（bs）を使用できるようになります。
+
+| USE KVCache | bs=1 | bs=4 | bs=16 | bs=32 | bs=64 | bs=100 |
+| --- | :---: | :---: | :---: | :---: | :---: | :---: |
+| no | 16.3GB | 24.1GB | 31.7GB | 48.7GB   | oom  |  oom |
+| yes | 15.5GB | 17.2GB | 22.3GB | 30.2GB  | 48.2GB  |  72.4GB |
+
+KVキャッシュ量子化を有効にすると、推論の時により長い文章が生成できる。
+
+| USE KVCache | sl=512 | sl=1024 | sl=2048 | sl=4096 | sl=8192 |
+| --- | :---: | :---: | :---: | :---: | :---: |
+| no | 15.2GB | 16.3GB | 17.6GB | 19.5GB  | 23.2GB  |
+| yes | 15GB | 15.5GB | 15.8GB | 16.6GB  | 17.6GB  |
+
+
+### 保存の違い
+モデルがKVキャッシュ量子化を有効にした場合、モデルの推論の時には、元のfloat形式のkey/valueをint8形式のqkey/qvalueと対応する量子化パラメータに変換します。
+具体的な手順は以下の通りです：
+1、key/valueの量子化を行います。
+```
+    qv,scale,zero_point=quantize_cache_v(v)
+```
+2、layer_pastに保存します。
+量子化されたのlayer_pastは:
+```
+    layer_past=((q_key,key_scale,key_zero_point),
+                (q_value,value_scale,value_zero_point))
+```
+元のlayer_past:
+```
+    layer_past=(key,value)
+```
+layer_pastのkey、valueを使用する必要がある場合は、int8形式のkey/valueをfloat形式に戻すために、逆量子化操作を使用することができます。
+```
+    v=dequantize_cache_torch(qv,scale,zero_point)
+```
+
 ## ファインチューニング
 
 現在、公式のトレーニングスクリプト `finetune.py` を提供しています。さらに、finetune.pyのシェルスクリプトを提供し、finetune.pyを実行することで、finetune.pyを起動することができる。さらに、安心してファインチューニングを開始するためのシェルスクリプトも提供しています。このスクリプトは、[DeepSpeed](https://github.com/microsoft/DeepSpeed) および [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/) を使用したトレーニングをサポートします。弊社が提供するシェル・スクリプトは DeepSpeed と Peft を使用するため、事前に DeepSpeed と Peft をインストールすることをお勧めします：
@@ -744,4 +806,3 @@ Qwen と Qwen-Chat のコードとモデルウェイトは、研究者や開発�
 ## お問い合わせ
 
 研究チームまたは製品チームへのメッセージは、qianwen_opensource@alibabacloud.com までお気軽にお送りください。
-
