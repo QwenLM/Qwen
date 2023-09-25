@@ -281,7 +281,10 @@ The above speed and memory profiling are conducted using [this script](https://q
 
 ## Finetuning
 
-Now we provide the official training script, `finetune.py`, for users to finetune the pretrained model for downstream applications in a simple fashion. Additionally, we provide shell scripts to launch finetuning with no worries. This script supports the training with [DeepSpeed](https://github.com/microsoft/DeepSpeed) and [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/). The shell scripts that we provide use DeepSpeed, and thus we advise you to install DeepSpeed before you start.
+Now we provide the official training script, `finetune.py`, for users to finetune the pretrained model for downstream applications in a simple fashion. Additionally, we provide shell scripts to launch finetuning with no worries. This script supports the training with [DeepSpeed](https://github.com/microsoft/DeepSpeed) and [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/). The shell scripts that we provide use DeepSpeed (Note: this may have conflicts with the latest version of pydantic) and Peft. You can install them by:
+```bash
+pip install peft deespeed
+```
 
 To prepare your training data, you need to put all the samples into a list and save it to a json file. Each sample is a dictionary consisting of an id and a list for conversation. Below is a simple example list with 1 sample:
 ```json
@@ -395,7 +398,7 @@ python cli_demo.py
 We provide methods to deploy local API based on OpenAI API (thanks to @hanpenggit). Before you start, install the required packages:
 
 ```bash
-pip install fastapi uvicorn openai pydantic sse_starlette
+pip install fastapi uvicorn openai pydantic>=2.3.0 sse_starlette
 ```
 
 Then run the command to deploy your API:
