@@ -35,6 +35,7 @@ Qwen-7B は、アリババクラウドが提唱する大規模言語モデルシ
 
 ## ニュースとアップデート
 
+* 2023.9.25 ModelScope と Hugging Face 上で **Qwen-14B** と **Qwen-14B-Chat** をリリースしました。
 * 2023.9.12 Qwen-7Bモデルにおいて、フルパラメーター・ファインチューニング、LoRA、Q-LoRAを含むファインチューニングをサポートしました。
 * 2023.8.21 Qwen-7B-Chat 用 Int4 量子化モデル **Qwen-7B-Chat-Int4** をリリースしました。また、ベンチマーク評価においても大きな性能低下は見られませんでした。
 * 2023.8.3 ModelScope と Hugging Face 上で **Qwen-7B** と **Qwen-7B-Chat** をリリースしました。また、トレーニングの詳細やモデルの性能など、モデルの詳細については技術メモを提供しています。
@@ -42,29 +43,27 @@ Qwen-7B は、アリババクラウドが提唱する大規模言語モデルシ
 
 ## 性能
 
-Qwen-7B は、MMLU、C-Eval、GSM8K、HumanEval、WMT22、CMMLU など、自然言語理解、数学的問題解決、コーディングなどに関するモデルの能力を評価する一連のベンチマークデータセットにおいて、同程度のモデルサイズのベースラインモデルを凌駕しており、さらには 13B 程度のパラメータを持つより大規模なモデルをも凌駕しています。以下の結果をご覧ください。
+Qwen-14B は、MMLU、C-Eval、GSM8K、HumanEval、CMMLU など、自然言語理解、数学的問題解決、コーディングなどに関するモデルの能力を評価する一連のベンチマークデータセットにおいて、同程度のモデルサイズのベースラインモデルを凌駕しており。以下の結果をご覧ください。
 
-| Model             | MMLU           |         C-Eval |          GSM8K |      HumanEval |  WMT22 (en-zh) |         CMMLU |
-| :---------------- | :------------: | :------------: | :------------: | :------------: | :------------: |:------------: |
-| LLaMA-7B          | 35.1           |              - |           11.0 |           10.5 |            8.7 |             - |
-| LLaMA 2-7B        | 45.3           |              - |           14.6 |           12.8 |           17.9 |             - |
-| Baichuan-7B       | 42.3           |           42.8 |            9.7 |            9.2 |           26.6 |          44.4 |
-| ChatGLM2-6B       | 47.9           |           51.7 |           32.4 |            9.2 |              - |          48.8 |
-| InternLM-7B       | 51.0           |           52.8 |           31.2 |           10.4 |           14.8 |             - |
-| Baichuan-13B      | 51.6           |           53.6 |           26.6 |           12.8 |           30.0 |          55.8 |
-| LLaMA-13B         | 46.9           |           35.5 |           17.8 |           15.8 |           12.0 |             - |
-| LLaMA 2-13B       | 54.8           |              - |           28.7 |           18.3 |           24.2 |             - |
-| ChatGLM2-12B      | 56.2           |       **61.6** |           40.9 |              - |              - |             - |
-| **Qwen-7B**       | **56.7**       |           59.6 |       **51.6** |       **24.4** |       **30.6** |      **58.8** |
+| Model             |   MMLU   |  C-Eval  |  GSM8K   |    MATH  | HumanEval |    MBPP   |    BBH   |  CMMLU   |
+|:------------------|:--------:|:--------:|:--------:|:--------:|:---------:|:---------:|:--------:|:--------:|
+|                   |   5-shot |  5-shot  | 8-shot   |   4-shot | 0-shot    |    3-shot | 3-shot   |  5-shot  |
+| LLaMA2-7B         |   46.8   |   32.5   |   16.7   |   3.3    |   12.8    |   20.8    |   38.2   |   31.8   |
+| LLaMA2-13B        |   55.0   |   41.4   |   29.6   |   5.0    |   18.9    |   30.3    |   45.6   |   38.4   |
+| LLaMA2-34B        |   62.6   |   -      |   42.2   |   6.2    |   22.6    |   33.0    |   44.1   |   -      |
+| ChatGLM2-6B       |   47.9   |   51.7   |   32.4   |   6.5    |   -       |   -       |   33.7   |   -      |
+| InternLM-7B       |   51.0   |   52.8   |   31.2   |   6.3    |   10.4    |   14.0    |   37.0   |   51.8   |
+| InternLM-20B      |   62.1   |   58.8   |   52.6   |   7.9    |   25.6    |   35.6    |   52.5   |   59.0   |
+| Baichuan2-7B      |   54.2   |   54.0   |   24.5   |   5.6    |   18.3    |   24.2    |   41.6   |   57.1   |
+| Baichuan2-13B     |   59.2   |   58.1   |   52.8   |   10.1   |   17.1    |   30.2    |   48.8   |   62.0   |
+| **Qwen-7B**       |   56.7   |   59.6   |   51.6   |   -      |   24.4    |   31.2    |   40.6   |   58.8   |
+| **Qwen-7B v1.1**  |   58.2   |   63.5   |   51.7   |   11.6   |   29.9    |   31.6    |   45.0   |   62.2   |
+| **Qwen-14B**      | **66.3** | **72.1** | **61.3** | **24.8** | **32.3**  | **40.8**  | **53.4** | **71.0** |
 
-<p align="center">
-    <img src="assets/performance.png" width="1000"/>
-<p>
-<br>
 
-さらに、[OpenCompass](https://opencompass.org.cn/leaderboard-llm) が実施した大規模言語モデルの第三者評価によると、Qwen-7B と Qwen-7B-Chat は 7B パラメータモデルのトップになります。この評価は、言語理解・生成、コーディング、数学、推論などの評価のための大量の公開ベンチマークで構成されています。
+比較されたすべてのモデルについて、公式に報告された結果と[OpenCompass](https://opencompass.org.cn/leaderboard-llm) の間の最高スコアを報告します。
 
-より詳細な実験結果（より多くのベンチマークデータセットでの詳細なモデル性能）や詳細については、[こちら](tech_memo.md)をクリックして技術メモを参照してください。
+より詳細な実験結果（より多くのベンチマークデータセットでの詳細なモデル性能）や詳細については、[こちら](TODO)をクリックして技術メモを参照してください。
 <br><br>
 
 ## 必要条件
@@ -442,22 +441,217 @@ model = load_model_on_gpus('Qwen/Qwen-7B-Chat', num_gpus=2)
 
 Qwen-7B-Chat は、API、データベース、モデルなど、ツールの利用に特化して最適化されており、ユーザは独自の Qwen-7B ベースの LangChain、エージェント、コードインタプリタを構築することができます。ツール利用能力を評価するための評価[ベンチマーク](eval/EVALUATION.md)では、Qwen-7B は安定した性能に達しています。
 
-| Model            | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑)  | False Positive Error↓  |
-|:-----------------|:----------------------:|:----------------------:|:----------------------:|
-| GPT-4            | 95%                    | **0.90**               | 15%                    |
-| GPT-3.5          | 85%                    | 0.88                   | 75%                    |
-| **Qwen-7B-Chat** | **99%**                | 0.89                   | **9.7%**               |
+<table>
+    <tr>
+        <th colspan="4" align="center">Chinese Tool-Use Benchmark</th>
+    </tr>
+    <tr>
+        <th align="center">Model</th><th align="center">Tool Selection (Acc.↑)</th><th align="center">Tool Input (Rouge-L↑)</th><th align="center">False Positive Error↓</th>
+    </tr>
+    <tr>
+        <td>GPT-4</td><td align="center">95%</td><td align="center">0.90</td><td align="center">15.0%</td>
+    </tr>
+    <tr>
+        <td>GPT-3.5</td><td align="center">85%</td><td align="center">0.88</td><td align="center">75.0%</td>
+    </tr>
+    <tr>Qwen-7B-Chat v1.1
+        <td>Qwen-7B-Chat v1.1</td><td align="center">98%</td><td align="center">0.91</td><td align="center">7.3%</td>
+    </tr>
+    <tr>
+        <td>Qwen-14B-Chat</td><td align="center">98%</td><td align="center">0.93</td><td align="center">2.4%</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th colspan="4" align="center">Using Code Interpreter - Executable Rate of Generated Code (%)</th>
+    </tr>
+    <tr>
+        <th align="center">Model</th><th align="center">Math↑</th><th align="center">Visualization↑</th><th align="center">General↑</th>
+    </tr>
+    <tr>
+        <td>GPT-4</td><td align="center">91.9</td><td align="center">85.9</td><td align="center">82.8</td>
+    </tr>
+    <tr>
+        <td>GPT-3.5</td><td align="center">89.2</td><td align="center">65.0</td><td align="center">74.1</td>
+    </tr>
+    <tr>
+        <td>LLaMA2-7B-Chat</td>
+        <td align="center">41.9</td>
+        <td align="center">33.1</td>
+        <td align="center">24.1 </td>
+    </tr>
+    <tr>
+        <td>LLaMA2-13B-Chat</td>
+        <td align="center">50.0</td>
+        <td align="center">40.5</td>
+        <td align="center">48.3 </td>
+    </tr>
+    <tr>
+        <td>CodeLLaMA-7B-Instruct</td>
+        <td align="center">85.1</td>
+        <td align="center">54.0</td>
+        <td align="center">70.7 </td>
+    </tr>
+    <tr>
+        <td>CodeLLaMA-13B-Instruct</td>
+        <td align="center">93.2</td>
+        <td align="center">55.8</td>
+        <td align="center">74.1 </td>
+    </tr>
+    <tr>
+        <td>InternLM-7B-Chat-v1.1</td>
+        <td align="center">78.4</td>
+        <td align="center">44.2</td>
+        <td align="center">62.1 </td>
+    </tr>
+    <tr>
+        <td>InternLM-20B-Chat</td>
+        <td align="center">70.3</td>
+        <td align="center">44.2</td>
+        <td align="center">65.5 </td>
+    </tr>
+    <tr>Qwen-7B-Chat v1.1
+        <td>Qwen-7B-Chat v1.1</td>
+        <td align="center">82.4</td>
+        <td align="center">64.4</td>
+        <td align="center">67.2 </td>
+    </tr>
+    <tr>
+        <td>Qwen-14B-Chat</td>
+        <td align="center">89.2</td>
+        <td align="center">84.1</td>
+        <td align="center">65.5</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th colspan="4" align="center">Using Code Interpreter - Accuracy of Code Execution Results (%)</th>
+    </tr>
+    <tr>
+        <th align="center">Model</th><th align="center">Math↑</th><th align="center">Visualization-Hard↑</th><th align="center">Visualization-Easy↑</th>
+    </tr>
+    <tr>
+        <td>GPT-4</td><td align="center">82.8</td><td align="center">66.7</td><td align="center">60.8</td>
+    </tr>
+    <tr>
+        <td>GPT-3.5</td><td align="center">47.3</td><td align="center">33.3</td><td align="center">55.7</td>
+    </tr>
+    <tr>
+        <td>LLaMA2-7B-Chat</td>
+        <td align="center">3.9</td>
+        <td align="center">14.3</td>
+        <td align="center">39.2 </td>
+    </tr>
+    <tr>
+        <td>LLaMA2-13B-Chat</td>
+        <td align="center">8.3</td>
+        <td align="center">8.3</td>
+        <td align="center">40.5 </td>
+    </tr>
+    <tr>
+        <td>CodeLLaMA-7B-Instruct</td>
+        <td align="center">14.3</td>
+        <td align="center">26.2</td>
+        <td align="center">60.8 </td>
+    </tr>
+    <tr>
+        <td>CodeLLaMA-13B-Instruct</td>
+        <td align="center">28.2</td>
+        <td align="center">27.4</td>
+        <td align="center">62.0 </td>
+    </tr>
+    <tr>
+        <td>InternLM-7B-Chat-v1.1</td>
+        <td align="center">28.5</td>
+        <td align="center">4.8</td>
+        <td align="center">40.5 </td>
+    </tr>
+    <tr>
+        <td>InternLM-20B-Chat</td>
+        <td align="center">34.6</td>
+        <td align="center">21.4</td>
+        <td align="center">45.6 </td>
+    </tr>
+    <tr>Qwen-7B-Chat v1.1
+        <td>Qwen-7B-Chat v1.1</td>
+        <td align="center">41.9</td>
+        <td align="center">40.5</td>
+        <td align="center">54.4 </td>
+    </tr>
+    <tr>
+        <td>Qwen-14B-Chat</td>
+        <td align="center">58.4</td>
+        <td align="center">53.6</td>
+        <td align="center">59.5</td>
+    </tr>
+</table>
+
 
 ReAct プロンプトの書き方や使い方については、[ReAct の例](examples/react_prompt.md)を参照してください。ツールを使用することで、モデルがよりよいタスクを実行できるようになります。
 
-さらに、エージェントとしての能力を示す実験結果を提供する。詳細は [Hugging Face Agent](https://huggingface.co/docs/transformers/transformers_agents) を参照して下さい。Hugging Face が提供するランモードベンチマークでの性能は以下の通りです:
+<p align="center">
+    <br>
+    <img src="assets/code_interpreter_showcase_001.jpg" />
+    <br>
+<p>
 
-| Model            | Tool Selection↑ | Tool Used↑  |   Code↑   |
-|:-----------------|:---------------:|:-----------:|:---------:|
-| GPT-4            |     **100**     |   **100**   | **97.41** |
-| GPT-3.5          |      95.37      |    96.30    |   87.04   |
-| StarCoder-15.5B  |      87.04      |    87.96    |   68.89   |
-| **Qwen-7B-Chat** |      90.74      |    92.59    |   74.07   |
+さらに、エージェントとしての能力を示す実験結果を提供する。詳細は [Hugging Face Agent](examples/transformers_agent.md) を参照して下さい。Hugging Face が提供するランモードベンチマークでの性能は以下の通りです:
+
+<table>
+    <tr>
+        <th colspan="4" align="center">HuggingFace Agent Benchmark- Run Mode</th>
+    </tr>
+    <tr>
+        <th align="center">Model</th><th align="center">Tool Selection↑</th><th align="center">Tool Used↑</th><th align="center">Code↑</th>
+    </tr>
+    <tr>
+        <td>GPT-4</td><td align="center">100</td><td align="center">100</td><td align="center">97.4</td>
+    </tr>
+    <tr>
+        <td>GPT-3.5</td><td align="center">95.4</td><td align="center">96.3</td><td align="center">87.0</td>
+    </tr>
+    <tr>
+        <td>StarCoder-Base-15B</td><td align="center">86.1</td><td align="center">87.0</td><td align="center">68.9</td>
+    </tr>
+    <tr>
+        <td>StarCoder-15B</td><td align="center">87.0</td><td align="center">88.0</td><td align="center">68.9</td>
+    </tr>
+    <tr>Qwen-7B-Chat v1.1
+        <td>Qwen-7B-Chat v1.1</td><td align="center">87.0</td><td align="center">87.0</td><td align="center">71.5</td>
+    </tr>
+    <tr>
+        <td>Qwen-14B-Chat</td><td align="center">93.5</td><td align="center">94.4</td><td align="center">87.0</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th colspan="4" align="center">HuggingFace Agent Benchmark - Chat Mode</th>
+    </tr>
+    <tr>
+        <th align="center">Model</th><th align="center">Tool Selection↑</th><th align="center">Tool Used↑</th><th align="center">Code↑</th>
+    </tr>
+    <tr>
+        <td>GPT-4</td><td align="center">97.9</td><td align="center">97.9</td><td align="center">98.5</td>
+    </tr>
+    <tr>
+        <td>GPT-3.5</td><td align="center">97.3</td><td align="center">96.8</td><td align="center">89.6</td>
+    </tr>
+    <tr>
+        <td>StarCoder-Base-15B</td><td align="center">97.9</td><td align="center">97.9</td><td align="center">91.1</td>
+    </tr>
+    <tr>
+        <td>StarCoder-15B</td><td align="center">97.9</td><td align="center">97.9</td><td align="center">89.6</td>
+    </tr>
+    <tr>Qwen-7B-Chat v1.1
+        <td>Qwen-7B-Chat v1.1</td><td align="center">94.7</td><td align="center">94.7</td><td align="center">85.1</td>
+    </tr>
+    <tr>
+        <td>Qwen-14B-Chat</td><td align="center">97.9</td><td align="center">97.9</td><td align="center">95.5</td>
+    </tr>
+</table>
 
 <br>
 
@@ -467,25 +661,40 @@ ReAct プロンプトの書き方や使い方については、[ReAct の例](ex
 
 <table>
     <tr>
-        <th rowspan="2">Model</th><th colspan="5" align="center">Sequence Length</th>
+        <th rowspan="2">Model</th><th colspan="6" align="center">Sequence Length</th>
     </tr>
     <tr>
-        <th align="center">1024</th><th align="center">2048</th><th align="center">4096</th><th align="center">8192</th><th align="center">16384</th>
+        <th align="center">1024</th><th align="center">2048</th><th align="center">4096</th><th align="center">8192</th><th align="center">16384</th><th align="center">32768</th>
+    </tr>
+     <tr>
+        <td>Qwen-7B (original)</td><td align="center">4.23</td><td align="center">3.78</td><td align="center">39.35</td><td align="center">469.81</td><td align="center">2645.09</td><td align="center">-</td>
     </tr>
     <tr>
-        <td>Qwen-7B</td><td align="center"><b>4.23</b></td><td align="center"><b>3.78</b></td><td align="center">39.35</td><td align="center">469.81</td><td align="center">2645.09</td>
+        <td>+ dynamic_ntk</td><td align="center">4.23</td><td align="center">3.78</td><td align="center">3.59</td><td align="center">3.66</td><td align="center">5.71</td><td align="center">-</td>
     </tr>
     <tr>
-        <td>+ dynamic_ntk</td><td align="center"><b>4.23</b></td><td align="center"><b>3.78</b></td><td align="center">3.59</td><td align="center">3.66</td><td align="center">5.71</td>
+        <td>+ dynamic_ntk + logn</td><td align="center">4.23</td><td align="center">3.78</td><td align="center">3.58</td><td align="center">3.56</td><td align="center">4.62</td><td align="center">-</td>
     </tr>
     <tr>
-        <td>+ dynamic_ntk + logn</td><td align="center"><b>4.23</b></td><td align="center"><b>3.78</b></td><td align="center"><b>3.58</b></td><td align="center">3.56</td><td align="center">4.62</td>
+        <td>+ dynamic_ntk + logn + window_attn</td><td align="center">4.23</td><td align="center">3.78</td><td align="center">3.58</td><td align="center">3.49</td><td align="center">4.32</td><td align="center">-</td>
     </tr>
     <tr>
-        <td>+ dynamic_ntk + logn + window_attn</td><td align="center"><b>4.23</b></td><td align="center"><b>3.78</b></td><td align="center"><b>3.58</b></td><td align="center"><b>3.49</b></td><td align="center"><b>4.32</b></td>
+    <tr>
+        <td>Qwen-7B v1.1</td><td align="center"><b>4.23</b></td><td align="center"><b>3.81</b></td><td align="center"><b>3.52</b></td><td align="center"><b>3.31</b></td><td align="center">7.27</td><td align="center">181.49</td>
+    </tr>
+    <tr>
+        <td>+ dynamic_ntk</td><td align="center"><b>4.23</b></td><td align="center"><b>3.81</b></td><td align="center"><b>3.52</b></td><td align="center"><b>3.31</b></td><td align="center"><b>3.23</b></td><td align="center">3.33</td>
+    </tr>
+    <tr>
+        <td>+ dynamic_ntk + logn + window_attn</td><td align="center"><b>4.23</b></td><td align="center"><b>3.81</b></td><td align="center"><b>3.52</b></td><td align="center"><b>3.33</b></td><td align="center"><b>3.22</b></td><td align="center"><b>3.17</b></td>
+    </tr>
+    <tr>
+        <td>Qwen-14B</td><td align="center"><b>-</b></td><td align="center"><b>3.46</b></td><td align="center">22.79</td><td align="center">334.65</td><td align="center">3168.35</td><td align="center">-</td>
+    </tr>
+    <tr>
+        <td>+ dynamic_ntk + logn + window_attn</td><td align="center"><b>-</b></td><td align="center"><b>3.46</b></td><td align="center"><b>3.29</b></td><td align="center"><b>3.18</b></td><td align="center">3.42</td><td align="center">-</td>
     </tr>
 </table>
-<br>
 
 ## 再現
 

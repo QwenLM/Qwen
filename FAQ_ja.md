@@ -20,7 +20,7 @@ Flash attention は、トレーニングと推論を加速するオプション�
 
 #### transformers_stream_generator/tiktoken/accelerate が見つかりません。
 
-コマンド `pip install -r requirements.txt` を実行してください。このファイルは [https://github.com/QwenLM/Qwen-7B/blob/main/requirements.txt](https://github.com/QwenLM/Qwen-7B/blob/main/requirements.txt) にあります。
+コマンド `pip install -r requirements.txt` を実行してください。このファイルは [https://github.com/QwenLM/Qwen/blob/main/requirements.txt](https://github.com/QwenLM/Qwen/blob/main/requirements.txt) にあります。
 <br><br>
 
 
@@ -47,19 +47,16 @@ Flash attention は、トレーニングと推論を加速するオプション�
 
 #### インストラクションとは関係ないようですが...
 
-Qwen-7B ではなく Qwen-7B-Chat を読み込んでいないか確認してください。Qwen-7B はアライメントなしのベースモデルで、SFT/Chat モデルとは挙動が異なります。
+Qwen ではなく Qwen-Chat を読み込んでいないか確認してください。Qwen はアライメントなしのベースモデルで、SFT/Chat モデルとは挙動が異なります。
 
 #### 量子化はサポートされていますか？
 
-はい、量子化は `bitsandbytes` でサポートされています。私たちは改良版の開発に取り組んでおり、量子化されたモデルのチェックポイントをリリースする予定です。
+はい、量子化は AutoGPTQ でサポートされています。
 
-#### 量子化モデル実行時のエラー: `importlib.metadata.PackageNotFoundError: No package metadata was found for bitsandbytes`
-
-Linux ユーザの場合は，`pip install bitsandbytes` を直接実行することで解決できます。Windows ユーザの場合は、`python -m pip install bitsandbytes --prefer-binary --extra-index-url=https://jllllll.github.io/bitsandbytes-windows-webui` を実行することができます。
 
 #### 長いシーケンスの処理に時間がかかる
 
-この問題は解決しました。コードを最新版に更新することで解決します。
+コードを最新版に更新することで解決します。
 
 #### 長いシーケンスの処理で不満足なパフォーマンス
 
@@ -72,7 +69,7 @@ NTK が適用されていることを確認してください。`config.json` �
 
 #### Qwen は SFT、あるいは RLHF に対応できますか？
 
-今のところ、ファインチューニングや RLHF のコードは提供していません。しかし、[FastChat](**[https://github.com/lm-sys/FastChat](https://github.com/lm-sys/FastChat))、[Firefly]([https://github.com/yangjianxin1/Firefly](https://github.com/yangjianxin1/Firefly))、[**LLaMA Efficient Tuning**]([https://github.com/hiyouga/LLaMA-Efficient-Tuning](https://github.com/hiyouga/LLaMA-Efficient-Tuning))など、いくつかのプロジェクトではファインチューニングをサポートしています。近日中に関連コードを更新する予定です。
+SFTのコードは提供します。[FastChat](**[https://github.com/lm-sys/FastChat](https://github.com/lm-sys/FastChat))、[Firefly]([https://github.com/yangjianxin1/Firefly](https://github.com/yangjianxin1/Firefly))、[**LLaMA Efficient Tuning**]([https://github.com/hiyouga/LLaMA-Efficient-Tuning](https://github.com/hiyouga/LLaMA-Efficient-Tuning))など、いくつかのプロジェクトではファインチューニングをサポートしています。近日中に関連コードを更新する予定です。
 <br><br>
 
 

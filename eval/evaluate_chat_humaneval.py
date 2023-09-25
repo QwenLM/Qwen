@@ -1,4 +1,3 @@
-
 import re
 import textwrap
 import argparse
@@ -18,6 +17,7 @@ evaluate_functional_correctness HumanEval_res.jsonl
 """
 
 DEVICE = "cuda:0"
+
 
 def extract_code(text, entry_point):
     # 正则表达式匹配代码块
@@ -99,7 +99,26 @@ if __name__ == "__main__":
     f = jsonlines.open(args.sample_input_file)
     with f_output as output:
         for jobj in tqdm.tqdm(f, desc="task_idx"):
-            prompt = "Help me fill the following code.\n" + jobj["prompt"]
+            # use humanevalpack prompt
+            signature = re.search(
+                rf"def\s+({jobj['entry_point']}.*?):\s*\n", jobj["prompt"]
+            ).group(1)
+            description = "\n".join(
+                [
+                    line.strip()
+                    for line in re.search(
+                        rf"(?:\"\"\"|''')(.*?)(?:\"\"\"|''')", jobj["prompt"], re.DOTALL
+                    )
+                    .group(1)
+                    .split("\n")
+                ]
+            )
+            prompt = (
+                f"Write a Python function `{signature}` to solve the following problem:\n"
+                f"{description}\n"
+                f"{jobj['prompt']}"
+            )
+
             task_id = jobj["task_id"]
             answer, response = generate_sample(
                 model, tokenizer, prompt, jobj["entry_point"]

@@ -4,32 +4,45 @@
 <br><br>
 
 <p align="center">
-    <img src="assets/logo.jpg" width="400"/>
+    <img src="assets/logoqwen.jpg" width="400"/>
 <p>
 <br>
 
 <p align="center">
-        Qwen-7B <a href="https://modelscope.cn/models/qwen/Qwen-7B/summary">🤖 <a> | <a href="https://huggingface.co/Qwen/Qwen-7B">🤗</a>&nbsp ｜ Qwen-7B-Chat <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">🤖 <a> | <a href="https://huggingface.co/Qwen/Qwen-7B-Chat">🤗</a>&nbsp | Qwen-7B-Chat-Int4 <a href="https://huggingface.co/Qwen/Qwen-7B-Chat-Int4">🤗</a>
+        🤗 <a href="https://huggingface.co/Qwen">Hugging Face</a>&nbsp&nbsp | &nbsp&nbsp🤖 <a href="https://modelscope.cn/models/qwen">魔搭社区<a>&nbsp&nbsp | &nbsp&nbsp 📑 论文&nbsp&nbsp ｜ &nbsp&nbsp🖥️ <a href="https://modelscope.cn/studios/qwen/Qwen-7B-Chat-Demo/summary">Demo</a>
 <br>
-<a href="assets/wechat.png">WeChat</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/z3GAxXZ9Ce">Discord</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://modelscope.cn/studios/qwen/Qwen-7B-Chat-Demo/summary">Demo</a>&nbsp ｜ &nbsp<a href="https://github.com/QwenLM/Qwen-7B/blob/main/tech_memo.md">Report</a>
+<a href="assets/wechat.png">微信</a>&nbsp&nbsp ｜ &nbsp&nbsp 钉钉 &nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/z3GAxXZ9Ce">Discord</a>&nbsp&nbsp
 </p>
 <br><br>
 
-我们在🤖 **ModelScope**以及🤗 **Hugging Face**均开源了**Qwen-7B**系列模型。请在本文档顶部点击相关链接查看仓库信息。本仓库主要包括Qwen-7B的简介、使用指南、技术备忘等内容。想了解更多关于模型的信息，请点击[链接](tech_memo.md)查看我们的技术备忘录。
+|     |                                                              Qwen-Chat                                                               |                                                                Qwen-Chat (Int4)                                                                |                                                            Qwen                                                            |
+|-----|:------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------:|
+| 7B  |  <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">🤖 <a>  <a href="https://huggingface.co/Qwen/Qwen-7B-Chat">🤗</a>  |  <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat-Int4/summary">🤖 <a>  <a href="https://huggingface.co/Qwen/Qwen-7B-Chat-Int4">🤗</a>  |  <a href="https://modelscope.cn/models/qwen/Qwen-7B/summary">🤖 <a>  <a href="https://huggingface.co/Qwen/Qwen-7B">🤗</a>  |
+| 14B | <a href="https://modelscope.cn/models/qwen/Qwen-14B-Chat/summary">🤖 <a>  <a href="https://huggingface.co/Qwen/Qwen-14B-Chat">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-14B-Chat-Int4/summary">🤖 <a>  <a href="https://huggingface.co/Qwen/Qwen-14B-Chat-Int4">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-14B/summary">🤖 <a>  <a href="https://huggingface.co/Qwen/Qwen-14B">🤗</a> |
 
-通义千问-7B（Qwen-7B） 是阿里云研发的通义千问大模型系列的70亿参数规模的模型。Qwen-7B是基于Transformer的大语言模型, 在超大规模的预训练数据上进行训练得到。预训练数据类型多样，覆盖广泛，包括大量网络文本、专业书籍、代码等。同时，在Qwen-7B的基础上，我们使用对齐机制打造了基于大语言模型的AI助手Qwen-7B-Chat。Qwen-7B系列模型的特点包括：
+我们开源了**Qwen**（通义千问）系列工作，当前开源模型的参数规模为70亿（7B）和140亿（14B）。本次开源包括基础模型**Qwen**，即**Qwen-7B**和**Qwen-14B**，以及对话模型**Qwen-Chat**，即**Qwen-7B-Chat**和**Qwen-14B-Chat**。模型链接在表格中，请点击了解详情。
 
-1. **大规模高质量预训练数据**：我们使用了超过2.2万亿token的自建大规模预训练数据集进行语言模型的预训练。数据集包括文本和代码等多种数据类型，覆盖通用领域和专业领域。
-2. **优秀的模型性能**：相比同规模的开源模型，Qwen-7B在多个评测数据集上具有显著优势，甚至超出12-13B等更大规模的模型。评测评估的能力范围包括自然语言理解与生成、数学运算解题、代码生成等。
-3. **更好地支持多语言**：基于更大词表的分词器在分词上更高效，同时它对其他语言表现更加友好。用户可以在Qwen-7B的基础上更方便地训练特定语言的7B语言模型。
-4. **8K的上下文长度**：Qwen-7B及Qwen-7B-Chat均能支持8K的上下文长度, 允许用户输入更长的prompt。
-5. **支持插件调用**：Qwen-7B-Chat针对插件调用相关的对齐数据做了特定优化，当前模型能有效调用插件以及升级为Agent。
+当前基础模型已经稳定训练了大规模高质量且多样化的数据，覆盖多语言（当前绝以中文和英文为主），总量高达3万亿token。在相关基准评测中，Qwen系列模型拿出非常有竞争力的表现，显著超出同规模模型并紧追一系列最强的闭源模型。此外，我们利用SFT和RLHF技术实现对齐，从基座模型训练得到对话模型。Qwen-Chat具备聊天、文字创作、摘要、信息抽取、翻译等能力，同时还具备一定的代码生成和简单数学推理的能力。在此基础上，我们针对LLM对接外部系统等方面针对性地做了优化，当前具备较强的工具调用能力，以及最近备受关注的Code Interpreter的能力和扮演Agent的能力。
 
-以下章节的信息可能对你有帮助，建议阅读。如果你在使用过程遇到问题，建议先查询FAQ，如仍无法解决再提交issue。
+在这个项目中，你可以了解到以下内容
+
+* 快速上手Qwen-Chat教程，玩转大模型推理.
+* 量化模型相关细节，包括用法、显存占用、推理性能等。这部分还提供了和非量化模型的对比。
+* 微调的教程，帮你实现全参数微调、LoRA以及Q-LoRA。
+* 搭建Demo的方法，包括WebUI和CLI Demo
+* 更多关于Qwen在工具调用、Code Interpreter、Agent方面的内容
+* 长序列理解能力及评测
+* 使用协议
+* ...
+
+如果遇到问题，请优先考虑查询[FAQ](FAQ.md)。如仍未解决，随时提出issue（但建议使用英语或提供翻译，有助于帮助更多用户）。如果想帮助我们提升，欢迎提交Pull Requests！
+
+想和我们一起讨论和聊天的话，赶紧加入我们的微信群和Discord server（入口见文档开头部分）！
 <br><br>
 
 ## 新闻
 
+* 2023年9月25日 在魔搭社区（ModelScope）和Hugging Face同步推出Qwen-14B和Qwen-14B-Chat模型。
 * 2023年9月12日 支持Qwen-7B和Qwen-7B-Chat的微调，其中包括全参数微调、LoRA以及Q-LoRA。
 * 2023年8月21日 发布Qwen-7B-Chat的Int4量化模型，Qwen-7B-Chat-Int4。该模型显存占用低，推理速度相比半精度模型显著提升，在基准评测上效果损失较小。
 * 2023年8月3日 在魔搭社区（ModelScope）和Hugging Face同步推出Qwen-7B和Qwen-7B-Chat模型。同时，我们发布了技术备忘录，介绍了相关的训练细节和模型表现。
@@ -37,29 +50,32 @@
 
 ## 评测表现
 
-Qwen-7B在多个全面评估自然语言理解与生成、数学运算解题、代码生成等能力的评测数据集上，包括MMLU、C-Eval、GSM8K、HumanEval、WMT22、CMMLU等，均超出了同规模大语言模型的表现，甚至超出了如12-13B参数等更大规模的语言模型。
+Qwen-14B及Qwen-7B (最新版本使用更大量的token进行预训练)相比同规模模型均实现了效果的显著提升。我们评测的数据集包括MMLU、C-Eval、 GSM8K、 MATH、HumanEval、MBPP、BBH等数据集，考察的能力包括自然语言理解、知识、数学计算和推理、代码生成、逻辑推理等。当然，即便Qwen-14B相比GPT-3.5和GPT-4仍有差距。 
 
-| Model             | MMLU           |         C-Eval |          GSM8K |      HumanEval |  WMT22 (en-zh) |         CMMLU |
-| :---------------- | :------------: | :------------: | :------------: | :------------: | :------------: |:------------: |
-| LLaMA-7B          | 35.1           |              - |           11.0 |           10.5 |            8.7 |             - |
-| LLaMA 2-7B        | 45.3           |              - |           14.6 |           12.8 |           17.9 |             - |
-| Baichuan-7B       | 42.3           |           42.8 |            9.7 |            9.2 |           26.6 |          44.4 |
-| ChatGLM2-6B       | 47.9           |           51.7 |           32.4 |            9.2 |              - |          48.8 |
-| InternLM-7B       | 51.0           |           52.8 |           31.2 |           10.4 |           14.8 |             - |
-| Baichuan-13B      | 51.6           |           53.6 |           26.6 |           12.8 |           30.0 |          55.8 |
-| LLaMA-13B         | 46.9           |           35.5 |           17.8 |           15.8 |           12.0 |             - |
-| LLaMA 2-13B       | 54.8           |              - |           28.7 |           18.3 |           24.2 |             - |
-| ChatGLM2-12B      | 56.2           |       **61.6** |           40.9 |              - |              - |             - |
-| **Qwen-7B**       | **56.7**       |           59.6 |       **51.6** |       **24.4** |       **30.6** |      **58.8** |
-
-<p align="center">
-    <img src="assets/performance.png" width="1000"/>
+<p align="left">
+    <img src="assets/radar_14b.jpg" width="600"/>
 <p>
 <br>
 
-此外，根据[OpenCompass](https://opencompass.org.cn/leaderboard-llm)进行的大型语言模型第三方评估，Qwen-7B 和 Qwen-7B-Chat 是其中表现最优的7B参数模型。该评估由大量公开基准组成，用于评估语言理解和生成、代码生成、数学、推理等。
+| Model                  |   MMLU   |  C-Eval  |  GSM8K   |   MATH   | HumanEval |   MBPP    |   BBH    |  CMMLU   |
+|:-----------------------|:--------:|:--------:|:--------:|:--------:|:---------:|:---------:|:--------:|:--------:|
+|                        |  5-shot  |  5-shot  |  8-shot  |  4-shot  |  0-shot   |  3-shot   |  3-shot  |  5-shot  |
+| LLaMA2-7B              |   46.8   |   32.5   |   16.7   |   3.3    |   12.8    |   20.8    |   38.2   |   31.8   |
+| LLaMA2-13B             |   55.0   |   41.4   |   29.6   |   5.0    |   18.9    |   30.3    |   45.6   |   38.4   |
+| LLaMA2-34B             |   62.6   |    -     |   42.2   |   6.2    |   22.6    |   33.0    |   44.1   |    -     |
+| ChatGLM2-6B            |   47.9   |   51.7   |   32.4   |   6.5    |     -     |     -     |   33.7   |    -     |
+| InternLM-7B            |   51.0   |   52.8   |   31.2   |   6.3    |   10.4    |   14.0    |   37.0   |   51.8   |
+| InternLM-20B           |   62.1   |   58.8   |   52.6   |   7.9    |   25.6    |   35.6    |   52.5   |   59.0   |
+| Baichuan2-7B           |   54.2   |   54.0   |   24.5   |   5.6    |   18.3    |   24.2    |   41.6   |   57.1   |
+| Baichuan2-13B          |   59.2   |   58.1   |   52.8   |   10.1   |   17.1    |   30.2    |   48.8   |   62.0   |
+| **Qwen-7B (original)** |   56.7   |   59.6   |   51.6   |     10.4     |   24.4    |   31.2    |   40.6   |   58.8   |
+| **Qwen-7B**            |   58.2   |   63.5   |   51.7   |   11.6   |   29.9    |   31.6    |   45.0   |   62.2   |
+| **Qwen-14B**           | **66.3** | **72.1** | **61.3** | **24.8** | **32.3**  | **40.8**  | **53.4** | **71.0** |
 
-更多的实验结果和细节请查看我们的技术备忘录。点击[这里](tech_memo.md)。
+
+对于以上所有对比模型，我们列出了其官方汇报结果与[OpenCompass](https://opencompass.org.cn/leaderboard-llm)结果之间的最佳分数。
+
+更多的实验结果和细节请查看我们的技术备忘录。点击[这里](TODO)。
 <br><br>
 
 ## 要求
@@ -93,13 +109,13 @@ cd flash-attention && pip install .
 
 #### 🤗 Transformers
 
-如希望使用Qwen-7B-chat进行推理，所需要写的只是如下所示的数行代码。**请确保你使用的是最新代码。**
+如希望使用Qwen-chat进行推理，所需要写的只是如下所示的数行代码。**请确保你使用的是最新代码，并指定正确的模型名称和路径，如`Qwen/Qwen-7B-Chat`和`Qwen/Qwen-14B-Chat`**
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
-# 请注意：分词器默认行为已更改为默认关闭特殊token攻击防护。
+# 可选的模型包括: "Qwen/Qwen-7B-Chat", "Qwen/Qwen-14B-Chat"
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
 # 打开bf16精度，A100、H100、RTX3060、RTX3070等显卡建议启用以节省显存
@@ -135,15 +151,16 @@ print(response)
 # 《奋斗创业：一个年轻人的成功之路》
 ```
 
-运行Qwen-7B同样非常简单。
+运行Qwen同样非常简单。
 
 <details>
-  <summary>运行Qwen-7B</summary>
+  <summary>运行Qwen</summary>
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
+# 可选的模型包括: "Qwen/Qwen-7B", "Qwen/Qwen-14B"
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
 
 # 打开bf16精度，A100、H100、RTX3060、RTX3070等显卡建议启用以节省显存
@@ -175,6 +192,7 @@ print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 from modelscope import AutoModelForCausalLM, AutoTokenizer
 from modelscope import GenerationConfig
 
+# 可选的模型包括: "qwen/Qwen-7B-Chat", "qwen/Qwen-14B-Chat"
 tokenizer = AutoTokenizer.from_pretrained("qwen/Qwen-7B-Chat", revision='v1.0.5', trust_remote_code=True)
 model = AutoModelForCausalLM.from_pretrained("qwen/Qwen-7B-Chat", revision='v1.0.5', device_map="auto", trust_remote_code=True, fp16=True).eval()
 model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", revision='v1.0.5', trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
@@ -188,18 +206,11 @@ print(response)
 ```
 <br>
 
-## Tokenization
-
-> 注：作为术语的“tokenization”在中文中尚无共识的概念对应，本文档采用英文表达以利说明。
-
-基于tiktoken的tokenizer有别于其他分词器，比如sentencepiece tokenizer。尤其在微调阶段，需要特别注意特殊token的使用。关于tokenizer的更多信息，以及微调时涉及的相关使用，请参阅[文档](tokenization_note_zh.md)。
-<br><br>
-
 ## 量化
 
 ### 用法
 
-**请注意：我们更新量化方案为基于[AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ)的量化，提供Qwen-7B-Chat的Int4量化模型[点击这里](https://huggingface.co/Qwen/Qwen-7B-Chat-Int4)。相比此前方案，该方案在模型评测效果几乎无损，且存储需求更低，推理速度更优。**
+**请注意：我们更新量化方案为基于[AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ)的量化，提供Int4量化模型，包括Qwen-7B-Chat [Click here](https://huggingface.co/Qwen/Qwen-7B-Chat-Int4)和Qwen-14B-Chat [Click here](https://huggingface.co/Qwen/Qwen-14B-Chat-Int4)。该方案在模型评测效果几乎无损，且存储需求更低，推理速度更优。**
 
 以下我们提供示例说明如何使用Int4量化模型。在开始使用前，请先保证满足要求（如torch 2.0及以上，transformers版本为4.32.0及以上，等等），并安装所需安装包：
 
@@ -212,6 +223,7 @@ pip install auto-gptq optimum
 随后即可使用和上述一致的用法调用量化模型：
 
 ```python
+# 可选模型包括："Qwen/Qwen-7B-Chat-Int4", "Qwen/Qwen-14B-Chat-Int4"
 model = AutoModelForCausalLM.from_pretrained(
     "Qwen/Qwen-7B-Chat-Int4",
     device_map="auto",
@@ -223,19 +235,23 @@ response, history = model.chat(tokenizer, "Hi", history=None)
 
 我们对BF16和Int4模型在基准评测上做了测试，发现量化模型效果损失较小，结果如下所示：
 
-|  Quantization |   MMLU     |  CEval (val) |  GSM8K |  Humaneval |
-| ------------- | :--------: | :----------: | :----: | :--------: |
-| BF16          |    53.9    |     54.2     |  41.1  |    24.4    |
-| Int4          |    52.6    |     52.9     |  38.1  |    23.8    |
+| Quantization         | MMLU | CEval (val) | GSM8K | Humaneval |
+|----------------------|:----:|:-----------:|:-----:|:---------:|
+| Qwen-7B-Chat (BF16)  | 53.9 |    54.2     | 41.1  |   24.4    |
+| Qwen-7B-Chat (Int4)  | 52.6 |    52.9     | 38.1  |   23.8    |
+| Qwen-14B-Chat (BF16) | 64.6 |    69.8     | 61.0  |   43.9    |
+| Qwen-14B-Chat (Int4) | 63.3 |    69.0     | 59.8  |   45.7    |
 
 ### 推理速度
 
 我们测算了BF16和Int4模型生成2048和8192个token的平均推理速度（tokens/s）。如图所示：
 
-|  Quantization | Speed (2048 tokens) | Speed (8192 tokens) |
-| ------------- | :------------------:| :------------------:|
-|      BF16     | 30.34               | 29.32               |
-|      Int4     | 43.56               | 33.92               |
+| Quantization         | Speed (2048 tokens) | Speed (8192 tokens) |
+|----------------------|:-------------------:|:-------------------:|
+| Qwen-7B-Chat (BF16)  |        30.34        |        29.32        |
+| Qwen-7B-Chat (Int4)  |        43.56        |        33.92        |
+| Qwen-14B-Chat (BF16) |        30.70        |        21.73        |
+| Qwen-14B-Chat (Int4) |        37.11        |        26.11        |
 
 具体而言，我们记录在长度为1的上下文的条件下生成8192个token的性能。评测运行于单张A100-SXM4-80G GPU，使用PyTorch 2.0.1和CUDA 11.4。推理速度是生成8192个token的速度均值。
 
@@ -243,10 +259,12 @@ response, history = model.chat(tokenizer, "Hi", history=None)
 
 我们还测算了BF16和Int4模型编码2048个token及生成8192个token的峰值显存占用情况。结果如下所示：
 
-| Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
-| ------------------ | :---------------------------------: | :-----------------------------------: |
-| BF16               |               17.66GB               |                22.58GB                |
-| Int4               |               8.21GB                |                13.62GB                |
+| Quantization         | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
+|----------------------|:-----------------------------------:|:-------------------------------------:|
+| Qwen-7B-Chat (BF16)  |               17.66GB               |                22.58GB                |
+| Qwen-7B-Chat (Int4)  |               8.21GB                |                13.62GB                |
+| Qwen-14B-Chat (BF16) |               30.15GB                 |                38.94GB                  |
+| Qwen-14B-Chat (Int4) |               13.00GB                 |                21.79GB                  |
 
 上述性能测算使用[此脚本](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)完成。
 <br><br>
@@ -439,54 +457,272 @@ model = load_model_on_gpus('Qwen/Qwen-7B-Chat', num_gpus=2)
 
 ## 工具调用
 
-Qwen-7B-Chat针对包括API、数据库、模型等工具在内的调用进行了优化。用户可以开发基于Qwen-7B的LangChain、Agent甚至Code Interpreter。在我们开源的[评测数据集](eval/EVALUATION.md)上测试模型的工具调用能力，并发现Qwen-7B-Chat能够取得稳定的表现。
+Qwen-Chat针对工具使用、函数调用能力进行了优化。用户可以开发基于Qwen的Agent、LangChain应用、甚至Code Interpreter。
 
-| Model            | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑)  | False Positive Error↓  |
-|:-----------------|:----------------------:|:----------------------:|:----------------------:|
-| GPT-4            | 95%                    | **0.90**               | 15%                    |
-| GPT-3.5          | 85%                    | 0.88                   | 75%                    |
-| **Qwen-7B-Chat** | **99%**                | 0.89                   | **9.7%**               |
+我们提供了文档说明如何根据ReAct Prompting的原理实现工具调用，请参见[ReAct示例](examples/react_prompt.md)。基于该原理，我们在 [openai_api.py](openai_api.py) 里提供了函数调用（Function Calling）的支持。
+我们在已开源的中文[评测数据集](eval/EVALUATION.md)上测试模型的工具调用能力，并发现Qwen-Chat能够取得稳定的表现：
 
-我们提供了文档说明如何根据ReAct Prompting的原则写作你的prompt。
+<table>
+    <tr>
+        <th colspan="4" align="center">中文工具调用评测基准</th>
+    </tr>
+    <tr>
+        <th align="center">Model</th><th align="center">Tool Selection (Acc.↑)</th><th align="center">Tool Input (Rouge-L↑)</th><th align="center">False Positive Error↓</th>
+    </tr>
+    <tr>
+        <td>GPT-4</td><td align="center">95%</td><td align="center">0.90</td><td align="center">15.0%</td>
+    </tr>
+    <tr>
+        <td>GPT-3.5</td><td align="center">85%</td><td align="center">0.88</td><td align="center">75.0%</td>
+    </tr>
+    <tr>
+        <td>Qwen-7B-Chat</td><td align="center">98%</td><td align="center">0.91</td><td align="center">7.3%</td>
+    </tr>
+    <tr>
+        <td>Qwen-14B-Chat</td><td align="center">98%</td><td align="center">0.93</td><td align="center">2.4%</td>
+    </tr>
+</table>
 
-For how to write and use prompts for ReAct Prompting, please refer to [the ReAct examples](examples/react_prompt.md)。
+为了考察Qwen使用Python Code Interpreter完成数学解题、数据可视化、及文件处理与爬虫等任务的能力，我们专门建设并开源了一个评测这方面能力的[评测基准](https://github.com/QwenLM/Qwen-Agent/tree/main/benchmark)。
+我们发现Qwen在生成代码的可执行率、结果正确性上均表现较好：
 
-此外，我们还提供了实验结果表明我们的模型扮演Agent的能力。请阅读相关文档[链接](https://huggingface.co/docs/transformers/transformers_agents)了解更多信息。模型在Hugging Face提供的评测数据集上表现如下：
+<table>
+    <tr>
+        <th colspan="4" align="center">生成代码的可执行率 (%)</th>
+    </tr>
+    <tr>
+        <th align="center">Model</th><th align="center">Math↑</th><th align="center">Visualization↑</th><th align="center">General↑</th>
+    </tr>
+    <tr>
+        <td>GPT-4</td><td align="center">91.9</td><td align="center">85.9</td><td align="center">82.8</td>
+    </tr>
+    <tr>
+        <td>GPT-3.5</td><td align="center">89.2</td><td align="center">65.0</td><td align="center">74.1</td>
+    </tr>
+    <tr>
+        <td>LLaMA2-7B-Chat</td>
+        <td align="center">41.9</td>
+        <td align="center">33.1</td>
+        <td align="center">24.1 </td>
+    </tr>
+    <tr>
+        <td>LLaMA2-13B-Chat</td>
+        <td align="center">50.0</td>
+        <td align="center">40.5</td>
+        <td align="center">48.3 </td>
+    </tr>
+    <tr>
+        <td>CodeLLaMA-7B-Instruct</td>
+        <td align="center">85.1</td>
+        <td align="center">54.0</td>
+        <td align="center">70.7 </td>
+    </tr>
+    <tr>
+        <td>CodeLLaMA-13B-Instruct</td>
+        <td align="center">93.2</td>
+        <td align="center">55.8</td>
+        <td align="center">74.1 </td>
+    </tr>
+    <tr>
+        <td>InternLM-7B-Chat-v1.1</td>
+        <td align="center">78.4</td>
+        <td align="center">44.2</td>
+        <td align="center">62.1 </td>
+    </tr>
+    <tr>
+        <td>InternLM-20B-Chat</td>
+        <td align="center">70.3</td>
+        <td align="center">44.2</td>
+        <td align="center">65.5 </td>
+    </tr>
+    <tr>
+        <td>Qwen-7B-Chat</td>
+        <td align="center">82.4</td>
+        <td align="center">64.4</td>
+        <td align="center">67.2 </td>
+    </tr>
+    <tr>
+        <td>Qwen-14B-Chat</td>
+        <td align="center">89.2</td>
+        <td align="center">84.1</td>
+        <td align="center">65.5</td>
+    </tr>
+</table>
 
-| Model            | Tool Selection↑ | Tool Used↑  |   Code↑   |
-|:-----------------|:---------------:|:-----------:|:---------:|
-| GPT-4            |     **100**     |   **100**   | **97.41** |
-| GPT-3.5          |      95.37      |    96.30    |   87.04   |
-| StarCoder-15.5B  |      87.04      |    87.96    |   68.89   |
-| **Qwen-7B-Chat** |      90.74      |    92.59    |   74.07   |
+<table>
+    <tr>
+        <th colspan="4" align="center">代码执行结果的正确率 (%)</th>
+    </tr>
+    <tr>
+        <th align="center">Model</th><th align="center">Math↑</th><th align="center">Visualization-Hard↑</th><th align="center">Visualization-Easy↑</th>
+    </tr>
+    <tr>
+        <td>GPT-4</td><td align="center">82.8</td><td align="center">66.7</td><td align="center">60.8</td>
+    </tr>
+    <tr>
+        <td>GPT-3.5</td><td align="center">47.3</td><td align="center">33.3</td><td align="center">55.7</td>
+    </tr>
+    <tr>
+        <td>LLaMA2-7B-Chat</td>
+        <td align="center">3.9</td>
+        <td align="center">14.3</td>
+        <td align="center">39.2 </td>
+    </tr>
+    <tr>
+        <td>LLaMA2-13B-Chat</td>
+        <td align="center">8.3</td>
+        <td align="center">8.3</td>
+        <td align="center">40.5 </td>
+    </tr>
+    <tr>
+        <td>CodeLLaMA-7B-Instruct</td>
+        <td align="center">14.3</td>
+        <td align="center">26.2</td>
+        <td align="center">60.8 </td>
+    </tr>
+    <tr>
+        <td>CodeLLaMA-13B-Instruct</td>
+        <td align="center">28.2</td>
+        <td align="center">27.4</td>
+        <td align="center">62.0 </td>
+    </tr>
+    <tr>
+        <td>InternLM-7B-Chat-v1.1</td>
+        <td align="center">28.5</td>
+        <td align="center">4.8</td>
+        <td align="center">40.5 </td>
+    </tr>
+    <tr>
+        <td>InternLM-20B-Chat</td>
+        <td align="center">34.6</td>
+        <td align="center">21.4</td>
+        <td align="center">45.6 </td>
+    </tr>
+    <tr>
+        <td>Qwen-7B-Chat</td>
+        <td align="center">41.9</td>
+        <td align="center">40.5</td>
+        <td align="center">54.4 </td>
+    </tr>
+    <tr>
+        <td>Qwen-14B-Chat</td>
+        <td align="center">58.4</td>
+        <td align="center">53.6</td>
+        <td align="center">59.5</td>
+    </tr>
+</table>
+
+<p align="center">
+    <br>
+    <img src="assets/code_interpreter_showcase_001.jpg" />
+    <br>
+<p>
+
+此外，我们还提供了实验结果表明我们的模型具备扮演HuggingFace Agent的能力，详见[示例文档](examples/transformers_agent.md)了解更多信息。模型在Hugging Face提供的评测数据集上表现如下：
+
+<table>
+    <tr>
+        <th colspan="4" align="center">HuggingFace Agent评测基准 - Run模式</th>
+    </tr>
+    <tr>
+        <th align="center">Model</th><th align="center">Tool Selection↑</th><th align="center">Tool Used↑</th><th align="center">Code↑</th>
+    </tr>
+    <tr>
+        <td>GPT-4</td><td align="center">100</td><td align="center">100</td><td align="center">97.4</td>
+    </tr>
+    <tr>
+        <td>GPT-3.5</td><td align="center">95.4</td><td align="center">96.3</td><td align="center">87.0</td>
+    </tr>
+    <tr>
+        <td>StarCoder-Base-15B</td><td align="center">86.1</td><td align="center">87.0</td><td align="center">68.9</td>
+    </tr>
+    <tr>
+        <td>StarCoder-15B</td><td align="center">87.0</td><td align="center">88.0</td><td align="center">68.9</td>
+    </tr>
+    <tr>
+        <td>Qwen-7B-Chat</td><td align="center">87.0</td><td align="center">87.0</td><td align="center">71.5</td>
+    </tr>
+    <tr>
+        <td>Qwen-14B-Chat</td><td align="center">93.5</td><td align="center">94.4</td><td align="center">87.0</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th colspan="4" align="center">HuggingFace Agent评测基准 - Chat模式</th>
+    </tr>
+    <tr>
+        <th align="center">Model</th><th align="center">Tool Selection↑</th><th align="center">Tool Used↑</th><th align="center">Code↑</th>
+    </tr>
+    <tr>
+        <td>GPT-4</td><td align="center">97.9</td><td align="center">97.9</td><td align="center">98.5</td>
+    </tr>
+    <tr>
+        <td>GPT-3.5</td><td align="center">97.3</td><td align="center">96.8</td><td align="center">89.6</td>
+    </tr>
+    <tr>
+        <td>StarCoder-Base-15B</td><td align="center">97.9</td><td align="center">97.9</td><td align="center">91.1</td>
+    </tr>
+    <tr>
+        <td>StarCoder-15B</td><td align="center">97.9</td><td align="center">97.9</td><td align="center">89.6</td>
+    </tr>
+    <tr>
+        <td>Qwen-7B-Chat</td><td align="center">94.7</td><td align="center">94.7</td><td align="center">85.1</td>
+    </tr>
+    <tr>
+        <td>Qwen-14B-Chat</td><td align="center">97.9</td><td align="center">97.9</td><td align="center">95.5</td>
+    </tr>
+</table>
 
 <br>
 
 ## 长文本理解
 
-我们引入了NTK插值、窗口注意力、LogN注意力缩放等技术来提升模型的上下文长度并突破训练序列长度的限制。我们的模型已经突破8K的序列长度。通过arXiv数据集上的语言模型实验，我们发现Qwen-7B能够在长序列的设置下取得不错的表现。
+我们引入了NTK插值、窗口注意力、LogN注意力缩放等技术来提升模型的上下文长度并突破训练序列长度的限制。通过arXiv数据集上的语言模型实验，我们的原生长度为2K的Qwen-7B/14B在8K的序列长度下依然表现不错，而原生长度扩展到8K的Qwen-7B能够在32K长序列的设置下取得不错的表现。
 
 <table>
     <tr>
-        <th rowspan="2">Model</th><th colspan="5" align="center">Sequence Length</th>
+        <th rowspan="2">Model</th><th colspan="6" align="center">Sequence Length</th>
     </tr>
     <tr>
-        <th align="center">1024</th><th align="center">2048</th><th align="center">4096</th><th align="center">8192</th><th align="center">16384</th>
+        <th align="center">1024</th><th align="center">2048</th><th align="center">4096</th><th align="center">8192</th><th align="center">16384</th><th align="center">32768</th>
+    </tr>
+     <tr>
+        <td>Qwen-7B (original)</td><td align="center">4.23</td><td align="center">3.78</td><td align="center">39.35</td><td align="center">469.81</td><td align="center">2645.09</td><td align="center">-</td>
     </tr>
     <tr>
-        <td>Qwen-7B</td><td align="center"><b>4.23</b></td><td align="center"><b>3.78</b></td><td align="center">39.35</td><td align="center">469.81</td><td align="center">2645.09</td>
+        <td>+ dynamic_ntk</td><td align="center">4.23</td><td align="center">3.78</td><td align="center">3.59</td><td align="center">3.66</td><td align="center">5.71</td><td align="center">-</td>
     </tr>
     <tr>
-        <td>+ dynamic_ntk</td><td align="center"><b>4.23</b></td><td align="center"><b>3.78</b></td><td align="center">3.59</td><td align="center">3.66</td><td align="center">5.71</td>
+        <td>+ dynamic_ntk + logn</td><td align="center">4.23</td><td align="center">3.78</td><td align="center">3.58</td><td align="center">3.56</td><td align="center">4.62</td><td align="center">-</td>
     </tr>
     <tr>
-        <td>+ dynamic_ntk + logn</td><td align="center"><b>4.23</b></td><td align="center"><b>3.78</b></td><td align="center"><b>3.58</b></td><td align="center">3.56</td><td align="center">4.62</td>
+        <td>+ dynamic_ntk + logn + window_attn</td><td align="center">4.23</td><td align="center">3.78</td><td align="center">3.58</td><td align="center">3.49</td><td align="center">4.32</td><td align="center">-</td>
     </tr>
     <tr>
-        <td>+ dynamic_ntk + logn + local_attn</td><td align="center"><b>4.23</b></td><td align="center"><b>3.78</b></td><td align="center"><b>3.58</b></td><td align="center"><b>3.49</b></td><td align="center"><b>4.32</b></td>
+    <tr>
+        <td>Qwen-7B</td><td align="center"><b>4.23</b></td><td align="center"><b>3.81</b></td><td align="center"><b>3.52</b></td><td align="center"><b>3.31</b></td><td align="center">7.27</td><td align="center">181.49</td>
+    </tr>
+    <tr>
+        <td>+ dynamic_ntk</td><td align="center"><b>4.23</b></td><td align="center"><b>3.81</b></td><td align="center"><b>3.52</b></td><td align="center"><b>3.31</b></td><td align="center"><b>3.23</b></td><td align="center">3.33</td>
+    </tr>
+    <tr>
+        <td>+ dynamic_ntk + logn + window_attn</td><td align="center"><b>4.23</b></td><td align="center"><b>3.81</b></td><td align="center"><b>3.52</b></td><td align="center"><b>3.33</b></td><td align="center"><b>3.22</b></td><td align="center"><b>3.17</b></td>
+    </tr>
+    <tr>
+        <td>Qwen-14B</td><td align="center"><b>-</b></td><td align="center"><b>3.46</b></td><td align="center">22.79</td><td align="center">334.65</td><td align="center">3168.35</td><td align="center">-</td>
+    </tr>
+    <tr>
+        <td>+ dynamic_ntk + logn + window_attn</td><td align="center"><b>-</b></td><td align="center"><b>3.46</b></td><td align="center"><b>3.29</b></td><td align="center"><b>3.18</b></td><td align="center">3.42</td><td align="center">-</td>
     </tr>
 </table>
-<br>
+
+## Tokenization
+
+> 注：作为术语的“tokenization”在中文中尚无共识的概念对应，本文档采用英文表达以利说明。
+
+基于tiktoken的tokenizer有别于其他分词器，比如sentencepiece tokenizer。尤其在微调阶段，需要特别注意特殊token的使用。关于tokenizer的更多信息，以及微调时涉及的相关使用，请参阅[文档](tokenization_note_zh.md)。
+<br><br>
 
 ## 复现
 
@@ -500,10 +736,10 @@ For how to write and use prompts for ReAct Prompting, please refer to [the ReAct
 
 ## 使用协议
 
-研究人员与开发者可使用Qwen-7B和Qwen-7B-Chat或进行二次开发。我们同样允许商业使用，具体细节请查看[LICENSE](LICENSE)。如需商用，请填写[问卷](https://dashscope.console.aliyun.com/openModelApply/qianwen)申请。
+研究人员与开发者可使用Qwen和Qwen-Chat或进行二次开发。我们同样允许商业使用，具体细节请查看[LICENSE](LICENSE)。如需商用，请填写[问卷](https://dashscope.console.aliyun.com/openModelApply/qianwen)申请。
 <br><br>
 
 ## 联系我们
 
-如果你想给我们的研发团队和产品团队留言，请通过邮件（qianwen_opensource@alibabacloud.com）联系我们。
+如果你想给我们的研发团队和产品团队留言，欢迎加入我们的微信群和Discord server。当然也可以通过邮件（qianwen_opensource@alibabacloud.com）联系我们。
 

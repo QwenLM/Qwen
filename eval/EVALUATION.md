@@ -12,7 +12,7 @@ cd ../../
 # Qwen-7B
 python evaluate_ceval.py -d data/ceval/
 
-# Qwen-7B-Chat
+# Qwen-7B-Chat (We only provide 0-shot reproduction scripts. 5-shot results are obtained by OpenCompass (https://github.com/InternLM/opencompass).)
 pip install thefuzz
 python evaluate_chat_ceval.py -d data/ceval/
 ```
@@ -29,7 +29,7 @@ cd ../../
 # Qwen-7B
 python evaluate_mmlu.py -d data/mmlu/data/
 
-# Qwen-7B-Chat
+# Qwen-7B-Chat (We only provide 0-shot reproduction scripts. 5-shot results are obtained by OpenCompass (https://github.com/InternLM/opencompass).)
 pip install thefuzz
 python evaluate_chat_mmlu.py -d data/mmlu/data/
 ```
@@ -73,9 +73,8 @@ This program exists to run untrusted model-generated code. Users are strongly en
 # Qwen-7B
 python evaluate_gsm8k.py
 
-# Qwen-7B-Chat
+# Qwen-7B-Chat (We only provide 0-shot reproduction scripts. 5-shot results are obtained by OpenCompass (https://github.com/InternLM/opencompass).)
 python evaluate_chat_gsm8k.py # zeroshot
-python evaluate_chat_gsm8k.py --use-fewshot # fewshot
 ```
 
 - PLUGIN

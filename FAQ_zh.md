@@ -20,7 +20,7 @@ flash attention是一个用于加速模型训练推理的可选项，且仅适�
 
 #### transformers_stream_generator/tiktoken/accelerate，这几个库提示找不到，怎么办？
 
-运行如下命令：`pip install -r requirements.txt`。相关依赖库在[https://github.com/QwenLM/Qwen-7B/blob/main/requirements.txt](https://github.com/QwenLM/Qwen-7B/blob/main/requirements.txt) 可以找到。
+运行如下命令：`pip install -r requirements.txt`。相关依赖库在[https://github.com/QwenLM/Qwen-7B/blob/main/requirements.txt](https://github.com/QwenLM/Qwen/blob/main/requirements.txt) 可以找到。
 <br><br>
 
 
@@ -44,19 +44,15 @@ Qwen当前支持流式推理。见位于`modeling_qwen.py`的`chat_stream`函数
 
 #### 模型的输出看起来与输入无关/没有遵循指令/看起来呆呆的
 
-请检查是否加载的是Qwen-7B-Chat模型进行推理，Qwen-7B模型是未经align的预训练基模型，不期望具备响应用户指令的能力。我们在模型最新版本已经对`chat`及`chat_stream`接口内进行了检查，避免您误将预训练模型作为SFT/Chat模型使用。
+请检查是否加载的是Qwen-Chat模型进行推理，Qwen模型是未经align的预训练基模型，不期望具备响应用户指令的能力。我们在模型最新版本已经对`chat`及`chat_stream`接口内进行了检查，避免您误将预训练模型作为SFT/Chat模型使用。
 
 #### 是否有量化版本模型
 
-目前Qwen支持基于`bitsandbytes`的8-bit和4-bit的量化推理。后续我们将进一步更新提供更加高效的量化推理实现，并提供对应的量化模型。
-
-#### 运行量化推理报错：`importlib.metadata.PackageNotFoundError: No package metadata was found for bitsandbytes`
-
-对于linux 用户，直接`pip install bitsandbytes`即可。对于windows用户，可以 运行`python -m pip install bitsandbytes --prefer-binary --extra-index-url=https://jllllll.github.io/bitsandbytes-windows-webui`。
+目前Qwen支持基于AutoGPTQ的4-bit的量化推理。
 
 #### 生成序列较长后速度显著变慢
 
-这一问题已经在最新版本中修复。请更新到最新代码。
+请更新到最新代码。
 
 #### 处理长序列时效果有问题
 
@@ -68,7 +64,9 @@ Qwen当前支持流式推理。见位于`modeling_qwen.py`的`chat_stream`函数
 
 #### 当前是否支持SFT和RLHF？
 
-我们目前未提供SFT和RLHF代码。当前有多个外部项目已实现支持，如[FastChat](**[https://github.com/lm-sys/FastChat](https://github.com/lm-sys/FastChat))、[Firefly]([https://github.com/yangjianxin1/Firefly](https://github.com/yangjianxin1/Firefly))、[**LLaMA Efficient Tuning**]([https://github.com/hiyouga/LLaMA-Efficient-Tuning](https://github.com/hiyouga/LLaMA-Efficient-Tuning))等。我们会尽快更新这部分代码和说明。
+我们目前提供了SFT的代码，支持全参数微调、LoRA和Q-LoRA。此外，当前有多个外部项目也已实现支持，如[FastChat](**[https://github.com/lm-sys/FastChat](https://github.com/lm-sys/FastChat))、[Firefly]([https://github.com/yangjianxin1/Firefly](https://github.com/yangjianxin1/Firefly))、[**LLaMA Efficient Tuning**]([https://github.com/hiyouga/LLaMA-Efficient-Tuning](https://github.com/hiyouga/LLaMA-Efficient-Tuning))等。我们会尽快更新这部分代码和说明。
+
+我们还没提供对RLHF训练的支持，敬请期待。
 <br><br>
 
 
