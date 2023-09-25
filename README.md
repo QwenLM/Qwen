@@ -467,6 +467,8 @@ model = load_model_on_gpus('Qwen/Qwen-7B-Chat', num_gpus=2)
 Then you can run the 7B chat model on 2 GPUs using the above scripts.
 <br><br>
 
+We also provide pure C++ implementation of Qwen-LM and tiktoken, see [qwen.cpp](https://github.com/QwenLM/qwen.cpp) for details.
+
 ## Tool Usage
 
 Qwen-Chat has been optimized for tool usage and function calling capabilities. Users can develop agents, LangChain applications, and even agument Qwen with a Python Code Interpreter.

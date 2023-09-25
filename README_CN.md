@@ -456,6 +456,8 @@ model = load_model_on_gpus('Qwen/Qwen-7B-Chat', num_gpus=2)
 你即可使用2张GPU进行推理。
 <br><br>
 
+我们同时提供了Qwen-LM和tiktoken的C++实现, 更多细节请查看[qwen.cpp](https://github.com/QwenLM/qwen.cpp).
+
 ## 工具调用
 
 Qwen-Chat针对工具使用、函数调用能力进行了优化。用户可以开发基于Qwen的Agent、LangChain应用、甚至Code Interpreter。
