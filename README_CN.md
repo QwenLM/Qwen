@@ -286,11 +286,11 @@ model = AutoModelForCausalLM.from_pretrained(
      use_flash_attn=False
 )
 ```
-注意：当前该功能目前不支持与flash attn同时开启，如果你开了kv cache量化的同时又开了flash attn（use_flash_attn=True， use_cache_quantization=True, use_cache_kernel=True），会默认将use flash attn关闭。
+注意：当前该功能目前不支持与flash attn同时开启，如果你开了kv cache量化的同时又开了flash attn（use_flash_attn=True， use_cache_quantization=True, use_cache_kernel=True），会默认将use_flash_attn关闭。
 
 ### 结果对比
 #### 效果
-我们验证过int8 kvcache的使用对模型整体的精度指标基本无损。
+我们验证过int8 kv-cache的使用对模型整体的精度指标基本无损。
 
 #### 显存对比
 本次评测运行于单张A100-SXM4-80G GPU，模型默认使用BF16格式，默认生成的seq-length=1024（生成1024个token），其中oom表示out of memory。
