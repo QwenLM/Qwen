@@ -2,8 +2,8 @@
 # Implements API for Qwen-7B in OpenAI's format. (https://platform.openai.com/docs/api-reference/chat)
 # Usage: python openai_api.py
 # Visit http://localhost:8000/docs for documents.
-
-import re
+from math import *
+import re  
 import copy
 import json
 import time
