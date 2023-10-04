@@ -359,7 +359,7 @@ To prepare your training data, you need to put all the samples into a list and s
     "conversations": [
       {
         "from": "user",
-        "value": "你好",
+        "value": "你好"
       },
       {
         "from": "assistant",
