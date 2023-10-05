@@ -345,7 +345,7 @@ model = AutoModelForCausalLM.from_pretrained(
     "conversations": [
       {
         "from": "user",
-        "value": "你好",
+        "value": "你好"
       },
       {
         "from": "assistant",
