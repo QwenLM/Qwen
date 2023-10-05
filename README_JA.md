@@ -353,7 +353,7 @@ pip install -r requirements_finetune.txt
     "conversations": [
       {
         "from": "user",
-        "value": "你好",
+        "value": "你好"
       },
       {
         "from": "assistant",
