@@ -447,7 +447,7 @@ python cli_demo.py
 我们提供了OpenAI API格式的本地API部署方法（感谢@hanpenggit）。在开始之前先安装必要的代码库：
 
 ```bash
-pip install fastapi uvicorn openai "pydantic>=2.3.0" sse_starlette
+pip install fastapi uvicorn openai "pydantic>=2.3.0" sse-starlette
 ```
 
 随后即可运行以下命令部署你的本地API：

@@ -455,7 +455,7 @@ python cli_demo.py
 OpenAI API をベースにローカルAPIをデプロイする方法を提供する（@hanpenggit に感謝）。始める前に、必要なパッケージをインストールしてください:
 
 ```bash
-pip install fastapi uvicorn openai "pydantic>=2.3.0" sse_starlette
+pip install fastapi uvicorn openai "pydantic>=2.3.0" sse-starlette
 ```
 
 それから、API をデプロイするコマンドを実行します:
