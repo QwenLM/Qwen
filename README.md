@@ -1,72 +1,96 @@
-<br>
-
-<p align="center">
-    <img src="assets/logo.jpg" width="400"/>
-<p>
-<br>
-
-<p align="center">
-        Qwen-7B <a href="https://modelscope.cn/models/qwen/Qwen-7B/summary">🤖 <a> | <a href="https://huggingface.co/Qwen/Qwen-7B">🤗</a>&nbsp ｜ Qwen-7B-Chat <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">🤖 <a>| <a href="https://huggingface.co/Qwen/Qwen-7B-Chat">🤗</a>&nbsp ｜ &nbsp<a href="https://modelscope.cn/studios/qwen/Qwen-7B-Chat-Demo/summary">Demo</a>&nbsp ｜ &nbsp<a href="https://github.com/QwenLM/Qwen-7B/blob/main/tech_memo.md">Report</a>
-</p>
-<br>
-
-<p align="center">
+<p align="left">
         <a href="README_CN.md">中文</a>&nbsp ｜ &nbspEnglish&nbsp ｜ &nbsp<a href="README_JA.md">日本語</a>
 </p>
 <br><br>
 
-We opensource **Qwen-7B** and **Qwen-7B-Chat** on both **🤖 ModelScope** and **🤗 Hugging Face** (Click the logos on top to the repos with codes and checkpoints). This repo includes the brief introduction to Qwen-7B, the usage guidance, and also a technical memo [link](tech_memo.md) that provides more information.
-
-Qwen-7B is the 7B-parameter version of the large language model series, Qwen (abbr. Tongyi Qianwen), proposed by Alibaba Cloud. Qwen-7B is a Transformer-based large language model, which is pretrained on a large volume of data, including web texts, books, codes, etc. Additionally, based on the pretrained Qwen-7B, we release Qwen-7B-Chat, a large-model-based AI assistant, which is trained with alignment techniques. The features of the Qwen-7B series include:
-
-1. **Trained with high-quality pretraining data**. We have pretrained Qwen-7B on a self-constructed large-scale high-quality dataset of over 2.2 trillion tokens. The dataset includes plain texts and codes, and it covers a wide range of domains, including general domain data and professional domain data.
-2. **Strong performance**. In comparison with the models of the similar model size, we outperform the competitors on a series of benchmark datasets, which evaluates natural language understanding, mathematics, coding, etc.
-3. **Better support of languages**. Our tokenizer, based on a large vocabulary of over 150K tokens, is a more efficient one compared with other tokenizers. It is friendly to many languages, and it is helpful for users to further finetune Qwen-7B for the extension of understanding a certain language.
-4. **Support of 8K Context Length**. Both Qwen-7B and Qwen-7B-Chat support the context length of 8K, which allows inputs with long contexts.
-5. **Support of Plugins**. Qwen-7B-Chat is trained with plugin-related alignment data, and thus it is capable of using tools, including APIs, models, databases, etc., and it is capable of playing as an agent.
-
-The following sections include information that you might find it helpful. Specifically, we advise you to read the FAQ section before you launch issues.
-
-
-## News
-
-* 2023.8.3 We release both Qwen-7B and Qwen-7B-Chat on ModelScope and Hugging Face. We also provide a technical memo for more details about the model, including training details and model performance.
-
-## Performance
-
-In general, Qwen-7B outperforms the baseline models of a similar model size, and even outperforms larger models of around 13B parameters, on a series of benchmark datasets, e.g., MMLU, C-Eval, GSM8K, HumanEval, and WMT22, etc., which evaluate the models' capabilities on natural language understanding, mathematic problem solving, coding, etc. See the results below.
-
-| Model             | MMLU           |         C-Eval |          GSM8K |      HumanEval |  WMT22 (en-zh) |
-| :---------------- | :------------: | :------------: | :------------: | :------------: | :------------: |
-| LLaMA-7B          | 35.1           |              - |           11.0 |           10.5 |            8.7 |
-| LLaMA 2-7B        | 45.3           |              - |           14.6 |           12.8 |           17.9 |
-| Baichuan-7B       | 42.3           |           42.8 |            9.7 |            9.2 |           26.6 |
-| ChatGLM2-6B       | 47.9           |           51.7 |           32.4 |            9.2 |              - |
-| InternLM-7B       | 51.0           |           52.8 |           31.2 |           10.4 |           14.8 |
-| Baichuan-13B      | 51.6           |           53.6 |           26.6 |           12.8 |           30.0 |
-| LLaMA-13B         | 46.9           |           35.5 |           17.8 |           15.8 |           12.0 |
-| LLaMA 2-13B       | 54.8           |              - |           28.7 |           18.3 |           24.2 |
-| ChatGLM2-12B      | 56.2           |       **61.6** |           40.9 |              - |              - |
-| **Qwen-7B**       | **56.7**       |           59.6 |       **51.6** |       **24.4** |       **30.6** |
-
 <p align="center">
-    <img src="assets/performance.png" width="1000"/>
+    <img src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/logo_qwen.jpg" width="400"/>
 <p>
 <br>
 
-Additionally, according to the third-party evaluation of large language models, conducted by [OpenCompass](https://opencompass.org.cn/leaderboard-llm), Qwen-7B and Qwen-7B-Chat are the top 7B-parameter models. This evaluation consists of a large amount of public benchmarks for the evaluation of language understanding and generation, coding, mathematics, reasoning, etc.
+<p align="center">
+        🤗 <a href="https://huggingface.co/Qwen">Hugging Face</a>&nbsp&nbsp | &nbsp&nbsp🤖 <a href="https://modelscope.cn/models/qwen">ModelScope</a>&nbsp&nbsp | &nbsp&nbsp 📑 <a href="https://arxiv.org/abs/2309.16609">Paper</a> &nbsp&nbsp ｜ &nbsp&nbsp🖥️ <a href="https://modelscope.cn/studios/qwen/Qwen-14B-Chat-Demo/summary">Demo</a>
+<br>
+<a href="assets/wechat.png">WeChat (微信)</a>&nbsp&nbsp ｜ &nbsp&nbsp DingTalk (钉钉) &nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/z3GAxXZ9Ce">Discord</a>&nbsp&nbsp
+</p>
+<br><br>
 
-For more experimental results (detailed model performance on more benchmark datasets) and details, please refer to our technical memo by clicking [here](tech_memo.md).
+|    |                                                              Qwen-Chat                                                               |                                                                Qwen-Chat (Int4)                                                                |                                                            Qwen                                                            |
+|----|:------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------:|
+| 7B |  <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-7B-Chat">🤗</a>  |  <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat-Int4/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-7B-Chat-Int4">🤗</a>  |  <a href="https://modelscope.cn/models/qwen/Qwen-7B/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-7B">🤗</a>  |
+| 14B | <a href="https://modelscope.cn/models/qwen/Qwen-14B-Chat/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-14B-Chat">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-14B-Chat-Int4/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-14B-Chat-Int4">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-14B/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-14B">🤗</a> |
+
+
+
+We opensource our **Qwen** series, now including **Qwen**, the base language models, namely **Qwen-7B** and **Qwen-14B**, as well as **Qwen-Chat**, the chat models, namely **Qwen-7B-Chat** and **Qwen-14B-Chat**. Links are on the above table. Click them and check the model cards. Also, we release the **[technical report](https://qianwen-res.oss-cn-beijing.aliyuncs.com/QWEN_TECHNICAL_REPORT.pdf)**. Please click the paper link and check it out!
+
+In brief, we have strong base language models, which have been stably pretrained for up to 3 trillion tokens of multilingual data with a wide coverage of domains, languages (with a focus on Chinese and English), etc. They are able to achieve competitive performance on benchmark datasets. Additionally, we have chat models that are aligned with human preference based on SFT and RLHF (not released yet), which are able to chat, create content, extract information, summarize, translate, code, solve math problems, and so on, and are able to use tools, play as agents, or even play as code interpreters, etc.
+
+In this repo, you can figure out:
+
+* Quickstart with Qwen, and enjoy the simple inference.
+* Details about the quantization models, including usage, memory, inference speed. For comparison, we also provide the statistics of the BF16 models.
+* Tutorials on finetuning, including full-parameter tuning, LoRA, and Q-LoRA.
+* Instructions on building demos, including WebUI, CLI demo, etc.
+* Information about Qwen for tool use, agent, and code interpreter
+* Statistics of long-context understanding evaluation
+* License agreement
+* ...
+
+Also, if you meet problems, turn to [FAQ](FAQ.md) for help first. Still feeling struggled? Feel free to shoot us issues (better in English so that more people can understand you)! If you would like to help us, send us pull requests with no hesitation! We are always excited about PR! 
+
+Would like to chat with us or date us coffee time? Welcome to our Discord or WeChat! 
+<br><br>
+
+## News and Updates
+
+* 2023.9.25 🔥 We release **Qwen-14B** and **Qwen-14B-Chat** on ModelScope and Hugging Face, along with [qwen.cpp](https://github.com/QwenLM/qwen.cpp) and [Qwen-Agent](https://github.com/QwenLM/Qwen-Agent). Codes and checkpoints of **Qwen-7B** and **Qwen-7B-Chat** are also updated. **PLEASE PULL THE LATEST VERSION!**
+    - Compared to **Qwen-7B** (original), **Qwen-7B** uses more training tokens, increasing from 2.2T tokens to 2.4T tokens, while the context length extends from 2048 to 8192. The Chinese knowledge and coding ability of **Qwen-7B** have been further improved.
+* 2023.9.12 We now support finetuning on the Qwen-7B models, including full-parameter finetuning, LoRA and Q-LoRA.
+* 2023.8.21 We release the Int4 quantized model for Qwen-7B-Chat, **Qwen-7B-Chat-Int4**, which requires low memory costs but achieves improved inference speed. Besides, there is no significant performance degradation on the benchmark evaluation.
+* 2023.8.3 We release both **Qwen-7B** and **Qwen-7B-Chat** on ModelScope and Hugging Face. We also provide a technical memo for more details about the model, including training details and model performance.
+<br>
+
+## Performance
+
+Qwen-14B and Qwen-7B (this is the new version trained with more tokens and the context length is extended from 2048 to 8192) outperform the baseline models of similar model sizes on a series of benchmark datasets, e.g., MMLU, C-Eval, GSM8K, MATH, HumanEval, MBPP, BBH, etc., which evaluate the models' capabilities on natural language understanding, mathematic problem solving, coding, etc. However, even Qwen-14B still significantly fall behind GPT-3.5, let alone GPT-4. See the results below. 
+
+<p align="left">
+    <img src="assets/radar_14b.jpg" width="600"/>
+<p>
+<br>
+
+| Model              |   MMLU   |  C-Eval  |  GSM8K   |   MATH   | HumanEval |   MBPP    |   BBH    |  CMMLU   |
+|:-------------------|:--------:|:--------:|:--------:|:--------:|:---------:|:---------:|:--------:|:--------:|
+|                    |  5-shot  |  5-shot  |  8-shot  |  4-shot  |  0-shot   |  3-shot   |  3-shot  |  5-shot  |
+| LLaMA2-7B          |   46.8   |   32.5   |   16.7   |   3.3    |   12.8    |   20.8    |   38.2   |   31.8   |
+| LLaMA2-13B         |   55.0   |   41.4   |   29.6   |   5.0    |   18.9    |   30.3    |   45.6   |   38.4   |
+| LLaMA2-34B         |   62.6   |    -     |   42.2   |   6.2    |   22.6    |   33.0    |   44.1   |    -     |
+| ChatGLM2-6B        |   47.9   |   51.7   |   32.4   |   6.5    |     -     |     -     |   33.7   |    -     |
+| InternLM-7B        |   51.0   |   53.4   |   31.2   |   6.3    |   10.4    |   14.0    |   37.0   |   51.8   |
+| InternLM-20B       |   62.1   |   58.8   |   52.6   |   7.9    |   25.6    |   35.6    |   52.5   |   59.0   |
+| Baichuan2-7B       |   54.7   |   56.3   |   24.6   |   5.6    |   18.3    |   24.2    |   41.6   |   57.1   |
+| Baichuan2-13B      |   59.5   |   59.0   |   52.8   |   10.1   |   17.1    |   30.2    |   49.0   |   62.0   |
+| Qwen-7B (original) |   56.7   |   59.6   |   51.6   |   10.4    |   24.4    |   31.2    |   40.6   |   58.8   |
+| **Qwen-7B**        |   58.2   |   63.5   |   51.7   |   11.6   |   29.9    |   31.6    |   45.0   |   62.2   |
+| **Qwen-14B**       | **66.3** | **72.1** | **61.3** | **24.8** | **32.3**  | **40.8**  | **53.4** | **71.0** |
+
+For all compared models, we report the best scores between their official reported results and [OpenCompass](https://opencompass.org.cn/leaderboard-llm). 
+
+For more experimental results (detailed model performance on more benchmark datasets) and details, please refer to our technical report by clicking [here](https://qianwen-res.oss-cn-beijing.aliyuncs.com/QWEN_TECHNICAL_REPORT.pdf).
+<br><br>
 
 ## Requirements
 
 * python 3.8 and above
 * pytorch 1.12 and above, 2.0 and above are recommended
+* transformers 4.32 and above
 * CUDA 11.4 and above are recommended (this is for GPU users, flash-attention users, etc.)
+<br>
 
 ## Quickstart
 
-Below, we provide simple examples to show how to use Qwen-7B with 🤖 ModelScope and 🤗 Transformers.
+Below, we provide simple examples to show how to use Qwen-Chat with 🤖 ModelScope and 🤗 Transformers.
 
 Before running the code, make sure you have setup the environment and installed the required packages. Make sure you meet the above requirements, and then install the dependent libraries.
 
@@ -88,13 +112,13 @@ Now you can start with ModelScope or Transformers.
 
 #### 🤗 Transformers
 
-To use Qwen-7B-Chat for the inference, all you need to do is to input a few lines of codes as demonstrated below. However, **please make sure that you are using the latest code.**
+To use Qwen-Chat for the inference, all you need to do is to input a few lines of codes as demonstrated below. Remember to pass in the correct model names or paths, such as "Qwen/Qwen-7B-Chat" and "Qwen/Qwen-14B-Chat". However, **please make sure that you are using the latest code.**
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
-# Note: The default behavior now has injection attack prevention off.
+# Model names: "Qwen/Qwen-7B-Chat", "Qwen/Qwen-14B-Chat"
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
 # use bf16
@@ -104,17 +128,21 @@ tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code
 # use cpu only
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
 # use auto mode, automatically select precision based on the device.
-model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True).eval()
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen-7B-Chat",
+    device_map="auto",
+    trust_remote_code=True
+).eval()
 
-# Specify hyperparameters for generation
-model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
+# Specify hyperparameters for generation. But if you use transformers>=4.32.0, there is no need to do this.
+# model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
-# 第一轮对话 1st dialogue turn
+# 1st dialogue turn
 response, history = model.chat(tokenizer, "你好", history=None)
 print(response)
 # 你好！很高兴为你提供帮助。
 
-# 第二轮对话 2nd dialogue turn
+# 2nd dialogue turn
 response, history = model.chat(tokenizer, "给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history)
 print(response)
 # 这是一个关于一个年轻人奋斗创业最终取得成功的故事。
@@ -124,21 +152,22 @@ print(response)
 # 最终，李明成功地获得了一笔投资，开始了自己的创业之路。他成立了一家科技公司，专注于开发新型软件。在他的领导下，公司迅速发展起来，成为了一家成功的科技企业。
 # 李明的成功并不是偶然的。他勤奋、坚韧、勇于冒险，不断学习和改进自己。他的成功也证明了，只要努力奋斗，任何人都有可能取得成功。
 
-# 第三轮对话 3rd dialogue turn
+# 3rd dialogue turn
 response, history = model.chat(tokenizer, "给这个故事起一个标题", history=history)
 print(response)
 # 《奋斗创业：一个年轻人的成功之路》
 ```
 
-Running Qwen-7B pretrained base model is also simple.
+Running Qwen pretrained base model is also simple.
 
 <details>
-  <summary>Running Qwen-7B</summary>
+  <summary>Running Qwen</summary>
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
+# Model names: "Qwen/Qwen-7B", "Qwen/Qwen-14B" 
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
 # use bf16
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True, bf16=True).eval()
@@ -147,10 +176,14 @@ tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True
 # use cpu only
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="cpu", trust_remote_code=True).eval()
 # use auto mode, automatically select precision based on the device.
-model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True).eval()
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen-7B",
+    device_map="auto",
+    trust_remote_code=True
+).eval()
 
-# Specify hyperparameters for generation
-model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
+# Specify hyperparameters for generation. But if you use transformers>=4.32.0, there is no need to do this.
+# model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
 
 inputs = tokenizer('蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是', return_tensors='pt')
 inputs = inputs.to(model.device)
@@ -166,129 +199,227 @@ print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 ModelScope is an opensource platform for Model-as-a-Service (MaaS), which provides flexible and cost-effective model service to AI developers. Similarly, you can run the models with ModelScope as shown below:
 
 ```python
-import os
-from modelscope.pipelines import pipeline
-from modelscope.utils.constant import Tasks
-from modelscope import snapshot_download
+from modelscope import AutoModelForCausalLM, AutoTokenizer
+from modelscope import GenerationConfig
 
-model_id = 'QWen/qwen-7b-chat'
-revision = 'v1.0.0'
+# Model names: "qwen/Qwen-7B-Chat", "qwen/Qwen-14B-Chat"
+tokenizer = AutoTokenizer.from_pretrained("qwen/Qwen-7B-Chat", revision='v1.0.5', trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained("qwen/Qwen-7B-Chat", revision='v1.0.5', device_map="auto", trust_remote_code=True, fp16=True).eval()
+model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", revision='v1.0.5', trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
 
-model_dir = snapshot_download(model_id, revision)
-
-pipe = pipeline(
-task=Tasks.chat, model=model_dir, device_map='auto')
-history = None
-
-text = '浙江的省会在哪里？'
-results = pipe(text, history=history)
-response, history = results['response'], results['history']
-print(f'Response: {response}')
-text = '它有什么好玩的地方呢？'
-results = pipe(text, history=history)
-response, history = results['response'], results['history']
-print(f'Response: {response}')
+response, history = model.chat(tokenizer, "你好", history=None)
+print(response)
+response, history = model.chat(tokenizer, "浙江的省会在哪里？", history=history) 
+print(response)
+response, history = model.chat(tokenizer, "它有什么好玩的景点", history=history)
+print(response)
 ```
-
-## Tokenizer
-
-Our tokenizer based on tiktoken is different from other tokenizers, e.g., sentencepiece tokenizer. You need to pay attention to special tokens, especially in finetuning. For more detailed information on the tokenizer and related use in fine-tuning, please refer to the [documentation](tokenization_note.md).
+<br>
 
 ## Quantization
 
-We provide examples to show how to load models in `NF4` and `Int8`. For starters, make sure you have implemented `bitsandbytes`. Note that the requirements for `bitsandbytes` are:
+### Usage
 
-```
-**Requirements** Python >=3.8. Linux distribution (Ubuntu, MacOS, etc.) + CUDA > 10.0.
-```
+We provide a solution based on [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ), and release an Int4 quantized model for Qwen-7B-Chat [Click here](https://huggingface.co/Qwen/Qwen-7B-Chat-Int4) and Qwen-14B-Chat [Click here](https://huggingface.co/Qwen/Qwen-14B-Chat-Int4), which achieve nearly lossless model effects but improved performance on both memory costs and inference speed.
 
-Then run the following command to install `bitsandbytes`:
+Here we demonstrate how to use our provided quantized models for inference. Before you start, make sure you meet the requirements of auto-gptq (e.g., torch 2.0 and above, transformers 4.32.0 and above, etc.) and install the required packages:
 
-```
-pip install bitsandbytes
+```bash
+pip install auto-gptq optimum
 ```
 
-Windows users should find another option, which might be [bitsandbytes-windows-webui](https://github.com/jllllll/bitsandbytes-windows-webui/releases/tag/wheels).
+If you meet problems installing `auto-gptq`, we advise you to check out the official [repo](https://github.com/PanQiWei/AutoGPTQ) to find a wheel.
 
-Then you only need to add your quantization configuration to `AutoModelForCausalLM.from_pretrained`. See the example below:
+Then you can load the quantized model easily and run inference as same as usual:
 
 ```python
-from transformers import AutoModelForCausalLM, BitsAndBytesConfig
-
-# quantization configuration for NF4 (4 bits)
-quantization_config = BitsAndBytesConfig(
-    load_in_4bit=True,
-    bnb_4bit_quant_type='nf4',
-    bnb_4bit_compute_dtype=torch.bfloat16
-)
-
-# quantization configuration for Int8 (8 bits)
-quantization_config = BitsAndBytesConfig(load_in_8bit=True)
-
+# Model names: "Qwen/Qwen-7B-Chat-Int4", "Qwen/Qwen-14B-Chat-Int4"
 model = AutoModelForCausalLM.from_pretrained(
-    args.checkpoint_path,
-    device_map="cuda:0",
-    quantization_config=quantization_config,
-    max_memory=max_memory,
-    trust_remote_code=True,
+    "Qwen/Qwen-7B-Chat-Int4",
+    device_map="auto",
+    trust_remote_code=True
 ).eval()
+response, history = model.chat(tokenizer, "Hi", history=None)
 ```
 
-With this method, it is available to load Qwen-7B in `NF4` and `Int8`, which saves you memory usage. We provide related statistics of model performance below. We find that the quantization downgrades the effectiveness slightly but significantly reduces memory costs.
+### Performance
 
-| Precision   |   MMLU   |  GPU Memory for Loading Model |
-| ----------- | :------: | :---------------------------: |
-|   BF16      |   56.7   |             16.38G            |
-|   Int8      |   52.8   |             10.44G            |
-|    NF4      |   48.9   |             7.79G             |
+We illustrate the model performance of both BF16 and Int4 models on the benchmark, and we find that the quantized model does not suffer from significant performance degradation. Results are shown below:
 
-Note: The GPU memory usage profiling in the above table is performed on single A100-SXM4-80G GPU, PyTorch 2.0.1 and CUDA 11.8, with flash attention used.
-
-## Inference Efficiency
+| Quantization         | MMLU | CEval (val) | GSM8K | Humaneval |
+|----------------------|:----:|:-----------:|:-----:|:---------:|
+| Qwen-7B-Chat (BF16)  | 53.9 |    54.2     | 41.1  |   24.4    |
+| Qwen-7B-Chat (Int4)  | 52.6 |    52.9     | 38.1  |   23.8    |
+| Qwen-14B-Chat (BF16) | 64.6 |    69.8     | 61.0  |   43.9    |
+| Qwen-14B-Chat (Int4) | 63.3 |    69.0     | 59.8  |   45.7    |
 
 ### Inference Speed
 
-We measured the average inference speed of generating 2K tokens under BF16 precision and Int8 or NF4 quantization levels, respectively.
+We measured the average inference speed (tokens/s) of generating 2048 and 8192 tokens under BF16 precision and Int4 quantization, respectively.
 
-| Quantization Level | Inference Speed with flash_attn (tokens/s) | Inference Speed w/o flash_attn (tokens/s) |
-| ------ | :---------------------------: | :---------------------------: |
-| BF16 (no quantization) | 30.06 | 27.55 |
-| Int8 (bnb) | 7.94 | 7.86 |
-| NF4 (bnb) | 21.43 | 20.37 |
+| Quantization         | Speed (2048 tokens) | Speed (8192 tokens) |
+|----------------------|:-------------------:|:-------------------:|
+| Qwen-7B-Chat (BF16)  |        30.34        |        29.32        |
+| Qwen-7B-Chat (Int4)  |        43.56        |        33.92        |
+| Qwen-14B-Chat (BF16) |        30.70        |        21.73        |
+| Qwen-14B-Chat (Int4) |        37.11        |        26.11        |
 
-In detail, the setting of profiling is generating 2048 new tokens with 1 context token. The profiling runs on single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.8. The inference speed is averaged over the generated 2048 tokens.
+In detail, the setting of profiling is generating 8192 new tokens with 1 context token. The profiling runs on a single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.4. The inference speed is averaged over the generated 8192 tokens.
 
 ### GPU Memory Usage
 
-We also profile the peak GPU memory usage for encoding 2048 tokens as context (and generating single token) and generating 8192 tokens (with single token as context) under BF16 or Int8/NF4 quantization levels, respectively. The results are shown below.
+We also profile the peak GPU memory usage for encoding 2048 tokens as context (and generating single token) and generating 8192 tokens (with single token as context) under BF16 or Int4 quantization level, respectively. The results are shown below.
 
-When using flash attention, the memory usage is:
-
-| Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
-| --- | :---: | :---: |
-| BF16 | 18.11GB | 23.52GB |
-| Int8 | 12.17GB | 17.60GB |
-| NF4 | 9.52GB | 14.93GB |
-
-When not using flash attention, the memory usage is:
-
-| Quantization Level | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
-| --- | :---: | :---: |
-| BF16 | 18.11GB | 24.40GB |
-| Int8 | 12.18GB | 18.47GB |
-| NF4 | 9.52GB | 15.81GB |
+| Quantization         | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
+|----------------------|:-----------------------------------:|:-------------------------------------:|
+| Qwen-7B-Chat (BF16)  |               17.66GB               |                22.58GB                |
+| Qwen-7B-Chat (Int4)  |               8.21GB                |                13.62GB                |
+| Qwen-14B-Chat (BF16) |               30.15GB                 |                38.94GB                  |
+| Qwen-14B-Chat (Int4) |               13.00GB                 |                21.79GB                  |
 
 The above speed and memory profiling are conducted using [this script](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py).
+<br><br>
+
+## Quantization of KV cache
+Attention KV cache can be quantized and compressed for storage, to get a higher sample throughput.
+### Usage
+The parameters of 'use_cache_quantization' and 'use_cache_kernel' are provided to control kv-cache-quantization behavior
+When use_cache_quantization=True and use_cache_kernel=True, kv-cache-quantization will be enabled.
+The specific use method is as follows:
+```python
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen-7B-Chat",
+     device_map="auto",
+     trust_remote_code=True,
+     use_cache_quantization=True,
+     use_cache_kernel=True,
+     use_flash_attn=False
+)
+```
+Attention:
+Currently, kv-cache-quantization and flash attn cannot be turned on at the same time.
+If you enable kv cache quantization and use_flash_attn at the same time (use_flash_attn=True, use_cache_quantization=True, use_cache_kernel=True), use_flash_attn is disabled by default(use_flash_attn=false).
+### Comparative Results
+#### Results
+We have verified that the use of the quantized int8-kvcache model does not suffer from significant performance degradation.
+#### memory usage comparison
+The profiling runs on a single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.4. 
+We use BF16 models, and generate 1024 tokens (seq-length=1024) by default, and oom indicates out of memory.
+
+With kv-cache quantization turned on, we can run a larger batch size(bs).
+
+| USE KVCache | bs=1 | bs=4 | bs=16 | bs=32 | bs=64 | bs=100 |
+| --- | :---: | :---: | :---: | :---: | :---: | :---: |
+| no | 16.3GB | 24.1GB | 31.7GB | 48.7GB   | oom  |  oom |
+| yes | 15.5GB | 17.2GB | 22.3GB | 30.2GB  | 48.2GB  |  72.4GB |
+
+With kv-cache quantization turned on, the model can save more memory when generate longer seq-length (sl, number of tokens generated) at infer.
+
+| USE KVCache | sl=512 | sl=1024 | sl=2048 | sl=4096 | sl=8192 |
+| --- | :---: | :---: | :---: | :---: | :---: |
+| no | 15.2GB | 16.3GB | 17.6GB | 19.5GB  | 23.2GB  |
+| yes | 15GB | 15.5GB | 15.8GB | 16.6GB  | 17.6GB  |
+
+### Difference of Storage in layer-past
+The model which turn on the kv-cache quantization will convert the format of layer-past from float to int8, meanwhile the quantianted layer-past will also store quantiantion parameters of current value.
+Specific steps are as follows:
+1、Quantize key/value
+```
+    qv,scale,zero_point=quantize_cache_v(v)
+```
+2、Store into layer_past
+
+Following is the format of quantized layer_past:
+```
+    layer_past=((q_key,key_scale,key_zero_point),
+                (q_value,value_scale,value_zero_point))
+```
+Bascial format of layer_past:
+```
+    layer_past=(key,value)
+```
+If you want to use the attention KV which is quantized, 
+you can use the dequantization operation to convert the int8 key/value back to the float format as following:
+```
+    v=dequantize_cache_torch(qv,scale,zero_point)
+```
+
+## Finetuning
+
+Now we provide the official training script, `finetune.py`, for users to finetune the pretrained model for downstream applications in a simple fashion. Additionally, we provide shell scripts to launch finetuning with no worries. This script supports the training with [DeepSpeed](https://github.com/microsoft/DeepSpeed) and [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/). The shell scripts that we provide use DeepSpeed (Note: this may have conflicts with the latest version of pydantic) and Peft. You can install them by:
+```bash
+pip install peft deepspeed
+```
+
+To prepare your training data, you need to put all the samples into a list and save it to a json file. Each sample is a dictionary consisting of an id and a list for conversation. Below is a simple example list with 1 sample:
+```json
+[
+  {
+    "id": "identity_0",
+    "conversations": [
+      {
+        "from": "user",
+        "value": "你好"
+      },
+      {
+        "from": "assistant",
+        "value": "我是一个语言模型，我叫通义千问。"
+      }
+    ]
+  }
+]
+```
+
+After data preparation, you can use the provided shell scripts to run finetuning. Remember to specify the path to the data file, `$DATA`.
+
+The finetuning scripts allow you to perform:
+- Full-parameter finetuning
+- LoRA
+- Q-LoRA
+
+Full-parameter parameter finetuning requires updating all parameters in the whole training process. To launch your training, run the following script:
+
+```bash
+# Distributed training. We do not provide single-GPU training script as the insufficient GPU memory will break down the training.
+sh finetune/finetune_ds.sh
+```
+
+Remember to specify the correct model name or path, the data path, as well as the output directory in the shell scripts. Another thing to notice is that we use DeepSpeed ZeRO 3 in this script. If you want to make changes, just remove the argument `--deepspeed` or make changes in the DeepSpeed configuration json file based on your requirements. Additionally, this script supports mixed-precision training, and thus you can use `--bf16 True` or `--fp16 True`. Empirically we advise you to use bf16 to make your training consistent with our pretraining and alignment if your machine supports bf16, and thus we use it by default.
+
+Similarly, to run LoRA, use another script to run as shown below. Before you start, make sure that you have installed `peft`. Also, you need to specify your paths to your model, data, and output. We advise you to use absolute path for your pretrained model. This is because LoRA only saves the adapter and the absolute path in the adapter configuration json file is used for finding out the pretrained model to load. Also, this script support both bf16 and fp16.
+
+```bash
+# Single GPU training
+sh finetune/finetune_lora_single_gpu.sh
+# Distributed training
+sh finetune/finetune_lora_ds.sh
+```
+
+In comparison with full-parameter finetuning, LoRA ([paper](https://arxiv.org/abs/2106.09685)) only updates the parameters of adapter layers but keeps the original large language model layers frozen. This allows much fewer memory costs and thus fewer computation costs. However, if you still suffer from insufficient memory, you can consider Q-LoRA ([paper](https://arxiv.org/abs/2305.14314)), which uses the quantized large language model and other techniques such as paged attention to allow even fewer memory costs. To run Q-LoRA, directly run the following script (In terms of QLoRA, temporarily we found problems with mixed precision training in the setup of single GPU. We'll fix it as soon as possible):
+
+```bash
+# Distributed training
+sh finetune/finetune_qlora_ds.sh
+```
+
+For Q-LoRA, we advise you to load our provided quantized model, e.g., Qwen-7B-Chat-Int4. However, different from full-parameter finetuning and LoRA, only fp16 is supported for Q-LoRA.
+
+Different from full-parameter finetuning, the training of both LoRA and Q-LoRA only saves the adapter parameters. Suppose your training starts from Qwen-7B, you can load the finetuned model for inference as shown below:
+
+```python
+from peft import AutoPeftModelForCausalLM
+
+model = AutoPeftModelForCausalLM.from_pretrained(
+    path_to_adapter, # path to the output directory
+    device_map="auto",
+    trust_remote_code=True
+).eval()
+```
+
+The shell scripts uses `torchrun` to run single-GPU or multi-GPU training. For multi-GPU training, you need to specify the proper hyperparameters for distributed training based on your machine. 
+<br><br>
 
 ## Demo
-
-### CLI Demo
-
-We provide a CLI demo example in `cli_demo.py`, which supports streaming output for the generation. Users can interact with Qwen-7B-Chat by inputting prompts, and the model returns model outputs in the streaming mode. Run the command below:
-
-```
-python cli_demo.py
-```
 
 ### Web UI
 
@@ -300,20 +431,45 @@ pip install -r requirements_web_demo.txt
 
 Then run the command below and click on the generated link:
 
-```
+```bash
 python web_demo.py
 ```
 
+<p align="center">
+    <br>
+    <img src="assets/web_demo.gif" width="600" />
+    <br>
+<p>
+
+### CLI Demo
+
+We provide a CLI demo example in `cli_demo.py`, which supports streaming output for the generation. Users can interact with Qwen-7B-Chat by inputting prompts, and the model returns model outputs in the streaming mode. Run the command below:
+
+```bash
+python cli_demo.py
+```
+
+<p align="center">
+    <br>
+    <img src="assets/cli_demo.gif" width="600" />
+    <br>
+<p>
+<br>
+
 ## API
+
 We provide methods to deploy local API based on OpenAI API (thanks to @hanpenggit). Before you start, install the required packages:
 
 ```bash
-pip install fastapi uvicorn openai pydantic sse_starlette
+pip install fastapi uvicorn openai "pydantic>=2.3.0" sse_starlette
 ```
+
 Then run the command to deploy your API:
+
 ```bash
 python openai_api.py
 ```
+
 You can change your arguments, e.g., `-c` for checkpoint name or path, `--cpu-only` for CPU deployment, etc. If you meet problems launching your API deployment, updating the packages to the latest version can probably solve them.
 
 Using the API is also simple. See the example below:
@@ -322,77 +478,343 @@ Using the API is also simple. See the example below:
 import openai
 openai.api_base = "http://localhost:8000/v1"
 openai.api_key = "none"
+
+# create a request activating streaming response
 for chunk in openai.ChatCompletion.create(
-    model="Qwen-7B",
+    model="Qwen",
     messages=[
         {"role": "user", "content": "你好"}
     ],
-    stream=True
+    stream=True 
+    # Specifying stop words in streaming output format is not yet supported and is under development.
 ):
     if hasattr(chunk.choices[0].delta, "content"):
         print(chunk.choices[0].delta.content, end="", flush=True)
+
+# create a request not activating streaming response
+response = openai.ChatCompletion.create(
+    model="Qwen",
+    messages=[
+        {"role": "user", "content": "你好"}
+    ],
+    stream=False,
+    stop=[] # You can add custom stop words here, e.g., stop=["Observation:"] for ReAct prompting.
+)
+print(response.choices[0].message.content)
 ```
 
+<p align="center">
+    <br>
+    <img src="assets/openai_api.gif" width="600" />
+    <br>
+<p>
+
+Function calling is also supported (but only when `stream=False` for the moment). See the [example usage](examples/function_call_examples.py) here.
+<br><br>
+
+## Deployment
+
+It is simple to run the model on CPU, which requires your specification of device:
+
+```python
+model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
+```
+
+If you suffer from lack of GPU memory and you would like to run the model on more than 1 GPU, you can use our provided script `utils.py`:
+
+```python
+from utils import load_model_on_gpus
+model = load_model_on_gpus('Qwen/Qwen-7B-Chat', num_gpus=2)
+```
+
+Then you can run the 7B chat model on 2 GPUs using the above scripts.
+<br><br>
+
+We also provide pure C++ implementation of Qwen-LM and tiktoken, see [qwen.cpp](https://github.com/QwenLM/qwen.cpp) for details.
 
 ## Tool Usage
 
-Qwen-7B-Chat is specifically optimized for tool usage, including API, database, models, etc., so that users can build their own Qwen-7B-based LangChain, Agent, and Code Interpreter. In our evaluation [benchmark](eval/EVALUATION.md) for assessing tool usage capabilities, we find that Qwen-7B reaches stable performance.
+Qwen-Chat has been optimized for tool usage and function calling capabilities. Users can develop agents, LangChain applications, and even agument Qwen with a Python Code Interpreter.
 
-| Model       | Tool Selection (Acc.↑) | Tool Input (Rouge-L↑)  | False Positive Error↓  |
-|:------------|:----------------------:|:----------------------:|:----------------------:|
-| GPT-4       | 95%                    | **0.90**               | 15%                    |
-| GPT-3.5     | 85%                    | 0.88                   | 75%                    |
-| **Qwen-7B** | **99%**                | 0.89                   | **9.7%**               |
+We provide documentation on how to implement tool calls based on the principle of ReAct Prompting, please refer to [the ReAct example](examples/react_prompt.md). Based on this principle, we provide support for function calling in [openai_api.py](openai_api.py).
 
-For how to write and use prompts for ReAct Prompting, please refer to [the ReAct examples](examples/react_prompt.md). The use of tools can enable the model to better perform tasks.
-
-Additionally, we provide experimental results to show its capabilities of playing as an agent. See [Hugging Face Agent](https://huggingface.co/docs/transformers/transformers_agents) for more information. Its performance on the run-mode benchmark provided by Hugging Face is as follows:
-
-| Model          | Tool Selection↑ | Tool Used↑  |   Code↑   |
-|:---------------|:---------------:|:-----------:|:---------:|
-|GPT-4           |     **100**     |   **100**   | **97.41** |
-|GPT-3.5         |      95.37      |    96.30    |   87.04   |
-|StarCoder-15.5B |      87.04      |    87.96    |   68.89   |
-| **Qwen-7B**    |      90.74      |    92.59    |   74.07   |
-
-## Long-Context Understanding
-
-To extend the context length and break the bottleneck of training sequence length, we introduce several techniques, including NTK-aware interpolation, window attention, and LogN attention scaling, to extend the context length to over 8K tokens. We conduct language modeling experiments on the arXiv dataset with the PPL evaluation and find that Qwen-7B can reach outstanding performance in the scenario of long context. Results are demonstrated below:
+We have tested the model's tool calling capabilities on our open-source Chinese evaluation benchmark and found that Qwen-Chat consistently performs well:
 
 <table>
     <tr>
-        <th rowspan="2">Model</th><th colspan="5" align="center">Sequence Length</th>
+        <th colspan="4" align="center">Chinese Tool-Use Benchmark</th>
     </tr>
     <tr>
-        <th align="center">1024</th><th align="center">2048</th><th align="center">4096</th><th align="center">8192</th><th align="center">16384</th>
+        <th align="center">Model</th><th align="center">Tool Selection (Acc.↑)</th><th align="center">Tool Input (Rouge-L↑)</th><th align="center">False Positive Error↓</th>
     </tr>
     <tr>
-        <td>Qwen-7B</td><td align="center"><b>4.23</b></td><td align="center"><b>3.78</b></td><td align="center">39.35</td><td align="center">469.81</td><td align="center">2645.09</td>
+        <td>GPT-4</td><td align="center">95%</td><td align="center">0.90</td><td align="center">15.0%</td>
     </tr>
     <tr>
-        <td>+ dynamic_ntk</td><td align="center"><b>4.23</b></td><td align="center"><b>3.78</b></td><td align="center">3.59</td><td align="center">3.66</td><td align="center">5.71</td>
+        <td>GPT-3.5</td><td align="center">85%</td><td align="center">0.88</td><td align="center">75.0%</td>
     </tr>
     <tr>
-        <td>+ dynamic_ntk + logn</td><td align="center"><b>4.23</b></td><td align="center"><b>3.78</b></td><td align="center"><b>3.58</b></td><td align="center">3.56</td><td align="center">4.62</td>
+        <td>Qwen-7B-Chat</td><td align="center">98%</td><td align="center">0.91</td><td align="center">7.3%</td>
     </tr>
     <tr>
-        <td>+ dynamic_ntk + logn + window_attn</td><td align="center"><b>4.23</b></td><td align="center"><b>3.78</b></td><td align="center"><b>3.58</b></td><td align="center"><b>3.49</b></td><td align="center"><b>4.32</b></td>
+        <td>Qwen-14B-Chat</td><td align="center">98%</td><td align="center">0.93</td><td align="center">2.4%</td>
     </tr>
 </table>
+
+To assess Qwen's ability to use the Python Code Interpreter for tasks such as mathematical problem solving, data visualization, and other general-purpose tasks such as file handling and web scraping, we have created and open-sourced a benchmark specifically designed for evaluating these capabilities. You can find the benchmark at this [link](https://github.com/QwenLM/Qwen-Agent/tree/main/benchmark).
+
+We have observed that Qwen performs well in terms of code executability and result accuracy when generating code:
+
+<table>
+    <tr>
+        <th colspan="4" align="center">Executable Rate of Generated Code (%)</th>
+    </tr>
+    <tr>
+        <th align="center">Model</th><th align="center">Math↑</th><th align="center">Visualization↑</th><th align="center">General↑</th>
+    </tr>
+    <tr>
+        <td>GPT-4</td><td align="center">91.9</td><td align="center">85.9</td><td align="center">82.8</td>
+    </tr>
+    <tr>
+        <td>GPT-3.5</td><td align="center">89.2</td><td align="center">65.0</td><td align="center">74.1</td>
+    </tr>
+    <tr>
+        <td>LLaMA2-7B-Chat</td>
+        <td align="center">41.9</td>
+        <td align="center">33.1</td>
+        <td align="center">24.1 </td>
+    </tr>
+    <tr>
+        <td>LLaMA2-13B-Chat</td>
+        <td align="center">50.0</td>
+        <td align="center">40.5</td>
+        <td align="center">48.3 </td>
+    </tr>
+    <tr>
+        <td>CodeLLaMA-7B-Instruct</td>
+        <td align="center">85.1</td>
+        <td align="center">54.0</td>
+        <td align="center">70.7 </td>
+    </tr>
+    <tr>
+        <td>CodeLLaMA-13B-Instruct</td>
+        <td align="center">93.2</td>
+        <td align="center">55.8</td>
+        <td align="center">74.1 </td>
+    </tr>
+    <tr>
+        <td>InternLM-7B-Chat-v1.1</td>
+        <td align="center">78.4</td>
+        <td align="center">44.2</td>
+        <td align="center">62.1 </td>
+    </tr>
+    <tr>
+        <td>InternLM-20B-Chat</td>
+        <td align="center">70.3</td>
+        <td align="center">44.2</td>
+        <td align="center">65.5 </td>
+    </tr>
+    <tr>
+        <td>Qwen-7B-Chat</td>
+        <td align="center">82.4</td>
+        <td align="center">64.4</td>
+        <td align="center">67.2 </td>
+    </tr>
+    <tr>
+        <td>Qwen-14B-Chat</td>
+        <td align="center">89.2</td>
+        <td align="center">84.1</td>
+        <td align="center">65.5</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th colspan="4" align="center">Accuracy of Code Execution Results (%)</th>
+    </tr>
+    <tr>
+        <th align="center">Model</th><th align="center">Math↑</th><th align="center">Visualization-Hard↑</th><th align="center">Visualization-Easy↑</th>
+    </tr>
+    <tr>
+        <td>GPT-4</td><td align="center">82.8</td><td align="center">66.7</td><td align="center">60.8</td>
+    </tr>
+    <tr>
+        <td>GPT-3.5</td><td align="center">47.3</td><td align="center">33.3</td><td align="center">55.7</td>
+    </tr>
+    <tr>
+        <td>LLaMA2-7B-Chat</td>
+        <td align="center">3.9</td>
+        <td align="center">14.3</td>
+        <td align="center">39.2 </td>
+    </tr>
+    <tr>
+        <td>LLaMA2-13B-Chat</td>
+        <td align="center">8.3</td>
+        <td align="center">8.3</td>
+        <td align="center">40.5 </td>
+    </tr>
+    <tr>
+        <td>CodeLLaMA-7B-Instruct</td>
+        <td align="center">14.3</td>
+        <td align="center">26.2</td>
+        <td align="center">60.8 </td>
+    </tr>
+    <tr>
+        <td>CodeLLaMA-13B-Instruct</td>
+        <td align="center">28.2</td>
+        <td align="center">27.4</td>
+        <td align="center">62.0 </td>
+    </tr>
+    <tr>
+        <td>InternLM-7B-Chat-v1.1</td>
+        <td align="center">28.5</td>
+        <td align="center">4.8</td>
+        <td align="center">40.5 </td>
+    </tr>
+    <tr>
+        <td>InternLM-20B-Chat</td>
+        <td align="center">34.6</td>
+        <td align="center">21.4</td>
+        <td align="center">45.6 </td>
+    </tr>
+    <tr>
+        <td>Qwen-7B-Chat</td>
+        <td align="center">41.9</td>
+        <td align="center">40.5</td>
+        <td align="center">54.4 </td>
+    </tr>
+    <tr>
+        <td>Qwen-14B-Chat</td>
+        <td align="center">58.4</td>
+        <td align="center">53.6</td>
+        <td align="center">59.5</td>
+    </tr>
+</table>
+
+<p align="center">
+    <br>
+    <img src="assets/code_interpreter_showcase_001.jpg" />
+    <br>
+<p>
+
+In addition, we also provide experimental results demonstrating that our model is capable of acting as a HuggingFace Agent. For more information, please refer to the [example documentation](examples/transformers_agent.md). The model's performance on the evaluation dataset provided by Hugging Face is as follows:
+
+<table>
+    <tr>
+        <th colspan="4" align="center">HuggingFace Agent Benchmark- Run Mode</th>
+    </tr>
+    <tr>
+        <th align="center">Model</th><th align="center">Tool Selection↑</th><th align="center">Tool Used↑</th><th align="center">Code↑</th>
+    </tr>
+    <tr>
+        <td>GPT-4</td><td align="center">100</td><td align="center">100</td><td align="center">97.4</td>
+    </tr>
+    <tr>
+        <td>GPT-3.5</td><td align="center">95.4</td><td align="center">96.3</td><td align="center">87.0</td>
+    </tr>
+    <tr>
+        <td>StarCoder-Base-15B</td><td align="center">86.1</td><td align="center">87.0</td><td align="center">68.9</td>
+    </tr>
+    <tr>
+        <td>StarCoder-15B</td><td align="center">87.0</td><td align="center">88.0</td><td align="center">68.9</td>
+    </tr>
+    <tr>
+        <td>Qwen-7B-Chat</td><td align="center">87.0</td><td align="center">87.0</td><td align="center">71.5</td>
+    </tr>
+    <tr>
+        <td>Qwen-14B-Chat</td><td align="center">93.5</td><td align="center">94.4</td><td align="center">87.0</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th colspan="4" align="center">HuggingFace Agent Benchmark - Chat Mode</th>
+    </tr>
+    <tr>
+        <th align="center">Model</th><th align="center">Tool Selection↑</th><th align="center">Tool Used↑</th><th align="center">Code↑</th>
+    </tr>
+    <tr>
+        <td>GPT-4</td><td align="center">97.9</td><td align="center">97.9</td><td align="center">98.5</td>
+    </tr>
+    <tr>
+        <td>GPT-3.5</td><td align="center">97.3</td><td align="center">96.8</td><td align="center">89.6</td>
+    </tr>
+    <tr>
+        <td>StarCoder-Base-15B</td><td align="center">97.9</td><td align="center">97.9</td><td align="center">91.1</td>
+    </tr>
+    <tr>
+        <td>StarCoder-15B</td><td align="center">97.9</td><td align="center">97.9</td><td align="center">89.6</td>
+    </tr>
+    <tr>
+        <td>Qwen-7B-Chat</td><td align="center">94.7</td><td align="center">94.7</td><td align="center">85.1</td>
+    </tr>
+    <tr>
+        <td>Qwen-14B-Chat</td><td align="center">97.9</td><td align="center">97.9</td><td align="center">95.5</td>
+    </tr>
+</table>
+
+<br>
+
+## Long-Context Understanding
+
+To extend the context length and break the bottleneck of training sequence length, we introduce several techniques, including NTK-aware interpolation, window attention, and LogN attention scaling, to extend the context length of Qwen-7B/14B from 2k to over 8K tokens, and Qwen-7B from 8k to 32k tokens. We conduct language modeling experiments on the arXiv dataset with the PPL evaluation and find that Qwen can reach outstanding performance in the scenario of long context. Results are demonstrated below:
+
+<table>
+    <tr>
+        <th rowspan="2">Model</th><th colspan="6" align="center">Sequence Length</th>
+    </tr>
+    <tr>
+        <th align="center">1024</th><th align="center">2048</th><th align="center">4096</th><th align="center">8192</th><th align="center">16384</th><th align="center">32768</th>
+    </tr>
+     <tr>
+        <td>Qwen-7B (original)</td><td align="center">4.23</td><td align="center">3.78</td><td align="center">39.35</td><td align="center">469.81</td><td align="center">2645.09</td><td align="center">-</td>
+    </tr>
+    <tr>
+        <td>+ dynamic_ntk</td><td align="center">4.23</td><td align="center">3.78</td><td align="center">3.59</td><td align="center">3.66</td><td align="center">5.71</td><td align="center">-</td>
+    </tr>
+    <tr>
+        <td>+ dynamic_ntk + logn</td><td align="center">4.23</td><td align="center">3.78</td><td align="center">3.58</td><td align="center">3.56</td><td align="center">4.62</td><td align="center">-</td>
+    </tr>
+    <tr>
+        <td>+ dynamic_ntk + logn + window_attn</td><td align="center">4.23</td><td align="center">3.78</td><td align="center">3.58</td><td align="center">3.49</td><td align="center">4.32</td><td align="center">-</td>
+    </tr>
+    <tr>
+    <tr>
+        <td>Qwen-7B</td><td align="center"><b>4.23</b></td><td align="center"><b>3.81</b></td><td align="center"><b>3.52</b></td><td align="center"><b>3.31</b></td><td align="center">7.27</td><td align="center">181.49</td>
+    </tr>
+    <tr>
+        <td>+ dynamic_ntk + logn + window_attn</td><td align="center"><b>4.23</b></td><td align="center"><b>3.81</b></td><td align="center"><b>3.52</b></td><td align="center"><b>3.33</b></td><td align="center"><b>3.22</b></td><td align="center"><b>3.17</b></td>
+    </tr>
+    <tr>
+        <td>Qwen-14B</td><td align="center"><b>-</b></td><td align="center"><b>3.46</b></td><td align="center">22.79</td><td align="center">334.65</td><td align="center">3168.35</td><td align="center">-</td>
+    </tr>
+    <tr>
+        <td>+ dynamic_ntk + logn + window_attn</td><td align="center"><b>-</b></td><td align="center"><b>3.46</b></td><td align="center"><b>3.29</b></td><td align="center"><b>3.18</b></td><td align="center">3.42</td><td align="center">-</td>
+    </tr>
+</table>
+
+
+## Tokenizer
+
+Our tokenizer based on tiktoken is different from other tokenizers, e.g., sentencepiece tokenizer. You need to pay attention to special tokens, especially in finetuning. For more detailed information on the tokenizer and related use in fine-tuning, please refer to the [documentation](tokenization_note.md).
+<br><br>
 
 ## Reproduction
 
 For your reproduction of the model performance on benchmark datasets, we provide scripts for you to reproduce the results. Check [eval/EVALUATION.md](eval/EVALUATION.md) for more information. Note that the reproduction may lead to slight differences from our reported results.
+<br><br>
 
 ## FAQ
 
 If you meet problems, please refer to [FAQ](FAQ.md) and the issues first to search a solution before you launch a new issue.
+<br><br>
 
 ## License Agreement
 
-Researchers and developers are free to use the codes and model weights of both Qwen-7B and Qwen-7B-Chat. We also allow their commercial use. Check our license at [LICENSE](LICENSE) for more details. If you have requirements for commercial use, please fill out the [form](https://dashscope.console.aliyun.com/openModelApply/qianwen) to apply.
+Researchers and developers are free to use the codes and model weights of both Qwen and Qwen-Chat. We also allow their commercial use. Check our license at [LICENSE](LICENSE) for more details. If you have requirements for commercial use, please fill out the form ([7B](https://dashscope.console.aliyun.com/openModelApply/qianwen), [14B](https://dashscope.console.aliyun.com/openModelApply/Qwen-14B-Chat)) to apply.
+<br><br>
 
 ## Contact Us
 
-If you are interested to leave a message to either our research team or product team, feel free to send an email to qianwen_opensource@alibabacloud.com.
+If you are interested to leave a message to either our research team or product team, join our Discord or WeChat groups! Also, feel free to send an email to qianwen_opensource@alibabacloud.com.
 

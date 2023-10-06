@@ -9,7 +9,7 @@ By clicking to agree or by using or distributing any portion or element of the T
     b. "We"(or "Us") shall mean Alibaba Cloud.
     c. "You" (or "Your") shall mean a natural person or legal entity exercising the rights granted by this Agreement and/or using the Materials for any purpose and in any field of use.
     d. "Third Parties" shall mean individuals or legal entities that are not under common control with Us or You.
-    e. "Tongyi Qianwen" shall mean the large language models (including Qwen-7B model and Qwen-7B-Chat model), and software and algorithms, consisting of trained model weights, parameters (including optimizer states), machine-learning model code, inference-enabling code, training-enabling code, fine-tuning enabling code and other elements of the foregoing distributed by Us.
+    e. "Tongyi Qianwen" shall mean the large language models (including Qwen model and Qwen-Chat model), and software and algorithms, consisting of trained model weights, parameters (including optimizer states), machine-learning model code, inference-enabling code, training-enabling code, fine-tuning enabling code and other elements of the foregoing distributed by Us.
     f. "Materials" shall mean, collectively, Alibaba Cloud's proprietary Tongyi Qianwen and Documentation (and any portion thereof) made available under this Agreement.
     g. "Source" form shall mean the preferred form for making modifications, including but not limited to model source code, documentation source, and configuration files.
     h. "Object" form shall mean any form resulting from mechanical transformation or translation of a Source form, including but not limited to compiled object code, generated documentation,

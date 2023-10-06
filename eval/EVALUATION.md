@@ -12,7 +12,7 @@ cd ../../
 # Qwen-7B
 python evaluate_ceval.py -d data/ceval/
 
-# Qwen-7B-Chat
+# Qwen-7B-Chat (We only provide 0-shot reproduction scripts. 5-shot results are obtained by OpenCompass (https://github.com/InternLM/opencompass).)
 pip install thefuzz
 python evaluate_chat_ceval.py -d data/ceval/
 ```
@@ -29,9 +29,22 @@ cd ../../
 # Qwen-7B
 python evaluate_mmlu.py -d data/mmlu/data/
 
-# Qwen-7B-Chat
+# Qwen-7B-Chat (We only provide 0-shot reproduction scripts. 5-shot results are obtained by OpenCompass (https://github.com/InternLM/opencompass).)
 pip install thefuzz
 python evaluate_chat_mmlu.py -d data/mmlu/data/
+```
+
+- CMMLU
+
+```Shell
+wget https://huggingface.co/datasets/haonan-li/cmmlu/resolve/main/cmmlu_v1_0_1.zip
+mkdir data/cmmlu
+mv cmmlu_v1_0_1.zip data/cmmlu
+cd data/cmmlu; unzip cmmlu_v1_0_1.zip
+cd ../../
+
+# Qwen-7B
+python evaluate_cmmlu.py -d data/cmmlu/
 ```
 
 - HumanEval
@@ -46,7 +59,7 @@ pip install -e human-eval
 python evaluate_humaneval.py -f HumanEval.jsonl -o HumanEval_res.jsonl
 evaluate_functional_correctness HumanEval_res.jsonl
 # Qwen-7B-Chat
-python evaluate_chat_mmlu.py -f HumanEval.jsonl -o HumanEval_res_chat.jsonl
+python evaluate_chat_humaneval.py -f HumanEval.jsonl -o HumanEval_res_chat.jsonl
 evaluate_functional_correctness HumanEval_res_chat.jsonl
 ```
 
@@ -60,9 +73,8 @@ This program exists to run untrusted model-generated code. Users are strongly en
 # Qwen-7B
 python evaluate_gsm8k.py
 
-# Qwen-7B-Chat
+# Qwen-7B-Chat (We only provide 0-shot reproduction scripts. 5-shot results are obtained by OpenCompass (https://github.com/InternLM/opencompass).)
 python evaluate_chat_gsm8k.py # zeroshot
-python evaluate_chat_gsm8k.py --use-fewshot # fewshot
 ```
 
 - PLUGIN
