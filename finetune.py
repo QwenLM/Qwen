@@ -15,6 +15,7 @@ import transformers
 from transformers import Trainer, GPTQConfig, deepspeed
 from transformers.trainer_pt_utils import LabelSmoother
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+from accelerate.utils import DistributedType
 
 
 IGNORE_TOKEN_ID = LabelSmoother.ignore_index
@@ -263,6 +264,10 @@ def train():
         training_args,
         lora_args,
     ) = parser.parse_args_into_dataclasses()
+
+    # This serves for single-gpu qlora.
+    if getattr(training_args, 'deepspeed', None) and getattr(lora_args, 'q_lora', False):
+        training_args.distributed_state.distributed_type = DistributedType.DEEPSPEED
 
     compute_dtype = (
         torch.float16
