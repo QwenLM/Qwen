@@ -32,6 +32,7 @@ In this repo, you can figure out:
 * Details about the quantization models, including usage, memory, inference speed. For comparison, we also provide the statistics of the BF16 models.
 * Tutorials on finetuning, including full-parameter tuning, LoRA, and Q-LoRA.
 * Instructions on building demos, including WebUI, CLI demo, etc.
+* Instructions on building an OpenAI-style API for your model.
 * Information about Qwen for tool use, agent, and code interpreter
 * Statistics of long-context understanding evaluation
 * License agreement
@@ -397,7 +398,11 @@ sh finetune/finetune_lora_single_gpu.sh
 sh finetune/finetune_lora_ds.sh
 ```
 
-In comparison with full-parameter finetuning, LoRA ([paper](https://arxiv.org/abs/2106.09685)) only updates the parameters of adapter layers but keeps the original large language model layers frozen. This allows much fewer memory costs and thus fewer computation costs. However, if you still suffer from insufficient memory, you can consider Q-LoRA ([paper](https://arxiv.org/abs/2305.14314)), which uses the quantized large language model and other techniques such as paged attention to allow even fewer memory costs. To run Q-LoRA, directly run the following script:
+In comparison with full-parameter finetuning, LoRA ([paper](https://arxiv.org/abs/2106.09685)) only updates the parameters of adapter layers but keeps the original large language model layers frozen. This allows much fewer memory costs and thus fewer computation costs. However, if you still suffer from insufficient memory, you can consider Q-LoRA ([paper](https://arxiv.org/abs/2305.14314)), which uses the quantized large language model and other techniques such as paged attention to allow even fewer memory costs. 
+
+Note: To run single-GPU Q-LoRA training, you may need to install `mpi4py` through `pip` or `conda`.
+
+To run Q-LoRA, directly run the following script:
 
 ```bash
 # Single GPU training

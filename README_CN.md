@@ -26,10 +26,11 @@
 
 在这个项目中，你可以了解到以下内容
 
-* 快速上手Qwen-Chat教程，玩转大模型推理.
+* 快速上手Qwen-Chat教程，玩转大模型推理
 * 量化模型相关细节，包括用法、显存占用、推理性能等。这部分还提供了和非量化模型的对比。
-* 微调的教程，帮你实现全参数微调、LoRA以及Q-LoRA。
+* 微调的教程，帮你实现全参数微调、LoRA以及Q-LoRA
 * 搭建Demo的方法，包括WebUI和CLI Demo
+* 搭建API的方法，我们提供的示例为OpenAI风格的API
 * 更多关于Qwen在工具调用、Code Interpreter、Agent方面的内容
 * 长序列理解能力及评测
 * 使用协议
@@ -383,7 +384,11 @@ sh finetune/finetune_lora_single_gpu.sh
 sh finetune/finetune_lora_ds.sh
 ```
 
-与全参数微调不同，LoRA ([论文](https://arxiv.org/abs/2106.09685)) 只更新adapter层的参数而无需更新原有语言模型的参数。这种方法允许用户用更低的显存开销来训练模型，也意味着更小的计算开销。然而，如果你依然遇到显存不足的问题，可以考虑使用Q-LoRA ([论文](https://arxiv.org/abs/2305.14314))。该方法使用4比特量化模型以及paged attention等技术实现更小的显存开销。运行Q-LoRA你只需运行如下脚本：
+与全参数微调不同，LoRA ([论文](https://arxiv.org/abs/2106.09685)) 只更新adapter层的参数而无需更新原有语言模型的参数。这种方法允许用户用更低的显存开销来训练模型，也意味着更小的计算开销。然而，如果你依然遇到显存不足的问题，可以考虑使用Q-LoRA ([论文](https://arxiv.org/abs/2305.14314))。该方法使用4比特量化模型以及paged attention等技术实现更小的显存开销。
+
+注意：如你使用单卡Q-LoRA，你可能需要安装`mpi4py`。你可以通过`pip`或者`conda`来安装。
+
+运行Q-LoRA你只需运行如下脚本：
 
 ```bash
 # 单卡训练
