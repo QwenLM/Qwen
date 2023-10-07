@@ -319,7 +319,7 @@ def train():
     tokenizer.pad_token_id = tokenizer.eod_id
 
     if training_args.use_lora:
-        if lora_args.q_lora:
+        if lora_args.q_lora or 'chat' in model_args.model_name_or_path.lower():
             modules_to_save = None
         else:
             modules_to_save = ["wte", "lm_head"]
