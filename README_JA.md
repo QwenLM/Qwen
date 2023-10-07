@@ -443,7 +443,7 @@ merged_model.save_pretrained(new_model_directory, max_shard_size="2048MB", safe_
 注意：マルチGPUトレーニングの場合、分散トレーニング用の適切なハイパーパラメータをマシンに応じて指定する必要があります。また、データ、メモリフットプリント、トレーニング速度を考慮して、引数 `--model_max_length` で最大シーケンス長を指定することをお勧めします。
 
 ### メモリと速度のプロファイリング
-シングルGPUトレーニングのセットアップにおいて、LoRAとQ-LoRAのGPUメモリとトレーニング速度をプロファイリングする。このテストでは、シングルA100-SXM4-80G GPUで実験し、CUDA 11.8とPytorch 2.0を使用します。256、512、1024、2048という異なる長さの入力のメモリ（GB）と速度（s/iter）をプロファイリングします。統計量を以下に示す：
+シングルGPUトレーニングのセットアップにおいて、LoRA (LoRA(emb)はembeddingと出力層を学習させるが、LoRAはembeddingと出力層を学習させない) とQ-LoRAのGPUメモリとトレーニング速度をプロファイリングする。このテストでは、シングルA100-SXM4-80G GPUで実験し、CUDA 11.8とPytorch 2.0を使用します。256、512、1024、2048という異なる長さの入力のメモリ（GB）と速度（s/iter）をプロファイリングします。統計量を以下に示す：
 
 <table>
     <tr>
@@ -453,13 +453,19 @@ merged_model.save_pretrained(new_model_directory, max_shard_size="2048MB", safe_
         <th align="center">256</th><th align="center">512</th><th align="center">1024</th><th align="center">2048</th>
     </tr>
     <tr>
-        <th rowspan="2">7B</th><td>LoRA</td><td align="center">33.5G / 1.6s/it</td><td align="center">34.0G / 1.7s/it</td><td align="center">35.0G / 3.0s/it</td><td align="center">35.0G / 5.7s/it</td>
+        <th rowspan="3">7B</th><td>LoRA</td><td align="center">19.9G / 1.6s/it</td><td align="center">20.2G / 1.6s/it</td><td align="center">21.5G / 2.9s/it</td><td align="center">23.7G / 5.5s/it</td>
+    </tr>
+    <tr>
+        <td>LoRA (emb)</td><td align="center">33.5G / 1.6s/it</td><td align="center">34.0G / 1.7s/it</td><td align="center">35.0G / 3.0s/it</td><td align="center">35.0G / 5.7s/it</td>
     </tr>
     <tr>
         <td>Q-LoRA</td><td align="center">11.5G / 3.0s/it</td><td align="center">12.2G / 3.6s/it</td><td align="center">12.7G / 4.8s/it</td><td align="center">13.9G / 7.3s/it</td>
     </tr>
     <tr>
-        <th rowspan="2">14B</th><td>LoRA</td><td align="center">51.0G / 2.1s/it</td><td align="center">51.0G / 2.7s/it</td><td align="center">51.5G / 5.0s/it</td><td align="center">53.9G / 9.2s/it</td>
+        <th rowspan="3">14B</th><td>LoRA</td><td align="center">34.5G / 2.0s/it</td><td align="center">35.0G / 2.5s/it</td><td align="center">35.2G / 4.9s/it</td><td align="center">37.3G / 8.9s/it</td>
+    </tr>
+    <tr>
+        <td>LoRA (emb)</td><td align="center">51.0G / 2.1s/it</td><td align="center">51.0G / 2.7s/it</td><td align="center">51.5G / 5.0s/it</td><td align="center">53.9G / 9.2s/it</td>
     </tr>
     <tr>
         <td>Q-LoRA</td><td align="center">18.3G / 5.4s/it</td><td align="center">18.4G / 6.4s/it</td><td align="center">18.5G / 8.5s/it</td><td align="center">19.9G / 12.4s/it</td>

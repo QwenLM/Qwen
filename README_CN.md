@@ -435,7 +435,7 @@ merged_model.save_pretrained(new_model_directory, max_shard_size="2048MB", safe_
 注意：分布式训练需要根据你的需求和机器指定正确的分布式训练超参数。此外，你需要根据你的数据、显存情况和训练速度预期，使用`--model_max_length`设定你的数据长度。
 
 ### 显存占用及训练速度
-下面记录7B和14B模型在单GPULoRA和QLoRA时处理不同长度输入的显存占用和训练速度的情况。本次评测运行于单张A100-SXM4-80G GPU，使用CUDA 11.8和Pytorch 2.0。我们统一使用batch size为1，gradient accumulation为8的训练配置，记录输入长度分别为256、512、1024和2048的显存占用（GB）和训练速度（s/iter）。具体数值如下所示：
+下面记录7B和14B模型在单GPU使用LoRA（LoRA (emb)指的是embedding和输出层参与训练，而LoRA则不优化这部分参数）和QLoRA时处理不同长度输入的显存占用和训练速度的情况。本次评测运行于单张A100-SXM4-80G GPU，使用CUDA 11.8和Pytorch 2.0。我们统一使用batch size为1，gradient accumulation为8的训练配置，记录输入长度分别为256、512、1024和2048的显存占用（GB）和训练速度（s/iter）。具体数值如下所示：
 
 <table>
     <tr>
@@ -445,13 +445,19 @@ merged_model.save_pretrained(new_model_directory, max_shard_size="2048MB", safe_
         <th align="center">256</th><th align="center">512</th><th align="center">1024</th><th align="center">2048</th>
     </tr>
     <tr>
-        <th rowspan="2">7B</th><td>LoRA</td><td align="center">33.5G / 1.6s/it</td><td align="center">34.0G / 1.7s/it</td><td align="center">35.0G / 3.0s/it</td><td align="center">35.0G / 5.7s/it</td>
+        <th rowspan="3">7B</th><td>LoRA</td><td align="center">19.9G / 1.6s/it</td><td align="center">20.2G / 1.6s/it</td><td align="center">21.5G / 2.9s/it</td><td align="center">23.7G / 5.5s/it</td>
+    </tr>
+    <tr>
+        <td>LoRA (emb)</td><td align="center">33.5G / 1.6s/it</td><td align="center">34.0G / 1.7s/it</td><td align="center">35.0G / 3.0s/it</td><td align="center">35.0G / 5.7s/it</td>
     </tr>
     <tr>
         <td>Q-LoRA</td><td align="center">11.5G / 3.0s/it</td><td align="center">12.2G / 3.6s/it</td><td align="center">12.7G / 4.8s/it</td><td align="center">13.9G / 7.3s/it</td>
     </tr>
     <tr>
-        <th rowspan="2">14B</th><td>LoRA</td><td align="center">51.0G / 2.1s/it</td><td align="center">51.0G / 2.7s/it</td><td align="center">51.5G / 5.0s/it</td><td align="center">53.9G / 9.2s/it</td>
+        <th rowspan="3">14B</th><td>LoRA</td><td align="center">34.5G / 2.0s/it</td><td align="center">35.0G / 2.5s/it</td><td align="center">35.2G / 4.9s/it</td><td align="center">37.3G / 8.9s/it</td>
+    </tr>
+    <tr>
+        <td>LoRA (emb)</td><td align="center">51.0G / 2.1s/it</td><td align="center">51.0G / 2.7s/it</td><td align="center">51.5G / 5.0s/it</td><td align="center">53.9G / 9.2s/it</td>
     </tr>
     <tr>
         <td>Q-LoRA</td><td align="center">18.3G / 5.4s/it</td><td align="center">18.4G / 6.4s/it</td><td align="center">18.5G / 8.5s/it</td><td align="center">19.9G / 12.4s/it</td>
