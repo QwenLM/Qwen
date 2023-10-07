@@ -41,7 +41,7 @@ torchrun $DISTRIBUTED_ARGS finetune.py \
     --lr_scheduler_type "cosine" \
     --logging_steps 1 \
     --report_to "none" \
-    --model_max_length 2048 \
+    --model_max_length 512 \
     --lazy_preprocess True \
     --use_lora \
     --gradient_checkpointing \
