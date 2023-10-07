@@ -319,6 +319,10 @@ def train():
     tokenizer.pad_token_id = tokenizer.eod_id
 
     if training_args.use_lora:
+        if lora_args.q_lora:
+            modules_to_save = None
+        else:
+            modules_to_save = ["wte", "lm_head"]
         lora_config = LoraConfig(
             r=lora_args.lora_r,
             lora_alpha=lora_args.lora_alpha,
@@ -326,7 +330,7 @@ def train():
             lora_dropout=lora_args.lora_dropout,
             bias=lora_args.lora_bias,
             task_type="CAUSAL_LM",
-            modules_to_save=["wte", "lm_head"]  # This argument serves for adding new tokens.
+            modules_to_save=modules_to_save  # This argument serves for adding new tokens.
         )
         if lora_args.q_lora:
             model = prepare_model_for_kbit_training(
