@@ -398,7 +398,11 @@ sh finetune/finetune_lora_single_gpu.sh
 sh finetune/finetune_lora_ds.sh
 ```
 
-In comparison with full-parameter finetuning, LoRA ([paper](https://arxiv.org/abs/2106.09685)) only updates the parameters of adapter layers but keeps the original large language model layers frozen. This allows much fewer memory costs and thus fewer computation costs. However, if you still suffer from insufficient memory, you can consider Q-LoRA ([paper](https://arxiv.org/abs/2305.14314)), which uses the quantized large language model and other techniques such as paged attention to allow even fewer memory costs. 
+In comparison with full-parameter finetuning, LoRA ([paper](https://arxiv.org/abs/2106.09685)) only updates the parameters of adapter layers but keeps the original large language model layers frozen. This allows much fewer memory costs and thus fewer computation costs. 
+
+Note that if you use LoRA to finetune the base language model, e.g., Qwen-7B, instead of chat models, e.g., Qwen-7B-Chat, the script automatically switches the embedding and output layer as trainable parameters. This is because the base language model has no knowledge of special tokens brought by ChatML format. Thus these layers should be updated for the model to understand and predict the tokens. Or in another word, if your training brings in special tokens in LoRA, you should set the layers to trainable parameters by setting `modules_to_save` inside the code. Additionally, we find that there is a significant gap between the memory footprint of LoRA with and without these trainable parameters. Therefore, if you have trouble with memory, we advise you to LoRA finetune the chat models. Check the profile below for more information.
+
+If you still suffer from insufficient memory, you can consider Q-LoRA ([paper](https://arxiv.org/abs/2305.14314)), which uses the quantized large language model and other techniques such as paged attention to allow even fewer memory costs. 
 
 Note: To run single-GPU Q-LoRA training, you may need to install `mpi4py` through `pip` or `conda`.
 
@@ -411,7 +415,7 @@ sh finetune/finetune_qlora_single_gpu.sh
 sh finetune/finetune_qlora_ds.sh
 ```
 
-For Q-LoRA, we advise you to load our provided quantized model, e.g., Qwen-7B-Chat-Int4. You **SHOULD NOT** use the bf16 models. Different from full-parameter finetuning and LoRA, only fp16 is supported for Q-LoRA. 
+For Q-LoRA, we advise you to load our provided quantized model, e.g., Qwen-7B-Chat-Int4. You **SHOULD NOT** use the bf16 models. Different from full-parameter finetuning and LoRA, only fp16 is supported for Q-LoRA. Besides, for Q-LoRA, the troubles with the special tokens in LoRA still exist. However, as we only provide the Int4 models for chat models, which means the language model has learned the special tokens of ChatML format, you have no worry about the layers. Note that the layers of the Int4 model should not be trainable, and thus if you introduce special tokens in your training, Q-LoRA might not work.
 
 Different from full-parameter finetuning, the training of both LoRA and Q-LoRA only saves the adapter parameters. Suppose your training starts from Qwen-7B, you can load the finetuned model for inference as shown below:
 
@@ -425,7 +429,24 @@ model = AutoPeftModelForCausalLM.from_pretrained(
 ).eval()
 ```
 
-For multi-GPU training, you need to specify the proper hyperparameters for distributed training based on your machine. 
+If you want to merge the adapters and save the finetuned model as a standalone model, you can run the following codes:
+
+```python
+from peft import AutoPeftModelForCausalLM
+
+model = AutoPeftModelForCausalLM.from_pretrained(
+    path_to_adapter, # path to the output directory
+    device_map="auto",
+    trust_remote_code=True
+).eval()
+
+merged_model = model.merge_and_unload()
+# max_shard_size and safe serialization are not necessary. 
+# They respectively work for sharding checkpoint and save the model to safetensors
+merged_model.save_pretrained(new_model_directory, max_shard_size="2048MB", safe_serialization=True)
+```
+
+Note: For multi-GPU training, you need to specify the proper hyperparameters for distributed training based on your machine. Besides, we advise you to specify your maximum sequence length with the argument `--model_max_length`, based on your consideration of data, memory footprint, and training speed.
 
 ### Profiling of Memory and Speed
 We profile the GPU memory and training speed of both LoRA and Q-LoRA in the setup of single-GPU training. In this test, we experiment on a single A100-SXM4-80G GPU, and we use CUDA 11.8 and Pytorch 2.0. We uniformly use a batch size of 1 and gradient accumulation of 8. We profile the memory (GB) and speed (s/iter) of inputs of different lengths, namely 256, 512, 1024, and 2048. The statistics are listed below:
@@ -438,13 +459,19 @@ We profile the GPU memory and training speed of both LoRA and Q-LoRA in the setu
         <th align="center">256</th><th align="center">512</th><th align="center">1024</th><th align="center">2048</th>
     </tr>
     <tr>
-        <th rowspan="2">7B</th><td>LoRA</td><td align="center">33.5G / 1.6s/it</td><td align="center">34.0G / 1.7s/it</td><td align="center">35.0G / 3.0s/it</td><td align="center">35.0G / 5.7s/it</td>
+        <th rowspan="3">7B</th><td>LoRA</td><td align="center">19.9G / 1.6s/it</td><td align="center">20.2G / 1.6s/it</td><td align="center">21.5G / 2.9s/it</td><td align="center">23.7G / 5.5s/it</td>
+    </tr>
+    <tr>
+        <td>LoRA (emb)</td><td align="center">33.5G / 1.6s/it</td><td align="center">34.0G / 1.7s/it</td><td align="center">35.0G / 3.0s/it</td><td align="center">35.0G / 5.7s/it</td>
     </tr>
     <tr>
         <td>Q-LoRA</td><td align="center">11.5G / 3.0s/it</td><td align="center">12.2G / 3.6s/it</td><td align="center">12.7G / 4.8s/it</td><td align="center">13.9G / 7.3s/it</td>
     </tr>
     <tr>
-        <th rowspan="2">14B</th><td>LoRA</td><td align="center">51.0G / 2.1s/it</td><td align="center">51.0G / 2.7s/it</td><td align="center">51.5G / 5.0s/it</td><td align="center">53.9G / 9.2s/it</td>
+        <th rowspan="3">14B</th><td>LoRA</td><td align="center">34.5G / 2.0s/it</td><td align="center">35.0G / 2.5s/it</td><td align="center">35.2G / 4.9s/it</td><td align="center">37.3G / 8.9s/it</td>
+    </tr>
+    <tr>
+        <td>LoRA (emb)</td><td align="center">51.0G / 2.1s/it</td><td align="center">51.0G / 2.7s/it</td><td align="center">51.5G / 5.0s/it</td><td align="center">53.9G / 9.2s/it</td>
     </tr>
     <tr>
         <td>Q-LoRA</td><td align="center">18.3G / 5.4s/it</td><td align="center">18.4G / 6.4s/it</td><td align="center">18.5G / 8.5s/it</td><td align="center">19.9G / 12.4s/it</td>
@@ -548,23 +575,22 @@ Function calling is also supported (but only when `stream=False` for the moment)
 
 ## Deployment
 
-It is simple to run the model on CPU, which requires your specification of device:
+### CPU
+
+To deploy our models on CPU, we strongly advise you to use [qwen.cpp](https://github.com/QwenLM/qwen.cpp), which is a pure C++ implementation of Qwen and tiktoken. Check the repo for more details!
+
+Also, it is also simple to directly run the model on CPU, which requires your specification of device:
 
 ```python
 model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
 ```
 
-If you suffer from lack of GPU memory and you would like to run the model on more than 1 GPU, you can use our provided script `utils.py`:
+However, it is likely that you suffer from extremely low inference efficiency.
 
-```python
-from utils import load_model_on_gpus
-model = load_model_on_gpus('Qwen/Qwen-7B-Chat', num_gpus=2)
-```
+### Multiple GPUs
 
-Then you can run the 7B chat model on 2 GPUs using the above scripts.
+If you suffer from lack of GPU memory and you would like to run the model on more than 1 GPU, you can directly use the default loading method, which is now supported by Transformers. The previous method based on `utils.py` is deprecated.
 <br><br>
-
-We also provide pure C++ implementation of Qwen-LM and tiktoken, see [qwen.cpp](https://github.com/QwenLM/qwen.cpp) for details.
 
 ## Tool Usage
 
