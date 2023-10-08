@@ -102,10 +102,8 @@ pip install -r requirements.txt
 If your device supports fp16 or bf16, we recommend installing [flash-attention](https://github.com/Dao-AILab/flash-attention) (**we support flash attention 2 now.**) for higher efficiency and lower memory usage. (**flash-attention is optional and the project can run normally without installing it**)
 
 ```bash
-# Previous installation commands. Now flash attention 2 is supported.
-# git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
-# cd flash-attention && pip install .
-pip install flash-attn --no-build-isolation
+git clone https://github.com/Dao-AILab/flash-attention
+cd flash-attention && pip install .
 # Below are optional. Installing them might be slow.
 # pip install csrc/layer_norm
 # pip install csrc/rotary
