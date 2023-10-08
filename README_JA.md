@@ -423,7 +423,7 @@ model = AutoPeftModelForCausalLM.from_pretrained(
 ).eval()
 ```
 
-アダプターをマージし、微調整したモデルをスタンドアロンモデルとして保存したい場合は、以下のコードを実行します：
+アダプターをマージし、微調整したモデルをスタンドアロンモデルとして保存したい場合は（これは LoRA でのみ可能で、Q-LoRA からパラメータをマージすることはできません）、以下のコードを実行します：
 
 ```python
 from peft import AutoPeftModelForCausalLM
