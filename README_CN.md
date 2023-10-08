@@ -97,11 +97,13 @@ Qwen-14B及Qwen-7B (最新版本使用更大量的token进行预训练)相比同
 pip install -r requirements.txt
 ```
 
-如果你的显卡支持fp16或bf16精度，我们还推荐安装[flash-attention](https://github.com/Dao-AILab/flash-attention)来提高你的运行效率以及降低显存占用。(**flash-attention只是可选项，不安装也可正常运行该项目**)
+如果你的显卡支持fp16或bf16精度，我们还推荐安装[flash-attention](https://github.com/Dao-AILab/flash-attention)（**当前已支持flash attention 2**）来提高你的运行效率以及降低显存占用。(**flash-attention只是可选项，不安装也可正常运行该项目**)
 
 ```bash
-git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
-cd flash-attention && pip install .
+# 以下是此前的安装命令，当前已支持flash attention 2。
+# git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
+# cd flash-attention && pip install .
+pip install flash-attn --no-build-isolation
 # 下方安装可选，安装可能比较缓慢。
 # pip install csrc/layer_norm
 # pip install csrc/rotary
