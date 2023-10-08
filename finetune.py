@@ -98,6 +98,7 @@ def get_peft_state_maybe_zero_3(named_params, bias):
     to_return = {k: maybe_zero_3(v) for k, v in to_return.items()}
     return to_return
 
+
 local_rank = None
 
 def rank0_print(*args):
@@ -266,7 +267,7 @@ def train():
     ) = parser.parse_args_into_dataclasses()
 
     # This serves for single-gpu qlora.
-    if getattr(training_args, 'deepspeed', None) and getattr(lora_args, 'q_lora', False):
+    if getattr(training_args, 'deepspeed', None) and int(os.environ.get("WORLD_SIZE", 1))==1:
         training_args.distributed_state.distributed_type = DistributedType.DEEPSPEED
 
     compute_dtype = (
