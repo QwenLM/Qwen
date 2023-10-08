@@ -34,3 +34,6 @@ python finetune.py \
   --lazy_preprocess True \
   --gradient_checkpointing \
   --use_lora
+
+# If you use fp16 instead of bf16, you should use deepspeed
+# --fp16 True --deepspeed finetune/ds_config_zero2.json
