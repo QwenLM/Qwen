@@ -103,10 +103,10 @@ Qwen-14BとQwen-7B（これは、より多くのトークンで学習され、�
 pip install -r requirements.txt
 ```
 
-お使いのデバイスが fp16 または bf16 をサポートしている場合、[flash-attention](https://github.com/Dao-AILab/flash-attention) をインストールすることで、より高い効率とメモリ使用量を抑えることができます。(**flash-attention はオプションであり、インストールしなくてもプロジェクトは正常に実行できます**)
+お使いのデバイスが fp16 または bf16 をサポートしている場合、[flash-attention](https://github.com/Dao-AILab/flash-attention) （flash attention 2に対応しました）をインストールすることで、より高い効率とメモリ使用量を抑えることができます。(**flash-attention はオプションであり、インストールしなくてもプロジェクトは正常に実行できます**)
 
 ```bash
-# 以前のインストールコマンド。Flash Attention 2がサポートされました。
+# 以前のインストールコマンド。flash attention 2がサポートされました。
 # git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
 # cd flash-attention && pip install .
 pip install flash-attn --no-build-isolation
