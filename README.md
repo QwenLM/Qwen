@@ -429,7 +429,7 @@ model = AutoPeftModelForCausalLM.from_pretrained(
 ).eval()
 ```
 
-If you want to merge the adapters and save the finetuned model as a standalone model, you can run the following codes:
+If you want to merge the adapters and save the finetuned model as a standalone model (you can only do this with LoRA, and you CANNOT merge the parameters from Q-LoRA), you can run the following codes:
 
 ```python
 from peft import AutoPeftModelForCausalLM
