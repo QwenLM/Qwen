@@ -11,6 +11,7 @@ import platform
 import shutil
 from copy import deepcopy
 
+import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 from transformers.trainer_utils import set_seed
@@ -62,6 +63,13 @@ def _load_model_tokenizer(args):
     )
 
     return model, tokenizer, config
+
+
+def _gc():
+    import gc
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
 
 
 def _clear_screen():
@@ -129,10 +137,12 @@ def main():
             elif command in ['clear', 'cl']:
                 _clear_screen()
                 print(_WELCOME_MSG)
+                _gc()
                 continue
             elif command in ['clear-history', 'clh']:
                 print(f'[INFO] All {len(history)} history cleared')
                 history.clear()
+                _gc()
                 continue
             elif command in ['help', 'h']:
                 print(_HELP_MSG)

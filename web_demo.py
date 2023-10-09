@@ -107,6 +107,13 @@ def _parse_text(text):
     return text
 
 
+def _gc():
+    import gc
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+
+
 def _launch_demo(args, model, tokenizer, config):
 
     def predict(_query, _chatbot, _task_history):
@@ -138,9 +145,7 @@ def _launch_demo(args, model, tokenizer, config):
     def reset_state(_chatbot, _task_history):
         _task_history.clear()
         _chatbot.clear()
-        import gc
-        gc.collect()
-        torch.cuda.empty_cache()
+        _gc()
         return _chatbot
 
     with gr.Blocks() as demo:

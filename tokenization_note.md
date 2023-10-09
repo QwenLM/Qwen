@@ -125,3 +125,122 @@ The new default is the same as
 {'input_ids': [1350, 445, 151643, 899], 'token_type_ids': [0, 0, 0, 0], 'attention_mask': [1, 1, 1, 1]}
 ```
 
+## Vocabulary Expansion
+
+> WARNING: Read carefully, be aware of what you are doing, and use at your own risk. 
+> There are certain caveats regarding how your vocabulary is produced.
+
+The tokenizer of Qwen models are based on BPE and you cannot directly expand the vocabulary by adding words to the vocabulary. 
+The intermediate merges are needed for tokenization.
+Please follow the steps to obtain such information.
+
+1. Prepare a plain text file `qwen_extra_vocab.txt`, where each line contains a token and its frequency separated by `\t`. 
+
+   An example is given below:
+   ```
+   我是一只猫	20
+   你是一只猫	10
+   他是一只猫	5
+   一只	200
+   一只猫	100
+   夸张的 比喻手法	20
+   ```
+   The frequencies are needed to compute the BPE.
+
+   
+
+2. Prepare the base vocabulary file, e.g., `qwen.tiktoken`, and determine the start index for new tokens.
+   
+   There are 151,643 regular tokens and 208 control tokens in the vocabulary for Qwen models. 
+   For simplicity, the start index can be set as 151,851, which is the default value. 
+   You can, of course, override the many inactive control tokens, but you will need to modify the tokenizer code. 
+
+3. Run the following command:
+   ```
+   python add_merges.py qwen.tiktoken qwen_extra.tiktoken qwen_extra_vocab.txt
+   ```
+   `add_merges.py` can be found [here](examples/add_merges.py).
+   It will learn the new merges based on the provided `qwen_extra_vocab.txt`. 
+   The new tokens and their indices will be stored in `qwen_extra.tiktoken`. 
+   Modify the paths as you wish.
+
+   It is a pure Python implementation, so please expect it to be slow if you are adding a lot of words.
+
+   Please note that not all words can be added due to pre-tokenization. 
+   You will get warnings if you try to add such word:
+   ```
+   WARNING - 夸张的 比喻手法 would be pre-tokenized to ['夸张的', ' 比喻手法'], and thus cannot be added to vocabulary
+   WARNING - word 一只 is already a token b'\xe4\xb8\x80\xe5\x8f\xaa', skipping
+   INFO - number of existing merges: 151643
+   INFO - number of words for expanding: 4
+   DEBUG - (b'\xe4\xb8\x80\xe5\x8f\xaa', b'\xe7\x8c\xab') (一只猫) is selected as the next merge with freq 100
+   DEBUG - (b'\xe5\x8f\xaa', b'\xe7\x8c\xab') (只猫) is selected as the next merge with freq 35
+   DEBUG - (b'\xe6\x98\xaf\xe4\xb8\x80', b'\xe5\x8f\xaa\xe7\x8c\xab') (是一只猫) is selected as the next merge with freq 35
+   DEBUG - (b'\xe6\x88\x91', b'\xe6\x98\xaf\xe4\xb8\x80\xe5\x8f\xaa\xe7\x8c\xab') (我是一只猫) is selected as the next merge with freq 20
+   DEBUG - (b'\xe4\xbd\xa0', b'\xe6\x98\xaf\xe4\xb8\x80\xe5\x8f\xaa\xe7\x8c\xab') (你是一只猫) is selected as the next merge with freq 10
+   DEBUG - (b'\xe4\xbb\x96', b'\xe6\x98\xaf\xe4\xb8\x80\xe5\x8f\xaa\xe7\x8c\xab') (他是一只猫) is selected as the next merge with freq 5
+   INFO - number of newly learned merges: 6
+   ```
+
+The `qwen_extra.tiktoken` will contain the following lines:
+```
+5LiA5Y+q54yr 151851
+5Y+q54yr 151852
+5piv5LiA5Y+q54yr 151853
+5oiR5piv5LiA5Y+q54yr 151854
+5L2g5piv5LiA5Y+q54yr 151855
+5LuW5piv5LiA5Y+q54yr 151856
+```
+
+You may use the file as follows in your code:
+``` python
+from transformers import AutoTokenizer
+
+>>> tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True, extra_vocab_file="qwen_extra.tiktoken")
+
+>>> len(tokenizer)
+151857
+
+>>> tokenizer("我是一只猫")
+{'input_ids': [151854], 'token_type_ids': [0], 'attention_mask': [1]}
+```
+Note: You need the latest tokenizer code, i.e., after 2013-10-08, to use the `extra_vocab_file` argument.
+Otherwise, you need to manually append `qwen.tiktoken` (of which path varies with your configuration) with the content from `qwen_extra.tiktoken`.
+
+Certainly, you will need to finetune the model for the new tokens to work.
+
+
+### Caveats
+
+
+The tokenizer of Qwen operates directly on UTF-8 byte sequences, unlike others, e.g., SentencePiece that operates on UTF-8 codepoints/characters and falls back to UTF-8 byte sequences for the unknown (IIRC). 
+The thing is if the frequencies are computed on limited data, the UTF-8 codepoint boundary may not be correctly recognized.
+In theory, it could be a problem for fine-tuned models using the expanded vocabulary with limited data.
+
+For example, it could happen that `b'\x80\xe5'` might be merged first for the UTF-8 byte sequence `b'\xe4\xb8\x80\xe5\x8f\xaa'` of the string `一只`, across the UTF-8 codepoint of `一`(`b'\xe4\xb8\x80'`) and `只` (`b'\xe5\x8f\xaa'`).
+Normally, this would work just fine for known words, but for actually unknown words, unusual merges may happen, which may not be well understood for the pre-trained model.
+
+Our advice is that to be safe, you should gather the UTF-8 codepoints from all the words you need to add, and also add them to the file with frequencies higher than the sum of the frequencies of the corresponding words.
+But since Qwen has most of the Chinese words, it could be okay to just add the Chinese words alone.
+
+For curious minds, you will also notice that in the given example, `一只` is a token and `只猫` is also learned as a new token. 
+The reason is that `是一` is also a token in Qwen and has higher merging priority than `一只`, such that the merging path for `是|一|只|猫` is `是一|只|猫 -> 是一|只猫 -> 是一只猫` (omitting the UTF-8 byte merges).
+
+This is the characteristic for plain BPE: it is based solely on distribution, meaning it does not have knowledge of which bytes can form a valid UTF-8 codepoint, character, or meaningful word.
+
+The byproduct is that text may be sub-tokenized differently in different contexts, even for words containing only ASCII characters.
+```python
+>>> tokenizer.tokenize("Panda")
+[b'P', b'anda']
+
+>>> tokenizer.tokenize(" Panda")
+[b' Panda']
+
+>>> tokenizer.tokenize("Pandas")
+[b'P', b'andas']
+
+>>> tokenizer.tokenize(" Pandas")
+[b' Pand', b'as']
+```
+This simply suggests that those combinations occur more frequently in the data.
+If you have vast amount of training data, it should not be a problem.
