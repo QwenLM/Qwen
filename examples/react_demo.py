@@ -18,13 +18,13 @@ from transformers.generation import GenerationConfig
 
 for _ in range(10):  # 网络不稳定，多试几次
     try:
-        tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
-        generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
+        name = 'Qwen/Qwen-7B-Chat'
+        tokenizer = AutoTokenizer.from_pretrained(name, trust_remote_code=True)
+        generation_config = GenerationConfig.from_pretrained(name, trust_remote_code=True)
         model = AutoModelForCausalLM.from_pretrained(
-            "Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True
+            name, device_map="auto", trust_remote_code=True
         ).eval()
         model.generation_config = generation_config
-        model.generation_config.do_sample = False
         break
     except Exception:
         pass
@@ -236,7 +236,7 @@ def test():
         },
     ]
     history = []
-    for query in ['你好', '谁是周杰伦', '他老婆是谁', '给我画个可爱的小猫吧，最好是黑猫']:
+    for query in ['你好', '查一下谁是周杰伦', '搜下他老婆是谁', '给我画个可爱的小猫吧，最好是黑猫']:
         print(f"User's Query:\n{query}\n")
         response, history = llm_with_plugin(prompt=query, history=history, list_of_plugin_info=tools)
         print(f"Qwen's Response:\n{response}\n")
@@ -254,7 +254,7 @@ Thought: 提供的工具对回答该问题帮助较小，我将不使用工具�
 Final Answer: 你好！很高兴见到你。有什么我可以帮忙的吗？
 
 User's Query:
-谁是周杰伦
+查一下谁是周杰伦
 
 Qwen's Response:
 Thought: 我应该使用Google搜索查找相关信息。
@@ -265,7 +265,7 @@ Thought: I now know the final answer.
 Final Answer: 周杰伦（Jay Chou）是一位来自台湾的歌手、词曲创作人、音乐制作人、说唱歌手、演员、电视节目主持人和企业家。他以其独特的音乐风格和才华在华语乐坛享有很高的声誉。
 
 User's Query:
-他老婆是谁
+搜下他老婆是谁
 
 Qwen's Response:
 Thought: 我应该使用Google搜索查找相关信息。
