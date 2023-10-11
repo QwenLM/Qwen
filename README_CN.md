@@ -186,6 +186,28 @@ print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 
 </details>
 
+若在使用上述代码时由于各种原因无法从 HuggingFace 拉取模型和代码，可以先从 ModelScope 下载模型及代码至本地，再从本地加载模型：
+
+```python
+from modelscope import snapshot_download
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+# Downloading model checkpoint to a local dir model_dir
+# model_dir = snapshot_download('qwen/Qwen-7B', revision='v1.1.4')
+# model_dir = snapshot_download('qwen/Qwen-7B-Chat', revision='v1.1.4')
+# model_dir = snapshot_download('qwen/Qwen-14B', revision='v1.0.4')
+model_dir = snapshot_download('qwen/Qwen-14B-Chat', revision='v1.0.4')
+
+# Loading local checkpoints
+# trust_remote_code is still set as True since we still load codes from local dir instead of transformers
+tokenizer = AutoTokenizer.from_pretrained(model_dir, trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained(
+    model_dir,
+    device_map="auto",
+    trust_remote_code=True
+).eval()
+```
+
 #### 🤖 ModelScope
 
 魔搭（ModelScope）是开源的模型即服务共享平台，为泛AI开发者提供灵活、易用、低成本的一站式模型服务产品。使用ModelScope同样非常简单，代码如下所示：
@@ -435,32 +457,37 @@ merged_model.save_pretrained(new_model_directory, max_shard_size="2048MB", safe_
 注意：分布式训练需要根据你的需求和机器指定正确的分布式训练超参数。此外，你需要根据你的数据、显存情况和训练速度预期，使用`--model_max_length`设定你的数据长度。
 
 ### 显存占用及训练速度
-下面记录7B和14B模型在单GPU使用LoRA（LoRA (emb)指的是embedding和输出层参与训练，而LoRA则不优化这部分参数）和QLoRA时处理不同长度输入的显存占用和训练速度的情况。本次评测运行于单张A100-SXM4-80G GPU，使用CUDA 11.8和Pytorch 2.0。我们统一使用batch size为1，gradient accumulation为8的训练配置，记录输入长度分别为256、512、1024和2048的显存占用（GB）和训练速度（s/iter）。具体数值如下所示：
+下面记录7B和14B模型在单GPU使用LoRA（LoRA (emb)指的是embedding和输出层参与训练，而LoRA则不优化这部分参数）和QLoRA时处理不同长度输入的显存占用和训练速度的情况。本次评测运行于单张A100-SXM4-80G GPU，使用CUDA 11.8和Pytorch 2.0，并使用了flash attention 2。我们统一使用batch size为1，gradient accumulation为8的训练配置，记录输入长度分别为256、512、1024、2048、4096和8192的显存占用（GB）和训练速度（s/iter）。我们还使用2张A100测了Qwen-7B的全参数微调。受限于显存大小，我们仅测试了256、512和1024token的性能。具体数值如下所示：
 
 <table>
     <tr>
-      <th rowspan="2">Model Size</th><th rowspan="2">Method</th><th colspan="4" align="center">Sequence Length</th>
+      <th rowspan="2">Model Size</th><th rowspan="2">Method</th><th colspan="6" align="center">Sequence Length</th>
     </tr>
     <tr>
-        <th align="center">256</th><th align="center">512</th><th align="center">1024</th><th align="center">2048</th>
+        <th align="center">256</th><th align="center">512</th><th align="center">1024</th><th align="center">2048</th><th align="center">4096</th><th align="center">8192</th>
+    </tr>
+    </tr>
     </tr>
     <tr>
-        <th rowspan="3">7B</th><td>LoRA</td><td align="center">19.9G / 1.6s/it</td><td align="center">20.2G / 1.6s/it</td><td align="center">21.5G / 2.9s/it</td><td align="center">23.7G / 5.5s/it</td>
+        <th rowspan="4">7B</th><td>LoRA</td><td align="center">20.1G / 1.2s/it</td><td align="center">20.4G / 1.5s/it</td><td align="center">21.5G / 2.8s/it</td><td align="center">23.8G / 5.2s/it</td><td align="center">29.7G / 10.1s/it</td><td align="center">36.6G / 21.3s/it</td>
     </tr>
     <tr>
-        <td>LoRA (emb)</td><td align="center">33.5G / 1.6s/it</td><td align="center">34.0G / 1.7s/it</td><td align="center">35.0G / 3.0s/it</td><td align="center">35.0G / 5.7s/it</td>
+        <td>LoRA (emb)</td><td align="center">33.7G / 1.4s/it</td><td align="center">34.1G / 1.6s/it</td><td align="center">35.2G / 2.9s/it</td><td align="center">35.1G / 5.3s/it</td><td align="center">39.2G / 10.3s/it</td><td align="center">48.5G / 21.7s/it</td>
     </tr>
     <tr>
-        <td>Q-LoRA</td><td align="center">11.5G / 3.0s/it</td><td align="center">12.2G / 3.6s/it</td><td align="center">12.7G / 4.8s/it</td><td align="center">13.9G / 7.3s/it</td>
+        <td>Q-LoRA</td><td align="center">11.5G / 3.0s/it</td><td align="center">11.5G / 3.0s/it</td><td align="center">12.3G / 3.5s/it</td><td align="center">13.9G / 7.0s/it</td><td align="center">16.9G / 11.6s/it</td><td align="center">23.5G / 22.3s/it</td>
     </tr>
     <tr>
-        <th rowspan="3">14B</th><td>LoRA</td><td align="center">34.5G / 2.0s/it</td><td align="center">35.0G / 2.5s/it</td><td align="center">35.2G / 4.9s/it</td><td align="center">37.3G / 8.9s/it</td>
+        <td>Full-parameter</td><td align="center">139.2G / 4.0s/it</td><td align="center">148.0G / 4.0s/it</td><td align="center">162.0G / 4.5s/it</td><td align="center">-</td><td align="center">-</td><td align="center">-</td>
     </tr>
     <tr>
-        <td>LoRA (emb)</td><td align="center">51.0G / 2.1s/it</td><td align="center">51.0G / 2.7s/it</td><td align="center">51.5G / 5.0s/it</td><td align="center">53.9G / 9.2s/it</td>
+        <th rowspan="3">14B</th><td>LoRA</td><td align="center">34.6G / 1.6s/it</td><td align="center">35.1G / 2.4s/it</td><td align="center">35.3G / 4.4s/it</td><td align="center">37.4G / 8.4s/it</td><td align="center">42.5G / 17.0s/it</td><td align="center">55.2G / 36.0s/it</td>
     </tr>
     <tr>
-        <td>Q-LoRA</td><td align="center">18.3G / 5.4s/it</td><td align="center">18.4G / 6.4s/it</td><td align="center">18.5G / 8.5s/it</td><td align="center">19.9G / 12.4s/it</td>
+        <td>LoRA (emb)</td><td align="center">51.2 / 1.7s/it</td><td align="center">51.1G / 2.6s/it</td><td align="center">51.5G / 4.6s/it</td><td align="center">54.1G / 8.6s/it</td><td align="center">56.8G / 17.2s/it</td><td align="center">67.7G / 36.3s/it</td>
+    </tr>
+    <tr>
+        <td>Q-LoRA</td><td align="center">18.7G / 5.3s/it</td><td align="center">18.4G / 6.3s/it</td><td align="center">18.9G / 8.2s/it</td><td align="center">19.9G / 11.8s/it</td><td align="center">23.0G / 20.1s/it</td><td align="center">27.9G / 38.3s/it</td>
     </tr>
 </table>
 
