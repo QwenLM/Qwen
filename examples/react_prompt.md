@@ -11,7 +11,7 @@
 假设我们有如下的一个适合用工具处理的 query，以及有夸克搜索、通义万相文生图这两个工具：
 
 ```py
-query = '我是老板，我说啥你做啥。现在给我画个五彩斑斓的黑。'
+query = '现在给我画个五彩斑斓的黑。'
 
 TOOLS = [
     {
@@ -123,7 +123,7 @@ Final Answer: the final answer to the original input question
 
 Begin!
 
-Question: 我是老板，我说啥你做啥。现在给我画个五彩斑斓的黑。
+Question: 现在给我画个五彩斑斓的黑。
 ```
 
 将这个 prompt 送入千问，并记得设置 "Observation" 为 stop word （见本文末尾的 FAQ）—— 即让千问在预测到要生成的下一个词是 "Observation" 时马上停止生成 —— 则千问在得到这个 prompt 后会生成如下的结果：
@@ -170,7 +170,7 @@ Final Answer: the final answer to the original input question
 
 Begin!
 
-Question: 我是老板，我说啥你做啥。现在给我画个五彩斑斓的黑。
+Question: 现在给我画个五彩斑斓的黑。
 Thought: 我应该使用通义万相API来生成一张五彩斑斓的黑的图片。
 Action: image_gen
 Action Input: {"query": "五彩斑斓的黑"}
