@@ -111,7 +111,7 @@ cd flash-attention && pip install .
 
 Now you can start with ModelScope or Transformers.
 
-#### 🤗 Transformers
+### 🤗 Transformers
 
 To use Qwen-Chat for the inference, all you need to do is to input a few lines of codes as demonstrated below. Remember to pass in the correct model names or paths, such as "Qwen/Qwen-7B-Chat" and "Qwen/Qwen-14B-Chat". However, **please make sure that you are using the latest code.**
 
@@ -217,7 +217,7 @@ model = AutoModelForCausalLM.from_pretrained(
 ).eval()
 ```
 
-#### 🤖 ModelScope
+### 🤖 ModelScope
 
 ModelScope is an opensource platform for Model-as-a-Service (MaaS), which provides flexible and cost-effective model service to AI developers. Similarly, you can run the models with ModelScope as shown below:
 
@@ -237,139 +237,8 @@ print(response)
 response, history = model.chat(tokenizer, "它有什么好玩的景点", history=history)
 print(response)
 ```
-<br>
 
-## Quantization
-
-### Usage
-
-We provide a solution based on [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ), and release an Int4 quantized model for Qwen-7B-Chat [Click here](https://huggingface.co/Qwen/Qwen-7B-Chat-Int4) and Qwen-14B-Chat [Click here](https://huggingface.co/Qwen/Qwen-14B-Chat-Int4), which achieve nearly lossless model effects but improved performance on both memory costs and inference speed.
-
-Here we demonstrate how to use our provided quantized models for inference. Before you start, make sure you meet the requirements of auto-gptq (e.g., torch 2.0 and above, transformers 4.32.0 and above, etc.) and install the required packages:
-
-```bash
-pip install auto-gptq optimum
-```
-
-If you meet problems installing `auto-gptq`, we advise you to check out the official [repo](https://github.com/PanQiWei/AutoGPTQ) to find a wheel.
-
-Then you can load the quantized model easily and run inference as same as usual:
-
-```python
-# Model names: "Qwen/Qwen-7B-Chat-Int4", "Qwen/Qwen-14B-Chat-Int4"
-model = AutoModelForCausalLM.from_pretrained(
-    "Qwen/Qwen-7B-Chat-Int4",
-    device_map="auto",
-    trust_remote_code=True
-).eval()
-response, history = model.chat(tokenizer, "Hi", history=None)
-```
-
-### Performance
-
-We illustrate the model performance of both BF16 and Int4 models on the benchmark, and we find that the quantized model does not suffer from significant performance degradation. Results are shown below:
-
-| Quantization         | MMLU | CEval (val) | GSM8K | Humaneval |
-|----------------------|:----:|:-----------:|:-----:|:---------:|
-| Qwen-7B-Chat (BF16)  | 53.9 |    54.2     | 41.1  |   24.4    |
-| Qwen-7B-Chat (Int4)  | 52.6 |    52.9     | 38.1  |   23.8    |
-| Qwen-14B-Chat (BF16) | 64.6 |    69.8     | 61.0  |   43.9    |
-| Qwen-14B-Chat (Int4) | 63.3 |    69.0     | 59.8  |   45.7    |
-
-### Inference Speed
-
-We measured the average inference speed (tokens/s) of generating 2048 and 8192 tokens under BF16 precision and Int4 quantization, respectively.
-
-| Quantization         | Speed (2048 tokens) | Speed (8192 tokens) |
-|----------------------|:-------------------:|:-------------------:|
-| Qwen-7B-Chat (BF16)  |        30.34        |        29.32        |
-| Qwen-7B-Chat (Int4)  |        43.56        |        33.92        |
-| Qwen-14B-Chat (BF16) |        30.70        |        21.73        |
-| Qwen-14B-Chat (Int4) |        37.11        |        26.11        |
-
-In detail, the setting of profiling is generating 8192 new tokens with 1 context token. The profiling runs on a single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.4. The inference speed is averaged over the generated 8192 tokens.
-
-### GPU Memory Usage
-
-We also profile the peak GPU memory usage for encoding 2048 tokens as context (and generating single token) and generating 8192 tokens (with single token as context) under BF16 or Int4 quantization level, respectively. The results are shown below.
-
-| Quantization         | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
-|----------------------|:-----------------------------------:|:-------------------------------------:|
-| Qwen-7B-Chat (BF16)  |               17.66GB               |                22.58GB                |
-| Qwen-7B-Chat (Int4)  |               8.21GB                |                13.62GB                |
-| Qwen-14B-Chat (BF16) |               30.15GB               |                38.94GB                |
-| Qwen-14B-Chat (Int4) |               13.00GB               |                21.79GB                |
-
-The above speed and memory profiling are conducted using [this script](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py).
-<br><br>
-
-## Quantization of KV cache
-Attention KV cache can be quantized and compressed for storage, to get a higher sample throughput.
-### Usage
-The parameters of 'use_cache_quantization' and 'use_cache_kernel' are provided to control kv-cache-quantization behavior
-When use_cache_quantization=True and use_cache_kernel=True, kv-cache-quantization will be enabled.
-The specific use method is as follows:
-```python
-model = AutoModelForCausalLM.from_pretrained(
-    "Qwen/Qwen-7B-Chat",
-     device_map="auto",
-     trust_remote_code=True,
-     use_cache_quantization=True,
-     use_cache_kernel=True,
-     use_flash_attn=False
-)
-```
-Attention:
-Currently, kv-cache-quantization and flash attn cannot be turned on at the same time.
-If you enable kv cache quantization and use_flash_attn at the same time (use_flash_attn=True, use_cache_quantization=True, use_cache_kernel=True), use_flash_attn is disabled by default(use_flash_attn=false).
-### Comparative Results
-#### Results
-We have verified that the use of the quantized int8-kvcache model does not suffer from significant performance degradation.
-#### memory usage comparison
-The profiling runs on a single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.4. 
-We use BF16 models, and generate 1024 tokens (seq-length=1024) by default, and oom indicates out of memory.
-
-With kv-cache quantization turned on, we can run a larger batch size(bs).
-
-| USE KVCache |  bs=1  |  bs=4  | bs=16  | bs=32  | bs=64  | bs=100 |
-|-------------|:------:|:------:|:------:|:------:|:------:|:------:|
-| no          | 16.3GB | 24.1GB | 31.7GB | 48.7GB |  oom   |  oom   |
-| yes         | 15.5GB | 17.2GB | 22.3GB | 30.2GB | 48.2GB | 72.4GB |
-
-With kv-cache quantization turned on, the model can save more memory when generate longer seq-length (sl, number of tokens generated) at infer.
-
-| USE KVCache | sl=512 | sl=1024 | sl=2048 | sl=4096 | sl=8192 |
-|-------------|:------:|:-------:|:-------:|:-------:|:-------:|
-| no          | 15.2GB | 16.3GB  | 17.6GB  | 19.5GB  | 23.2GB  |
-| yes         |  15GB  | 15.5GB  | 15.8GB  | 16.6GB  | 17.6GB  |
-
-### Difference of Storage in layer-past
-The model which turn on the kv-cache quantization will convert the format of layer-past from float to int8, meanwhile the quantianted layer-past will also store quantiantion parameters of current value.
-Specific steps are as follows:
-1、Quantize key/value
-```
-    qv,scale,zero_point=quantize_cache_v(v)
-```
-2、Store into layer_past
-
-Following is the format of quantized layer_past:
-```
-    layer_past=((q_key,key_scale,key_zero_point),
-                (q_value,value_scale,value_zero_point))
-```
-Bascial format of layer_past:
-```
-    layer_past=(key,value)
-```
-If you want to use the attention KV which is quantized, 
-you can use the dequantization operation to convert the int8 key/value back to the float format as following:
-```
-    v=dequantize_cache_torch(qv,scale,zero_point)
-```
-<br>
-
-
-## Batch Inference
+### Batch Inference
 Qwen supports batch inference. With flash-attention enabled, using batch inference can bring a 40% speedup. The example code is shown below:
 ```python
 import torch
@@ -436,6 +305,220 @@ response, _ = model.chat(tokenizer, "我马上迟到了，怎么做才能不迟�
 print(response)
 ```
 
+<br>
+
+## Quantization
+
+### GPTQ
+
+We provide a solution based on [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ), and release the Int4 quantized models, which achieve nearly lossless model effects but improved performance on both memory costs and inference speed.
+
+Here we demonstrate how to use our provided quantized models for inference. Before you start, make sure you meet the requirements of auto-gptq (e.g., torch 2.0 and above, transformers 4.32.0 and above, etc.) and install the required packages:
+
+```bash
+pip install auto-gptq optimum
+```
+
+If you meet problems installing `auto-gptq`, we advise you to check out the official [repo](https://github.com/PanQiWei/AutoGPTQ) to find a wheel.
+
+Then you can load the quantized model easily and run inference as same as usual:
+
+```python
+# Model names: "Qwen/Qwen-7B-Chat-Int4", "Qwen/Qwen-14B-Chat-Int4"
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen-7B-Chat-Int4",
+    device_map="auto",
+    trust_remote_code=True
+).eval()
+response, history = model.chat(tokenizer, "Hi", history=None)
+```
+
+We illustrate the model performance of both BF16 and Int4 models on the benchmark, and we find that the quantized model does not suffer from significant performance degradation. Results are shown below:
+
+| Quantization         | MMLU | CEval (val) | GSM8K | Humaneval |
+|----------------------|:----:|:-----------:|:-----:|:---------:|
+| Qwen-7B-Chat (BF16)  | 53.9 |    54.2     | 41.1  |   24.4    |
+| Qwen-7B-Chat (Int4)  | 52.6 |    52.9     | 38.1  |   23.8    |
+| Qwen-14B-Chat (BF16) | 64.6 |    69.8     | 61.0  |   43.9    |
+| Qwen-14B-Chat (Int4) | 63.3 |    69.0     | 59.8  |   45.7    |
+<br>
+
+### Quantization of KV cache
+Attention KV cache can be quantized and compressed for storage, to get a higher sample throughput. The parameters of 'use_cache_quantization' and 'use_cache_kernel' are provided to control kv-cache-quantization behavior
+When use_cache_quantization=True and use_cache_kernel=True, kv-cache-quantization will be enabled.
+The specific use method is as follows:
+```python
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen-7B-Chat",
+     device_map="auto",
+     trust_remote_code=True,
+     use_cache_quantization=True,
+     use_cache_kernel=True,
+     use_flash_attn=False
+)
+```
+Attention:
+Currently, kv-cache-quantization and flash attn cannot be turned on at the same time.
+If you enable kv cache quantization and use_flash_attn at the same time (use_flash_attn=True, use_cache_quantization=True, use_cache_kernel=True), use_flash_attn is disabled by default(use_flash_attn=false).
+
+We have verified that the use of the quantized int8-kvcache model does not suffer from significant performance degradation in downstream evaluation. In addition, we evaluate its performance focusing on the memory footprint. 
+The profiling runs on a single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.4. 
+We use BF16 models, and generate 1024 tokens (seq-length=1024) by default, and oom indicates out of memory.
+
+With kv-cache quantization turned on, we can run a larger batch size(bs).
+
+| USE KVCache |  bs=1  |  bs=4  | bs=16  | bs=32  | bs=64  | bs=100 |
+|-------------|:------:|:------:|:------:|:------:|:------:|:------:|
+| no          | 16.3GB | 24.1GB | 31.7GB | 48.7GB |  oom   |  oom   |
+| yes         | 15.5GB | 17.2GB | 22.3GB | 30.2GB | 48.2GB | 72.4GB |
+
+With kv-cache quantization turned on, the model can save more memory when generate longer seq-length (sl, number of tokens generated) at infer.
+
+| USE KVCache | sl=512 | sl=1024 | sl=2048 | sl=4096 | sl=8192 |
+|-------------|:------:|:-------:|:-------:|:-------:|:-------:|
+| no          | 15.2GB | 16.3GB  | 17.6GB  | 19.5GB  | 23.2GB  |
+| yes         |  15GB  | 15.5GB  | 15.8GB  | 16.6GB  | 17.6GB  |
+
+The model which turn on the kv-cache quantization will convert the format of layer-past from float to int8, meanwhile the quantianted layer-past will also store quantiantion parameters of current value.
+Specific steps are as follows:
+1、Quantize key/value
+```
+    qv,scale,zero_point=quantize_cache_v(v)
+```
+2、Store into layer_past
+
+Following is the format of quantized layer_past:
+```
+    layer_past=((q_key,key_scale,key_zero_point),
+                (q_value,value_scale,value_zero_point))
+```
+Bascial format of layer_past:
+```
+    layer_past=(key,value)
+```
+If you want to use the attention KV which is quantized, 
+you can use the dequantization operation to convert the int8 key/value back to the float format as following:
+```
+    v=dequantize_cache_torch(qv,scale,zero_point)
+```
+<br>
+
+
+## Inference Performance
+
+This section provides the statistics of speed and memory of models in different precisions. The speed and memory profiling are conducted using [this script](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py). 
+
+### Speed
+
+We measured the average inference speed (tokens/s) of generating 2048 and 8192 tokens with the models in the precision of BF16, Int8, and Int4 under the condition of using flash attention v1, v2, or not using it. 
+
+<table>
+    <tr>
+      <th rowspan="2">Model Size</th><th rowspan="2">Precision</th><th rowspan="2">FlashAttn</th><th colspan="2" align="center">Sequence Length</th>
+    </tr>
+    <tr>
+        <th align="center">2048</th><th align="center">8192</th>
+    </tr>
+    </tr>
+    </tr>
+    <tr>
+        <th rowspan="9">7B</th><td align="center" rowspan="3">BF16</td><td align="center">v2</td><td align="center">40.93</td><td align="center">36.14</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">40.75</td><td align="center">35.34
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">37.55</td><td align="center">33.56
+    </tr>
+    <tr>
+        <td align="center" rowspan="3">Int8</td><td align="center">v2</td><td align="center">37.47</td><td align="center">32.54</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">37.51</td><td align="center">32.39
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">37.84</td><td align="center">32.65
+    </tr>
+    <tr>
+        <td align="center" rowspan="3">Int4</td><td align="center">v2</td><td align="center">50.09</td><td align="center">38.61</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">45.98</td><td align="center">36.47
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">48.12</td><td align="center">36.70
+    </tr>
+    <tr>
+        <th rowspan="9">14B</th><td align="center" rowspan="3">BF16</td><td align="center">v2</td><td align="center">32.88</td><td align="center">24.87</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">32.76</td><td align="center">28.89
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">29.32</td><td align="center">22.91
+    </tr>
+    <tr>
+        <td align="center" rowspan="3">Int8</td><td align="center">v2</td><td align="center">29.28</td><td align="center">24.22</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">28.31</td><td align="center">23.87
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">31.12</td><td align="center">24.60
+    </tr>
+    <tr>
+        <td align="center" rowspan="3">Int4</td><td align="center">v2</td><td align="center">38.72</td><td align="center">27.33</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">37.81</td><td align="center">26.46
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">37.65</td><td align="center">26.00
+    </tr>
+</table>
+
+
+In detail, the setting of profiling is encoding 2048 tokens and generating 8192 new tokens. The profiling runs on a single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.4. The inference speed is averaged over the encoded and generated tokens.
+
+### GPU Memory Usage
+
+We also profile the peak GPU memory usage for encoding 2048 tokens as context (and generating single token) and generating 8192 tokens (with single token as context) under BF16, Int8 or Int4 quantization level, respectively. The results (GB) are shown below.
+
+<table>
+    <tr>
+      <th rowspan="2">Model Size</th><th rowspan="2">Precision</th><th colspan="2" align="center">Sequence Length</th>
+    </tr>
+    <tr>
+        <th align="center">2048</th><th align="center">8192</th>
+    </tr>
+    </tr>
+    </tr>
+    <tr>
+        <th rowspan="3">7B</th><td align="center">BF16</td><td align="center">16.99</td><td align="center">22.53</td>
+    </tr>
+    <tr>
+        <td align="center">Int8</td><td align="center">11.20</td><td align="center">16.62
+    </tr>
+    <tr>
+        <td align="center">Int4</td><td align="center">8.21</td><td align="center">13.63</td>
+    </tr>
+    <tr>
+        <th rowspan="3">14B</th><td align="center">BF16</td><td align="center">30.15</td><td align="center">38.94</td>
+    </tr>
+    <tr>
+        <td align="center">Int8</td><td align="center">18.81</td><td align="center">27.54
+    </tr>
+    <tr>
+        <td align="center">Int4</td><td align="center">13.01</td><td align="center">21.79</td>
+    </tr>
+</table>
+
+
+<br>
+
+
+
+
 ## Finetuning
 
 ### Usage
@@ -490,11 +573,11 @@ sh finetune/finetune_lora_ds.sh
 
 In comparison with full-parameter finetuning, LoRA ([paper](https://arxiv.org/abs/2106.09685)) only updates the parameters of adapter layers but keeps the original large language model layers frozen. This allows much fewer memory costs and thus fewer computation costs. 
 
-Note that if you use LoRA to finetune the base language model, e.g., Qwen-7B, instead of chat models, e.g., Qwen-7B-Chat, the script automatically switches the embedding and output layer as trainable parameters. This is because the base language model has no knowledge of special tokens brought by ChatML format. Thus these layers should be updated for the model to understand and predict the tokens. Or in another word, if your training brings in special tokens in LoRA, you should set the layers to trainable parameters by setting `modules_to_save` inside the code. Additionally, we find that there is a significant gap between the memory footprint of LoRA with and without these trainable parameters. Therefore, if you have trouble with memory, we advise you to LoRA finetune the chat models. Check the profile below for more information.
+Note that if you use LoRA to finetune the base language model, e.g., Qwen-7B, instead of chat models, e.g., Qwen-7B-Chat, the script automatically switches the embedding and output layer as trainable parameters. This is because the base language model has no knowledge of special tokens brought by ChatML format. Thus these layers should be updated for the model to understand and predict the tokens. Or in another word, if your training brings in special tokens in LoRA, you should set the layers to trainable parameters by setting `modules_to_save` inside the code. Also, if we have these parameters trainable, it is not available to use ZeRO 3, and this is why we use ZeRO 2 in the script by default. If you do not have new trainable parameters, you can switch to ZeRO 3 by changing the DeepSpeed configuration file. Additionally, we find that there is a significant gap between the memory footprint of LoRA with and without these trainable parameters. Therefore, if you have trouble with memory, we advise you to LoRA finetune the chat models. Check the profile below for more information. 
 
 If you still suffer from insufficient memory, you can consider Q-LoRA ([paper](https://arxiv.org/abs/2305.14314)), which uses the quantized large language model and other techniques such as paged attention to allow even fewer memory costs. 
 
-Note: To run single-GPU Q-LoRA training, you may need to install `mpi4py` through `pip` or `conda`.
+Note: to run single-GPU Q-LoRA training, you may need to install `mpi4py` through `pip` or `conda`.
 
 To run Q-LoRA, directly run the following script:
 
@@ -505,7 +588,7 @@ sh finetune/finetune_qlora_single_gpu.sh
 sh finetune/finetune_qlora_ds.sh
 ```
 
-For Q-LoRA, we advise you to load our provided quantized model, e.g., Qwen-7B-Chat-Int4. You **SHOULD NOT** use the bf16 models. Different from full-parameter finetuning and LoRA, only fp16 is supported for Q-LoRA. Besides, for Q-LoRA, the troubles with the special tokens in LoRA still exist. However, as we only provide the Int4 models for chat models, which means the language model has learned the special tokens of ChatML format, you have no worry about the layers. Note that the layers of the Int4 model should not be trainable, and thus if you introduce special tokens in your training, Q-LoRA might not work.
+For Q-LoRA, we advise you to load our provided quantized model, e.g., Qwen-7B-Chat-Int4. You **SHOULD NOT** use the bf16 models. Different from full-parameter finetuning and LoRA, only fp16 is supported for Q-LoRA. For single-GPU training, we have to use deepspeed for mixed-precision training due to our observation of errors caused by torch amp. Besides, for Q-LoRA, the troubles with the special tokens in LoRA still exist. However, as we only provide the Int4 models for chat models, which means the language model has learned the special tokens of ChatML format, you have no worry about the layers. Note that the layers of the Int4 model should not be trainable, and thus if you introduce special tokens in your training, Q-LoRA might not work.
 
 Different from full-parameter finetuning, the training of both LoRA and Q-LoRA only saves the adapter parameters. Suppose your training starts from Qwen-7B, you can load the finetuned model for inference as shown below:
 
@@ -614,6 +697,62 @@ python cli_demo.py
 
 ## API
 
+The most simple way to use Qwen through APIs is DashScope API service through Alibaba Cloud. We give an introduction to the usage. Additionally, we provide a script for you to deploy an OpenAI-style API on your own servers.
+
+### DashScope
+DashScope is the large language model API service provided by Alibaba Cloud, which now supports Qwen. Note that the models behind DashScope are in-house versions temporarily without details provided. The services include `qwen-turbo` and `qwen-plus`, where the former one runs faster and the latter achieves better performance. For more information, visit the documentation [here](https://dashscope.aliyun.com).
+
+Please head to the official website [link](https://help.aliyun.com/zh/dashscope/developer-reference/activate-dashscope-and-create-an-api-key?spm=a2c4g.11186623.0.0.6c2774fahtfXdn) to create a DashScope account and obtain the API key (AK). We recommend setting the AK with an environment variable:
+```bash
+export DASHSCOPE_API_KEY="YOUR_DASHSCOPE_API_KEY"
+```
+Then please install the packages and click [here](https://help.aliyun.com/zh/dashscope/developer-reference/install-dashscope-sdk) for the documentation. If you use Python, you can install DashScope with pip:
+```bash
+pip install dashscope
+```
+If you use JAVA SDK, you can install it in this way:
+```xml
+<!-- https://mvnrepository.com/artifact/com.alibaba/dashscope-sdk-java -->
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>dashscope-sdk-java</artifactId>
+    <version>the-latest-version</version>
+</dependency>
+```
+The simplest way to use DashScope is the usage with messages, which is similar to OpenAI API. The example is demonstrated below:
+```python
+import random
+from http import HTTPStatus
+from dashscope import Generation
+
+
+def call_with_messages():
+    messages = [{'role': 'system', 'content': 'You are a helpful assistant.'},
+                {'role': 'user', 'content': '如何做西红柿鸡蛋？'}]
+    gen = Generation()
+    response = gen.call(
+        Generation.Models.qwen_turbo,
+        messages=messages,
+        seed=random.randint(1, 10000),  # set the random seed, optional, default to 1234 if not set
+        result_format='message',  # set the result to be "message" format.
+    )
+    return response
+
+
+if __name__ == '__main__':
+    response = call_with_messages()
+    if response.status_code == HTTPStatus.OK:
+        print(response)
+    else:
+        print('Request id: %s, Status code: %s, error code: %s, error message: %s' % (
+            response.request_id, response.status_code,
+            response.code, response.message
+        ))
+```
+For more usages, please visit the official website for more details.
+
+### OpenAI API
+
 We provide methods to deploy local API based on OpenAI API (thanks to @hanpenggit). Before you start, install the required packages:
 
 ```bash
@@ -665,7 +804,7 @@ print(response.choices[0].message.content)
     <br>
 <p>
 
-Function calling is also supported (but only when `stream=False` for the moment). See the [example usage](examples/function_call_examples.py) here.
+**Function calling** is also supported (but only when `stream=False` for the moment). See the [example usage](examples/function_call_examples.py) here.
 <br><br>
 
 ## Deployment

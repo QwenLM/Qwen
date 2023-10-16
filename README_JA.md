@@ -115,7 +115,7 @@ cd flash-attention && pip install .
 
 これで ModelScope か Transformers で始めることができます。
 
-#### 🤗 Transformers
+### 🤗 Transformers
 
 Qwen-Chat を推論に使用するには、以下のように数行のコードを入力するだけです。**最新のコードを使用していることを確認してください。**
 
@@ -213,7 +213,7 @@ model = AutoModelForCausalLM.from_pretrained(
 ).eval()
 ```
 
-#### 🤖 ModelScope
+### 🤖 ModelScope
 
 ModelScope は、MaaS（Model-as-a-Service） のためのオープンソースプラットフォームであり、AI 開発者に柔軟で費用対効果の高いモデルサービスを提供します。同様に、以下のように ModelScope でモデルを実行することができます:
 
@@ -233,11 +233,78 @@ print(response)
 response, history = model.chat(tokenizer, "它有什么好玩的景点", history=history)
 print(response)
 ```
+
+### バッチ推論
+Qwenはバッチ推論をサポートしている。フラッシュ・アテンションを有効にした場合、バッチ推論を使用することで40%のスピードアップが期待できる。以下にコード例を示す：
+```python
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import GenerationConfig
+from qwen_generation_utils import make_context, decode_tokens, get_stop_words_ids
+
+tokenizer = AutoTokenizer.from_pretrained(
+    './',
+    pad_token='<|extra_0|>',
+    eos_token='<|endoftext|>',
+    padding_side='left',
+    trust_remote_code=True
+)
+model = AutoModelForCausalLM.from_pretrained(
+    './',
+    pad_token_id=tokenizer.pad_token_id,
+    device_map="auto",
+    trust_remote_code=True
+).eval()
+model.generation_config = GenerationConfig.from_pretrained('./', pad_token_id=tokenizer.pad_token_id)
+
+all_raw_text = ["我想听你说爱我。", "今天我想吃点啥，甜甜的，推荐下", "我马上迟到了，怎么做才能不迟到"]
+batch_raw_text = []
+for q in all_raw_text:
+    raw_text, _ = make_context(
+        tokenizer,
+        q,
+        system="You are a helpful assistant.",
+        max_window_size=model.generation_config.max_window_size,
+        chat_format=model.generation_config.chat_format,
+    )
+    batch_raw_text.append(raw_text)
+
+batch_input_ids = tokenizer(batch_raw_text, padding='longest')
+batch_input_ids = torch.LongTensor(batch_input_ids['input_ids']).to(model.device)
+batch_out_ids = model.generate(
+    batch_input_ids,
+    return_dict_in_generate=False,
+    generation_config=model.generation_config
+)
+padding_lens = [batch_input_ids[i].eq(tokenizer.pad_token_id).sum().item() for i in range(batch_input_ids.size(0))]
+
+batch_response = [
+    decode_tokens(
+        batch_out_ids[i][padding_lens[i]:],
+        tokenizer,
+        raw_text_len=len(batch_raw_text[i]),
+        context_length=(batch_input_ids[i].size(0)-padding_lens[i]),
+        chat_format="chatml",
+        verbose=False,
+        errors='replace'
+    ) for i in range(len(all_raw_text))
+]
+print(batch_response)
+
+response, _ = model.chat(tokenizer, "我想听你说爱我。", history=None)
+print(response)
+
+response, _ = model.chat(tokenizer, "今天我想吃点啥，甜甜的，推荐下", history=None)
+print(response)
+
+response, _ = model.chat(tokenizer, "我马上迟到了，怎么做才能不迟到", history=None)
+print(response)
+```
 <br>
 
 ## 量子化
 
-### 使用方法
+### GPTQ
 
 **注: [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ) に基づく新しい解決策を提供し、Qwen-Chat 用の Int4 量子化モデル[ここをクリック](https://huggingface.co/Qwen/Qwen-7B-Chat-Int4)をリリースしました。このモデルは、従来の解決策と比較して、ほぼ無損失のモデル効果を達成しつつ、メモリコストと推論速度の両方で性能が向上しています。**
 
@@ -260,8 +327,6 @@ model = AutoModelForCausalLM.from_pretrained(
 response, history = model.chat(tokenizer, "Hi", history=None)
 ```
 
-### 性能
-
 ベンチマークにおける BF16 モデルと Int4 モデルの性能について説明します。その結果は以下に示します：
 
 | Quantization         | MMLU | CEval (val) | GSM8K | Humaneval |
@@ -271,38 +336,10 @@ response, history = model.chat(tokenizer, "Hi", history=None)
 | Qwen-14B-Chat (BF16) | 64.6 |    69.8     | 61.0  |   43.9    |
 | Qwen-14B-Chat (Int4) | 63.3 |    69.0     | 59.8  |   45.7    |
 
-### 推論スピード
-
-BF16 の精度と Int4 の量子化レベルの下で、それぞれ 2048 個と 8192 個のトークンを生成する平均推論速度(tokens/s)を測定しました。
-
-| Quantization         | Speed (2048 tokens) | Speed (8192 tokens) |
-|----------------------|:-------------------:|:-------------------:|
-| Qwen-7B-Chat (BF16)  |        30.34        |        29.32        |
-| Qwen-7B-Chat (Int4)  |        43.56        |        33.92        |
-| Qwen-14B-Chat (BF16) |        30.70        |        21.73        |
-| Qwen-14B-Chat (Int4) |        37.11        |        26.11        |
-
-詳細には、プロファイリングの設定は、1 コンテクストトークンで 8192 個の新しいトークンを生成しています。プロファイリングは、PyTorch 2.0.1 と CUDA 11.4 を搭載したシングル A100-SXM4-80G GPU で実行されました。推論速度は生成された 8192 個のトークンの平均値となります。
-
-### GPU メモリ使用量
-
-また、BF16またはInt4の量子化レベルで、それぞれ2048トークンをコンテキストとしてエンコードした場合（および単一のトークンを生成した場合）と、8192トークンを生成した場合（単一のトークンをコンテキストとして生成した場合）のGPUメモリ使用量のピーク値をプロファイリングしました。その結果を以下に示します。
-
-| Quantization         | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
-|----------------------|:-----------------------------------:|:-------------------------------------:|
-| Qwen-7B-Chat (BF16)  |               17.66GB               |                22.58GB                |
-| Qwen-7B-Chat (Int4)  |               8.21GB                |                13.62GB                |
-| Qwen-14B-Chat (BF16) |               30.15GB               |                38.94GB                |
-| Qwen-14B-Chat (Int4) |               13.00GB               |                21.79GB                |
-
-上記のスピードとメモリーのプロファイリングは、[このスクリプト](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)を使用しています。
-<br><br>
-
-## KVキャッシュ量子化
+### KVキャッシュ量子化
 
 モデルの推論の時に、中間結果のKeyとValueを量子化して圧縮保存することができます。これにより、同じGPUでより多くのKeyとValueを保存することができ、サンプルのスピードを増やすことができます。
 
-### 使い方
 use_cache_quantizationとuse_cache_kernelという2つのパラメータを提供します。use_cache_quantizationとuse_cache_kernelを両方ONにした場合、KVキャッシュ量子化の機能が有効になります。具体的な使い方は：
 ```python
 model = AutoModelForCausalLM.from_pretrained(
@@ -316,12 +353,8 @@ model = AutoModelForCausalLM.from_pretrained(
 ```
 現在、この機能はflash attnと同時に使用することはできません。use_flash_attnをTrueにしてKVキャッシュ量子化とflash attnを同時に有効にした場合、use_flash_attnはデフォルトで無効になります。
 
-### 結果の比較
-#### 効果
-int8 KVキャッシュ量子化の使用によるモデルの性能の影響はほとんどありませんでした。
 
-#### VRAMの比較
-この評価は単一のA100-SXM4-80G GPUで実行され、モデルはデフォルトでBF16形式を使用し、生成される文章の長さは1024です。oomはメモリ不足を示します。
+Int8 KVキャッシュ量子化の使用によるモデルの性能の影響はほとんどありませんでした。性能評価は単一のA100-SXM4-80G GPUで実行され、モデルはデフォルトでBF16形式を使用し、生成される文章の長さは1024です。oomはメモリ不足を示します。
 
 KVキャッシュ量子化を有効にすると、推論の時により大きなバッチサイズ（bs）を使用できるようになります。
 
@@ -338,7 +371,6 @@ KVキャッシュ量子化を有効にすると、推論の時により長い文
 | yes         |  15GB  | 15.5GB  | 15.8GB  | 16.6GB  | 17.6GB  |
 
 
-### 保存の違い
 モデルがKVキャッシュ量子化を有効にした場合、モデルの推論の時には、元のfloat形式のkey/valueをint8形式のqkey/qvalueと対応する量子化パラメータに変換します。
 具体的な手順は以下の通りです：
 1、key/valueの量子化を行います。
@@ -359,6 +391,116 @@ layer_pastのkey、valueを使用する必要がある場合は、int8形式のk
 ```
     v=dequantize_cache_torch(qv,scale,zero_point)
 ```
+<br>
+
+## 推論パフォーマンス
+
+このセクションでは、さまざまな精度のモデルのスピードとメモリの統計情報を提供する。スピードとメモリーのプロファイリングは[このスクリプト](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)を使用しています。
+
+### 推論スピード
+
+BF16、Int8、Int4の精度のモデルを用いて、2048個と8192個のトークンを生成する平均推論速度（tokens/s）を、フラッシュアテンションv1、v2を使用した場合と使用しなかった場合の条件で測定した。
+
+<table>
+    <tr>
+      <th rowspan="2">Model Size</th><th rowspan="2">Precision</th><th rowspan="2">FlashAttn</th><th colspan="2" align="center">Sequence Length</th>
+    </tr>
+    <tr>
+        <th align="center">2048</th><th align="center">8192</th>
+    </tr>
+    </tr>
+    </tr>
+    <tr>
+        <th rowspan="9">7B</th><td align="center" rowspan="3">BF16</td><td align="center">v2</td><td align="center">40.93</td><td align="center">36.14</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">40.75</td><td align="center">35.34
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">37.55</td><td align="center">33.56
+    </tr>
+    <tr>
+        <td align="center" rowspan="3">Int8</td><td align="center">v2</td><td align="center">37.47</td><td align="center">32.54</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">37.51</td><td align="center">32.39
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">37.84</td><td align="center">32.65
+    </tr>
+    <tr>
+        <td align="center" rowspan="3">Int4</td><td align="center">v2</td><td align="center">50.09</td><td align="center">38.61</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">45.98</td><td align="center">36.47
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">48.12</td><td align="center">36.70
+    </tr>
+    <tr>
+        <th rowspan="9">14B</th><td align="center" rowspan="3">BF16</td><td align="center">v2</td><td align="center">32.88</td><td align="center">24.87</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">32.76</td><td align="center">28.89
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">29.32</td><td align="center">22.91
+    </tr>
+    <tr>
+        <td align="center" rowspan="3">Int8</td><td align="center">v2</td><td align="center">29.28</td><td align="center">24.22</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">28.31</td><td align="center">23.87
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">31.12</td><td align="center">24.60
+    </tr>
+    <tr>
+        <td align="center" rowspan="3">Int4</td><td align="center">v2</td><td align="center">38.72</td><td align="center">27.33</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">37.81</td><td align="center">26.46
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">37.65</td><td align="center">26.00
+    </tr>
+</table>
+
+詳細には、プロファイリングの設定は、2048個のトークンをエンコードし、8192個の新しいトークンを生成することである。プロファイリングは、PyTorch 2.0.1とCUDA 11.4を搭載したシングルA100-SXM4-80G GPUで実行される。推論速度はエンコードされたトークンと生成されたトークンの平均である。
+
+### GPU メモリ使用量
+
+また、BF16、Int8、Int4量子化レベルのそれぞれにおいて、2048個のトークンをコンテキストとしてエンコードした場合（および単一のトークンを生成した場合）と、8192個のトークンを生成した場合（単一のトークンをコンテキストとして生成した場合）のGPUメモリ使用量のピーク値をプロファイリングしました。結果（GB）を以下に示します。
+
+<table>
+    <tr>
+      <th rowspan="2">Model Size</th><th rowspan="2">Precision</th><th colspan="2" align="center">Sequence Length</th>
+    </tr>
+    <tr>
+        <th align="center">2048</th><th align="center">8192</th>
+    </tr>
+    </tr>
+    </tr>
+    <tr>
+        <th rowspan="3">7B</th><td align="center">BF16</td><td align="center">16.99</td><td align="center">22.53</td>
+    </tr>
+    <tr>
+        <td align="center">Int8</td><td align="center">11.20</td><td align="center">16.62
+    </tr>
+    <tr>
+        <td align="center">Int4</td><td align="center">8.21</td><td align="center">13.63</td>
+    </tr>
+    <tr>
+        <th rowspan="3">14B</th><td align="center">BF16</td><td align="center">30.15</td><td align="center">38.94</td>
+    </tr>
+    <tr>
+        <td align="center">Int8</td><td align="center">18.81</td><td align="center">27.54
+    </tr>
+    <tr>
+        <td align="center">Int4</td><td align="center">13.01</td><td align="center">21.79</td>
+    </tr>
+</table>
+
 <br>
 
 ## ファインチューニング
@@ -416,7 +558,7 @@ sh finetune/finetune_lora_ds.sh
 
 LoRA ([論文](https://arxiv.org/abs/2106.09685)) は、フルパラメーターによるファインチューニングと比較して、adapterのパラメーターを更新するだけで、元の大きな言語モデル層は凍結されたままである。そのため、メモリコストが大幅に削減でき、計算コストも削減できる。
 
-なお、チャットモデル（Qwen-7B-Chatなど）ではなく、ベース言語モデル（Qwen-7Bなど）の微調整にLoRAを使用した場合、スクリプトは自動的に学習可能なパラメータとして埋め込み層と出力層を切り替えます。これは、ベースとなる言語モデルには、ChatMLフォーマットによってもたらされる特殊なトークンに関する知識がないためです。したがって、これらのレイヤーは、モデルがトークンを理解し予測するために更新される必要があります。別の言い方をすれば、もしLoRAで特殊なトークンを学習するのであれば、コード内で `modules_to_save` を設定することで、レイヤーを学習可能なパラメータに設定する必要があります。さらに、LoRAのメモリフットプリントは、このような学習可能なパラメータがある場合とない場合で、大きな開きがあることがわかります。そのため、メモリに問題がある場合は、LoRAのChatモデルを微調整することをお勧めします。詳細は以下のプロファイルを参照してください。
+なお、チャットモデル（Qwen-7B-Chatなど）ではなく、ベース言語モデル（Qwen-7Bなど）の微調整にLoRAを使用した場合、スクリプトは自動的に学習可能なパラメータとして埋め込み層と出力層を切り替えます。これは、ベースとなる言語モデルには、ChatMLフォーマットによってもたらされる特殊なトークンに関する知識がないためです。したがって、これらのレイヤーは、モデルがトークンを理解し予測するために更新される必要があります。別の言い方をすれば、もしLoRAで特殊なトークンを学習するのであれば、コード内で `modules_to_save` を設定することで、レイヤーを学習可能なパラメータに設定する必要があります。また、これらのパラメータが学習可能な場合、ZeRO 3 を使用することはできません。新しいトレーニング可能なパラメータがない場合は、DeepSpeed 設定ファイルを変更することで ZeRO 3 に切り替えることができます。さらに、LoRAのメモリフットプリントは、このような学習可能なパラメータがある場合とない場合で、大きな開きがあることがわかります。そのため、メモリに問題がある場合は、LoRAのChatモデルを微調整することをお勧めします。詳細は以下のプロファイルを参照してください。
 
 しかし、それでもメモリ不足に悩む場合は、Q-LoRA（[論文](https://arxiv.org/abs/2305.14314)）を検討することができます。これは、量子化されたラージ言語モデルと、ページド・アテンションなどの他のテクニックを使用し、さらに少ないメモリコストで実行することができます。
 
@@ -431,7 +573,7 @@ sh finetune/finetune_qlora_single_gpu.sh
 sh finetune/finetune_qlora_ds.sh
 ```
 
-Q-LoRAについては、弊社が提供する量子化モデル、例えばQwen-7B-Chat-Int4をロードすることをお勧めします。BF16モデルは使用し**ない**でください！フルパラメータ・ファインチューニングやLoRAとは異なり、Q-LoRAではfp16のみがサポートされる。また、Q-LoRAの場合、LoRAの特殊トークンの問題が残っています。しかし、Q-LoRAではチャットモデルとしてInt4モデルのみを提供しており、言語モデルはChatML形式の特殊トークンを学習しているため、レイヤーの心配はありません。なお、Int4モデルのレイヤーは学習できないはずなので、学習で特殊なトークンを導入すると、Q-LoRAが動作しなくなる可能性があります。
+Q-LoRAについては、弊社が提供する量子化モデル、例えばQwen-7B-Chat-Int4をロードすることをお勧めします。BF16モデルは使用し**ない**でください！フルパラメータ・ファインチューニングやLoRAとは異なり、Q-LoRAではfp16のみがサポートされる。シングルGPUのトレーニングでは、トーチアンプによるエラーが観測されたため、混合精度のトレーニングにはディープスピードを使用する必要がある。また、Q-LoRAの場合、LoRAの特殊トークンの問題が残っています。しかし、Q-LoRAではチャットモデルとしてInt4モデルのみを提供しており、言語モデルはChatML形式の特殊トークンを学習しているため、レイヤーの心配はありません。なお、Int4モデルのレイヤーは学習できないはずなので、学習で特殊なトークンを導入すると、Q-LoRAが動作しなくなる可能性があります。
 
 LoRAとQ-LoRAの学習は、フルパラメータによるファインチューニングとは異なり、アダプターパラメータのみを保存する。仮にQwen-7Bから学習を開始したとすると、以下のようにファインチューニングされたモデルを読み込んで推論を行うことができる：
 
@@ -540,6 +682,62 @@ python cli_demo.py
 
 ## API
 
+APIを通じてQwenを利用する最も簡単な方法は、Alibaba Cloudを通じたDashScope APIサービスです。その使い方を紹介します。さらに、OpenAIスタイルのAPIをご自身のサーバーにデプロイするためのスクリプトも提供しています。
+
+### DashScope
+DashScopeはAlibaba Cloudが提供する大規模言語モデルAPIサービスで、今回Qwenに対応した。DashScopeの背後にあるモデルは、詳細が提供されていない一時的な社内バージョンであることに注意してください。サービスには `qwen-turbo` と `qwen-plus` があり、前者はより高速に動作し、後者はより優れたパフォーマンスを実現している。詳細はドキュメント [こちら](https://dashscope.aliyun.com) を参照。
+
+公式サイト [link](https://help.aliyun.com/zh/dashscope/developer-reference/activate-dashscope-and-create-an-api-key?spm=a2c4g.11186623.0.0.6c2774fahtfXdn) で DashScope アカウントを作成し、API キー (AK) を取得してください。AK は環境変数で設定することをお勧めします：
+```bash
+export DASHSCOPE_API_KEY="YOUR_DASHSCOPE_API_KEY"
+```
+その後、パッケージをインストールし、ドキュメントは [こちら](https://help.aliyun.com/zh/dashscope/developer-reference/install-dashscope-sdk) をクリックしてください。Python をお使いの場合は、pip で DashScope をインストールできます：
+```bash
+pip install dashscope
+```
+JAVA SDKを使用する場合は、この方法でインストールできます：
+```xml
+<!-- https://mvnrepository.com/artifact/com.alibaba/dashscope-sdk-java -->
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>dashscope-sdk-java</artifactId>
+    <version>the-latest-version</version>
+</dependency>
+```
+DashScope を使用する最も簡単な方法は、OpenAI API と同様のメッセージを使用する方法です。以下にその例を示す：
+```python
+import random
+from http import HTTPStatus
+from dashscope import Generation
+
+
+def call_with_messages():
+    messages = [{'role': 'system', 'content': 'You are a helpful assistant.'},
+                {'role': 'user', 'content': '如何做西红柿鸡蛋？'}]
+    gen = Generation()
+    response = gen.call(
+        Generation.Models.qwen_turbo,
+        messages=messages,
+        seed=random.randint(1, 10000),  # set the random seed, optional, default to 1234 if not set
+        result_format='message',  # set the result to be "message" format.
+    )
+    return response
+
+
+if __name__ == '__main__':
+    response = call_with_messages()
+    if response.status_code == HTTPStatus.OK:
+        print(response)
+    else:
+        print('Request id: %s, Status code: %s, error code: %s, error message: %s' % (
+            response.request_id, response.status_code,
+            response.code, response.message
+        ))
+```
+詳しい使い方は公式サイトをご覧ください。
+
+### OpenAI API
+
 OpenAI API をベースにローカルAPIをデプロイする方法を提供する（@hanpenggit に感謝）。始める前に、必要なパッケージをインストールしてください:
 
 ```bash
@@ -590,7 +788,9 @@ print(response.choices[0].message.content)
     <img src="assets/openai_api.gif" width="600" />
     <br>
 <p>
-<br>
+
+**Function Calling** もサポートされています(ただし、今のところ `stream=False` の場合のみ)。使用例](examples/function_call_examples.py) を参照してください。
+<br><br>
 
 ## デプロイ
 

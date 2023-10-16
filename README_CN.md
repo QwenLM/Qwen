@@ -109,7 +109,7 @@ cd flash-attention && pip install .
 
 接下来你可以开始使用Transformers或者ModelScope来使用我们的模型。
 
-#### 🤗 Transformers
+### 🤗 Transformers
 
 如希望使用Qwen-chat进行推理，所需要写的只是如下所示的数行代码。**请确保你使用的是最新代码，并指定正确的模型名称和路径，如`Qwen/Qwen-7B-Chat`和`Qwen/Qwen-14B-Chat`**
 
@@ -208,7 +208,7 @@ model = AutoModelForCausalLM.from_pretrained(
 ).eval()
 ```
 
-#### 🤖 ModelScope
+### 🤖 ModelScope
 
 魔搭（ModelScope）是开源的模型即服务共享平台，为泛AI开发者提供灵活、易用、低成本的一站式模型服务产品。使用ModelScope同样非常简单，代码如下所示：
 
@@ -228,136 +228,8 @@ print(response)
 response, history = model.chat(tokenizer, "它有什么好玩的景点", history=history)
 print(response)
 ```
-<br>
 
-## 量化
-
-### 用法
-
-**请注意：我们更新量化方案为基于[AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ)的量化，提供Int4量化模型，包括Qwen-7B-Chat [Click here](https://huggingface.co/Qwen/Qwen-7B-Chat-Int4)和Qwen-14B-Chat [Click here](https://huggingface.co/Qwen/Qwen-14B-Chat-Int4)。该方案在模型评测效果几乎无损，且存储需求更低，推理速度更优。**
-
-以下我们提供示例说明如何使用Int4量化模型。在开始使用前，请先保证满足要求（如torch 2.0及以上，transformers版本为4.32.0及以上，等等），并安装所需安装包：
-
-```bash
-pip install auto-gptq optimum
-```
-
-如安装`auto-gptq`遇到问题，我们建议您到官方[repo](https://github.com/PanQiWei/AutoGPTQ)搜索合适的wheel。
-
-随后即可使用和上述一致的用法调用量化模型：
-
-```python
-# 可选模型包括："Qwen/Qwen-7B-Chat-Int4", "Qwen/Qwen-14B-Chat-Int4"
-model = AutoModelForCausalLM.from_pretrained(
-    "Qwen/Qwen-7B-Chat-Int4",
-    device_map="auto",
-    trust_remote_code=True
-).eval()
-response, history = model.chat(tokenizer, "Hi", history=None)
-```
-### 效果评测
-
-我们对BF16和Int4模型在基准评测上做了测试，发现量化模型效果损失较小，结果如下所示：
-
-| Quantization         | MMLU | CEval (val) | GSM8K | Humaneval |
-|----------------------|:----:|:-----------:|:-----:|:---------:|
-| Qwen-7B-Chat (BF16)  | 53.9 |    54.2     | 41.1  |   24.4    |
-| Qwen-7B-Chat (Int4)  | 52.6 |    52.9     | 38.1  |   23.8    |
-| Qwen-14B-Chat (BF16) | 64.6 |    69.8     | 61.0  |   43.9    |
-| Qwen-14B-Chat (Int4) | 63.3 |    69.0     | 59.8  |   45.7    |
-
-### 推理速度
-
-我们测算了BF16和Int4模型生成2048和8192个token的平均推理速度（tokens/s）。如图所示：
-
-| Quantization         | Speed (2048 tokens) | Speed (8192 tokens) |
-|----------------------|:-------------------:|:-------------------:|
-| Qwen-7B-Chat (BF16)  |        30.34        |        29.32        |
-| Qwen-7B-Chat (Int4)  |        43.56        |        33.92        |
-| Qwen-14B-Chat (BF16) |        30.70        |        21.73        |
-| Qwen-14B-Chat (Int4) |        37.11        |        26.11        |
-
-具体而言，我们记录在长度为1的上下文的条件下生成8192个token的性能。评测运行于单张A100-SXM4-80G GPU，使用PyTorch 2.0.1和CUDA 11.4。推理速度是生成8192个token的速度均值。
-
-### 显存使用
-
-我们还测算了BF16和Int4模型编码2048个token及生成8192个token的峰值显存占用情况。结果如下所示：
-
-| Quantization         | Peak Usage for Encoding 2048 Tokens | Peak Usage for Generating 8192 Tokens |
-|----------------------|:-----------------------------------:|:-------------------------------------:|
-| Qwen-7B-Chat (BF16)  |               17.66GB               |                22.58GB                |
-| Qwen-7B-Chat (Int4)  |               8.21GB                |                13.62GB                |
-| Qwen-14B-Chat (BF16) |               30.15GB               |                38.94GB                |
-| Qwen-14B-Chat (Int4) |               13.00GB               |                21.79GB                |
-
-上述性能测算使用[此脚本](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)完成。
-<br><br>
-
-## KV cache量化
-
-在模型infer时，可以将中间结果key以及value的值量化后压缩存储，这样便可以在相同的卡上存储更多的key以及value，增加样本吞吐。
-
-### 使用方法
-提供use_cache_quantization以及use_cache_kernel两个参数对模型控制，当use_cache_quantization以及use_cache_kernel均开启时，将启动kv-cache量化的功能。具体使用如下：
-```python
-model = AutoModelForCausalLM.from_pretrained(
-    "Qwen/Qwen-7B-Chat",
-     device_map="auto",
-     trust_remote_code=True,
-     use_cache_quantization=True,
-     use_cache_kernel=True,
-     use_flash_attn=False
-)
-```
-注意：当前该功能目前不支持与flash attn同时开启，如果你开了kv cache量化的同时又开了flash attn（use_flash_attn=True， use_cache_quantization=True, use_cache_kernel=True），会默认将use_flash_attn关闭。
-
-### 结果对比
-#### 效果
-我们验证过int8 kv-cache的使用对模型整体的精度指标基本无损。
-
-#### 显存对比
-本次评测运行于单张A100-SXM4-80G GPU，模型默认使用BF16格式，默认生成的seq-length=1024（生成1024个token），其中oom表示out of memory。
-
-开启了kv-cache量化之后，模型在infer的时候可以开启更大的batch size(bs)
-
-| USE KVCache |  bs=1  |  bs=4  | bs=16  | bs=32  | bs=64  | bs=100 |
-|-------------|:------:|:------:|:------:|:------:|:------:|:------:|
-| no          | 16.3GB | 24.1GB | 31.7GB | 48.7GB |  oom   |  oom   |
-| yes         | 15.5GB | 17.2GB | 22.3GB | 30.2GB | 48.2GB | 72.4GB |
-
-
-开启了kv-cache量化之后，模型在infer时预测更长的seq-length（sl，生成的token数）结果时，可以节约更多的显存。
-
-| USE KVCache | sl=512 | sl=1024 | sl=2048 | sl=4096 | sl=8192 |
-|-------------|:------:|:-------:|:-------:|:-------:|:-------:|
-| no          | 15.2GB | 16.3GB  | 17.6GB  | 19.5GB  | 23.2GB  |
-| yes         |  15GB  | 15.5GB  | 15.8GB  | 16.6GB  | 17.6GB  |
-
-
-### 存储格式区别
-模型开启kv cache量化后再模型infer的时候，会将原始存进layer_past的float格式的key/value变成int8格式的qkey/qvalue和相对应的量化参数。
-具体操作如下：
-1、将key/value进行量化操作
-```
-    qv,scale,zero_point=quantize_cache_v(v)
-```
-2、存入layer_past中:
-量化格式的layer_past:
-```
-    layer_past=((q_key,key_scale,key_zero_point),
-                (q_value,value_scale,value_zero_point))
-```
-原始格式的layer_past:
-```
-    layer_past=(key,value)
-```
-如果需要将layer_past中存好的key，value直接取出使用，可以使用反量化操作将int8格式的key/value转回float格式：
-```
-    v=dequantize_cache_torch(qv,scale,zero_point)
-```
-<br>
-
-## Batch推理
+### Batch推理
 千问支持batch批量推理。在开启flash-attention的状态下，使用batch推理可以约40%的提速。示例代码如下所示：
 ```python
 import torch
@@ -423,6 +295,212 @@ print(response)
 response, _ = model.chat(tokenizer, "我马上迟到了，怎么做才能不迟到", history=None)
 print(response)
 ```
+<br>
+
+
+## 量化
+
+### GPTQ
+
+**请注意：我们更新量化方案为基于 [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ) 的量化，提供Int4量化模型。该方案在模型评测效果几乎无损，且存储需求更低，推理速度更优。**
+
+以下我们提供示例说明如何使用Int4量化模型。在开始使用前，请先保证满足要求（如torch 2.0及以上，transformers版本为4.32.0及以上，等等），并安装所需安装包：
+
+```bash
+pip install auto-gptq optimum
+```
+
+如安装`auto-gptq`遇到问题，我们建议您到官方[repo](https://github.com/PanQiWei/AutoGPTQ)搜索合适的wheel。
+
+随后即可使用和上述一致的用法调用量化模型：
+
+```python
+# 可选模型包括："Qwen/Qwen-7B-Chat-Int4", "Qwen/Qwen-14B-Chat-Int4"
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen-7B-Chat-Int4",
+    device_map="auto",
+    trust_remote_code=True
+).eval()
+response, history = model.chat(tokenizer, "Hi", history=None)
+```
+
+
+我们对BF16和Int4模型在基准评测上做了测试，发现量化模型效果损失较小，结果如下所示：
+
+| Quantization         | MMLU | CEval (val) | GSM8K | Humaneval |
+|----------------------|:----:|:-----------:|:-----:|:---------:|
+| Qwen-7B-Chat (BF16)  | 53.9 |    54.2     | 41.1  |   24.4    |
+| Qwen-7B-Chat (Int4)  | 52.6 |    52.9     | 38.1  |   23.8    |
+| Qwen-14B-Chat (BF16) | 64.6 |    69.8     | 61.0  |   43.9    |
+| Qwen-14B-Chat (Int4) | 63.3 |    69.0     | 59.8  |   45.7    |
+<br>
+
+
+### KV cache量化
+
+在模型infer时，可以将中间结果key以及value的值量化后压缩存储，这样便可以在相同的卡上存储更多的key以及value，增加样本吞吐。
+
+提供use_cache_quantization以及use_cache_kernel两个参数对模型控制，当use_cache_quantization以及use_cache_kernel均开启时，将启动kv-cache量化的功能。具体使用如下：
+```python
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen-7B-Chat",
+     device_map="auto",
+     trust_remote_code=True,
+     use_cache_quantization=True,
+     use_cache_kernel=True,
+     use_flash_attn=False
+)
+```
+注意：当前该功能目前不支持与flash attn同时开启，如果你开了kv cache量化的同时又开了flash attn（use_flash_attn=True， use_cache_quantization=True, use_cache_kernel=True），会默认将use_flash_attn关闭。
+
+效果方面，我们验证过Int8 kv-cache的使用对模型整体的精度指标基本无损。我们做了针对显存占用的性能测试。评测运行于单张A100-SXM4-80G GPU，模型默认使用BF16格式，默认生成的seq-length=1024（生成1024个token），其中oom表示out of memory。
+
+开启了kv-cache量化之后，模型在infer的时候可以开启更大的batch size(bs)
+
+| USE KVCache |  bs=1  |  bs=4  | bs=16  | bs=32  | bs=64  | bs=100 |
+|-------------|:------:|:------:|:------:|:------:|:------:|:------:|
+| no          | 16.3GB | 24.1GB | 31.7GB | 48.7GB |  oom   |  oom   |
+| yes         | 15.5GB | 17.2GB | 22.3GB | 30.2GB | 48.2GB | 72.4GB |
+
+
+开启了kv-cache量化之后，模型在infer时预测更长的seq-length（sl，生成的token数）结果时，可以节约更多的显存。
+
+| USE KVCache | sl=512 | sl=1024 | sl=2048 | sl=4096 | sl=8192 |
+|-------------|:------:|:-------:|:-------:|:-------:|:-------:|
+| no          | 15.2GB | 16.3GB  | 17.6GB  | 19.5GB  | 23.2GB  |
+| yes         |  15GB  | 15.5GB  | 15.8GB  | 16.6GB  | 17.6GB  |
+
+
+模型开启kv cache量化后再模型infer的时候，会将原始存进layer_past的float格式的key/value变成int8格式的qkey/qvalue和相对应的量化参数。
+具体操作如下：
+1、将key/value进行量化操作
+```
+    qv,scale,zero_point=quantize_cache_v(v)
+```
+2、存入layer_past中:
+量化格式的layer_past:
+```
+    layer_past=((q_key,key_scale,key_zero_point),
+                (q_value,value_scale,value_zero_point))
+```
+原始格式的layer_past:
+```
+    layer_past=(key,value)
+```
+如果需要将layer_past中存好的key，value直接取出使用，可以使用反量化操作将int8格式的key/value转回float格式：
+```
+    v=dequantize_cache_torch(qv,scale,zero_point)
+```
+<br>
+
+### 推理性能
+这一部分将介绍模型推理的速度和显存占用的相关数据。下文的性能测算使用 [此脚本](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py) 完成。
+
+### 推理速度
+
+我们测算了BF16、Int8和Int4模型在使用flash attention v2、v1或不使用时生成2048和8192个token的平均推理速度（tokens/s）。结果如下所示：
+
+<table>
+    <tr>
+      <th rowspan="2">Model Size</th><th rowspan="2">Precision</th><th rowspan="2">FlashAttn</th><th colspan="2" align="center">Sequence Length</th>
+    </tr>
+    <tr>
+        <th align="center">2048</th><th align="center">8192</th>
+    </tr>
+    </tr>
+    </tr>
+    <tr>
+        <th rowspan="9">7B</th><td align="center" rowspan="3">BF16</td><td align="center">v2</td><td align="center">40.93</td><td align="center">36.14</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">40.75</td><td align="center">35.34
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">37.55</td><td align="center">33.56
+    </tr>
+    <tr>
+        <td align="center" rowspan="3">Int8</td><td align="center">v2</td><td align="center">37.47</td><td align="center">32.54</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">37.51</td><td align="center">32.39
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">37.84</td><td align="center">32.65
+    </tr>
+    <tr>
+        <td align="center" rowspan="3">Int4</td><td align="center">v2</td><td align="center">50.09</td><td align="center">38.61</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">45.98</td><td align="center">36.47
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">48.12</td><td align="center">36.70
+    </tr>
+    <tr>
+        <th rowspan="9">14B</th><td align="center" rowspan="3">BF16</td><td align="center">v2</td><td align="center">32.88</td><td align="center">24.87</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">32.76</td><td align="center">28.89
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">29.32</td><td align="center">22.91
+    </tr>
+    <tr>
+        <td align="center" rowspan="3">Int8</td><td align="center">v2</td><td align="center">29.28</td><td align="center">24.22</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">28.31</td><td align="center">23.87
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">31.12</td><td align="center">24.60
+    </tr>
+    <tr>
+        <td align="center" rowspan="3">Int4</td><td align="center">v2</td><td align="center">38.72</td><td align="center">27.33</td>
+    </tr>
+    <tr>
+        <td align="center">v1</td><td align="center">37.81</td><td align="center">26.46
+    </tr>
+    <tr>
+        <td align="center">Disabled</td><td align="center">37.65</td><td align="center">26.00
+    </tr>
+</table>
+
+评测运行于单张A100-SXM4-80G GPU，使用PyTorch 2.0.1和CUDA 11.4。推理速度是编码2048个token和生成8192个token的速度均值。
+
+### 显存使用
+
+我们还测算了BF16、Int8和Int4模型编码2048个token及生成8192个token的峰值显存占用情况。结果（GB）如下所示：
+
+<table>
+    <tr>
+      <th rowspan="2">Model Size</th><th rowspan="2">Precision</th><th colspan="2" align="center">Sequence Length</th>
+    </tr>
+    <tr>
+        <th align="center">2048</th><th align="center">8192</th>
+    </tr>
+    </tr>
+    </tr>
+    <tr>
+        <th rowspan="3">7B</th><td align="center">BF16</td><td align="center">16.99</td><td align="center">22.53</td>
+    </tr>
+    <tr>
+        <td align="center">Int8</td><td align="center">11.20</td><td align="center">16.62
+    </tr>
+    <tr>
+        <td align="center">Int4</td><td align="center">8.21</td><td align="center">13.63</td>
+    </tr>
+    <tr>
+        <th rowspan="3">14B</th><td align="center">BF16</td><td align="center">30.15</td><td align="center">38.94</td>
+    </tr>
+    <tr>
+        <td align="center">Int8</td><td align="center">18.81</td><td align="center">27.54
+    </tr>
+    <tr>
+        <td align="center">Int4</td><td align="center">13.01</td><td align="center">21.79</td>
+    </tr>
+</table>
+
+<br>
 
 ## 微调
 
@@ -475,7 +553,7 @@ sh finetune/finetune_lora_ds.sh
 
 与全参数微调不同，LoRA ([论文](https://arxiv.org/abs/2106.09685)) 只更新adapter层的参数而无需更新原有语言模型的参数。这种方法允许用户用更低的显存开销来训练模型，也意味着更小的计算开销。
 
-注意，如果你使用预训练模型进行LoRA微调，而非chat模型，模型的embedding和输出层的参数将被设为可训练的参数。这是因为预训练模型没有学习过ChatML格式中的特殊token，因此需要将这部分参数设为可训练才能让模型学会理解和预测这些token。这也意味着，假如你的训练引入新的特殊token，你需要通过代码中的`modules_to_save`将这些参数设为可训练的参数。如果你想节省显存占用，可以考虑使用chat模型进行LoRA微调，显存占用将大幅度降低。下文的显存占用和训练速度的记录将详细介绍这部分细节。
+注意，如果你使用预训练模型进行LoRA微调，而非chat模型，模型的embedding和输出层的参数将被设为可训练的参数。这是因为预训练模型没有学习过ChatML格式中的特殊token，因此需要将这部分参数设为可训练才能让模型学会理解和预测这些token。这也意味着，假如你的训练引入新的特殊token，你需要通过代码中的`modules_to_save`将这些参数设为可训练的参数。此外，这部分训练参数的引入会影响ZeRO 3的使用，因此我们默认推荐使用ZeRO 2。当然，如果你不需要引入这部分训练参数，你可以通过替换DeepSpeed的配置文件来使用ZeRO 3。如果你想节省显存占用，可以考虑使用chat模型进行LoRA微调，显存占用将大幅度降低。下文的显存占用和训练速度的记录将详细介绍这部分细节。
 
 如果你依然遇到显存不足的问题，可以考虑使用Q-LoRA ([论文](https://arxiv.org/abs/2305.14314)) 。该方法使用4比特量化模型以及paged attention等技术实现更小的显存开销。
 
@@ -490,7 +568,7 @@ sh finetune/finetune_qlora_single_gpu.sh
 sh finetune/finetune_qlora_ds.sh
 ```
 
-我们建议你使用我们提供的Int4量化模型进行训练，即Qwen-7B-Chat-Int4。请**不要使用**非量化模型！与全参数微调以及LoRA不同，Q-LoRA仅支持fp16。此外，上述LoRA关于特殊token的问题在Q-LoRA依然存在。并且，Int4模型的参数无法被设为可训练的参数。所幸的是，我们只提供了Chat模型的Int4模型，因此你不用担心这个问题。但是，如果你执意要在Q-LoRA中引入新的特殊token，很抱歉，我们无法保证你能成功训练。
+我们建议你使用我们提供的Int4量化模型进行训练，即Qwen-7B-Chat-Int4。请**不要使用**非量化模型！与全参数微调以及LoRA不同，Q-LoRA仅支持fp16。注意，由于我们发现torch amp支持的fp16混合精度训练存在问题，因此当前的单卡训练Q-LoRA必须使用DeepSpeed。此外，上述LoRA关于特殊token的问题在Q-LoRA依然存在。并且，Int4模型的参数无法被设为可训练的参数。所幸的是，我们只提供了Chat模型的Int4模型，因此你不用担心这个问题。但是，如果你执意要在Q-LoRA中引入新的特殊token，很抱歉，我们无法保证你能成功训练。
 
 与全参数微调不同，LoRA和Q-LoRA的训练只需存储adapter部分的参数。假如你需要使用LoRA训练后的模型，你需要使用如下方法。假设你使用Qwen-7B训练模型，你可以用如下代码读取模型：
 
@@ -599,6 +677,62 @@ python cli_demo.py
 
 ## API
 
+最简单的使用Qwen模型API服务的方法就是通过DashScope（阿里云灵积模型服务）。我们提供了简单介绍说明使用方法。同时，我们还提供了自己部署OpenAI格式的API的方法。
+
+### DashScope
+DashScope是阿里云提供的大语言模型的API服务，目前支持Qwen。但请注意，目前提供服务的Qwen模型为内部模型，暂无更多具体细节对外透露。模型服务包括`qwen-turbo`和`qwen-plus`。前者速度更快，后者效果更优。详情请查看[文档](https://dashscope.aliyun.com)。
+
+请首先前往[官网](https://help.aliyun.com/zh/dashscope/developer-reference/activate-dashscope-and-create-an-api-key?spm=a2c4g.11186623.0.0.6c2774fahtfXdn)开通DashScope，获得API Key（AK）。建议通过环境变量设置AK：
+```bash
+export DASHSCOPE_API_KEY="YOUR_DASHSCOPE_API_KEY"
+```
+随后安装相关代码包，点击[此处](https://help.aliyun.com/zh/dashscope/developer-reference/install-dashscope-sdk)查看安装文档。如使用python，则直接通过pip安装：
+```bash
+pip install dashscope
+```
+如安装JAVA SDK，则通过如下命令安装：
+```xml
+<!-- https://mvnrepository.com/artifact/com.alibaba/dashscope-sdk-java -->
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>dashscope-sdk-java</artifactId>
+    <version>the-latest-version</version>
+</dependency>
+```
+最简单的使用方法就是通过messages调用，用法类似OpenAI API。示例如下：
+```python
+import random
+from http import HTTPStatus
+from dashscope import Generation
+
+
+def call_with_messages():
+    messages = [{'role': 'system', 'content': 'You are a helpful assistant.'},
+                {'role': 'user', 'content': '如何做西红柿鸡蛋？'}]
+    gen = Generation()
+    response = gen.call(
+        Generation.Models.qwen_turbo,
+        messages=messages,
+        seed=random.randint(1, 10000),  # set the random seed, optional, default to 1234 if not set
+        result_format='message',  # set the result to be "message" format.
+    )
+    return response
+
+
+if __name__ == '__main__':
+    response = call_with_messages()
+    if response.status_code == HTTPStatus.OK:
+        print(response)
+    else:
+        print('Request id: %s, Status code: %s, error code: %s, error message: %s' % (
+            response.request_id, response.status_code,
+            response.code, response.message
+        ))
+```
+更多用法请查看官方文档了解详情。
+
+### OpenAI API
+
 我们提供了OpenAI API格式的本地API部署方法（感谢@hanpenggit）。在开始之前先安装必要的代码库：
 
 ```bash
@@ -650,7 +784,7 @@ print(response.choices[0].message.content)
     <br>
 <p>
 
-该接口也支持函数调用（Function Calling），但暂时仅限 `stream=False` 时能生效。用法见[函数调用示例](examples/function_call_examples.py)。
+该接口也支持函数调用（**Function Calling**），但暂时仅限 `stream=False` 时能生效。用法见[函数调用示例](examples/function_call_examples.py)。
 <br><br>
 
 ## 部署
