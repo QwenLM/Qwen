@@ -324,14 +324,15 @@ model = AutoModelForCausalLM.from_pretrained(
 response, history = model.chat(tokenizer, "Hi", history=None)
 ```
 
-
-我们对BF16和Int4模型在基准评测上做了测试，发现量化模型效果损失较小，结果如下所示：
+我们对BF16，Int8和Int4模型在基准评测上做了测试，发现量化模型效果损失较小，结果如下所示：
 
 | Quantization         | MMLU | CEval (val) | GSM8K | Humaneval |
 |----------------------|:----:|:-----------:|:-----:|:---------:|
-| Qwen-7B-Chat (BF16)  | 53.9 |    54.2     | 41.1  |   24.4    |
-| Qwen-7B-Chat (Int4)  | 52.6 |    52.9     | 38.1  |   23.8    |
-| Qwen-14B-Chat (BF16) | 64.6 |    69.8     | 61.0  |   43.9    |
+| Qwen-7B-Chat (BF16)  | 55.8 |    59.7     | 50.3  |   37.2    |
+| Qwen-7B-Chat (Int8)  | 55.4 |    59.4     | 48.3  |   34.8    |
+| Qwen-7B-Chat (Int4)  | 55.1 |    59.2     | 49.7  |   29.9    |
+| Qwen-14B-Chat (BF16) | 64.6 |    69.8     | 60.1  |   43.9    |
+| Qwen-14B-Chat (Int8) | 63.6 |    68.6     | 60.0	|   48.2    |
 | Qwen-14B-Chat (Int4) | 63.3 |    69.0     | 59.8  |   45.7    |
 <br>
 
@@ -466,6 +467,8 @@ model = AutoModelForCausalLM.from_pretrained(
 </table>
 
 评测运行于单张A100-SXM4-80G GPU，使用PyTorch 2.0.1和CUDA 11.4。推理速度是编码2048个token和生成8192个token的速度均值。
+
+注意：以上Int4/Int8模型生成速度使用autogptq库给出，当前``AutoModelForCausalLM.from_pretrained``载入的模型生成速度会慢大约20%。我们已经将该问题汇报给HuggingFace团队，若有解决方案将即时更新。
 
 ### 显存使用
 

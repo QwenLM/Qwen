@@ -333,15 +333,16 @@ model = AutoModelForCausalLM.from_pretrained(
 response, history = model.chat(tokenizer, "Hi", history=None)
 ```
 
-We illustrate the model performance of both BF16 and Int4 models on the benchmark, and we find that the quantized model does not suffer from significant performance degradation. Results are shown below:
+We illustrate the model performance of both BF16, Int8 and Int4 models on the benchmark, and we find that the quantized model does not suffer from significant performance degradation. Results are shown below:
 
 | Quantization         | MMLU | CEval (val) | GSM8K | Humaneval |
 |----------------------|:----:|:-----------:|:-----:|:---------:|
-| Qwen-7B-Chat (BF16)  | 53.9 |    54.2     | 41.1  |   24.4    |
-| Qwen-7B-Chat (Int4)  | 52.6 |    52.9     | 38.1  |   23.8    |
-| Qwen-14B-Chat (BF16) | 64.6 |    69.8     | 61.0  |   43.9    |
+| Qwen-7B-Chat (BF16)  | 55.8 |    59.7     | 50.3  |   37.2    |
+| Qwen-7B-Chat (Int8)  | 55.4 |    59.4     | 48.3  |   34.8    |
+| Qwen-7B-Chat (Int4)  | 55.1 |    59.2     | 49.7  |   29.9    |
+| Qwen-14B-Chat (BF16) | 64.6 |    69.8     | 60.1  |   43.9    |
+| Qwen-14B-Chat (Int8) | 63.6 |    68.6     | 60.0	|   48.2    |
 | Qwen-14B-Chat (Int4) | 63.3 |    69.0     | 59.8  |   45.7    |
-<br>
 
 ### Quantization of KV cache
 Attention KV cache can be quantized and compressed for storage, to get a higher sample throughput. The parameters of 'use_cache_quantization' and 'use_cache_kernel' are provided to control kv-cache-quantization behavior
@@ -478,7 +479,9 @@ We measured the average inference speed (tokens/s) of generating 2048 and 8192 t
 </table>
 
 
-In detail, the setting of profiling is encoding 2048 tokens and generating 8192 new tokens. The profiling runs on a single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.4. The inference speed is averaged over the encoded and generated tokens.
+In detail, the setting of profiling is encoding 2048 tokens and generating 8192 new tokens. The profiling runs on a single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.8. The inference speed is averaged over the encoded and generated tokens.
+
+Note: The generation speed of the Int4/Int8 models mentioned above is provided by the autogptq library. The current speed of the model loaded using ``AutoModelForCausalLM.from_pretrained`` will be approximately 20% slower. We have reported this issue to the HuggingFace team and will update it promptly if a solution is available.
 
 ### GPU Memory Usage
 
