@@ -302,7 +302,7 @@ def train():
         config=config,
         cache_dir=training_args.cache_dir,
         device_map=device_map,
-        low_cpu_mem_usage=True,
+        low_cpu_mem_usage=True if training_args.use_lora and not lora_args.q_lora,
         trust_remote_code=True,
         quantization_config=GPTQConfig(
             bits=4, disable_exllama=True
