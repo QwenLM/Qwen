@@ -36,6 +36,7 @@ Qwen-7B**と**Qwen-14B**の**Qwen**シリーズと、**Qwen-7B-Chat**と**Qwen-1
 * Qwenのクイックスタート。
 * 量子化モデルの詳細（使用量、メモリ、推論速度など）。比較のために、BF16モデルの統計も提供します。
 * フルパラメーターチューニング、LoRA、Q-LoRAを含む、微調整に関するチュートリアル。
+* vLLMとFastChatを例に、デプロイメントについて説明します。
 * WebUI、CLIデモなど、デモの構築に関する説明。
 * あなたのモデルのためのOpenAIスタイルのAPIを構築する手順。
 * ツール使用、エージェント、コードインタプリタの Qwen の詳細。
@@ -301,7 +302,26 @@ print(response)
 response, _ = model.chat(tokenizer, "我马上迟到了，怎么做才能不迟到", history=None)
 print(response)
 ```
-<br>
+
+### CPU
+
+Qwenとtiktokenの純粋なC++実装である [qwen.cpp](https://github.com/QwenLM/qwen.cpp) を使用することを強くお勧めします。詳細はレポを確認してください！
+
+また、CPU上でモデルを直接実行することも簡単ですが、その場合はデバイスの指定が必要です：
+
+
+```python
+model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
+```
+
+ただし、推論効率が極端に低下する可能性があります。
+
+### 複数のGPU
+
+GPUメモリ不足に悩まされ、1つ以上のGPUでモデルを実行したい場合、Transformersでサポートされるようになったデフォルトのロード方法を直接使うことができます。以前の `utils.py` に基づく方法は非推奨です。
+
+しかし、この方法は簡単ですが、ネイティブ・パイプライン並列の効率は低いです。FastChatでvLLMを使用することをお勧めします。
+<br><br>
 
 ## 量子化
 
@@ -645,7 +665,39 @@ merged_model.save_pretrained(new_model_directory, max_shard_size="2048MB", safe_
         <td>Q-LoRA</td><td align="center">18.7G / 5.3s/it</td><td align="center">18.4G / 6.3s/it</td><td align="center">18.9G / 8.2s/it</td><td align="center">19.9G / 11.8s/it</td><td align="center">23.0G / 20.1s/it</td><td align="center">27.9G / 38.3s/it</td>
     </tr>
 </table>
+<br>
 
+## デプロイ
+
+### vLLM 
+デプロイメントと高速推論のためには、FastChatとvLLMを使用することをお勧めします。まずパッケージをインストールしてください：
+```bash
+pip install vllm fastchat
+```
+または、`git clone` と `pip install -e .` を使ってソースからインストールすることもできます。インストールに問題がある場合は、それぞれのドキュメントを読むことを勧める。
+
+QwenをvLLMとFastChatで実行するには、まず以下の方法でコントローラを起動する必要があります：
+```bash
+python -m fastchat.serve.controller
+```
+
+それからmodel workerを起動し、推論のためにモデルをロードします。シングルGPU推論の場合は、直接実行できます：
+```bash
+python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code
+```
+しかし、より高速な推論や大容量メモリーのために複数のGPUでモデルを実行したい場合は、vLLMがサポートするテンソル並列を使用することができます。モデルを4GPUで実行するとすると、コマンドは以下のようになります：
+```bash
+python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --tensor-parallel-size 4
+```
+
+Model workerを起動したら、Web デモや OpenAI API を好きなように起動できます。ウェブデモの場合は、以下のコマンドを実行します：
+```bash
+python -m fastchat.serve.gradio_web_server
+```
+OpenAI APIについては、まずOpenAI APIのドキュメントをチェックして、インストールしてください。次にコマンドを実行します：
+```bash
+python -m fastchat.serve.openai_api_server --host localhost --port 8000
+```
 <br>
 
 ## デモ
@@ -795,26 +847,6 @@ print(response.choices[0].message.content)
 <p>
 
 **Function Calling** もサポートされています(ただし、今のところ `stream=False` の場合のみ)。使用例](examples/function_call_examples.py) を参照してください。
-<br><br>
-
-## デプロイ
-
-### CPU
-
-Qwenとtiktokenの純粋なC++実装である [qwen.cpp](https://github.com/QwenLM/qwen.cpp) を使用することを強くお勧めします。詳細はレポを確認してください！
-
-また、CPU上でモデルを直接実行することも簡単ですが、その場合はデバイスの指定が必要です：
-
-
-```python
-model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
-```
-
-ただし、推論効率が極端に低下する可能性があります。
-
-### 複数のGPU
-
-GPUメモリ不足に悩まされ、1つ以上のGPUでモデルを実行したい場合、Transformersでサポートされるようになったデフォルトのロード方法を直接使うことができます。以前の `utils.py` に基づく方法は非推奨です。
 <br><br>
 
 ## ツールの使用
