@@ -32,6 +32,7 @@ In this repo, you can figure out:
 * Details about the quantization models, including GPTQ and KV cache quantization.
 * Statistics of inference performance, including speed and memory.
 * Tutorials on finetuning, including full-parameter tuning, LoRA, and Q-LoRA.
+* Instructions on deployment, with the example of vLLM and FastChat.
 * Instructions on building demos, including WebUI, CLI demo, etc.
 * Introduction to DashScope API service, as well as the instructions on building an OpenAI-style API for your model.
 * Information about Qwen for tool use, agent, and code interpreter
@@ -307,7 +308,24 @@ response, _ = model.chat(tokenizer, "我马上迟到了，怎么做才能不迟�
 print(response)
 ```
 
-<br>
+### CPU
+
+To deploy our models on CPU, we strongly advise you to use [qwen.cpp](https://github.com/QwenLM/qwen.cpp), which is a pure C++ implementation of Qwen and tiktoken. Check the repo for more details!
+
+Also, it is also simple to directly run the model on CPU, which requires your specification of device:
+
+```python
+model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
+```
+
+However, it is likely that you suffer from extremely low inference efficiency.
+
+### Multiple GPUs
+
+If you suffer from lack of GPU memory and you would like to run the model on more than 1 GPU, you can directly use the default loading method, which is now supported by Transformers. The previous method based on `utils.py` is deprecated.
+
+However, though this method is simple, the efficiency of the native pipeline parallelism is low. We advise you to use vLLM with FastChat and please read the section for deployment.
+<br><br>
 
 ## Quantization
 
@@ -517,11 +535,7 @@ We also profile the peak GPU memory usage for encoding 2048 tokens as context (a
         <td align="center">Int4</td><td align="center">13.01</td><td align="center">21.79</td>
     </tr>
 </table>
-
-
 <br>
-
-
 
 
 ## Finetuning
@@ -627,6 +641,7 @@ merged_model.save_pretrained(new_model_directory, max_shard_size="2048MB", safe_
 
 Note: For multi-GPU training, you need to specify the proper hyperparameters for distributed training based on your machine. Besides, we advise you to specify your maximum sequence length with the argument `--model_max_length`, based on your consideration of data, memory footprint, and training speed.
 
+
 ### Profiling of Memory and Speed
 We profile the GPU memory and training speed of both LoRA (LoRA (emb) refers to training the embedding and output layer, while LoRA has no trainable embedding and output layer) and Q-LoRA in the setup of single-GPU training. In this test, we experiment on a single A100-SXM4-80G GPU, and we use CUDA 11.8 and Pytorch 2.0. Flash attention 2 is applied. We uniformly use a batch size of 1 and gradient accumulation of 8. We profile the memory (GB) and speed (s/iter) of inputs of different lengths, namely 256, 512, 1024, 2048, 4096, and 8192. We also report the statistics of full-parameter finetuning with Qwen-7B on 2 A100 GPUs. We only report the statistics of 256, 512, and 1024 tokens due to the limitation of GPU memory. The statistics are listed below:
 
@@ -661,7 +676,39 @@ We profile the GPU memory and training speed of both LoRA (LoRA (emb) refers to 
         <td>Q-LoRA</td><td align="center">18.7G / 5.3s/it</td><td align="center">18.4G / 6.3s/it</td><td align="center">18.9G / 8.2s/it</td><td align="center">19.9G / 11.8s/it</td><td align="center">23.0G / 20.1s/it</td><td align="center">27.9G / 38.3s/it</td>
     </tr>
 </table>
+<br>
 
+## Deployment
+
+### vLLM 
+For deployment and fast inference, we suggest using vLLM with FastChat. Install the packages first:
+```bash
+pip install vllm fastchat
+```
+Or you can install them from source by `git clone` and `pip install -e .`. We advise you to read their documents if you meet problems in installation. 
+
+To run Qwen with vLLM and FastChat, you need to first launch a controller by:
+```bash
+python -m fastchat.serve.controller
+```
+
+Then you can launch the model worker, which means loading your model for inference. For single GPU inference, you can directly run:
+```bash
+python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code
+```
+However, if you hope to run the model on multiple GPUs for faster inference or larger memory, you can use tensor parallelism supported by vLLM. Suppose you run the model on 4 GPUs, the command is shown below:
+```bash
+python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --tensor-parallel-size 4
+```
+
+After launching your model worker, you can launch a web demo or an OpenAI API as you like. For web demo, run the following command:
+```bash
+python -m fastchat.serve.gradio_web_server
+```
+For OpenAI API, check the documentation of our OpenAI API for installation first. Then run the command:
+```bash
+python -m fastchat.serve.openai_api_server --host localhost --port 8000
+```
 <br>
 
 ## Demo
@@ -813,24 +860,7 @@ print(response.choices[0].message.content)
 **Function calling** is also supported (but only when `stream=False` for the moment). See the [example usage](examples/function_call_examples.py) here.
 <br><br>
 
-## Deployment
 
-### CPU
-
-To deploy our models on CPU, we strongly advise you to use [qwen.cpp](https://github.com/QwenLM/qwen.cpp), which is a pure C++ implementation of Qwen and tiktoken. Check the repo for more details!
-
-Also, it is also simple to directly run the model on CPU, which requires your specification of device:
-
-```python
-model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
-```
-
-However, it is likely that you suffer from extremely low inference efficiency.
-
-### Multiple GPUs
-
-If you suffer from lack of GPU memory and you would like to run the model on more than 1 GPU, you can directly use the default loading method, which is now supported by Transformers. The previous method based on `utils.py` is deprecated.
-<br><br>
 
 ## Tool Usage
 

@@ -28,8 +28,9 @@
 
 * 快速上手Qwen-Chat教程，玩转大模型推理
 * 量化模型相关细节，包括GPTQ和KV cache量化
-* 推理性能数据，包括推理速度和显存占用。
+* 推理性能数据，包括推理速度和显存占用
 * 微调的教程，帮你实现全参数微调、LoRA以及Q-LoRA
+* 部署教程，以vLLM和FastChat为例
 * 搭建Demo的方法，包括WebUI和CLI Demo
 * 搭建API的方法，我们提供的示例为OpenAI风格的API
 * 更多关于Qwen在工具调用、Code Interpreter、Agent方面的内容
@@ -297,7 +298,25 @@ print(response)
 response, _ = model.chat(tokenizer, "我马上迟到了，怎么做才能不迟到", history=None)
 print(response)
 ```
-<br>
+
+### CPU
+
+我们推荐你使用 [qwen.cpp](https://github.com/QwenLM/qwen.cpp) 来实现CPU部署和推理。qwen.cpp是Qwen和tiktoken的C++实现。你可以点击链接进入repo了解详情。
+
+当然，直接在CPU上运行模型也是可以的，示例如下：
+
+```python
+model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
+```
+
+但是，这样的推理效率大概率会非常低。
+
+### 多GPU
+
+如果你遇到显存不足的问题而希望使用多张GPU进行推理，可以使用上述的默认的使用方法读取模型。此前提供的脚本`utils.py`已停止维护。
+
+尽管这个方法很简单，但它的效率相对较低。我们建议使用vLLM和FastChat并请阅读部署章节。
+<br><br>
 
 
 ## 量化
@@ -643,6 +662,39 @@ merged_model.save_pretrained(new_model_directory, max_shard_size="2048MB", safe_
 
 <br>
 
+## 部署
+
+### vLLM
+如希望部署及加速推理，我们建议你使用vLLM和FastChat。首先安装相应的代码库：
+```bash
+pip install vllm fastchat
+```
+你也可以通过`git clone`和`pip install -e .`的方式通过源码安装。如果遇到安装问题，请阅读它们的官方文档。
+
+使用vLLM和FastChat运行Qwen之前，首先启动一个controller：
+```bash
+python -m fastchat.serve.controller
+```
+
+然后启动model worker读取模型。如使用单卡推理，运行如下命令：
+```bash
+python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code
+```
+然而，如果你希望使用多GPU加速推理或者增大显存，你可以使用vLLM支持的模型并行机制。假设你需要在4张GPU上运行你的模型，命令如下所示：
+```bash
+python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --tensor-parallel-size 4
+```
+
+启动model worker后，你可以启动一个web demo或者OpenAI API。启动web demo的命令如下：
+```bash
+python -m fastchat.serve.gradio_web_server
+```
+使用OpenAI API前，请阅读我们的API章节配置好环境，然后运行如下命令：
+```bash
+python -m fastchat.serve.openai_api_server --host localhost --port 8000
+```
+<br>
+
 ## Demo
 
 ### Web UI
@@ -792,24 +844,6 @@ print(response.choices[0].message.content)
 该接口也支持函数调用（**Function Calling**），但暂时仅限 `stream=False` 时能生效。用法见[函数调用示例](examples/function_call_examples.py)。
 <br><br>
 
-## 部署
-
-### CPU
-
-我们推荐你使用 [qwen.cpp](https://github.com/QwenLM/qwen.cpp) 来实现CPU部署和推理。qwen.cpp是Qwen和tiktoken的C++实现。你可以点击链接进入repo了解详情。
-
-当然，直接在CPU上运行模型也是可以的，示例如下：
-
-```python
-model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
-```
-
-但是，这样的推理效率大概率会非常低。
-
-### 多GPU
-
-如果你遇到显存不足的问题而希望使用多张GPU进行推理，可以使用上述的默认的使用方法读取模型。此前提供的脚本`utils.py`已停止维护。
-<br><br>
 
 ## 工具调用
 

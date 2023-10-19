@@ -32,6 +32,7 @@ Dans la repo, vous pouvez trouver:
 * Détails sur les modèles de quantization, y compris GPTQ et la quantization de KV cache.
 * Statistiques sur les performances de l'inférence, y compris la vitesse et la mémoire.
 * Tutoriels sur le finetuning, y compris le finetuning de paramètres complets, LoRA, et Q-LoRA.
+* Instructions de déploiement, avec l'exemple de vLLM et FastChat.
 * Instructions sur la création de démos, y compris WebUI, démo CLI, etc.
 * Introduction au service API de DashScope, ainsi que les instructions pour construire une API de type OpenAI pour votre modèle.
 * Informations sur Qwen pour l'utilisation d'outils, d'agents et code interpreter.
@@ -307,7 +308,24 @@ response, _ = model.chat(tokenizer, "我马上迟到了，怎么做才能不迟�
 print(response)
 ```
 
-<br>
+### CPU
+
+Pour déployer nos modèles sur CPU, nous vous conseillons vivement d'utiliser [qwen.cpp](https://github.com/QwenLM/qwen.cpp), qui est une implémentation purement C++ de Qwen et de tiktoken. Consultez le repo pour plus de détails!
+
+Il est simple d'exécuter directement le modèle sur le CPU, ce qui nécessite la spécification de votre appareil:
+
+```python
+model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
+```
+
+Cependant, il est probable que vous souffriez d'une efficacité d'inférence extrêmement faible.
+
+### Plusieurs GPU
+
+Si vous souffrez d'un manque de mémoire GPU et que vous souhaitez exécuter le modèle sur plus d'un GPU, vous pouvez utiliser directement la méthode de chargement par défaut, qui est maintenant supportée par Transformers. La méthode précédente basée sur `utils.py` est obsolète.
+
+Cependant, bien que cette méthode soit simple, l'efficacité du parallélisme natif du pipeline est faible. Nous vous conseillons d'utiliser vLLM avec FastChat et de lire la section relative au déploiement.
+<br><br>
 
 ## Quantization
 
@@ -660,7 +678,39 @@ Nous profilons la mémoire du GPU et la vitesse d'apprentissage de LoRA (LoRA (e
         <td>Q-LoRA</td><td align="center">18.7G / 5.3s/it</td><td align="center">18.4G / 6.3s/it</td><td align="center">18.9G / 8.2s/it</td><td align="center">19.9G / 11.8s/it</td><td align="center">23.0G / 20.1s/it</td><td align="center">27.9G / 38.3s/it</td>
     </tr>
 </table>
+<br>
 
+## Déploiement
+
+### vLLM 
+Pour le déploiement et l'inférence rapide, nous suggérons d'utiliser vLLM avec FastChat. Installez d'abord les paquets:
+```bash
+pip install vllm fastchat
+```
+Ou vous pouvez les installer à partir des sources par `git clone` et `pip install -e .`. Nous vous conseillons de lire leurs documents si vous rencontrez des problèmes lors de l'installation.
+
+Pour faire fonctionner Qwen avec vLLM et FastChat, vous devez d'abord lancer un contrôleur par:
+```bash
+python -m fastchat.serve.controller
+```
+
+Ensuite, vous pouvez lancer le travailleur de modèle, ce qui signifie charger votre modèle pour l'inférence. Pour l'inférence sur un seul GPU, vous pouvez directement lancer:
+```bash
+python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code
+```
+Cependant, si vous souhaitez exécuter le modèle sur plusieurs GPU pour une inférence plus rapide ou une mémoire plus importante, vous pouvez utiliser le parallélisme tensoriel pris en charge par vLLM. Supposons que vous exécutiez le modèle sur 4 GPU, la commande est présentée ci-dessous:
+```bash
+python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --tensor-parallel-size 4
+```
+
+Après avoir lancé votre model worker, vous pouvez lancer une démo web ou une API OpenAI comme vous le souhaitez. Pour la démo web, exécutez la commande suivante:
+```bash
+python -m fastchat.serve.gradio_web_server
+```
+Pour l'API OpenAI, consultez d'abord la documentation de notre API OpenAI pour l'installation. Exécutez ensuite la commande:
+```bash
+python -m fastchat.serve.openai_api_server --host localhost --port 8000
+```
 <br>
 
 ## Démo
@@ -812,24 +862,6 @@ print(response.choices[0].message.content)
 **Function calling** est aussi supporté (mais seulement quand `stream=False` pour le moment). Voir [l'exemple d'utilisation](examples/function_call_examples.py) ici.
 <br><br>
 
-## Déploiement
-
-### CPU
-
-Pour déployer nos modèles sur CPU, nous vous conseillons vivement d'utiliser [qwen.cpp](https://github.com/QwenLM/qwen.cpp), qui est une implémentation purement C++ de Qwen et de tiktoken. Consultez le repo pour plus de détails!
-
-Il est simple d'exécuter directement le modèle sur le CPU, ce qui nécessite la spécification de votre appareil:
-
-```python
-model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
-```
-
-Cependant, il est probable que vous souffriez d'une efficacité d'inférence extrêmement faible.
-
-### Plusieurs GPU
-
-Si vous souffrez d'un manque de mémoire GPU et que vous souhaitez exécuter le modèle sur plus d'un GPU, vous pouvez utiliser directement la méthode de chargement par défaut, qui est maintenant supportée par Transformers. La méthode précédente basée sur `utils.py` est obsolète.
-<br><br>
 
 ## Utilisation des outils
 
