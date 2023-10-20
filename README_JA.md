@@ -672,7 +672,8 @@ merged_model.save_pretrained(new_model_directory, max_shard_size="2048MB", safe_
 ### vLLM 
 デプロイメントと高速推論のためには、FastChatとvLLMを使用することをお勧めします。まずパッケージをインストールしてください：
 ```bash
-pip install vllm fastchat
+pip install vllm
+pip install "fschat[model_worker,webui]"
 ```
 または、`git clone` と `pip install -e .` を使ってソースからインストールすることもできます。インストールに問題がある場合は、それぞれのドキュメントを読むことを勧める。
 
