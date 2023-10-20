@@ -683,7 +683,8 @@ We profile the GPU memory and training speed of both LoRA (LoRA (emb) refers to 
 ### vLLM 
 For deployment and fast inference, we suggest using vLLM with FastChat. Install the packages first:
 ```bash
-pip install vllm fastchat
+pip install vllm
+pip install "fschat[model_worker,webui]"
 ```
 Or you can install them from source by `git clone` and `pip install -e .`. We advise you to read their documents if you meet problems in installation. 
 
