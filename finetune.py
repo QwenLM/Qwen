@@ -341,6 +341,9 @@ def train():
 
         model = get_peft_model(model, lora_config)
 
+        # Print peft trainable params
+        model.print_trainable_parameters()
+
         if training_args.gradient_checkpointing:
             model.enable_input_require_grads()
 
