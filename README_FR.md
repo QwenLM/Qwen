@@ -685,7 +685,8 @@ Nous profilons la mémoire du GPU et la vitesse d'apprentissage de LoRA (LoRA (e
 ### vLLM 
 Pour le déploiement et l'inférence rapide, nous suggérons d'utiliser vLLM avec FastChat. Installez d'abord les paquets:
 ```bash
-pip install vllm fastchat
+pip install vllm
+pip install "fschat[model_worker,webui]"
 ```
 Ou vous pouvez les installer à partir des sources par `git clone` et `pip install -e .`. Nous vous conseillons de lire leurs documents si vous rencontrez des problèmes lors de l'installation.
 
