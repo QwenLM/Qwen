@@ -397,7 +397,6 @@ async def create_chat_completion(request: ChatCompletionRequest):
             query,
             history=history,
             stop_words_ids=stop_words_ids,
-            append_history=False,
             **gen_kwargs
         )
         print(f"<chat>\n{history}\n{query}\n<!-- *** -->\n{response}\n</chat>")
