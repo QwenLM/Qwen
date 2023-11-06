@@ -17,8 +17,8 @@
 
 |     |                                                              Qwen-Chat                                                               |                                                                Qwen-Chat (Int4)                                                                |                        Qwen-Chat (Int8)                         |                                                            Qwen                                                            |
 |-----|:------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------:|
-| 7B  |  <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-7B-Chat">🤗</a>  |  <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat-Int4/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-7B-Chat-Int4">🤗</a>  | <a href="https://huggingface.co/Qwen/Qwen-7B-Chat-Int8">🤗</a>  |  <a href="https://modelscope.cn/models/qwen/Qwen-7B/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-7B">🤗</a>  |
-| 14B | <a href="https://modelscope.cn/models/qwen/Qwen-14B-Chat/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-14B-Chat">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-14B-Chat-Int4/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-14B-Chat-Int4">🤗</a> | <a href="https://huggingface.co/Qwen/Qwen-14B-Chat-Int8">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-14B/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-14B">🤗</a> |
+| 7B  |  <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-7B-Chat">🤗</a>  |  <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat-Int4/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-7B-Chat-Int4">🤗</a>  | <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat-Int8/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-7B-Chat-Int8">🤗</a>  |  <a href="https://modelscope.cn/models/qwen/Qwen-7B/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-7B">🤗</a>  |
+| 14B | <a href="https://modelscope.cn/models/qwen/Qwen-14B-Chat/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-14B-Chat">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-14B-Chat-Int4/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-14B-Chat-Int4">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-14B-Chat-Int8/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-14B-Chat-Int8">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-14B/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-14B">🤗</a> |
 
 
 
@@ -205,10 +205,10 @@ from modelscope import snapshot_download
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # Downloading model checkpoint to a local dir model_dir
-# model_dir = snapshot_download('qwen/Qwen-7B', revision='v1.1.4')
-# model_dir = snapshot_download('qwen/Qwen-7B-Chat', revision='v1.1.4')
-# model_dir = snapshot_download('qwen/Qwen-14B', revision='v1.0.4')
-model_dir = snapshot_download('qwen/Qwen-14B-Chat', revision='v1.0.4')
+# model_dir = snapshot_download('qwen/Qwen-7B')
+# model_dir = snapshot_download('qwen/Qwen-7B-Chat')
+# model_dir = snapshot_download('qwen/Qwen-14B')
+model_dir = snapshot_download('qwen/Qwen-14B-Chat')
 
 # Loading local checkpoints
 # trust_remote_code is still set as True since we still load codes from local dir instead of transformers
@@ -229,9 +229,9 @@ from modelscope import AutoModelForCausalLM, AutoTokenizer
 from modelscope import GenerationConfig
 
 # Model names: "qwen/Qwen-7B-Chat", "qwen/Qwen-14B-Chat"
-tokenizer = AutoTokenizer.from_pretrained("qwen/Qwen-7B-Chat", revision='v1.0.5', trust_remote_code=True)
-model = AutoModelForCausalLM.from_pretrained("qwen/Qwen-7B-Chat", revision='v1.0.5', device_map="auto", trust_remote_code=True, fp16=True).eval()
-model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", revision='v1.0.5', trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
+tokenizer = AutoTokenizer.from_pretrained("qwen/Qwen-7B-Chat", trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained("qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True, fp16=True).eval()
+model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
 
 response, history = model.chat(tokenizer, "你好", history=None)
 print(response)
@@ -365,6 +365,11 @@ We illustrate the model performance of both BF16, Int8 and Int4 models on the be
 | Qwen-14B-Chat (Int4) | 63.3 |    69.0     | 59.8  |   45.7    |
 
 ### Quantization of KV cache
+
+> NOTE: Please be aware that due to the internal mechanism of Hugging Face, the support files for this functionality 
+> (i.e., `cache_autogptq_cuda_256.cpp` and `cache_autogptq_cuda_kernel_245.cu`) may be missing. Please manually download
+> them from the Hugging Face Hub and place them into the same folder as the other module files.
+
 Attention KV cache can be quantized and compressed for storage, to get a higher sample throughput. The parameters of 'use_cache_quantization' and 'use_cache_kernel' are provided to control kv-cache-quantization behavior
 When use_cache_quantization=True and use_cache_kernel=True, kv-cache-quantization will be enabled.
 The specific use method is as follows:
@@ -610,6 +615,9 @@ sh finetune/finetune_qlora_ds.sh
 
 For Q-LoRA, we advise you to load our provided quantized model, e.g., Qwen-7B-Chat-Int4. You **SHOULD NOT** use the bf16 models. Different from full-parameter finetuning and LoRA, only fp16 is supported for Q-LoRA. For single-GPU training, we have to use deepspeed for mixed-precision training due to our observation of errors caused by torch amp. Besides, for Q-LoRA, the troubles with the special tokens in LoRA still exist. However, as we only provide the Int4 models for chat models, which means the language model has learned the special tokens of ChatML format, you have no worry about the layers. Note that the layers of the Int4 model should not be trainable, and thus if you introduce special tokens in your training, Q-LoRA might not work.
 
+> NOTE: Please be aware that due to the internal mechanisms of Hugging Face, certain non-Python files (e.g., `*.cpp` and `*.cu`) 
+> may be missing from the saved checkpoint. You may need to manually copy them to the directory containing other files.
+
 Different from full-parameter finetuning, the training of both LoRA and Q-LoRA only saves the adapter parameters. Suppose your training starts from Qwen-7B, you can load the finetuned model for inference as shown below:
 
 ```python
@@ -638,6 +646,19 @@ merged_model = model.merge_and_unload()
 # They respectively work for sharding checkpoint and save the model to safetensors
 merged_model.save_pretrained(new_model_directory, max_shard_size="2048MB", safe_serialization=True)
 ```
+
+The `new_model_directory` directory will contain the merged model weights and module files. Please note that `*.cu` and `*.cpp` files may be missing in the saved files. If you wish to use the KV cache functionality, please manually copy them. Besides, the tokenizer files are not saved in the new directory in this step. You can copy the tokenizer files or use the following code
+```python
+from transformers import AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained(
+    path_to_adapter, # path to the output directory
+    trust_remote_code=True
+)
+
+tokenizer.save_pretrained(new_model_directory)
+```
+
 
 Note: For multi-GPU training, you need to specify the proper hyperparameters for distributed training based on your machine. Besides, we advise you to specify your maximum sequence length with the argument `--model_max_length`, based on your consideration of data, memory footprint, and training speed.
 
