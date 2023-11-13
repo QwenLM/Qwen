@@ -1,5 +1,5 @@
 <p align="left">
-    <a href="README_CN.md">中文</a>&nbsp ｜ &nbspEnglish&nbsp ｜ &nbsp<a href="README_JA.md">日本語</a> ｜ &nbsp<a href="README_FR.md">Français</a> ｜ &nbsp<a href="README_KO.md"> 한국어 </a>
+    <a href="README_CN.md">中文</a>&nbsp ｜ &nbspEnglish&nbsp ｜ &nbsp<a href="README_JA.md">日本語</a> ｜ &nbsp<a href="README_FR.md">Français</a>
 </p>
 <br><br>
 
@@ -22,42 +22,42 @@
 
 
 
-We opensource our **Qwen** series, now including **Qwen**, the base language models, namely **Qwen-7B** and **Qwen-14B**, as well as **Qwen-Chat**, the chat models, namely **Qwen-7B-Chat** and **Qwen-14B-Chat**. Links are on the above table. Click them and check the model cards. Also, we release the **[technical report](https://arxiv.org/abs/2309.16609)**. Please click the paper link and check it out!
+기본 언어(base language models)인 **Qwen**, **Qwen-7B**, **Qwen-14B**와 채팅 모델(chat models)인 **Qwen-Chat**을 포함한 **Qwen** 시리즈를 오픈소스화합니다. 링크는 위 표에 있으며, 해당 링크를 클릭하여 모델 카드를 확인하실 수 있습니다. 또한, [Qwen의 기술 보고서](https://arxiv.org/abs/2309.16609)를 공개합니다. 논문 링크를 클릭하여 확인해 주세요.
 
-In brief, we have strong base language models, which have been stably pretrained for up to 3 trillion tokens of multilingual data with a wide coverage of domains, languages (with a focus on Chinese and English), etc. They are able to achieve competitive performance on benchmark datasets. Additionally, we have chat models that are aligned with human preference based on SFT and RLHF (not released yet), which are able to chat, create content, extract information, summarize, translate, code, solve math problems, and so on, and are able to use tools, play as agents, or even play as code interpreters, etc.
+요약하자면, 당사는 광범위한 도메인과 언어(중국어와 영어를 중심으로) 등으로 구성 된 최대 3조 토큰의 다국어 데이터에 대해 안정적으로 사전 학습된 강력한 기본 언어 모델을 보유하고 있습니다. 벤치마크 데이터 세트에서 경쟁력 있는 성능을 달성하였으며, 채팅·콘텐츠 생성·정보 추출·요약·번역·코딩·수학 문제 풀이 등을 할 수 있습니다. 또한, 도구를 사용하거나 에이전트 역할을 할 수 있으며, 코드 인터프리터 역할 또한 할 수 있는 사람의 선호도에 맞춰진 SFT 및 RLHF(아직 출시되지 않음) 채팅 모델 역시 보유하고 있습니다.
 
-In this repo, you can figure out:
+이 레포지토리에서는 다음과 같은 내용을 소개합니다.
 
-* Quickstart with Qwen, and enjoy the simple inference.
-* Details about the quantization models, including GPTQ and KV cache quantization.
-* Statistics of inference performance, including speed and memory.
-* Tutorials on finetuning, including full-parameter tuning, LoRA, and Q-LoRA.
-* Instructions on deployment, with the example of vLLM and FastChat.
-* Instructions on building demos, including WebUI, CLI demo, etc.
-* Introduction to DashScope API service, as well as the instructions on building an OpenAI-style API for your model.
-* Information about Qwen for tool use, agent, and code interpreter
-* Statistics of long-context understanding evaluation
-* License agreement
-* ...
+* Quick Start를 통한 Qwen을 이용한 간단한 추론 방법
+* GPTQ 및 KV 캐시 양자화를 포함한 양자화 모델에 대한 세부 정보
+* 속도와 메모리 비용을 포함한 추론 성능에 대한 통계
+* 전체 파라미터 튜닝, LoRA 및 Q-LoRA를 포함한 미세 튜닝에 대한 튜토리얼
+* 배포 가이드 (vLLM 및 FastChat의 예시 포함)
+* WebUI, CLI 데모 등을 포함한 데모 구축 방법
+* DashScope API 서비스 소개 및 모델에 대한 OpenAI 스타일 API 구축 가이드
+* 도구 사용, 에이전트 및 코드 인터프리터를 위한 Qwen에 대한 정보
+* 장문 이해도에 대한 평가 결과
+* 라이센스
+* 그 외 관련된 지식
 
-Also, if you meet problems, turn to [FAQ](FAQ.md) for help first. Still feeling struggled? Feel free to shoot us issues (better in English so that more people can understand you)! If you would like to help us, send us pull requests with no hesitation! We are always excited about PR! 
+문제가 발생한다면 [FAQ](FAQ.md)를 참조하여 도움을 받으실 수 있고, 추가적인 어려움이 있으시다면 언제든지 알려주십시요. (더 많은 사람과 문제를 공유하기 위해서 영어로 작성해주시면 감사하겠습니다.) 저희 팀을 돕고 싶으시다면, 주저하지 마시고 풀 리퀘스트를 보내주세요! 저희 팀은 항상 저희의 모델을 홍보하고자 노력하고 있습니다.
 
-Would like to chat with us or date us coffee time? Welcome to our Discord or WeChat! 
+저희와 대화를 나누거나 커피 타임을 갖고 싶으시다면 디스코드 또는 위챗에 참여해주세요! 언제든지 환영합니다.
 <br><br>
 
 ## News and Updates
 
-* 2023.10.17 We release the Int8 quantized model **Qwen-7B-Chat-Int8** and **Qwen-14B-Chat-Int8**. 
-* 2023.9.25 🔥 We release **Qwen-14B** and **Qwen-14B-Chat** on ModelScope and Hugging Face, along with [qwen.cpp](https://github.com/QwenLM/qwen.cpp) and [Qwen-Agent](https://github.com/QwenLM/Qwen-Agent). Codes and checkpoints of **Qwen-7B** and **Qwen-7B-Chat** are also updated. **PLEASE PULL THE LATEST VERSION!**
-    - Compared to **Qwen-7B** (original), **Qwen-7B** uses more training tokens, increasing from 2.2T tokens to 2.4T tokens, while the context length extends from 2048 to 8192. The Chinese knowledge and coding ability of **Qwen-7B** have been further improved.
-* 2023.9.12 We now support finetuning on the Qwen-7B models, including full-parameter finetuning, LoRA and Q-LoRA.
-* 2023.8.21 We release the Int4 quantized model for Qwen-7B-Chat, **Qwen-7B-Chat-Int4**, which requires low memory costs but achieves improved inference speed. Besides, there is no significant performance degradation on the benchmark evaluation.
-* 2023.8.3 We release both **Qwen-7B** and **Qwen-7B-Chat** on ModelScope and Hugging Face. We also provide a technical memo for more details about the model, including training details and model performance.
+* 2023.10.17 Int8 quantized model **Qwen-7B-Chat-Int8**, **Qwen-14B-Chat-Int8**을 릴리즈하였습니다.
+* 2023.9.25 🔥 [qwen.cpp](https://github.com/QwenLM/qwen.cpp)와 [Qwen-Agent](https://github.com/QwenLM/Qwen-Agent)를 포함하여, ModelScope 및 Hugging Face에 **Qwen-14B**과 **Qwen-14B-Chat**를 릴리즈하였으며, Codes와 **Qwen-7B**, **Qwen-7B-Chat**모델들의 체크 포인트가 업데이트 되었습니다. **최신 버전을 Pull 해서 사용해주세요.**
+    - 새로 업데이트 된 **Qwen-7B**는 이전 모델보다 더 많은 수의 훈련 토큰을 사용하였습니다. 훈련에 사용된 토큰의 수가 2.2T에서 2.4T로 증가했으며, 컨텍스트 길이는 2048에서 8192로 확장되었습니다. **Qwen-7B**의 중국어 지식과 코딩 능력이 더욱 향상되었습니다.
+* 2023.9.12 전체 파라미터 미세 조정, LoRA 및 Q-LoRA를 포함한 Qwen-7B 모델에서 미세 조정을 지원합니다.
+* 2023.8.21 낮은 메모리 비용으로 빠르게 추론 할 수 있는 Qwen-7B-Chat용 Int4 양자화 모델인 **Qwen-7B-Chat-Int4**를 출시합니다. 그럼에도 불구하고, 벤치마크 평가에서 성능 저하가 크지 않음을 보고합니다.
+* 2023.8.3 모델스코프와 허깅 페이스에서 **Qwen-7B**와 **Qwen-7B-Chat**을 모두 출시합니다. 또한 훈련 세부 사항 및 모델 성능을 포함한 모델에 대한 자세한 내용은 기술 메모를 제공합니다.
 <br>
 
 ## Performance
 
-Qwen-14B and Qwen-7B (this is the new version trained with more tokens and the context length is extended from 2048 to 8192) outperform the baseline models of similar model sizes on a series of benchmark datasets, e.g., MMLU, C-Eval, GSM8K, MATH, HumanEval, MBPP, BBH, etc., which evaluate the models' capabilities on natural language understanding, mathematic problem solving, coding, etc. However, even Qwen-14B still significantly fall behind GPT-3.5, let alone GPT-4. See the results below. 
+자연어 이해, 수학적 문제 해결, 코딩 등에 대한 모델의 능력을 평가하는 일련의 벤치마크 데이터 세트(예: MMLU, C-Eval, GSM8K, MATH, HumanEval, MBPP, BBH 등)에서 Qwen-14B와 Qwen-7B(더 많은 토큰으로 훈련된 새 버전이며 컨텍스트 길이가 2048에서 8192로 확장됨)는 유사한 모델 크기의 기준 모델보다 성능이 뛰어납니다. 그러나 Qwen-14B조차도 GPT-4는 말할 것도 없고 GPT-3.5에도 크게 뒤떨어집니다. 아래 결과를 참조하세요.
 
 <p align="left">
     <img src="assets/radar_14b.jpg" width="600"/>
@@ -79,9 +79,11 @@ Qwen-14B and Qwen-7B (this is the new version trained with more tokens and the c
 | **Qwen-7B**        |   58.2   |   63.5   |   51.7   |   11.6   |   29.9    |   31.6   |   45.0   |   62.2   |
 | **Qwen-14B**       | **66.3** | **72.1** | **61.3** | **24.8** | **32.3**  | **40.8** | **53.4** | **71.0** |
 
-For all compared models, we report the best scores between their official reported results and [OpenCompass](https://opencompass.org.cn/leaderboard-llm). 
 
-For more experimental results (detailed model performance on more benchmark datasets) and details, please refer to our technical report by clicking [here](https://qianwen-res.oss-cn-beijing.aliyuncs.com/QWEN_TECHNICAL_REPORT.pdf).
+비교한 모든 모델에 대해 공식적으로 보고된 결과와 [OpenCompass](https://opencompass.org.cn/leaderboard-llm) 사이의 최고 점수를 보고합니다. 
+
+더 많은 실험 결과(더 많은 벤치마크 데이터 세트에 대한 자세한 모델 성능) 및 자세한 내용은 [여기](https://qianwen-res.oss-cn-beijing.aliyuncs.com/QWEN_TECHNICAL_REPORT.pdf)를 클릭하여 기술 보고서를 참조하시기 바랍니다.
+
 <br><br>
 
 ## Requirements
@@ -94,15 +96,15 @@ For more experimental results (detailed model performance on more benchmark data
 
 ## Quickstart
 
-Below, we provide simple examples to show how to use Qwen-Chat with 🤖 ModelScope and 🤗 Transformers.
+아래에서는 🤖 모델스코프 및 🤗 트랜스포머와 함께 Qwen-Chat을 사용하는 방법을 보여주는 간단한 예제를 제공합니다.
 
-Before running the code, make sure you have setup the environment and installed the required packages. Make sure you meet the above requirements, and then install the dependent libraries.
+코드를 실행하기 전에 환경을 설정하고 필요한 패키지를 설치했는지 확인하세요. 위의 요구 사항을 충족하는지 확인한 다음 종속 라이브러리를 설치하세요.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-If your device supports fp16 or bf16, we recommend installing [flash-attention](https://github.com/Dao-AILab/flash-attention) (**we support flash attention 2 now.**) for higher efficiency and lower memory usage. (**flash-attention is optional and the project can run normally without installing it**)
+장치에서 fp16 또는 bf16을 지원하는 경우, 효율을 높이고 메모리 사용량을 줄이기 위해 [flash-attention](https://github.com/Dao-AILab/flash-attention)(**현재는 Flash Attention 2를 지원함**)을 설치하는 것을 권장합니다. (**플래시 어텐션은 선택 사항이며, 설치하지 않아도 프로젝트가 정상적으로 실행됩니다.**).
 
 ```bash
 git clone https://github.com/Dao-AILab/flash-attention
@@ -112,11 +114,11 @@ cd flash-attention && pip install .
 # pip install csrc/rotary
 ```
 
-Now you can start with ModelScope or Transformers.
+이제 모델스코프 또는 트랜스포머로 사용하실 수 있습니다.
 
 ### 🤗 Transformers
 
-To use Qwen-Chat for the inference, all you need to do is to input a few lines of codes as demonstrated below. Remember to pass in the correct model names or paths, such as "Qwen/Qwen-7B-Chat" and "Qwen/Qwen-14B-Chat". However, **please make sure that you are using the latest code.**
+추론에 Qwen-Chat을 사용하려면 아래에 설명된 대로 몇 줄의 코드를 입력하기만 하면 됩니다. "Qwen/Qwen-7B-Chat" 및 "Qwen/Qwen-14B-Chat"과 같이 올바른 모델 이름 또는 경로를 전달해야 하고, **최신 코드를 사용하셔야 합니다.**
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -162,7 +164,7 @@ print(response)
 # 《奋斗创业：一个年轻人的成功之路》
 ```
 
-Running Qwen pretrained base model is also simple.
+사전 학습된 기본 모델을 실행하는 방법도 간단합니다.
 
 <details>
   <summary>Running Qwen</summary>
@@ -198,7 +200,7 @@ print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 
 </details>
 
-In the event of a network issue while attempting to download model checkpoints and codes from HuggingFace, an alternative approach is to initially fetch the checkpoint from ModelScope and then load it from the local directory as outlined below:
+HuggingFace에서 모델 체크포인트와 코드를 다운로드하는 동안 네트워크 문제가 발생하는 경우, 아래에 설명된 대로 모델스코프에서 체크포인트를 먼저 가져온 다음 로컬 디렉터리에서 로드하는 방법을 사용할 수 있습니다.
 
 ```python
 from modelscope import snapshot_download
@@ -222,7 +224,7 @@ model = AutoModelForCausalLM.from_pretrained(
 
 ### 🤖 ModelScope
 
-ModelScope is an opensource platform for Model-as-a-Service (MaaS), which provides flexible and cost-effective model service to AI developers. Similarly, you can run the models with ModelScope as shown below:
+ModelScope는 서비스형 모델(MaaS)을 위한 오픈소스 플랫폼으로, AI 개발자에게 유연하고 비용 효율적인 모델 서비스를 제공합니다. 마찬가지로 아래와 같이 ModelScope로 모델을 실행할 수 있습니다.
 
 ```python
 from modelscope import AutoModelForCausalLM, AutoTokenizer
@@ -242,7 +244,7 @@ print(response)
 ```
 
 ### Batch Inference
-Qwen supports batch inference. With flash-attention enabled, using batch inference can bring a 40% speedup. The example code is shown below:
+Qwen은 일괄 추론을 지원합니다. 플래시 어텐션이 활성화된 상태에서 일괄 추론을 사용하면 속도가 40% 향상될 수 있습니다. 예제 코드는 아래와 같습니다.
 ```python
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -309,39 +311,38 @@ print(response)
 ```
 
 ### CPU
+CPU에 저희 모델을 배포하려면, Qwen과 tiktoken을 순수 C++로 구현한 [qwen.cpp](https://github.com/QwenLM/qwen.cpp)를 사용하실 것을 강력히 권장합니다. 자세한 내용은 저장소에서 확인하세요!
 
-To deploy our models on CPU, we strongly advise you to use [qwen.cpp](https://github.com/QwenLM/qwen.cpp), which is a pure C++ implementation of Qwen and tiktoken. Check the repo for more details!
-
-Also, it is also simple to directly run the model on CPU, which requires your specification of device:
+또한, CPU에서 직접 모델을 실행하는 것도 간단하지만 디바이스 사양이 필요합니다.
 
 ```python
 model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
 ```
 
-However, it is likely that you suffer from extremely low inference efficiency.
+그러나 추론 효율성이 매우 낮을 가능성이 높습니다. (suffer from extremely low inference efficiency)
 
 ### Multiple GPUs
 
-If you suffer from lack of GPU memory and you would like to run the model on more than 1 GPU, you can directly use the default loading method, which is now supported by Transformers. The previous method based on `utils.py` is deprecated.
+GPU 메모리가 부족하여 1개 이상의 GPU에서 모델을 실행하려는 경우, 이제 트랜스포머에서 지원하는 기본 로딩 방법을 직접 사용할 수 있습니다. utils.py`에 기반한 이전 방법은 더 이상 사용되지 않습니다.
 
-However, though this method is simple, the efficiency of the native pipeline parallelism is low. We advise you to use vLLM with FastChat and please read the section for deployment.
+그러나 이 방법은 간단하지만 네이티브 파이프라인 병렬 처리의 효율성이 낮습니다. FastChat과 함께 vLLM을 사용하는 것이 좋으며 배포 섹션을 읽어보시기 바랍니다.
 <br><br>
 
 ## Quantization
 
 ### GPTQ
 
-We provide a solution based on [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ), and release the Int4 quantized models, which achieve nearly lossless model effects but improved performance on both memory costs and inference speed.
+[AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ)를 기반으로 하는 솔루션을 제공하고 있으며, 무손실 모델 효과에 가깝지만 메모리 비용과 추론 속도 모두에서 성능이 향상된 Int4 양자화 모델을 출시했습니다.
 
-Here we demonstrate how to use our provided quantized models for inference. Before you start, make sure you meet the requirements of auto-gptq (e.g., torch 2.0 and above, transformers 4.32.0 and above, etc.) and install the required packages:
+여기에서는 제공된 양자화 모델을 추론에 사용하는 방법을 설명합니다. 시작하기 전에 자동-gptq의 요구 사항(예: 토치 2.0 이상, 트랜스포머 4.32.0 이상 등)을 충족하고 필요한 패키지를 설치했는지 확인하세요.
 
 ```bash
 pip install auto-gptq optimum
 ```
 
-If you meet problems installing `auto-gptq`, we advise you to check out the official [repo](https://github.com/PanQiWei/AutoGPTQ) to find a wheel.
+만약 'auto-gptq' 설치에 문제가 있다면, 공식 [repo](https://github.com/PanQiWei/AutoGPTQ)에서 휠을 찾아보시길 권장합니다.
 
-Then you can load the quantized model easily and run inference as same as usual:
+그러면 정량화된 모델을 쉽게 로드하고 평소와 동일하게 추론을 실행할 수 있습니다.
 
 ```python
 # Model names: "Qwen/Qwen-7B-Chat-Int4", "Qwen/Qwen-14B-Chat-Int4"
@@ -353,7 +354,7 @@ model = AutoModelForCausalLM.from_pretrained(
 response, history = model.chat(tokenizer, "Hi", history=None)
 ```
 
-We illustrate the model performance of both BF16, Int8 and Int4 models on the benchmark, and we find that the quantized model does not suffer from significant performance degradation. Results are shown below:
+벤치마크에서 BF16, Int8 및 Int4 모델의 모델 성능을 살펴본 결과, 양자화된 모델에서 성능 저하가 크지 않은 것으로 나타났습니다. 결과는 아래와 같습니다.
 
 | Quantization         | MMLU | CEval (val) | GSM8K | Humaneval |
 |----------------------|:----:|:-----------:|:-----:|:---------:|
@@ -366,13 +367,14 @@ We illustrate the model performance of both BF16, Int8 and Int4 models on the be
 
 ### Quantization of KV cache
 
-> NOTE: Please be aware that due to the internal mechanism of Hugging Face, the support files for this functionality 
-> (i.e., `cache_autogptq_cuda_256.cpp` and `cache_autogptq_cuda_kernel_245.cu`) may be missing. Please manually download
-> them from the Hugging Face Hub and place them into the same folder as the other module files.
+> 참고: 허깅 페이스의 내부 메커니즘으로 인해 이 기능에 대한 지원 파일
+> (예: `cache_autogptq_cuda_256.cpp` 및 `cache_autogptq_cuda_kernel_245.cu`)이 누락될 수 있습니다. 수동으로 다운로드하세요.
+> 수동으로 다운로드하여 다른 모듈 파일과 같은 폴더에 넣으세요.
 
-Attention KV cache can be quantized and compressed for storage, to get a higher sample throughput. The parameters of 'use_cache_quantization' and 'use_cache_kernel' are provided to control kv-cache-quantization behavior
-When use_cache_quantization=True and use_cache_kernel=True, kv-cache-quantization will be enabled.
-The specific use method is as follows:
+주의 KV 캐시를 정량화하여 압축하여 저장하면 샘플 처리량을 높일 수 있습니다. 'use_cache_quantization' 및 'use_cache_kernel' 파라미터는 KV 캐시 양자화 동작을 제어하기 위해 제공됩니다.
+`use_cache_quantization = True, use_cache_kernel = True`일 경우, kv-cache-quantization이 활성화됩니다.
+구체적인 사용 방법은 다음과 같습니다.
+
 ```python
 model = AutoModelForCausalLM.from_pretrained(
     "Qwen/Qwen-7B-Chat",
@@ -384,46 +386,46 @@ model = AutoModelForCausalLM.from_pretrained(
 )
 ```
 Attention:
-Currently, kv-cache-quantization and flash attn cannot be turned on at the same time.
-If you enable kv cache quantization and use_flash_attn at the same time (use_flash_attn=True, use_cache_quantization=True, use_cache_kernel=True), use_flash_attn is disabled by default(use_flash_attn=false).
+현재 kv-캐시 양자화 및 플래시 attn을 동시에 켤 수 없습니다.
+kv 캐시 양자화와 use_flash_attn을 동시에 활성화하면(`use_flash_attn=True, use_cache_quantization=True, use_cache_kernel=True`), use_flash_attn은 기본적으로 비활성화됩니다(`use_flash_attn=false`).
 
-We have verified that the use of the quantized int8-kvcache model does not suffer from significant performance degradation in downstream evaluation. In addition, we evaluate its performance focusing on the memory footprint. 
-The profiling runs on a single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.4. 
-We use BF16 models, and generate 1024 tokens (seq-length=1024) by default, and oom indicates out of memory.
+정량화된 int8-kvcache 모델을 사용해도 다운스트림 평가에서 성능 저하가 크지 않음을 확인했습니다. 다운스트림 평가는 메모리 풋프린트에 중점을 두었습니다. 
+프로파일링은 PyTorch 2.0.1 및 CUDA 11.4가 탑재된 단일 A100-SXM4-80G GPU에서 실행되었으며, BF16 모델을 사용하며 기본적으로 1024개의 토큰(seq-length=1024)을 생성하였고, oom은 메모리 부족을 의미합니다.
 
-With kv-cache quantization turned on, we can run a larger batch size(bs).
+kv-캐시 양자화를 켜면 더 큰 배치 크기(bs)를 실행할 수 있습니다.
 
 | USE KVCache |  bs=1  |  bs=4  | bs=16  | bs=32  | bs=64  | bs=100 |
 |-------------|:------:|:------:|:------:|:------:|:------:|:------:|
 | no          | 16.3GB | 24.1GB | 31.7GB | 48.7GB |  oom   |  oom   |
 | yes         | 15.5GB | 17.2GB | 22.3GB | 30.2GB | 48.2GB | 72.4GB |
 
-With kv-cache quantization turned on, the model can save more memory when generate longer seq-length (sl, number of tokens generated) at infer.
+kv-캐시 양자화가 켜져 있으면 모델은 추론 시 더 긴 seq 길이(sl, 생성된 토큰 수)를 생성할 때 더 많은 메모리를 절약할 수 있습니다.
 
 | USE KVCache | sl=512 | sl=1024 | sl=2048 | sl=4096 | sl=8192 |
 |-------------|:------:|:-------:|:-------:|:-------:|:-------:|
 | no          | 15.2GB | 16.3GB  | 17.6GB  | 19.5GB  | 23.2GB  |
 | yes         |  15GB  | 15.5GB  | 15.8GB  | 16.6GB  | 17.6GB  |
 
-The model which turn on the kv-cache quantization will convert the format of layer-past from float to int8, meanwhile the quantianted layer-past will also store quantiantion parameters of current value.
-Specific steps are as follows:
-1、Quantize key/value
+kv-캐시 양자화를 켜는 모델은 레이어-패스트의 형식을 float에서 int8로 변환하고, 양자화된 레이어-패스트는 현재 값의 양자화 매개변수도 저장합니다.
+구체적인 단계는 다음과 같습니다.
+
+1、key와 value의 양자화 (Quantize key/value)
 ```
     qv,scale,zero_point=quantize_cache_v(v)
 ```
-2、Store into layer_past
+2、layer_past로 양자화된 key, value 저장 (Store into layer_past)
 
-Following is the format of quantized layer_past:
+quantized layer_past의 포맷
 ```
     layer_past=((q_key,key_scale,key_zero_point),
                 (q_value,value_scale,value_zero_point))
 ```
-Bascial format of layer_past:
+layer_past의 기본 포맷
 ```
     layer_past=(key,value)
 ```
-If you want to use the attention KV which is quantized, 
-you can use the dequantization operation to convert the int8 key/value back to the float format as following:
+
+다시 float으로 양자화된 attention KV를 사용하고자 할 경우, int8 key/value 값을 다음과 같이 float으로 역양자화(dequantization)하시면 됩니다.
 ```
     v=dequantize_cache_torch(qv,scale,zero_point)
 ```
@@ -432,11 +434,11 @@ you can use the dequantization operation to convert the int8 key/value back to t
 
 ## Inference Performance
 
-This section provides the statistics of speed and memory of models in different precisions. The speed and memory profiling are conducted using [this script](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py). 
+이 섹션에서는 모델의 속도 및 메모리 통계를 다양한 정밀도로 제공합니다. 속도 및 메모리 프로파일링은 [이 스크립트](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py)를 사용하여 실행할 수 있습니다.
 
 ### Speed
 
-We measured the average inference speed (tokens/s) of generating 2048 and 8192 tokens with the models in the precision of BF16, Int8, and Int4 under the condition of using flash attention v1, v2, or not using it. 
+플래시 주의 v1, v2를 사용하거나 사용하지 않는 조건에서 BF16, Int8, Int4의 정밀도로 모델을 사용하여 2048개와 8192개의 토큰을 생성할 때의 평균 추론 속도 (tokens/s)를 측정했습니다.
 
 <table>
     <tr>
@@ -504,13 +506,13 @@ We measured the average inference speed (tokens/s) of generating 2048 and 8192 t
 </table>
 
 
-In detail, the setting of profiling is encoding 2048 tokens and generating 8192 new tokens. The profiling runs on a single A100-SXM4-80G GPU with PyTorch 2.0.1 and CUDA 11.8. The inference speed is averaged over the encoded and generated tokens.
+구체적으로 프로파일링 설정은 2048개의 토큰을 인코딩하고 8192개의 새로운 토큰을 생성하는 것입니다. 프로파일링은 파이토치 2.0.1 및 CUDA 11.8이 설치된 단일 A100-SXM4-80G GPU에서 실행되었으며, 추론 속도는 인코딩 및 생성된 토큰에 대한 평균값으로 표시합니다.
 
-Note: The generation speed of the Int4/Int8 models mentioned above is provided by the autogptq library. The current speed of the model loaded using ``AutoModelForCausalLM.from_pretrained`` will be approximately 20% slower. We have reported this issue to the HuggingFace team and will update it promptly if a solution is available.
+참고: 위에 언급된 Int4/Int8 모델의 생성 속도는 autogptq 라이브러리를 사용합니다. ``AutoModelForCausalLM.from_pretrained``를 사용하여 로드된 모델의 속도는 현재 약 20% 느립니다. 이 문제는 허깅페이스 팀에 보고했으며, 해결 방안이 마련되는 즉시 업데이트하겠습니다.
 
 ### GPU Memory Usage
 
-We also profile the peak GPU memory usage for encoding 2048 tokens as context (and generating single token) and generating 8192 tokens (with single token as context) under BF16, Int8 or Int4 quantization level, respectively. The results (GB) are shown below.
+또한 2048개의 토큰을 컨텍스트로 인코딩하고 단일 토큰을 생성할 때와 (단일 토큰을 컨텍스트로 사용하여) 8192개의 토큰을 생성할 때, 각각 BF16, Int8 또는 Int4 양자화 수준에서 최대 GPU 메모리 사용량도 프로파일링했습니다. 결과(GB)는 아래와 같습니다.
 
 <table>
     <tr>
@@ -546,12 +548,13 @@ We also profile the peak GPU memory usage for encoding 2048 tokens as context (a
 ## Finetuning
 
 ### Usage
-Now we provide the official training script, `finetune.py`, for users to finetune the pretrained model for downstream applications in a simple fashion. Additionally, we provide shell scripts to launch finetuning with no worries. This script supports the training with [DeepSpeed](https://github.com/microsoft/DeepSpeed) and [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/). The shell scripts that we provide use DeepSpeed (Note: this may have conflicts with the latest version of pydantic) and Peft. You can install them by:
+이제 사용자가 다운스트림 애플리케이션을 위해 사전 학습된 모델을 간단한 방식으로 미세 조정할 수 있도록 공식 학습 스크립트인 `finetune.py`를 제공합니다. 또한 셸 스크립트를 제공하여 간편하게 미세 조정을 시작할 수 있습니다. [DeepSpped](https://github.com/microsoft/DeepSpeed) 및 [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/)를 통한 학습을 지원하며, 제공되는 셸 스크립트는 DeepSpeed(참고: 최신 버전의 pydantic과 충돌이 있을 수 있음)와 PEFT를 사용합니다. 설치 방법은 다음과 같습니다.
+
 ```bash
 pip install peft deepspeed
 ```
 
-To prepare your training data, you need to put all the samples into a list and save it to a json file. Each sample is a dictionary consisting of an id and a list for conversation. Below is a simple example list with 1 sample:
+학습 데이터를 준비하려면 모든 샘플을 목록에 넣고 json 파일에 저장해야 합니다. 각 샘플은 ID와 대화 목록으로 구성된 사전이며, 아래는 샘플 1개에 포함된 내용을 보여주는 간단한 예제입니다.
 ```json
 [
   {
@@ -570,24 +573,24 @@ To prepare your training data, you need to put all the samples into a list and s
 ]
 ```
 
-After data preparation, you can use the provided shell scripts to run finetuning. Remember to specify the path to the data file, `$DATA`.
+데이터 준비 후 제공된 셸 스크립트를 사용하여 미세 조정을 실행할 수 있습니다. 데이터 파일 경로인 `$DATA`를 지정하는 것을 잊지 마세요.
 
-The finetuning scripts allow you to perform:
-- Full-parameter finetuning
+미세 조정 스크립트를 통해 다음을 수행할 수 있습니다.
+- 전체 파라미터 미세 조정
 - LoRA
 - Q-LoRA
 
-Full-parameter finetuning requires updating all parameters in the whole training process. To launch your training, run the following script:
+전체 파라미터 미세 조정을 수행하려면 전체 훈련 프로세스에서 모든 파라미터를 업데이트해야 합니다. 트레이닝을 시작하려면 다음 스크립트를 실행하세요.
 
 ```bash
 # Distributed training. We do not provide single-GPU training script as the insufficient GPU memory will break down the training.
 sh finetune/finetune_ds.sh
 ```
 
-Remember to specify the correct model name or path, the data path, as well as the output directory in the shell scripts. Another thing to notice is that we use DeepSpeed ZeRO 3 in this script. If you want to make changes, just remove the argument `--deepspeed` or make changes in the DeepSpeed configuration json file based on your requirements. Additionally, this script supports mixed-precision training, and thus you can use `--bf16 True` or `--fp16 True`. Remember to use DeepSpeed when you use fp16 due to mixed precision training. 
-Empirically we advise you to use bf16 to make your training consistent with our pretraining and alignment if your machine supports bf16, and thus we use it by default.
+셸 스크립트에서 올바른 모델 이름 또는 경로, 데이터 경로, 출력 디렉터리를 지정해야만 하며, 이 스크립트는 DeepSpeed ZeRO3를 사용한다는 것을 주의하세요. 변경을 원하시면 `--deepspeed` 인수를 제거하거나 요구 사항에 따라 DeepSpeed config json 파일을 변경하시면 됩니다. 또한, 이 스크립트는 혼합 정밀도 훈련을 지원하므로, 사용을 원하실 경우 `--bf16 True` 또는 `--fp16 True`인자를 전달하세요. 혼합 정밀도 훈련(mixed-precision training)으로 인해 fp16을 사용할 때는, 반드시 DeepSpeed를 사용해야 한다는 점을 기억하세요. 
+경험적으로 사용 중인 머신이 bf16을 지원하는 경우 사전 훈련 및 정렬과 일관된 훈련을 위해 bf16을 사용하는 것이 좋으며, 따라서 기본값으로 설정해두었습니다.
 
-Similarly, to run LoRA, use another script to run as shown below. Before you start, make sure that you have installed `peft`. Also, you need to specify your paths to your model, data, and output. We advise you to use absolute path for your pretrained model. This is because LoRA only saves the adapter and the absolute path in the adapter configuration json file is used for finding out the pretrained model to load. Also, this script support both bf16 and fp16.
+마찬가지로 LoRA를 실행하려면 아래와 같이 다른 스크립트를 사용하여 실행합니다. 시작하기 전에 `PEFT`를 설치했는지 확인하시고, 모델·데이터·출력에 대한 경로를 지정하세요. LoRA는 어댑터만 저장하고, 어댑터를 구성하는 config json 파일의 경로는 로드할 사전 학습 모델을 찾는 데 사용되기 때문에 사전 학습 모델을 지정하실 때, 상대 경로보다 절대 경로를 사용하는 것을 추천합니다. 이 스크립트는 bf16과 fp16을 모두 지원합니다.
 
 ```bash
 # Single GPU training
@@ -596,15 +599,15 @@ sh finetune/finetune_lora_single_gpu.sh
 sh finetune/finetune_lora_ds.sh
 ```
 
-In comparison with full-parameter finetuning, LoRA ([paper](https://arxiv.org/abs/2106.09685)) only updates the parameters of adapter layers but keeps the original large language model layers frozen. This allows much fewer memory costs and thus fewer computation costs. 
+전체 매개변수 미세 조정과 비교할 때 LoRA([논문 링크](https://arxiv.org/abs/2106.09685))는 어댑터 레이어의 매개변수만 업데이트하고, 원래의 LLM의 레이어는 고정된 상태로 유지됩니다. 따라서 메모리 비용이 훨씬 적게 들고 계산 비용도 적게 듭니다. 
 
-Note that if you use LoRA to finetune the base language model, e.g., Qwen-7B, instead of chat models, e.g., Qwen-7B-Chat, the script automatically switches the embedding and output layer as trainable parameters. This is because the base language model has no knowledge of special tokens brought by ChatML format. Thus these layers should be updated for the model to understand and predict the tokens. Or in another word, if your training brings in special tokens in LoRA, you should set the layers to trainable parameters by setting `modules_to_save` inside the code. Also, if we have these parameters trainable, it is not available to use ZeRO 3, and this is why we use ZeRO 2 in the script by default. If you do not have new trainable parameters, you can switch to ZeRO 3 by changing the DeepSpeed configuration file. Additionally, we find that there is a significant gap between the memory footprint of LoRA with and without these trainable parameters. Therefore, if you have trouble with memory, we advise you to LoRA finetune the chat models. Check the profile below for more information. 
+기본 언어 모델에 ChatML 형식에서 가져온 특수 토큰에 대한 지식이 없기 때문에 LoRA를 사용하여 채팅 모델(예: Qwen-7B-Chat) 대신 기본 언어 모델(예: Qwen-7B)을 미세 조정하려는 경우 스크립트가 임베딩 및 출력 레이어를 학습 가능한 파라미터로 자동 전환한다는 점에 유의하세요. 따라서 모델이 토큰을 이해하고 예측하려면 임베딩 및 출력 레이어를 업데이트해야만 합니다. 다시 말해, 학습을 통해 LoRA에서 특수 토큰을 가져오는 경우 코드 내에서 `modules_to_save`를 설정하여 레이어를 학습 가능한 파라미터 형태로 다시 설정해줘야 합니다. 또한, 이러한 파라미터를 훈련할 수 있는 경우 ZeRO3를 사용할 수 없으므로 스크립트에서 기본적으로 ZeRO2를 사용하게 됩니다. 새로 학습할 수 있는 파라미터가 없는 경우 DeepSpeed 구성 파일을 변경하여 ZeRO3로 전환하실 수 있으며, 이러한 학습 가능한 파라미터가 있는 경우와 없는 경우 LoRA의 메모리 사용량에 상당한 차이가 있음을 확인했습니다. 따라서 메모리 문제가 있는 경우 LoRA에서 채팅 모델을 미세 조정하는 것이 좋습니다. 자세한 내용은 아래 내용을 확인하세요. 
 
-If you still suffer from insufficient memory, you can consider Q-LoRA ([paper](https://arxiv.org/abs/2305.14314)), which uses the quantized large language model and other techniques such as paged attention to allow even fewer memory costs. 
+만약 LoRA 등을 사용해도 메모리가 부족하다면 양자화된 대규모 언어 모델과 페이징 주의와 같은 기타 기법을 사용하여 메모리 비용을 훨씬 더 적게 사용할 수 있는 Q-LoRA([논문 링크](https://arxiv.org/abs/2305.14314))를 고려해 볼 수 있습니다. 
 
-Note: to run single-GPU Q-LoRA training, you may need to install `mpi4py` through `pip` or `conda`.
+참고: 단일 GPU Q-LoRA 트레이닝을 실행하려면 `pip` 또는 `conda`를 통해 `mpi4py`를 설치해야 할 수 있습니다.
 
-To run Q-LoRA, directly run the following script:
+Q-LoRA를 실행하려면 다음 스크립트를 직접 실행하세요.
 
 ```bash
 # Single GPU training
@@ -613,12 +616,12 @@ sh finetune/finetune_qlora_single_gpu.sh
 sh finetune/finetune_qlora_ds.sh
 ```
 
-For Q-LoRA, we advise you to load our provided quantized model, e.g., Qwen-7B-Chat-Int4. You **SHOULD NOT** use the bf16 models. Different from full-parameter finetuning and LoRA, only fp16 is supported for Q-LoRA. For single-GPU training, we have to use deepspeed for mixed-precision training due to our observation of errors caused by torch amp. Besides, for Q-LoRA, the troubles with the special tokens in LoRA still exist. However, as we only provide the Int4 models for chat models, which means the language model has learned the special tokens of ChatML format, you have no worry about the layers. Note that the layers of the Int4 model should not be trainable, and thus if you introduce special tokens in your training, Q-LoRA might not work.
+Q-LoRA의 경우, 제공된 정량화된 모델(예: Qwen-7B-Chat-Int4)을 로드할 것을 권장합니다. 전체 파라미터 미세 조정 및 LoRA와 달리 **Q-LoRA에는 fp16만 지원하기 때문에 bf16 모델을 사용해서는 안됩니다.** 전체 파라미터 미세 조정 및 LoRA와 달리 Q-LoRA에는 fp16만 지원됩니다. 단일 GPU 훈련의 경우 torch amp로 인한 오류가 발생하기 때문에 혼합 정밀도 훈련에는 deepspeed를 사용해야 합니다. 또한 Q-LoRA의 경우에도 위에서 언급한 LoRA의 특수 토큰에 대한 문제가 여전히 존재합니다. 하지만 저희는 채팅 모델에 Int4 모델만 제공하고, 일반 모델의 경우 ChatML 형식의 특수 토큰을 이미 학습했기 때문에 레이어에 대한 걱정은 하지 않아도 됩니다. 단, Int4 모델의 레이어는 학습이 불가능하므로 학습에 특수 토큰을 도입하면 Q-LoRA가 작동하지 않을 수 있습니다.
 
-> NOTE: Please be aware that due to the internal mechanisms of Hugging Face, certain non-Python files (e.g., `*.cpp` and `*.cu`) 
-> may be missing from the saved checkpoint. You may need to manually copy them to the directory containing other files.
+> 참고: 허깅 페이스의 내부 메커니즘으로 인해 특정 파이썬이 아닌 파일(예: `*.cpp` 및 `*.cu`) 
+> 들이 체크포인트에서 누락되었을 수 있습니다. 다른 파일이 포함된 디렉터리에 수동으로 복사해서 사용해야될 수 있습니다.
 
-Different from full-parameter finetuning, the training of both LoRA and Q-LoRA only saves the adapter parameters. Suppose your training starts from Qwen-7B, you can load the finetuned model for inference as shown below:
+전체 매개변수 미세 조정과 달리 LoRA 및 Q-LoRA를 통한 학습은 어댑터의 매개변수만을 저장합니다. Qwen-7B에서 학습이 시작된다고 가정하면 다음과 같이 추론을 위한 미세 조정된 모델을 로드할 수 있습니다.
 
 ```python
 from peft import AutoPeftModelForCausalLM
@@ -630,8 +633,7 @@ model = AutoPeftModelForCausalLM.from_pretrained(
 ).eval()
 ```
 
-If you want to merge the adapters and save the finetuned model as a standalone model (you can only do this with LoRA, and you CANNOT merge the parameters from Q-LoRA), you can run the following codes:
-
+어댑터를 병합하고 미세 조정된 모델을 독립형 모델로 저장하려면 다음 코드를 실행하면 됩니다. (이 작업은 LoRA에서만 가능하며 Q-LoRA에서 파라미터를 병합할 수 없음)
 ```python
 from peft import AutoPeftModelForCausalLM
 
@@ -647,7 +649,8 @@ merged_model = model.merge_and_unload()
 merged_model.save_pretrained(new_model_directory, max_shard_size="2048MB", safe_serialization=True)
 ```
 
-The `new_model_directory` directory will contain the merged model weights and module files. Please note that `*.cu` and `*.cpp` files may be missing in the saved files. If you wish to use the KV cache functionality, please manually copy them. Besides, the tokenizer files are not saved in the new directory in this step. You can copy the tokenizer files or use the following code
+`new_model_directory` 폴더에는 병합된 모델 가중치와 모듈 파일이 포함되고, 저장된 파일에 `*.cu` 및 `*.cpp` 파일이 누락될 수 있음을 유의하시기 바랍니다. KV 캐시 기능을 사용하려면 해당 파일을 수동으로 복사하시기 바랍니다. 또한, 이 단계에서 토큰화기 파일은 새 디렉토리에 저장되지 않으므로, tokenizer files을 복사하거나 다음 코드를 사용하세요.
+
 ```python
 from transformers import AutoTokenizer
 
@@ -660,11 +663,10 @@ tokenizer.save_pretrained(new_model_directory)
 ```
 
 
-Note: For multi-GPU training, you need to specify the proper hyperparameters for distributed training based on your machine. Besides, we advise you to specify your maximum sequence length with the argument `--model_max_length`, based on your consideration of data, memory footprint, and training speed.
-
+참고: 멀티 GPU 트레이닝의 경우, 머신에 따라 분산 트레이닝에 적합한 하이퍼파라미터를 지정해야 하고, 데이터·메모리 사용량·훈련 속도 등을 고려하여  `--model_max_length` 인자를 사용하여 최대 시퀀스 길이를 지정하는 것이 좋습니다.
 
 ### Profiling of Memory and Speed
-We profile the GPU memory and training speed of both LoRA (LoRA (emb) refers to training the embedding and output layer, while LoRA has no trainable embedding and output layer) and Q-LoRA in the setup of single-GPU training. In this test, we experiment on a single A100-SXM4-80G GPU, and we use CUDA 11.8 and Pytorch 2.0. Flash attention 2 is applied. We uniformly use a batch size of 1 and gradient accumulation of 8. We profile the memory (GB) and speed (s/iter) of inputs of different lengths, namely 256, 512, 1024, 2048, 4096, and 8192. We also report the statistics of full-parameter finetuning with Qwen-7B on 2 A100 GPUs. We only report the statistics of 256, 512, and 1024 tokens due to the limitation of GPU memory. The statistics are listed below:
+단일 GPU 트레이닝 설정에서 LoRA와 Q-LoRA의 GPU 메모리와 트레이닝 속도를 프로파일링합니다. (LoRA(emb)는 임베딩 및 출력 레이어를 학습하는 것을 의미하며, LoRA에는 학습 가능한 임베딩 및 출력 레이어가 없음을 유의) 이 테스트에서는 단일 A100-SXM4-80G GPU에서 실험하고, CUDA 11.8 및 Pytorch 2.0을 사용합니다. Flash Attention-2가 적용되고, 배치 크기 1과 그라데이션 누적 8을 균일하게 사용하여 256, 512, 1024, 2048, 4096, 8192 등 다양한 길이의 입력에 대한 메모리(GB)와 속도(s/iter)를 프로파일링합니다. 또한, 2개의 A100 GPU에서 Qwen-7B를 사용한 전체 파라미터 미세 조정에 대한 통계도 제공합니다. GPU 메모리의 제한으로 인해 256, 512, 1024 토큰의 통계는 다음과 같습니다.
 
 <table>
     <tr>
@@ -702,32 +704,32 @@ We profile the GPU memory and training speed of both LoRA (LoRA (emb) refers to 
 ## Deployment
 
 ### vLLM 
-For deployment and fast inference, we suggest using vLLM with FastChat. Install the packages first:
+배포 및 빠른 추론을 위해서는 FastChat과 함께 vLLM을 사용하는 것이 좋습니다. 먼저 패키지를 설치합니다.
 ```bash
 pip install vllm
 pip install "fschat[model_worker,webui]"
 ```
-Or you can install them from source by `git clone` and `pip install -e .`. We advise you to read their documents if you meet problems in installation. 
+또는 `git clone` 및 `pip install -e .`를 사용하여 소스에서 설치할 수 있습니다. 설치 시 문제가 발생하면 해당 문서를 읽어보시기 바랍니다. 
 
-To run Qwen with vLLM and FastChat, you need to first launch a controller by:
+vLLM 및 FastChat과 함께 Qwen을 실행하려면 먼저 컨트롤러를 실행해야 합니다.
 ```bash
 python -m fastchat.serve.controller
 ```
 
-Then you can launch the model worker, which means loading your model for inference. For single GPU inference, you can directly run:
+그런 다음 모델 워커를 시작하면 추론을 위해 모델을 로드할 수 있습니다. 단일 GPU 추론의 경우 직접 실행할 수 있습니다.
 ```bash
 python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code
 ```
-However, if you hope to run the model on multiple GPUs for faster inference or larger memory, you can use tensor parallelism supported by vLLM. Suppose you run the model on 4 GPUs, the command is shown below:
+그러나 더 빠른 추론이나 더 큰 메모리를 위해 여러 GPU에서 모델을 실행하려는 경우 vLLM에서 지원하는 병렬 처리 텐서를 사용할 수 있습니다. 4개의 GPU에서 모델을 실행한다고 가정하면, 다음과 같은 명령어를 사용할 수 있습니다.
 ```bash
 python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --tensor-parallel-size 4
 ```
 
-After launching your model worker, you can launch a web demo or an OpenAI API as you like. For web demo, run the following command:
+모델 워커를 실행한 후 원하는 대로 웹 데모 또는 OpenAI API를 실행할 수 있습니다. 웹 데모의 경우 다음 명령을 실행합니다.
 ```bash
 python -m fastchat.serve.gradio_web_server
 ```
-For OpenAI API, check the documentation of our OpenAI API for installation first. Then run the command:
+OpenAI API의 경우, 먼저 설치에 대한 OpenAI API 설명서를 확인하세요. 그런 다음 명령을 실행합니다.
 ```bash
 python -m fastchat.serve.openai_api_server --host localhost --port 8000
 ```
@@ -737,13 +739,13 @@ python -m fastchat.serve.openai_api_server --host localhost --port 8000
 
 ### Web UI
 
-We provide code for users to build a web UI demo (thanks to @wysaid). Before you start, make sure you install the following packages:
+트위터에서는 사용자가 웹 UI 데모를 구축할 수 있는 코드를 제공(@wysaid)합니다. 시작하기 전에 다음 패키지를 설치해야 합니다.
 
 ```
 pip install -r requirements_web_demo.txt
 ```
 
-Then run the command below and click on the generated link:
+그런 다음 아래 명령을 실행하고 생성된 링크를 클릭합니다.
 
 ```bash
 python web_demo.py
@@ -757,7 +759,7 @@ python web_demo.py
 
 ### CLI Demo
 
-We provide a CLI demo example in `cli_demo.py`, which supports streaming output for the generation. Users can interact with Qwen-7B-Chat by inputting prompts, and the model returns model outputs in the streaming mode. Run the command below:
+생성에 대한 스트리밍 출력을 지원하는 CLI 데모 예제를 `cli_demo.py`에서 제공합니다. 사용자는 프롬프트를 입력하여 Qwen-7B-Chat과 상호 작용할 수 있으며, 모델은 스트리밍 모드에서 모델 출력을 반환합니다. 아래 명령어를 실행합니다.
 
 ```bash
 python cli_demo.py
@@ -772,20 +774,20 @@ python cli_demo.py
 
 ## API
 
-The most simple way to use Qwen through APIs is DashScope API service through Alibaba Cloud. We give an introduction to the usage. Additionally, we provide a script for you to deploy an OpenAI-style API on your own servers.
+API를 통해 Qwen을 사용하는 가장 간단한 방법은 알리바바 클라우드를 통한 DashScope API 서비스로 다음과 같이 사용하실 수 있습니다. 또한, 자체 서버에 OpenAI 스타일 API를 배포할 수 있는 스크립트도 제공합니다.
 
 ### DashScope
-DashScope is the large language model API service provided by Alibaba Cloud, which now supports Qwen. Note that the models behind DashScope are in-house versions temporarily without details provided. The services include `qwen-turbo` and `qwen-plus`, where the former one runs faster and the latter achieves better performance. For more information, visit the documentation [here](https://dashscope.aliyun.com).
+DashScope는 알리바바 클라우드에서 제공하는 대규모 언어 모델 API 서비스로, 이제 Qwen을 지원합니다. DashScope의 모델은 현재 세부 정보가 제공되지 않는 사내 버전입니다. 이 서비스에는 'qwen-turbo'와 'qwen-plus'가 있으며, 전자는 더 빠르게 실행되고 후자는 더 나은 성능을 달성합니다. 자세한 내용은 [공식 문서](https://dashscope.aliyun.com)를 참조하세요.
 
-Please head to the official website [link](https://help.aliyun.com/zh/dashscope/developer-reference/activate-dashscope-and-create-an-api-key?spm=a2c4g.11186623.0.0.6c2774fahtfXdn) to create a DashScope account and obtain the API key (AK). We recommend setting the AK with an environment variable:
+[공식 웹사이트](https://help.aliyun.com/zh/dashscope/developer-reference/activate-dashscope-and-create-an-api-key?spm=a2c4g.11186623.0.0.6c2774fahtfXdn)에서 대시스코프 계정을 생성하고 API 키(AK)를 발급받으시고, 환경 변수로 AK를 설정하시는 것을 권장합니다.
 ```bash
 export DASHSCOPE_API_KEY="YOUR_DASHSCOPE_API_KEY"
 ```
-Then please install the packages and click [here](https://help.aliyun.com/zh/dashscope/developer-reference/install-dashscope-sdk) for the documentation. If you use Python, you can install DashScope with pip:
+그런 다음 패키지를 설치하고 [다음 문서](https://help.aliyun.com/zh/dashscope/developer-reference/install-dashscope-sdk)를 확인하세요. Python을 사용하는 경우, pip로 DashScope를 설치할 수 있습니다.
 ```bash
 pip install dashscope
 ```
-If you use JAVA SDK, you can install it in this way:
+JAVA SDK를 사용하는 경우 이 방법으로 설치할 수 있습니다.
 ```xml
 <!-- https://mvnrepository.com/artifact/com.alibaba/dashscope-sdk-java -->
 <dependency>
@@ -794,7 +796,7 @@ If you use JAVA SDK, you can install it in this way:
     <version>the-latest-version</version>
 </dependency>
 ```
-The simplest way to use DashScope is the usage with messages, which is similar to OpenAI API. The example is demonstrated below:
+DashScope를 사용하는 가장 간단한 방법은 OpenAI API와 유사한 메시지와 함께 사용하는 것입니다. 아래에 예시가 나와 있습니다.
 ```python
 import random
 from http import HTTPStatus
@@ -824,25 +826,24 @@ if __name__ == '__main__':
             response.code, response.message
         ))
 ```
-For more usages, please visit the official website for more details.
+자세한 사용법은 공식 웹사이트에서 확인하세요.
 
 ### OpenAI API
 
-We provide methods to deploy local API based on OpenAI API (thanks to @hanpenggit). Before you start, install the required packages:
+OpenAI API를 기반으로 로컬 API를 배포하는 방법을 제공(@hanpenggit)합니다. 시작하기 전에 필요한 패키지를 설치하세요.
 
 ```bash
 pip install fastapi uvicorn openai "pydantic>=2.3.0" sse_starlette
 ```
 
-Then run the command to deploy your API:
-
+그런 다음 명령을 실행하여 API를 배포합니다:
 ```bash
 python openai_api.py
 ```
 
-You can change your arguments, e.g., `-c` for checkpoint name or path, `--cpu-only` for CPU deployment, etc. If you meet problems launching your API deployment, updating the packages to the latest version can probably solve them.
+인수를 변경할 수 있습니다(예: 체크포인트 이름 또는 경로의 경우 `-c`, CPU 배포의 경우 `--cpu-only` 등). API 배포를 실행하는 데 문제가 있는 경우, 패키지를 최신 버전으로 업데이트하면 문제를 해결할 수 있습니다.
 
-Using the API is also simple. See the example below:
+API 사용 방법도 간단합니다. 아래 예시를 참조하세요.
 
 ```python
 import openai
@@ -879,18 +880,18 @@ print(response.choices[0].message.content)
     <br>
 <p>
 
-**Function calling** is also supported (but only when `stream=False` for the moment). See the [example usage](examples/function_call_examples.py) here.
+**함수 호출**도 지원됩니다. 현재는 `stream=False`일 때만 지원하며, [사용 예시](examples/function_call_examples.py)를 참조하세요.
 <br><br>
 
 
 
 ## Tool Usage
 
-Qwen-Chat has been optimized for tool usage and function calling capabilities. Users can develop agents, LangChain applications, and even augment Qwen with a Python Code Interpreter.
+Qwen-Chat은 도구 사용과 함수 호출 기능에 최적화되어 있습니다. 사용자는 에이전트, LangChain 애플리케이션을 개발할 수 있으며, 파이썬 코드 인터프리터로 Qwen을 보강할 수도 있습니다.
 
-We provide documentation on how to implement tool calls based on the principle of ReAct Prompting, please refer to [the ReAct example](examples/react_prompt.md). Based on this principle, we provide support for function calling in [openai_api.py](openai_api.py).
+리액트 프롬프트 원칙에 따라 도구 호출을 구현하는 방법에 대한 설명서는 [리액트 예제](examples/react_prompt.md)를 참조하세요. 이 원칙에 따라 [openai_api.py](openai_api.py)에서 함수 호출을 지원하고 있습니다.
 
-We have tested the model's tool calling capabilities on our open-source Chinese evaluation benchmark and found that Qwen-Chat consistently performs well:
+중국 오픈소스 평가 벤치마크에서 모델의 도구 호출 기능을 테스트한 결과, Qwen-Chat은 일관되게 우수한 성능을 보였습니다.
 
 <table>
     <tr>
@@ -913,9 +914,9 @@ We have tested the model's tool calling capabilities on our open-source Chinese 
     </tr>
 </table>
 
-To assess Qwen's ability to use the Python Code Interpreter for tasks such as mathematical problem solving, data visualization, and other general-purpose tasks such as file handling and web scraping, we have created and open-sourced a benchmark specifically designed for evaluating these capabilities. You can find the benchmark at this [link](https://github.com/QwenLM/Qwen-Agent/tree/main/benchmark).
+수학 문제 해결, 데이터 시각화, 파일 처리 및 웹 스크래핑과 같은 기타 범용 작업에 Python 코드 인터프리터를 사용하는 Qwen의 능력을 평가하기 위해 이러한 기능을 평가하기 위해 특별히 고안된 벤치마크를 만들어 오픈 소스화했습니다. 벤치마크는 이 [링크](https://github.com/QwenLM/Qwen-Agent/tree/main/benchmark)에서 확인할 수 있습니다.
 
-We have observed that Qwen performs well in terms of code executability and result accuracy when generating code:
+Qwen은 코드 생성 시 코드 실행성과 결과 정확도 측면에서 우수한 성능을 보였습니다.
 
 <table>
     <tr>
@@ -1049,7 +1050,7 @@ We have observed that Qwen performs well in terms of code executability and resu
     <br>
 <p>
 
-In addition, we also provide experimental results demonstrating that our model is capable of acting as a HuggingFace Agent. For more information, please refer to the [example documentation](examples/transformers_agent.md). The model's performance on the evaluation dataset provided by Hugging Face is as follows:
+또한, 저희 모델이 허깅페이스 에이전트 역할을 할 수 있음을 입증하는 실험 결과도 제공합니다. 자세한 내용은 [예제 문서](examples/transformers_agent.md)를 참조하시기 바랍니다. 허깅페이스에서 제공하는 평가 데이터 세트에 대한 모델의 성능은 다음과 같습니다.
 
 <table>
     <tr>
@@ -1108,8 +1109,7 @@ In addition, we also provide experimental results demonstrating that our model i
 <br>
 
 ## Long-Context Understanding
-
-To extend the context length and break the bottleneck of training sequence length, we introduce several techniques, including NTK-aware interpolation, window attention, and LogN attention scaling, to extend the context length of Qwen-7B/14B from 2k to over 8K tokens, and Qwen-7B from 8k to 32k tokens. We conduct language modeling experiments on the arXiv dataset with the PPL evaluation and find that Qwen can reach outstanding performance in the scenario of long context. Results are demonstrated below:
+컨텍스트 길이를 확장하고 훈련 시퀀스 길이의 병목 현상을 해소하기 위해 NTK 인식 보간, 윈도우 주의, LogN 주의 스케일링 등 여러 기법을 도입하여 Qwen-7B/14B의 컨텍스트 길이를 2k에서 8k 토큰 이상으로, Qwen-7B는 8k에서 32k 토큰으로 확장합니다. PPL 평가와 함께 arXiv 데이터 세트에서 언어 모델링 실험을 수행한 결과, 긴 컨텍스트 시나리오에서 Qwen이 뛰어난 성능을 발휘할 수 있음을 확인했습니다. 결과는 다음과 같습니다.
 
 <table>
     <tr>
@@ -1148,21 +1148,22 @@ To extend the context length and break the bottleneck of training sequence lengt
 
 ## Tokenizer
 
-Our tokenizer based on tiktoken is different from other tokenizers, e.g., sentencepiece tokenizer. You need to pay attention to special tokens, especially in finetuning. For more detailed information on the tokenizer and related use in fine-tuning, please refer to the [documentation](tokenization_note.md).
+tiktoken 기반의 tokenizer는 문장 단위 tokenizer와 같은 다른 tokenizer와 다릅니다. 특히 미세 조정 시 특수 토큰(special tokens)을 제대로 처리해야합니다. tokenizer에 대한 자세한 설명과 미세 조정 관련 사용법은 [tokenizer 관련 문서](tokenization_note.md)를 참고하시기 바랍니다.
+
 <br><br>
 
 ## Reproduction
 
-For your reproduction of the model performance on benchmark datasets, we provide scripts for you to reproduce the results. Check [eval/EVALUATION.md](eval/EVALUATION.md) for more information. Note that the reproduction may lead to slight differences from our reported results.
+벤치마크 데이터 세트에서 모델 성능을 재현할 수 있도록 결과를 재현할 수 있는 스크립트를 제공합니다. 자세한 내용은 [eval/EVALUATION.md](eval/EVALUATION.md)를 확인하세요. 재현 결과는 보고된 결과와 약간의 차이가 있을 수도 있습니다.
 <br><br>
 
 ## FAQ
 
-If you meet problems, please refer to [FAQ](FAQ.md) and the issues first to search a solution before you launch a new issue.
+문제가 발생하면 새 이슈를 시작하기 전에 먼저 [자주 묻는 질문](FAQ.md)과 이슈를 참조하여 해결 방법을 찾아보시기 바랍니다.
 <br><br>
 
 ## Citation
-If you find our work helpful, feel free to give us a cite.
+도움이 되셨다면, 다음을 자유롭게 인용해주세요.
 
 ```
 @article{qwen,
@@ -1176,10 +1177,9 @@ If you find our work helpful, feel free to give us a cite.
 
 ## License Agreement
 
-Researchers and developers are free to use the codes and model weights of both Qwen and Qwen-Chat. We also allow their commercial use. Check our license at [LICENSE](LICENSE) for more details. If you have requirements for commercial use, please fill out the form ([7B](https://dashscope.console.aliyun.com/openModelApply/qianwen), [14B](https://dashscope.console.aliyun.com/openModelApply/Qwen-14B-Chat)) to apply.
+연구자와 개발자는 Qwen과 Qwen-Chat의 코드와 모델 가중치를 자유롭게 사용할 수 있으며, 상업적 사용도 허용됩니다. 자세한 내용은 [LICENSE](LICENSE)에서 확인하세요. 상업적 사용에 대한 요구 사항이 있는 경우 양식 ([7B](https://dashscope.console.aliyun.com/openModelApply/qianwen), [14B](https://dashscope.console.aliyun.com/openModelApply/Qwen-14B-Chat))을 작성하여 신청하시기 바랍니다.
 <br><br>
 
 ## Contact Us
 
-If you are interested to leave a message to either our research team or product team, join our Discord or WeChat groups! Also, feel free to send an email to qianwen_opensource@alibabacloud.com.
-
+저희 리서치팀이나 제품팀에 메시지를 남기고 싶으시다면, Discord 또는 WeChat 그룹에 가입하시거나 qianwen_opensource@alibabacloud.com로 이메일을 남겨주세요.
