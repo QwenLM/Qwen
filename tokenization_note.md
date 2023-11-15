@@ -204,7 +204,7 @@ from transformers import AutoTokenizer
 >>> tokenizer("我是一只猫")
 {'input_ids': [151854], 'token_type_ids': [0], 'attention_mask': [1]}
 ```
-Note: You need the latest tokenizer code, i.e., after 2013-10-08, to use the `extra_vocab_file` argument.
+Note: You need the latest tokenizer code, i.e., after 2023-10-08, to use the `extra_vocab_file` argument.
 Otherwise, you need to manually append `qwen.tiktoken` (of which path varies with your configuration) with the content from `qwen_extra.tiktoken`.
 
 Certainly, you will need to finetune the model for the new tokens to work.
@@ -213,20 +213,20 @@ Certainly, you will need to finetune the model for the new tokens to work.
 ### Caveats
 
 
-The tokenizer of Qwen operates directly on UTF-8 byte sequences, unlike others, e.g., SentencePiece that operates on UTF-8 codepoints/characters and falls back to UTF-8 byte sequences for the unknown (IIRC). 
-The thing is if the frequencies are computed on limited data, the UTF-8 codepoint boundary may not be correctly recognized.
+The tokenizer of Qwen operates directly on UTF-8 byte sequences, unlike others, e.g., SentencePiece that operates on Unicode codepoints/characters and falls back to UTF-8 byte sequences for the unknown (IIRC). 
+The thing is if the frequencies are computed on limited data, the Unicode codepoint boundary may not be correctly recognized.
 In theory, it could be a problem for fine-tuned models using the expanded vocabulary with limited data.
 
-For example, it could happen that `b'\x80\xe5'` might be merged first for the UTF-8 byte sequence `b'\xe4\xb8\x80\xe5\x8f\xaa'` of the string `一只`, across the UTF-8 codepoint of `一`(`b'\xe4\xb8\x80'`) and `只` (`b'\xe5\x8f\xaa'`).
-Normally, this would work just fine for known words, but for actually unknown words, unusual merges may happen, which may not be well understood for the pre-trained model.
+For example, it could happen that `b'\x80\xe5'` might be merged first for the UTF-8 byte sequence `b'\xe4\xb8\x80\xe5\x8f\xaa'` of the string `一只`, across the Unicode codepoint of `一` (`b'\xe4\xb8\x80'`) and `只` (`b'\xe5\x8f\xaa'`).
+Normally, this would work just fine for known tokens, but for actually unknown words, unusual merges may happen, which may not be well understood for the pre-trained model.
 
-Our advice is that to be safe, you should gather the UTF-8 codepoints from all the words you need to add, and also add them to the file with frequencies higher than the sum of the frequencies of the corresponding words.
+Our advice is that to be safe, you should gather the Unicode codepoints from all the words you need to add, and also add them to the file with frequencies higher than the sum of the frequencies of the corresponding words.
 But since Qwen has most of the Chinese words, it could be okay to just add the Chinese words alone.
 
 For curious minds, you will also notice that in the given example, `一只` is a token and `只猫` is also learned as a new token. 
 The reason is that `是一` is also a token in Qwen and has higher merging priority than `一只`, such that the merging path for `是|一|只|猫` is `是一|只|猫 -> 是一|只猫 -> 是一只猫` (omitting the UTF-8 byte merges).
 
-This is the characteristic for plain BPE: it is based solely on distribution, meaning it does not have knowledge of which bytes can form a valid UTF-8 codepoint, character, or meaningful word.
+This is the characteristic for plain BPE: it is based solely on distribution, meaning it does not have knowledge of which bytes can form a valid Unicode codepoint, character, or meaningful word.
 
 The byproduct is that text may be sub-tokenized differently in different contexts, even for words containing only ASCII characters.
 ```python

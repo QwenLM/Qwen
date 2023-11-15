@@ -397,7 +397,6 @@ async def create_chat_completion(request: ChatCompletionRequest):
             query,
             history=history,
             stop_words_ids=stop_words_ids,
-            append_history=False,
             **gen_kwargs
         )
         print(f"<chat>\n{history}\n{query}\n<!-- *** -->\n{response}\n</chat>")
@@ -417,6 +416,13 @@ async def create_chat_completion(request: ChatCompletionRequest):
     )
 
 
+def _dump_json(data: BaseModel, *args, **kwargs) -> str:
+    try:
+        return data.model_dump_json(*args, **kwargs)
+    except AttributeError:  # pydantic<2.0.0
+        return data.json(*args, **kwargs)  # noqa
+
+
 async def predict(
     query: str, history: List[List[str]], model_id: str, stop_words: List[str], gen_kwargs: Dict,
 ):
@@ -427,7 +433,7 @@ async def predict(
     chunk = ChatCompletionResponse(
         model=model_id, choices=[choice_data], object="chat.completion.chunk"
     )
-    yield "{}".format(chunk.model_dump_json(exclude_unset=True))
+    yield "{}".format(_dump_json(chunk, exclude_unset=True))
 
     current_length = 0
     stop_words_ids = [tokenizer.encode(s) for s in stop_words] if stop_words else None
@@ -453,7 +459,7 @@ async def predict(
         chunk = ChatCompletionResponse(
             model=model_id, choices=[choice_data], object="chat.completion.chunk"
         )
-        yield "{}".format(chunk.model_dump_json(exclude_unset=True))
+        yield "{}".format(_dump_json(chunk, exclude_unset=True))
 
     choice_data = ChatCompletionResponseStreamChoice(
         index=0, delta=DeltaMessage(), finish_reason="stop"
@@ -461,7 +467,7 @@ async def predict(
     chunk = ChatCompletionResponse(
         model=model_id, choices=[choice_data], object="chat.completion.chunk"
     )
-    yield "{}".format(chunk.model_dump_json(exclude_unset=True))
+    yield "{}".format(_dump_json(chunk, exclude_unset=True))
     yield "[DONE]"
 
     _gc()
