@@ -76,3 +76,9 @@ Qwen当前支持流式推理。见位于`modeling_qwen.py`的`chat_stream`函数
 
 在训练过程中，我们仅使用<|endoftext|>这一token作为sample/document之间的分隔符及padding位置占位符，你可以将bos_id, eos_id, pad_id均指向tokenizer.eod_id。请阅读我们关于tokenizer的文档，了解如何设置这些id。
 
+
+## Docker
+
+#### 下载官方Docker镜像速度很慢
+
+在下载官方镜像时，您可能由于某些网络原因导致下载速度变慢。可以参考[阿里云容器镜像服务](https://help.aliyun.com/zh/acr/user-guide/accelerate-the-pulls-of-docker-official-images)加速官方镜像的下载。

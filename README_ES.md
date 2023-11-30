@@ -1,5 +1,5 @@
 <p align="left">
-    <a href="README_CN.md">中文</a>&nbsp ｜ &nbsp<a href="README.md">English</a>&nbsp ｜ &nbsp<a href="README_JA.md">日本語</a>&nbsp ｜ &nbspFrançais ｜ &nbsp<a href="README_ES.md">Español</a>
+    <a href="README_CN.md">中文</a>&nbsp ｜ &nbsp<a href="README.md">English</a>&nbsp ｜ &nbsp<a href="README_JA.md">日本語</a> ｜ &nbsp<a href="README_FR.md">Français</a> ｜ &nbspEspañol
 </p>
 <br><br>
 
@@ -24,51 +24,50 @@
 
 
 
-Nous ouvrons notre série **Qwen**, qui comprend désormais **Qwen**, les modèles de langue de base, à savoir **Qwen-7B** et **Qwen-14B**, ainsi que **Qwen-Chat**, les modèles de chat, à savoir **Qwen-7B-Chat** et **Qwen-14B-Chat**. Les liens se trouvent dans le tableau ci-dessus. Cliquez dessus et consultez les fiches des modèles. Nous publions également le **[rapport technique](https://arxiv.org/abs/2309.16609)**. Cliquez sur le lien du document et consultez-le !
+Abrimos nuestra serie **Qwen**, que ahora incluye **Qwen**, los modelos de lenguaje, es decir **Qwen-7B** y **Qwen-14B**, así como **Qwen-Chat**, los modelos de chat, es decir **Qwen-7B-Chat** y **Qwen-14B-Chat**. Los enlaces se encuentran en la tabla anterior. Haz clic en ellos y comprueba las fichas de los modelos. Además, publicamos el **[informe técnico](https://arxiv.org/abs/2309.16609)**. Haz clic en el enlace y compruébalo.
 
-En bref, nous disposons de modèles linguistiques solides, qui ont été pré-entraîné de manière stable pour 3 000 milliards de tokens de données multilingues avec une large couverture de domaines, de langues (en particulier le chinois et l'anglais), etc. Ils sont capables d'atteindre des performances compétitives sur des ensembles de données de référence. En outre, nous disposons de modèles de chat alignés sur les préférences humaines basées sur SFT et RLHF (pas encore publiés), qui sont capables de chatter, de créer du contenu, d'extraire des informations, de résumer, de traduire, de coder, de résoudre des problèmes mathématiques, etc. et d'utiliser des outils, de jouer le rôle d'agents ou même code interpreter, etc.
+En resumen, disponemos de modelos lingüísticos sólidos, que han sido preentrenados de forma estable para hasta 3 billones de tokens de datos multilingües con una amplia cobertura de dominios, idiomas (con especial atención al chino y al inglés), etc. Son capaces de lograr un rendimiento competitivo en conjuntos de datos de referencia. Además, disponemos de modelos de chat alineados con las preferencias humanas basados en SFT y RLHF (aún no publicados), que son capaces de chatear, crear contenidos, extraer información, resumir, traducir, codificar, resolver problemas matemáticos, etc., y son capaces de utilizar herramientas, jugar como agentes o incluso jugar como intérpretes de código, etc.
 
-| Modèle    | Date de sortie | Longueur maximale | Amélioration de l'invite du système | # de tokens pré-formés | Utilisation minimale de la mémoire du GPU pour Finetuning (Q-Lora) | Utilisation minimale du GPU pour générer 2048 jetons (Int4) | Utilisation des outils |
-|:----------|:--------------:|:-----------------:|:-----------------------------------:|:----------------------:|:------------------------------------------------------------------:|:-----------------------------------------------------------:|:----------------------:|
-| Qwen-1.8B |    23.11.30    |        32K        |                  √                  |          2.2T          |                               5.8GB                                |                            2.9GB                            |           √            |  
-| Qwen-7B   |    23.08.03    |        32K        |                  ×                  |          2.4T          |                               11.5GB                               |                            8.2GB                            |           √            |   
-| Qwen-14B  |    23.09.25    |        8K         |                  ×                  |          3.0T          |                               18.7GB                               |                           13.0GB                            |           √            |
-| Qwen-72B  |    23.11.30    |        32K        |                  √                  |          3.0T          |                               61.4GB                               |                           48.9GB                            |           √            |   
+| Modelo    | Fecha de Publicación | Longitud Máx. | Mejora del Sistema de Avisos | # de Fichas Preentrenadas | Uso Mínimo de Memoria GPU de Finetuning (Q-Lora) | Uso Mínimo de la GPU para Generar 2048 Tokens (Int4) | Uso de Herramientas |
+|:----------|:--------------------:|:-------------:|:----------------------------:|:-------------------------:|:------------------------------------------------:|:----------------------------------------------------:|:-------------------:|
+| Qwen-1.8B |       23.11.30       |      32K      |              √               |           2.2T            |                      5.8GB                       |                        2.9GB                         |          √          |  
+| Qwen-7B   |       23.08.03       |      32K      |              ×               |           2.4T            |                      11.5GB                      |                        8.2GB                         |          √          |   
+| Qwen-14B  |       23.09.25       |      8K       |              ×               |           3.0T            |                      18.7GB                      |                        13.0GB                        |          √          |
+| Qwen-72B  |       23.11.30       |      32K      |              √               |           3.0T            |                      61.4GB                      |                        48.9GB                        |          √          |   
 
+En este repo, usted puede averiguar:
 
-Dans la repo, vous pouvez trouver:
-
-* Comment utiliser Qwen, et profiter de l'inférence simple.
-* Détails sur les modèles de quantization, y compris GPTQ et la quantization de KV cache.
-* Statistiques sur les performances de l'inférence, y compris la vitesse et la mémoire.
-* Tutoriels sur le finetuning, y compris le finetuning de paramètres complets, LoRA, et Q-LoRA.
-* Instructions de déploiement, avec l'exemple de vLLM et FastChat.
-* Instructions sur la création de démos, y compris WebUI, démo CLI, etc.
-* Introduction au service API de DashScope, ainsi que les instructions pour construire une API de type OpenAI pour votre modèle.
-* Informations sur Qwen pour l'utilisation d'outils, d'agents et code interpreter.
-* Statistiques de l'évaluation de la compréhension du contexte long.
-* Contrat de licence.
+* Inicio rápido con Qwen, y disfrute de la simple inferencia.
+* Detalles sobre los modelos de cuantificación, incluyendo GPTQ y cuantización de caché KV.
+* Estadísticas de rendimiento de la inferencia, incluyendo velocidad y memoria.
+* Tutoriales sobre ajuste fino, incluyendo ajuste de parámetros completos, LoRA y Q-LoRA.
+* Instrucciones de despliegue, con el ejemplo de vLLM y FastChat.
+* Instrucciones para construir demos, incluyendo WebUI, CLI demo, etc.
+* Introducción al servicio API de DashScope, así como instrucciones para crear una API de estilo OpenAI para tu modelo.
+* Información sobre Qwen para el uso de herramientas, agente e intérprete de código.
+* Estadísticas de la evaluación de la comprensión del contexto largo
+* Acuerdo de licencia
 * ...
 
-En outre, si vous rencontrez des problèmes, consultez d'abord la [FAQ](FAQ.md) pour obtenir de l'aide. Vous vous sentez toujours en difficulté ? N'hésitez pas à nous envoyer des questions (de préférence en anglais pour que plus de gens puissent vous comprendre) ! Si vous souhaitez nous aider, envoyez-nous des demandes d'extension sans hésitation ! Nous sommes toujours enthousiastes à propos des relations publiques ! 
+Además, si tienes problemas, consulta primero [FAQ](FAQ.md) para obtener ayuda. ¿Sigues teniendo problemas? No dudes en plantearnos tus problemas (mejor en inglés para que te entienda más gente). Si quieres ayudarnos, ¡envíanos pull requests sin dudarlo! ¡Siempre nos entusiasman los PR!
 
-Vous voulez discuter avec nous ou prendre un café avec nous ? Bienvenue sur notre Discord ou WeChat !
+¿Quieres charlar con nosotros o quedar para tomar un café? ¡Bienvenido a nuestro Discord o WeChat!
 <br><br>
 
-## Nouvelles et mises à jour
+## Noticias y Actualizaciones
 
-* 2023.11.30 🔥 Nous publions **Qwen-72B** et **Qwen-72B-Chat**, qui sont entraînés sur des tokens 3T et prennent en charge 32k contextes, ainsi que **Qwen-1.8B** et **Qwen-1.8B-Chat**, sur ModelScope et Hugging Face. Nous avons également renforcé les capacités de l'invite système du Qwen-72B-Chat et du Qwen-1.8B-Chat, voir la [documentation d'exemple](examples/system_prompt.md). De plus, nous supportons l'inférence sur **Ascend 910** et **Hygon DCU**. Consultez `ascend-support` et `dcu-support` pour plus de détails.
-* 2023.10.17 Nous publions le modèle quantifié Int8 **Qwen-7B-Chat-Int8** et **Qwen-14B-Chat-Int8**.
-* 2023.9.25 🔥 Nous publions **Qwen-14B** et **Qwen-14B-Chat** sur ModelScope et Hugging Face, ainsi que [qwen.cpp](https://github.com/QwenLM/qwen.cpp) et [Qwen-Agent](https://github.com/QwenLM/Qwen-Agent). Les codes et les poids de **Qwen-7B** et **Qwen-7B-Chat** ont également été mis à jour. **S'IL VOUS PLAÎT, TIREZ LA DERNIÈRE VERSION!**
-    - Par rapport à **Qwen-7B** (original), **Qwen-7B** utilise davantage de jetons d'entraînement, passant de 2,2 à 2,4T de jetons, tandis que la longueur du contexte passe de 2048 à 8192. La connaissance du chinois et la capacité de codage de **Qwen-7B** ont été encore améliorées.
-* 2023.9.12 Nous prenons désormais en charge le finetuning sur les modèles Qwen-7B, y compris le finetuning de tous les paramètres, LoRA et Q-LoRA.
-* 2023.8.21 Nous publions le modèle quantifié Int4 pour Qwen-7B-Chat, **Qwen-7B-Chat-Int4**, qui nécessite de faibles coûts de mémoire mais permet d'améliorer la vitesse d'inférence. En outre, il n'y a pas de dégradation significative des performances lors de l'évaluation de référence.
-* 2023.8.3 Nous publions **Qwen-7B** et **Qwen-7B-Chat** sur ModelScope et Hugging Face. Nous fournissons également un mémo technique pour plus de détails sur le modèle, y compris les détails de l'entraînement et les performances du modèle.
+* 2023.11.30 🔥 Lanzamos **Qwen-72B** y **Qwen-72B-Chat**, que están entrenados en tokens 3T y soportan 32k contextos, junto con **Qwen-1.8B**, y **Qwen-1.8B-Chat**, en ModelScope y Hugging Face. También hemos reforzado las capacidades de System Prompt de Qwen-72B-Chat y Qwen-1.8B-Chat, ver [documentación de ejemplo](examples/system_prompt.md). Adicionalmente, soporta la inferencia en **Ascend 910** y **Hygon DCU**. Consulta `ascend-support` y `dcu-support` para más detalles.
+* 2023.10.17 Publicamos el modelo cuantizado Int8 **Qwen-7B-Chat-Int8** y **Qwen-14B-Chat-Int8**.
+* 2023.9.25 Publicamos **Qwen-14B** y **Qwen-14B-Chat** en ModelScope y Hugging Face, junto con [qwen.cpp](https://github.com/QwenLM/qwen.cpp) y [Qwen-Agent](https://github.com/QwenLM/Qwen-Agent). También se actualizan los códigos y pesos de **Qwen-7B** y **Qwen-7B-Chat**. **POR FAVOR, DESCARGA LA ÚLTIMA VERSIÓN!**
+    - En comparación con **Qwen-7B** (original), **Qwen-7B** utiliza más tokens de entrenamiento, pasando de 2,2T tokens a 2,4T tokens, mientras que la longitud del contexto se amplía de 2048 a 8192. El conocimiento del chino y la capacidad de codificación de **Qwen-7B** se han mejorado aún más.
+* 2023.9.12 Ahora es posible el ajuste fino de los modelos Qwen-7B, incluido el ajuste fino de parámetros completos, LoRA y Q-LoRA.
+* 2023.8.21 Publicamos el modelo cuantizado Int4 para Qwen-7B-Chat, **Qwen-7B-Chat-Int4**, que requiere bajos costes de memoria pero consigue mejorar la velocidad de inferencia. Además, no se produce una degradación significativa del rendimiento en la evaluación comparativa.
+* 2023.8.3 Publicamos **Qwen-7B** y **Qwen-7B-Chat** en ModelScope y Hugging Face. También proporcionamos una nota técnica para más detalles sobre el modelo, incluidos los detalles de entrenamiento y el rendimiento del modelo.
 <br>
 
-## Performance
+## Rendimiento
 
-Les modèles Qwen surpassent les modèles de base de taille similaire sur une série de données de référence, par exemple MMLU, C-Eval, GSM8K, MATH, HumanEval, MBPP, BBH, etc., qui évaluent les capacités des modèles sur la compréhension du langage naturel, la résolution de problèmes mathématiques, le codage, etc. Qwen-72B obtient de meilleures performances que LLaMA2-70B dans toutes les tâches et surpasse GPT-3.5 dans 7 tâches sur 10.
+Los modelos Qwen superan a los modelos de referencia de tamaños de modelo similares en una serie de conjuntos de datos de referencia, como MMLU, C-Eval, GSM8K, MATH, HumanEval, MBPP, BBH, etc., que evalúan las capacidades de los modelos en comprensión del lenguaje natural, resolución de problemas matemáticos, codificación, etc. Qwen-72B obtiene mejores resultados que LLaMA2-70B en todas las tareas y supera a GPT-3.5 en 7 de cada 10 tareas.
 
 <p align="left">
     <img src="assets/radar_72b.jpg" width=600px/>
@@ -93,32 +92,32 @@ Les modèles Qwen surpassent les modèles de base de taille similaire sur une s�
 | **Qwen-14B**      |   66.3   |   72.1   |   61.3   |   24.8   |   32.3    |   40.8   |   53.4   |   71.0   |
 | **Qwen-72B**      | **77.4** | **83.3** | **78.9** | **35.2** | **35.4**  | **52.2** | **67.7** | **83.6** |
 
-Pour tous les modèles comparés, nous indiquons les meilleurs scores entre leurs résultats officiels et [OpenCompass] (https://opencompass.org.cn/leaderboard-llm). 
+Para todos los modelos comparados, presentamos las mejores puntuaciones entre sus resultados oficiales y [OpenCompass](https://opencompass.org.cn/leaderboard-llm).
 
-Pour plus de résultats expérimentaux (performances détaillées des modèles sur d'autres ensembles de données de référence) et de détails, veuillez vous référer à notre rapport technique en cliquant [ici](https://qianwen-res.oss-cn-beijing.aliyuncs.com/QWEN_TECHNICAL_REPORT.pdf).
+Para más resultados experimentales (rendimiento detallado del modelo en más conjuntos de datos de referencia) y detalles, consulte nuestro informe técnico haciendo clic [aquí](https://qianwen-res.oss-cn-beijing.aliyuncs.com/QWEN_TECHNICAL_REPORT.pdf).
 <br><br>
 
-## Besoins
+## Requisitos
 
-* python 3.8 et plus
-* pytorch 1.12 et plus, 2.0 et plus sont recommandés
-* transformers 4.32 et plus
-* CUDA 11.4 et plus sont recommandés (pour les utilisateurs de GPU, les utilisateurs de flash, etc.)
+* python 3.8 y superior
+* pytorch 1.12 y superior, se recomienda 2.0 y superior
+* transformers 4.32 y superiores
+* Se recomienda CUDA 11.4 y superior (esto es para usuarios de GPU, usuarios de flash-attention, etc.)
 <br>
 
-## Démarrage Rapide
+## Inicio rápido
 
-Ci-dessous, nous fournissons des exemples simples pour montrer comment utiliser Qwen-Chat avec 🤖 ModelScope et 🤗 Transformers.
+A continuación, proporcionamos ejemplos sencillos para mostrar cómo utilizar Qwen-Chat con 🤖 ModelScope y 🤗 Transformers.
 
-Vous pouvez utiliser nos images docker pré-construites pour sauter la plupart des étapes de configuration de l'environnement, voir la section ["Utiliser des images docker pré-construites"](#-using-pre-built-docker-images) pour plus de détails. 
+Puedes usar nuestras imágenes docker pre-construidas para saltarte la mayoría de los pasos de configuración del entorno, mira la Sección ["Usando Imágenes Docker Pre-construidas"](#-using-pre-built-docker-images) para más detalles. 
 
-Si vous n'utilisez pas Docker, assurez-vous d'avoir configuré l'environnement et installé les paquets requis. Assurez-vous de répondre aux exigences ci-dessus, puis installez les bibliothèques dépendantes.
+Si no utiliza Docker, asegúrese de haber configurado el entorno e instalado los paquetes necesarios. Asegúrese de que cumple los requisitos anteriores y, a continuación, instale las bibliotecas dependientes.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Si votre appareil supporte fp16 ou bf16, nous vous recommandons d'installer [flash-attention](https://github.com/Dao-AILab/flash-attention) (**nous supportons flash-attention 2 maintenant.**) pour une meilleure efficacité et une moindre utilisation de la mémoire. (**flash-attention est optionnel et le projet peut fonctionner normalement sans l'installer**)
+Si tu dispositivo soporta fp16 o bf16, te recomendamos instalar [flash-attention](https://github.com/Dao-AILab/flash-attention) (**ahora soportamos flash attention 2.**) para una mayor eficiencia y un menor uso de memoria. (**flash-attention es opcional y el proyecto puede ejecutarse normalmente sin instalarlo**)
 
 ```bash
 git clone https://github.com/Dao-AILab/flash-attention
@@ -128,11 +127,11 @@ cd flash-attention && pip install .
 # pip install csrc/rotary
 ```
 
-Vous pouvez maintenant commencer avec ModelScope ou Transformers.
+Ahora puedes empezar con ModelScope o Transformers.
 
 ### 🤗 Transformers
 
-Pour utiliser Qwen-Chat pour l'inférence, il vous suffit de saisir quelques lignes de code, comme indiqué ci-dessous. N'oubliez pas de transmettre les noms de modèles ou les chemins corrects, tels que "Qwen/Qwen-7B-Chat" et "Qwen/Qwen-14B-Chat". Cependant, **veuillez vous assurer que vous utilisez le code le plus récent**.
+Para utilizar Qwen-Chat para la inferencia, todo lo que tienes que hacer es introducir unas pocas líneas de código como se demuestra a continuación. Recuerda introducir los nombres o rutas correctos de los modelos, como "Qwen/Qwen-7B-Chat" y "Qwen/Qwen-14B-Chat". Sin embargo, **por favor, asegúrese de que está utilizando el código más reciente.**
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -178,10 +177,10 @@ print(response)
 # 《奋斗创业：一个年轻人的成功之路》
 ```
 
-L'exécution du modèle pré-entraîné de Qwen est également simple.
+Ejecutar Qwen, el modelo lingüístico base, también es sencillo.
 
 <details>
-  <summary>Running Qwen</summary>
+  <summary>Ejecutar Qwen</summary>
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -214,17 +213,17 @@ print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 
 </details>
 
-En cas de problème de réseau lors de la tentative de téléchargement des poids et des codes du modèle à partir de HuggingFace, une autre approche consiste à récupérer le point de contrôle à partir de ModelScope, puis à le charger à partir du répertoire local, comme indiqué ci-dessous:
+En caso de que se produzca un problema de red al intentar descargar puntos de control y códigos de modelos desde Hugging Face, un método alternativo consiste en obtener inicialmente el punto de control desde ModelScope y luego cargarlo desde el directorio local como se indica a continuación:
 
 ```python
 from modelscope import snapshot_download
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # Downloading model checkpoint to a local dir model_dir
-# model_dir = snapshot_download('qwen/Qwen-7B')
-# model_dir = snapshot_download('qwen/Qwen-7B-Chat')
-# model_dir = snapshot_download('qwen/Qwen-14B')
-model_dir = snapshot_download('qwen/Qwen-14B-Chat')
+# model_dir = snapshot_download('qwen/Qwen-7B', revision='v1.1.4')
+# model_dir = snapshot_download('qwen/Qwen-7B-Chat', revision='v1.1.4')
+# model_dir = snapshot_download('qwen/Qwen-14B', revision='v1.0.4')
+model_dir = snapshot_download('qwen/Qwen-14B-Chat', revision='v1.0.4')
 
 # Loading local checkpoints
 # trust_remote_code is still set as True since we still load codes from local dir instead of transformers
@@ -238,16 +237,16 @@ model = AutoModelForCausalLM.from_pretrained(
 
 ### 🤖 ModelScope
 
-ModelScope est une plateforme opensource pour Model-as-a-Service (MaaS), qui fournit un service de modèle flexible et rentable aux développeurs d'IA. De même, vous pouvez exécuter les modèles avec ModelScope comme indiqué ci-dessous:
+ModelScope es una plataforma de código abierto para Model-as-a-Service (MaaS), que proporciona un servicio de modelos flexible y rentable a los desarrolladores de IA. Del mismo modo, puede ejecutar los modelos con ModelScope como se muestra a continuación:
 
 ```python
 from modelscope import AutoModelForCausalLM, AutoTokenizer
 from modelscope import GenerationConfig
 
 # Model names: "qwen/Qwen-7B-Chat", "qwen/Qwen-14B-Chat"
-tokenizer = AutoTokenizer.from_pretrained("qwen/Qwen-7B-Chat", trust_remote_code=True)
-model = AutoModelForCausalLM.from_pretrained("qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True, fp16=True).eval()
-model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
+tokenizer = AutoTokenizer.from_pretrained("qwen/Qwen-7B-Chat", revision='v1.0.5', trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained("qwen/Qwen-7B-Chat", revision='v1.0.5', device_map="auto", trust_remote_code=True, fp16=True).eval()
+model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", revision='v1.0.5', trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
 
 response, history = model.chat(tokenizer, "你好", history=None)
 print(response)
@@ -257,8 +256,9 @@ response, history = model.chat(tokenizer, "它有什么好玩的景点", history
 print(response)
 ```
 
-### Inférence par lots
-Qwen prend en charge l'inférence par lots. Lorsque flash attention est activée, l'utilisation de l'inférence par lots peut entraîner une accélération de 40 %. Le code d'exemple est présenté ci-dessous:
+### Inferencia por lotes
+Qwen admite la inferencia por lotes. Con la atención flash activada, el uso de la inferencia por lotes puede suponer un aumento de velocidad del 40%. El código de ejemplo se muestra a continuación:
+
 ```python
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -326,38 +326,37 @@ print(response)
 
 ### CPU
 
-Pour déployer nos modèles sur CPU, nous vous conseillons vivement d'utiliser [qwen.cpp](https://github.com/QwenLM/qwen.cpp), qui est une implémentation purement C++ de Qwen et de tiktoken. Consultez le repo pour plus de détails!
+Para desplegar nuestros modelos en la CPU, le recomendamos encarecidamente que utilice [qwen.cpp](https://github.com/QwenLM/qwen.cpp), que es una implementación C++ pura de Qwen y tiktoken. Comprueba el repositorio para más detalles.
 
-Il est simple d'exécuter directement le modèle sur le CPU, ce qui nécessite la spécification de votre appareil:
+Además, también es sencillo ejecutar directamente el modelo en la CPU, lo que requiere que especifiques el dispositivo:
 
 ```python
 model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cpu", trust_remote_code=True).eval()
 ```
 
-Cependant, il est probable que vous souffriez d'une efficacité d'inférence extrêmement faible.
+Pero es probable que sufra una eficacia de inferencia extremadamente baja.
 
-### Plusieurs GPU
+### Múltiples GPU
 
-Si vous souffrez d'un manque de mémoire GPU et que vous souhaitez exécuter le modèle sur plus d'un GPU, vous pouvez utiliser directement la méthode de chargement par défaut, qui est maintenant supportée par Transformers. La méthode précédente basée sur `utils.py` est obsolète.
+Si sufres de falta de memoria en la GPU y quieres ejecutar el modelo en más de 1 GPU, puedes utilizar directamente el método de carga por defecto, que ahora es soportado por Transformers. El método anterior basado en `utils.py` está obsoleto.
 
-Cependant, bien que cette méthode soit simple, l'efficacité du parallélisme natif du pipeline est faible. Nous vous conseillons d'utiliser vLLM avec FastChat et de lire la section relative au déploiement.
-
+Sin embargo, aunque este método es sencillo, la eficiencia del paralelismo del pipeline nativo es baja. Le aconsejamos que utilice vLLM con FastChat y por favor lea la sección para el despliegue.
 
 ### DashScope
 
-Le moyen le plus simple d'utiliser Qwen via les API est le service API DashScope via Alibaba Cloud. Nous présentons une introduction à l'utilisation. De plus, nous fournissons un script pour vous permettre de déployer une API de type OpenAI sur vos propres serveurs.
+La forma más sencilla de utilizar Qwen a través de APIs es el servicio DashScope API a través de Alibaba Cloud. Damos una introducción al uso. Además, proporcionamos un script para que despliegues una API estilo OpenAI en tus propios servidores.
 
-DashScope est le service API de grands modèles linguistiques fourni par Alibaba Cloud, qui prend désormais en charge Qwen. Notez que les modèles derrière DashScope sont des versions internes temporairement sans détails fournis. Les services comprennent `qwen-turbo` et `qwen-plus`, le premier fonctionnant plus rapidement et le second atteignant de meilleures performances. Pour plus d'informations, consultez la documentation [ici] (https://dashscope.aliyun.com).
+DashScope es el gran servicio de API de modelos lingüísticos proporcionado por Alibaba Cloud, que ahora es compatible con Qwen. Tenga en cuenta que los modelos detrás de DashScope son versiones internas temporalmente sin detalles proporcionados. Los servicios incluyen `qwen-turbo` y `qwen-plus`, donde el primero se ejecuta más rápido y el segundo consigue un mejor rendimiento. Para más información, visita la documentación [aquí](https://dashscope.aliyun.com).
 
-Veuillez vous rendre sur le site officiel [lien](https://help.aliyun.com/zh/dashscope/developer-reference/activate-dashscope-and-create-an-api-key?spm=a2c4g.11186623.0.0.6c2774fahtfXdn) pour créer un compte DashScope et obtenir la clé API (AK). Nous recommandons de définir l'AK à l'aide d'une variable d'environnement:
+Dirígete al sitio web oficial [enlace](https://help.aliyun.com/zh/dashscope/developer-reference/activate-dashscope-and-create-an-api-key?spm=a2c4g.11186623.0.0.6c2774fahtfXdn) para crear una cuenta DashScope y obtener la clave API (AK). Recomendamos configurar la AK con una variable de entorno:
 ```bash
 export DASHSCOPE_API_KEY="YOUR_DASHSCOPE_API_KEY"
 ```
-Installez ensuite les paquets et cliquez sur [ici](https://help.aliyun.com/zh/dashscope/developer-reference/install-dashscope-sdk) pour obtenir la documentation. Si vous utilisez Python, vous pouvez installer DashScope avec pip:
+A continuación, instala los paquetes y haz clic [aquí](https://help.aliyun.com/zh/dashscope/developer-reference/install-dashscope-sdk) para consultar la documentación. Si utilizas Python, puedes instalar DashScope con pip:
 ```bash
 pip install dashscope
 ```
-Si vous utilisez JAVA SDK, vous pouvez l'installer de cette manière:
+Si utiliza JAVA SDK, puede instalarlo de esta forma:
 ```xml
 <!-- https://mvnrepository.com/artifact/com.alibaba/dashscope-sdk-java -->
 <dependency>
@@ -366,7 +365,7 @@ Si vous utilisez JAVA SDK, vous pouvez l'installer de cette manière:
     <version>the-latest-version</version>
 </dependency>
 ```
-La manière la plus simple d'utiliser DashScope est l'utilisation de messages, qui est similaire à l'API OpenAI. L'exemple est présenté ci-dessous:
+La forma más sencilla de utilizar DashScope es el uso con mensajes, que es similar a la API OpenAI. El ejemplo se muestra a continuación:
 ```python
 import random
 from http import HTTPStatus
@@ -396,30 +395,30 @@ if __name__ == '__main__':
             response.code, response.message
         ))
 ```
-Pour d'autres utilisations, veuillez consulter le site web officiel pour plus de détails.
+Para más usos, visite el sitio web oficial.
 <br><br>
 
-## Quantization
+## Cuantización
 
 ### GPTQ
 
-Nous proposons une solution basée sur [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ), et publions les modèles quantifiés Int4 et Int8, qui permettent d'obtenir des effets de modèle presque sans perte mais des performances améliorées en termes de coûts de mémoire et de vitesse d'inférence.
+Proporcionamos una solución basada en [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ), y liberamos los modelos cuantificados Int4 e Int8, que consiguen efectos de modelo casi sin pérdidas pero un rendimiento mejorado tanto en costes de memoria como en velocidad de inferencia.
 
-Nous démontrons ici comment utiliser les modèles quantifiés que nous fournissons pour l'inférence. Avant de commencer, assurez-vous que vous répondez aux exigences d'auto-gptq (par exemple, torch 2.0 et plus, transformers 4.32.0 et plus, etc.) et installez les paquets requis:
+Aquí demostramos cómo utilizar los modelos cuantizados que proporcionamos para la inferencia. Antes de empezar, asegúrese de que cumple los requisitos de auto-gptq (por ejemplo, torch 2.0 y superior, transformers 4.32.0 y superior, etc.) e instale los paquetes necesarios:
 
 ```bash
 pip install auto-gptq optimum
 ```
 
-Si vous rencontrez des problèmes pour installer `auto-gptq`, nous vous conseillons de consulter le [repo](https://github.com/PanQiWei/AutoGPTQ) officiel pour trouver une roue.
+Si tiene problemas para instalar `auto-gptq`, le aconsejamos que consulte el [repo] oficial (https://github.com/PanQiWei/AutoGPTQ) para encontrar una rueda.
 
-> Note : Les paquets `auto-gptq` précompilés dépendent fortement de la version de `torch` et de sa version CUDA. De plus, en raison d'une récente mise à jour,
-> vous pouvez aussi rencontrer des erreurs de version non supportée avec `transformers`, `optimum`, ou `peft`.
-> Nous recommandons d'utiliser les dernières versions répondant aux exigences suivantes :
+> Nota: Los paquetes `auto-gptq` precompilados dependen en gran medida de la versión de `torch` y de su versión CUDA. Además, debido a la reciente actualización 
+> también puede encontrar errores de versión no soportada de `transformers`, `optimum`, o `peft`.
+> Recomendamos utilizar las últimas versiones que cumplan los siguientes requisitos:
 > - torch==2.1 auto-gptq>=0.5.1 transformers>=4.35.0 optimum>=1.14.0 peft>=0.6.1
-> - torch>=2.0,<2.1 auto-gptq<0.5.0 transformers<4.35.0 optimum<1.14.0 peft>=0.5.0,<0.6.0
+> - antorcha>=2.0,<2.1 auto-gptq<0.5.0 transformadores<4.35.0 óptimo<1.14.0 peft>=0.5.0,<0.6.0
 
-Vous pouvez ensuite charger facilement le modèle quantifié et lancer l'inférence comme d'habitude:
+A continuación, puede cargar el modelo cuantizado fácilmente y ejecutar la inferencia como de costumbre:
 
 ```python
 # Model names: "Qwen/Qwen-7B-Chat-Int4", "Qwen/Qwen-14B-Chat-Int4"
@@ -431,7 +430,7 @@ model = AutoModelForCausalLM.from_pretrained(
 response, history = model.chat(tokenizer, "Hi", history=None)
 ```
 
-Nous illustrons les performances des modèles BF16, Int8 et Int4 sur le benchmark, et nous constatons que le modèle quantifié ne souffre pas d'une dégradation significative des performances. Les résultats sont présentés ci-dessous:
+Ilustramos el rendimiento de los modelos BF16, Int8 e Int4 en la prueba de referencia, y observamos que el modelo cuantizado no sufre una degradación significativa del rendimiento. Los resultados se muestran a continuación:
 
 | Quantization         | MMLU | CEval (val) | GSM8K | Humaneval |
 |----------------------|:----:|:-----------:|:-----:|:---------:|
@@ -448,14 +447,14 @@ Nous illustrons les performances des modèles BF16, Int8 et Int4 sur le benchmar
 | Qwen-72B-Chat (Int8) | 73.5 |    80.1     | 73.5  |   62.2    |
 | Qwen-72B-Chat (Int4) | 73.4 |    80.1     | 75.3  |   61.6    |
 
-### Quantization du cache KV
+### Cuantización de la caché KV
 
-> NOTE : Veuillez noter qu'en raison du mécanisme interne de Hugging Face, les fichiers de support pour cette fonctionnalité 
-> (i.e., `cache_autogptq_cuda_256.cpp` et `cache_autogptq_cuda_kernel_245.cu`) peuvent être manquants. 
-> Veuillez les télécharger manuellement manuellement depuis le Hugging Face Hub et placez-les dans le même dossier que les autres fichiers du module.
+> NOTA: Por favor, ten en cuenta que debido al mecanismo interno de Hugging Face, los archivos de soporte para esta funcionalidad
+> (es decir, `cache_autogptq_cuda_256.cpp` y `cache_autogptq_cuda_kernel_245.cu`). 
+> Por favor, descárguelos manualmente del Hugging Face Hub y colóquelos en la misma carpeta que los demás archivos del módulo.
 
-Le cache KV de l'attention peut être quantifié et compressé pour le stockage, afin d'obtenir un débit d'échantillonnage plus élevé. Les arguments `use_cache_quantization` et `use_cache_kernel` dans `config.json` sont fournis pour activer la quantification du cache KV. 
-La méthode d'utilisation spécifique est la suivante:
+La caché KV de atención puede cuantificarse y comprimirse para su almacenamiento, con el fin de obtener un mayor rendimiento de la muestra. Los argumentos `use_cache_quantization` y `use_cache_kernel` en `config.json` se proporcionan para habilitar la cuantización de la caché KV. 
+El método de uso específico es el siguiente:
 
 ```python
 model = AutoModelForCausalLM.from_pretrained(
@@ -467,61 +466,59 @@ model = AutoModelForCausalLM.from_pretrained(
      use_flash_attn=False
 )
 ```
-Attention : Actuellement, la quantification du cache KV et flash attention ne peuvent pas être utilisées en même temps.
-Si vous activez la quantification du cache KV et flash attention en même temps (`use_flash_attn=True`, `use_cache_quantization=True`, `use_cache_kernel=True`), `use_flash_attn` est désactivé par défaut (`use_flash_attn=false`).
+Atención: Actualmente, la cuantización de caché KV y flash attention no se pueden utilizar al mismo tiempo.
+Si habilita la cuantización de caché KV y flash attention al mismo tiempo (`use_flash_attn=True`, `use_cache_quantization=True`, `use_cache_kernel=True`), `use_flash_attn` está deshabilitado por defecto (`use_flash_attn=false`).
 
-Nous avons vérifié que l'utilisation du modèle int8-kvcache quantifié ne souffre pas d'une dégradation significative des performances dans l'évaluation en aval. Dans ce qui suit, nous nous concentrons sur le profilage de son empreinte mémoire dans différentes conditions. 
-Le profilage s'exécute sur un seul GPU A100-SXM4-80G avec PyTorch 2.0.1 et CUDA 11.4. 
-Nous utilisons des modèles BF16 pour générer 1024 jetons par défaut, et "OOM" indique une erreur de mémoire insuffisante.
+Hemos comprobado que el uso del modelo int8-kvcache cuantizado no sufre una degradación significativa del rendimiento en la evaluación posterior. A continuación, nos centraremos en el análisis de su huella de memoria en diferentes condiciones. 
+El perfil se ejecuta en una única GPU A100-SXM4-80G con PyTorch 2.0.1 y CUDA 11.4. 
+Utilizamos modelos BF16 para generar 1024 tokens por defecto, y "OOM" indica error de memoria insuficiente.
 
-Avec la quantification du cache KV, le modèle peut inférer avec une taille de lot (bs) plus grande.
+Con la cuantización de la caché KV, el modelo puede inferir con un tamaño de lote (bs) mayor.
 
-| Utilisation du cache KV |  bs=1  |  bs=4  | bs=16  | bs=32  | bs=64  | bs=100 |
-|--------------|:------:|:------:|:------:|:------:|:------:|:------:|
-| Non          | 16.3GB | 24.1GB | 31.7GB | 48.7GB |  OOM   |  OOM   |
-| Oui          | 15.5GB | 17.2GB | 22.3GB | 30.2GB | 48.2GB | 72.4GB |
+| Utilizar la caché KV |  bs=1  |  bs=4  | bs=16  | bs=32  | bs=64  | bs=100 |
+|----------------------|:------:|:------:|:------:|:------:|:------:|:------:|
+| No                   | 16.3GB | 24.1GB | 31.7GB | 48.7GB |  OOM   |  OOM   |
+| Yes                  | 15.5GB | 17.2GB | 22.3GB | 30.2GB | 48.2GB | 72.4GB |
 
-Avec la quantification du cache KV, le modèle peut économiser plus de mémoire lorsqu'il génère des séquences plus longues (`sl`, se référant au nombre de jetons générés) à l'étape de l'inférence.
+Con la cuantización kv-cache activada, el modelo puede ahorrar más memoria cuando genera seq-length más largos (sl, número de tokens generados) en infer.
 
-| Utilisation du cache KV | sl=512 | sl=1024 | sl=2048 | sl=4096 | sl=8192 |
-|-------------------------|:------:|:-------:|:-------:|:-------:|:-------:|
-| Non                     | 15.2GB | 16.3GB  | 17.6GB  | 19.5GB  | 23.2GB  |
-| Oui                     | 15.0GB | 15.5GB  | 15.8GB  | 16.6GB  | 17.6GB  |
+| Utilizar la caché KV | sl=512 | sl=1024 | sl=2048 | sl=4096 | sl=8192 |
+|----------------------|:------:|:-------:|:-------:|:-------:|:-------:|
+| No                   | 15.2GB | 16.3GB  | 17.6GB  | 19.5GB  | 23.2GB  |
+| Yes                  |  15GB  | 15.5GB  | 15.8GB  | 16.6GB  | 17.6GB  |
 
-Le modèle avec quantification du cache KV convertira le format de `layer_past` de float à int8, et pendant ce temps le `layer-past` quantifié stockera également les paramètres de quantification.
+El modelo con cuantificación de caché KV convertirá el formato de `layer_past` de float a int8, y mientras tanto el `layer-past` cuantificado también almacenará los parámetros de cuantificación.
 
-Les étapes spécifiques sont les suivantes:
+Los pasos específicos son los siguientes
 
-1. Quantifier clé/valeur
+1. Cuantificar clave/valor
 ```
     qv,scale,zero_point=quantize_cache_v(v)
 ```
-2. Stocker dans `layer_past`
+2. Almacenar en layer_past
 
-Voici le format de `layer_past` quantifié:
+A continuación se muestra el formato de `layer_past` cuantificado:
 ```
     layer_past=((q_key,key_scale,key_zero_point),
                 (q_value,value_scale,value_zero_point))
 ```
-
-Le format original de `layer_past` est illustré ci-dessous:
+A continuación se muestra el formato original de `layer_past`:
 ```
     layer_past=(key,value)
 ```
-
-Si vous souhaitez utiliser l'attention KV qui est quantifiée, vous pouvez utiliser l'opération de déquantification pour reconvertir la clé/valeur int8 au format float comme suit 
-vous pouvez utiliser l'opération de déquantification pour reconvertir la clé/valeur int8 au format float comme suit:
+Si desea utilizar la atención KV que se cuantiza, 
+puede utilizar la operación de decuantización para convertir la clave/valor int8 de nuevo al formato float de la siguiente manera:
 ```
     v=dequantize_cache_torch(qv,scale,zero_point)
 ```
 <br>
 
 
-## Performance de l'inférence
+## Rendimiento de Inferencia
 
-Cette section fournit les statistiques de vitesse et de mémoire des modèles dans différentes précisions. Le profilage de la vitesse et de la mémoire est effectué à l'aide de [ce script] (https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py).
+Esta sección proporciona las estadísticas de velocidad y memoria de los modelos en diferentes precisiones. Los perfiles de velocidad y memoria se realizan utilizando [este script](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py).
 
-Nous avons mesuré la vitesse moyenne d'inférence (tokens/s) et l'utilisation de la mémoire GPU pour générer 2048 avec les modèles en BF16, Int8 et Int4.
+Medimos la velocidad media de inferencia (tokens/s) y el uso de memoria de la GPU al generar 2048 con los modelos en BF16, Int8 e Int4.
 
 <table>
     <tr>
@@ -602,22 +599,23 @@ Nous avons mesuré la vitesse moyenne d'inférence (tokens/s) et l'utilisation d
     </tr>
 </table>
 
-Le profilage s'exécute sur un seul GPU A100-SXM4-80G (sauf si 2xA100 est mentionné) avec PyTorch 2.0.1, CUDA 11.8, et Flash-Attention 2. (72B + vLLM utilise PyTorch 2.1.0 et Cuda 11.8.) La vitesse d'inférence est calculée en moyenne sur les tokens encodés et générés.
+El perfil se ejecuta en una única GPU A100-SXM4-80G (salvo que se mencione 2xA100) con PyTorch 2.0.1, CUDA 11.8 y Flash-Attention 2. (72B + vLLM utiliza PyTorch 2.1.0 y Cuda 11.8.) La velocidad de inferencia se promedia sobre los tokens codificados y generados.
 
-Note : La vitesse de génération des modèles Int4/Int8 mentionnés ci-dessus est fournie par la bibliothèque autogptq. La vitesse actuelle du modèle chargé en utilisant ``AutoModelForCausalLM.from_pretrained`` sera environ 20% plus lente. Nous avons signalé ce problème à l'équipe HuggingFace et nous le mettrons à jour rapidement si une solution est disponible.
+Nota: La velocidad de generación de los modelos Int4/Int8 mencionados anteriormente es proporcionada por la librería autogptq. La velocidad actual del modelo cargado utilizando ``AutoModelForCausalLM.from_pretrained`` será aproximadamente un 20% más lenta. Hemos informado de este problema al equipo de HuggingFace y lo actualizaremos rápidamente si se encuentra una solución.
 
-Nous mesurons également la vitesse d'inférence et l'utilisation de la mémoire du GPU avec différents paramètres de contexte et de longueur de génération, version Flash-Attention. Vous pouvez trouver les résultats dans les cartes modèles correspondantes sur Hugging Face ou ModelScope.
+También medimos la velocidad de inferencia y el uso de memoria de la GPU con diferentes configuraciones de contexto y longitudes de generación, versión Flash-Attention. Puedes encontrar los resultados en las modelcards correspondientes en Hugging Face o ModelScope.
+
 
 
 ## Finetuning
 
-### Utilisation
-Nous fournissons maintenant le script d'entraînement officiel, `finetune.py`, pour que les utilisateurs puissent ajuster le modèle pré-entraîné pour les applications en aval de manière simple. De plus, nous fournissons des scripts shell pour lancer le finetune sans soucis. Ce script prend en charge l'entraînement avec [DeepSpeed](https://github.com/microsoft/DeepSpeed) et [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/). Les scripts que nous fournissons utilisent DeepSpeed (Note : il peut y avoir des conflits avec la dernière version de pydantic et vous devriez utiliser make sure `pydantic<2.0`) et Peft. Vous pouvez les installer en procédant comme suit :
+### Utilización
+Ahora proporcionamos el script de entrenamiento oficial, `finetune.py`, para que los usuarios puedan ajustar el modelo preentrenado para aplicaciones posteriores de forma sencilla. Además, proporcionamos scripts de shell para lanzar el ajuste fino sin preocupaciones. Este script soporta el entrenamiento con [DeepSpeed](https://github.com/microsoft/DeepSpeed) y [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/). Los shell scripts que proporcionamos utilizan DeepSpeed (Nota: esto puede tener conflictos con la última versión de pydantic y debe utilizar make sure `pydantic<2.0`) y Peft. Puede instalarlos de la siguiente manera:
 ```bash
 pip install peft deepspeed
 ```
 
-Pour préparer vos données d'entraînement, vous devez rassembler tous les échantillons dans une liste et l'enregistrer dans un fichier json. Chaque échantillon est un dictionnaire composé d'un identifiant et d'une liste de conversation. Voici un exemple simple de liste avec 1 échantillon :
+Para preparar tus datos de entrenamiento, necesitas poner todas las muestras en una lista y guardarla en un archivo json. Cada muestra es un diccionario que consiste en un id y una lista para la conversación. A continuación se muestra una lista de ejemplo simple con 1 muestra:
 ```json
 [
   {
@@ -636,23 +634,24 @@ Pour préparer vos données d'entraînement, vous devez rassembler tous les éch
 ]
 ```
 
-Après la préparation des données, vous pouvez utiliser les scripts shell fournis pour lancer le finetuning. N'oubliez pas de spécifier le chemin d'accès au fichier de données, `$DATA`.
+Una vez preparados los datos, puede utilizar los scripts de shell suministrados para ejecutar el ajuste fino. Recuerde especificar la ruta al archivo de datos, `$DATA`.
 
-Les scripts de finetuning vous permettent d'effectuer les opérations suivantes
-- Finetuning de tous les paramètres
+Los guiones de finetuning permiten realizar:
+- Finetuning de todos los parámetros
 - LoRA
 - Q-LoRA
 
-Le finetuning de tous les paramètres nécessite la mise à jour de tous les paramètres au cours de l'ensemble du processus de formation. Pour lancer votre formation, exécutez le script suivant:
+Full-parameter finetuning requires updating all parameters in the whole training process. To launch your training, run the following script:
 
 ```bash
-# Distributed training. We do not provide single-GPU training script as the insufficient GPU memory will break down the training.
+# Entrenamiento distribuido. No proporcionamos un script de entrenamiento para una sola GPU, ya que la insuficiente memoria de la GPU interrumpiría el entrenamiento.
 sh finetune/finetune_ds.sh
 ```
 
-N'oubliez pas de spécifier le nom ou le chemin d'accès au modèle, le chemin d'accès aux données, ainsi que le répertoire de sortie dans les scripts shell. Une autre chose à noter est que nous utilisons DeepSpeed ZeRO 3 dans ce script. Si vous voulez faire des changements, il suffit de supprimer l'argument `--deepspeed` ou de faire des changements dans le fichier json de configuration de DeepSpeed en fonction de vos besoins. De plus, ce script supporte l'entraînement en précision mixte, et donc vous pouvez utiliser `--bf16 True` ou `--fp16 True`. N'oubliez pas d'utiliser DeepSpeed lorsque vous utilisez fp16 en raison de l'entraînement de précision mixte. Empiriquement, nous vous conseillons d'utiliser bf16 pour rendre votre apprentissage cohérent avec notre pré-entraînement et notre alignement si votre machine supporte bf16, et nous l'utilisons donc par défaut.
+Recuerde especificar el nombre correcto del modelo o ruta, la ruta de datos, así como el directorio de salida en los scripts de shell. Otra cosa a notar es que usamos DeepSpeed ZeRO 3 en este script. Si desea realizar cambios, basta con eliminar el argumento `--deepspeed` o realizar cambios en el archivo json de configuración de DeepSpeed en función de sus necesidades. Además, este script soporta entrenamiento de precisión mixta, por lo que puedes usar `--bf16 True` o `--fp16 True`. Recuerde utilizar DeepSpeed cuando utilice fp16 debido al entrenamiento de precisión mixta. 
+Empíricamente le aconsejamos que utilice bf16 para que su entrenamiento sea coherente con nuestro preentrenamiento y alineación si su máquina soporta bf16, y por lo tanto lo utilizamos por defecto.
 
-Pour exécuter LoRA, utilisez un autre script à exécuter comme indiqué ci-dessous. Avant de commencer, assurez-vous que vous avez installé `peft`. Vous devez spécifier les chemins d'accès à votre modèle, à vos données et à vos résultats. Nous vous conseillons d'utiliser des chemins absolus pour votre modèle pré-entraîné. En effet, LoRA ne sauvegarde que l'adaptateur et le chemin absolu dans le fichier json de configuration de l'adaptateur est utilisé pour trouver le modèle pré-entraîné à charger. De plus, ce script supporte à la fois bf16 et fp16.
+Para ejecutar LoRA, utilice otro script para ejecutar como se muestra a continuación. Antes de empezar, asegúrese de que ha instalado `peft`. Además, es necesario especificar las rutas a su modelo, los datos y la salida. Le aconsejamos que utilice la ruta absoluta para su modelo pre-entrenado. Esto se debe a que LoRA sólo guarda el adaptador y la ruta absoluta en el archivo json de configuración del adaptador se utiliza para encontrar el modelo preentrenado para cargar. Además, este script soporta tanto bf16 como fp16.
 
 ```bash
 # Single GPU training
@@ -661,29 +660,29 @@ sh finetune/finetune_lora_single_gpu.sh
 sh finetune/finetune_lora_ds.sh
 ```
 
-Par rapport au finetuning de tous les paramètres, LoRA ([paper](https://arxiv.org/abs/2106.09685)) ne met à jour que les paramètres des couches d'adaptateurs, tout en gelant les couches originales du grand modèle de langage. Cela permet de réduire considérablement les coûts de mémoire et donc les coûts de calcul.
+En comparación con el ajuste fino de parámetros completos, LoRA ([artículo](https://arxiv.org/abs/2106.09685)) sólo actualiza los parámetros de las capas adaptadoras, pero mantiene congeladas las grandes capas originales del modelo de lenguaje. Esto permite muchos menos costes de memoria y, por tanto, de computación.
 
-Notez que si vous utilisez LoRA pour affiner le modèle linguistique de base, par exemple Qwen-7B, au lieu des modèles de chat, par exemple Qwen-7B-Chat, le script change automatiquement l'intégration et la couche de sortie en tant que paramètres entraînables. En effet, le modèle linguistique de base n'a aucune connaissance des jetons spéciaux apportés par le format ChatML. Ces couches doivent donc être mises à jour pour que le modèle comprenne et prédise les jetons. En d'autres termes, si votre formation apporte des tokens spéciaux dans LoRA, vous devez définir les couches comme des paramètres entraînables en définissant `modules_to_save` à l'intérieur du code. De plus, si ces paramètres sont entraînables, il n'est pas possible d'utiliser ZeRO 3, et c'est pourquoi nous utilisons ZeRO 2 par défaut dans le script. Si vous n'avez pas de nouveaux paramètres entraînables, vous pouvez passer à ZeRO 3 en modifiant le fichier de configuration de DeepSpeed. En outre, nous constatons qu'il existe un écart important entre l'empreinte mémoire de LoRA avec et sans ces paramètres d'entraînement. Par conséquent, si vous avez des problèmes de mémoire, nous vous conseillons d'affiner les modèles de chat de LoRA. Consultez le profil ci-dessous pour plus d'informations.
+Tenga en cuenta que si utiliza LoRA para ajustar el modelo de lenguaje base, por ejemplo, Qwen-7B, en lugar de los modelos de chat, por ejemplo, Qwen-7B-Chat, el script cambia automáticamente la incrustación y la capa de salida como parámetros entrenables. Esto se debe a que el modelo de lenguaje base no tiene conocimiento de los tokens especiales que aporta el formato ChatML. Por lo tanto, estas capas deben actualizarse para que el modelo comprenda y prediga los tokens. O en otras palabras, si tu entrenamiento trae tokens especiales en LoRA, deberías poner las capas como parámetros entrenables poniendo `modules_to_save` dentro del código. Además, si tenemos estos parámetros entrenables, no está disponible para usar ZeRO 3, y es por esto que usamos ZeRO 2 en el script por defecto. Si no tenemos nuevos parámetros entrenables, podemos cambiar a ZeRO 3 cambiando el fichero de configuración de DeepSpeed. Además, encontramos que hay una brecha significativa entre la huella de memoria de LoRA con y sin estos parámetros entrenables. Por lo tanto, si usted tiene problemas con la memoria, le aconsejamos LoRA finetune los modelos de chat. Compruebe el perfil de abajo para obtener más información.
 
-Si vous souffrez toujours d'un manque de mémoire, vous pouvez envisager Q-LoRA ([paper](https://arxiv.org/abs/2305.14314)), qui utilise le modèle de langage quantifié et d'autres techniques telles que l'attention paginée pour réduire encore les coûts de mémoire.
+Si sigue sufriendo de memoria insuficiente, puede considerar Q-LoRA ([artículo](https://arxiv.org/abs/2305.14314)), que utiliza el modelo de lenguaje cuantizado de gran tamaño y otras técnicas como la atención paginada para permitir incluso menos costes de memoria.
 
-Note : pour exécuter l'entraînement Q-LoRA sur un seul GPU, vous pouvez avoir besoin d'installer `mpi4py` via `pip` ou `conda`.
+Nota: para ejecutar el entrenamiento Q-LoRA con una sola GPU, puede que necesites instalar `mpi4py` a través de `pip` o `conda`.
 
-Pour lancer Q-LoRA, exécutez directement le script suivant :
+Para ejecutar Q-LoRA, ejecute directamente el siguiente script:
 
 ```bash
-# Single GPU training
+# Entrenamiento con una sola GPU
 sh finetune/finetune_qlora_single_gpu.sh
-# Distributed training
+# Entrenamiento distribuida
 sh finetune/finetune_qlora_ds.sh
 ```
 
-Pour Q-LoRA, nous vous conseillons de charger le modèle quantifié que nous fournissons, par exemple Qwen-7B-Chat-Int4. Vous **NE DEVRIEZ PAS** utiliser les modèles bf16. Contrairement au finetuning de tous les paramètres et à la LoRA, seul le modèle fp16 est pris en charge pour la Q-LoRA. Pour l'entraînement sur un seul GPU, nous devons utiliser DeepSpeed pour l'entraînement en précision mixte en raison de notre observation des erreurs causées par torch amp. En outre, pour Q-LoRA, les problèmes avec les jetons spéciaux dans LoRA existent toujours. Cependant, comme nous ne fournissons que les modèles Int4 pour les modèles de chat, ce qui signifie que le modèle de langage a appris les tokens spéciaux du format ChatML, vous n'avez pas à vous soucier des couches. Notez que les couches du modèle Int4 ne doivent pas être entraînables, et donc si vous introduisez des tokens spéciaux dans votre entraînement, Q-LoRA risque de ne pas fonctionner.
+Para Q-LoRA, le aconsejamos que cargue nuestro modelo cuantizado proporcionado, por ejemplo, Qwen-7B-Chat-Int4. **NO DEBE** utilizar los modelos bf16. A diferencia del finetuning de parámetros completos y LoRA, sólo fp16 es compatible con Q-LoRA. Para el entrenamiento con una sola GPU, tenemos que utilizar DeepSpeed para el entrenamiento de precisión mixta debido a nuestra observación de errores causados por el amplificador de antorcha. Además, para Q-LoRA, los problemas con los tokens especiales en LoRA siguen existiendo. Sin embargo, como sólo proporcionamos los modelos Int4 para los modelos de chat, lo que significa que el modelo lingüístico ha aprendido los tokens especiales del formato ChatML, no hay que preocuparse por las capas. Ten en cuenta que las capas del modelo Int4 no deben ser entrenables, por lo que si introduces tokens especiales en tu entrenamiento, Q-LoRA podría no funcionar.
 
-> NOTE : Veuillez noter qu'en raison des mécanismes internes de Hugging Face, certains fichiers non-Python (par exemple, `*.cpp` et `*.cu`) 
-> peuvent être absents du point de contrôle sauvegardé. Vous devrez peut-être les copier manuellement dans le répertoire contenant les autres fichiers.
+> NOTA: Tenga en cuenta que debido a los mecanismos internos de Hugging Face, ciertos archivos que no son de Python (por ejemplo, `*.cpp` y `*.cu`) pueden faltar en el punto de control guardado. 
+> pueden faltar en el punto de control guardado. Es posible que tenga que copiarlos manualmente en el directorio que contiene otros archivos.
 
-Contrairement au finetuning des paramètres complets, l'entraînement de LoRA et de Q-LoRA n'enregistre que les paramètres de l'adaptateur. Supposons que votre entraînement commence à partir de Qwen-7B, vous pouvez charger le modèle finalisé pour l'inférence comme indiqué ci-dessous:
+A diferencia del finetuning de parámetros completo, el entrenamiento de LoRA y Q-LoRA sólo guarda los parámetros del adaptador. Supongamos que su entrenamiento comienza desde Qwen-7B, puede cargar el modelo ajustado para la inferencia como se muestra a continuación:
 
 ```python
 from peft import AutoPeftModelForCausalLM
@@ -695,7 +694,7 @@ model = AutoPeftModelForCausalLM.from_pretrained(
 ).eval()
 ```
 
-Si vous souhaitez fusionner les adaptateurs et enregistrer le modèle affiné en tant que modèle autonome (vous ne pouvez le faire qu'avec LoRA, et vous **NE POUVEZ PAS** fusionner les paramètres de Q-LoRA), vous pouvez exécuter les codes suivants :
+Si quieres fusionar los adaptadores y guardar el modelo ajustado como un modelo independiente (sólo puedes hacer esto con LoRA, y NO puedes fusionar los parámetros desde Q-LoRA), puedes ejecutar los siguientes códigos:
 
 ```python
 from peft import AutoPeftModelForCausalLM
@@ -712,15 +711,15 @@ merged_model = model.merge_and_unload()
 merged_model.save_pretrained(new_model_directory, max_shard_size="2048MB", safe_serialization=True)
 ```
 
-Note : Pour l'entraînement multi-GPU, vous devez spécifier les hyperparamètres appropriés pour l'entraînement distribué en fonction de votre machine. De plus, nous vous conseillons de spécifier votre longueur maximale de séquence avec l'argument `--model_max_length`, en fonction de votre considération des données, de l'empreinte mémoire, et de la vitesse d'apprentissage.
+Nota: Para el entrenamiento multi-GPU, es necesario especificar los hiperparámetros adecuados para el entrenamiento distribuido basado en su máquina. Además, le aconsejamos que especifique la longitud máxima de la secuencia con el argumento `--model_max_length`, en función de los datos, el espacio de memoria y la velocidad de entrenamiento.
 
 
-### Profilage de la mémoire et de la vitesse
-Nous profilons la mémoire du GPU et la vitesse d'apprentissage de LoRA (LoRA (emb) se réfère à l'apprentissage de la couche d'intégration et de sortie, tandis que LoRA n'a pas de couche d'intégration et de sortie pouvant être entraînée) et de Q-LoRA dans la configuration de l'apprentissage sur un seul GPU. Dans ce test, nous expérimentons sur un seul GPU A100-SXM4-80G, et nous utilisons CUDA 11.8 et Pytorch 2.0. Flash attention 2 est appliqué. Nous utilisons uniformément une taille de lot de 1 et une accumulation de gradient de 8. Nous profilons la mémoire (GB) et la vitesse (s/iter) des entrées de différentes longueurs, à savoir 256, 512, 1024, 2048, 4096, et 8192. Nous présentons également les statistiques du réglage fin de tous les paramètres avec Qwen-7B sur 2 GPU A100. Nous ne présentons que les statistiques de 256, 512 et 1024 jetons en raison de la limitation de la mémoire du GPU. 
+### Perfiles de Memoria y Velocidad
+Perfilamos la memoria de la GPU y la velocidad de entrenamiento tanto de LoRA (LoRA (emb) se refiere al entrenamiento de la capa de incrustación y salida, mientras que LoRA no tiene capa de incrustación y salida entrenables) como de Q-LoRA en la configuración de entrenamiento en una sola GPU. En esta prueba, experimentamos con una única GPU A100-SXM4-80G, y utilizamos CUDA 11.8 y Pytorch 2.0. Se aplica Flash attention 2. Utilizamos uniformemente un tamaño de lote de 1 y una acumulación de gradiente de 8. Perfilamos la memoria (GB) y la velocidad (s/iter) de entradas de distintas longitudes, a saber, 256, 512, 1024, 2048, 4096 y 8192. También presentamos las estadísticas del ajuste fino de todos los parámetros con Qwen-7B en 2 GPU A100. Sólo se presentan las estadísticas de 256, 512 y 1024 tokens debido a la limitación de memoria de la GPU. 
 
-Pour Qwen-72B, nous expérimentons de deux manières : 1) Lora fintuning + DeepSpeed ZeRO 3 sur 4 GPU A100-SXM4-80G et 2) QLora (int4) fintuning sur un seul GPU A100-SXM4-80G. Notez que l'OOM se produit sur 4 GPUs A100-SXM4-80G à la fois avec le réglage fin LoRA (emb) et le réglage fin LoRA sans Deepspeed ZeRO 3 (vous pouvez passer `--deepspeed finetune/ds_config_zero3.json` à [`finetune/finetune_lora_ds.sh`](finetune/finetune_lora_ds.sh) afin d'activer DeepSpeed ZeRO 3).
+Para Qwen-72B, experimentamos de dos formas: 1) Ajuste fino de Lora + DeepSpeed ZeRO 3 en 4 GPUs A100-SXM4-80G y 2) Ajuste fino de QLora (int4) en una sola GPU A100-SXM4-80G. Ten en cuenta que la OOM se produce en 4 GPUs A100-SXM4-80G tanto con ajuste fino LoRA (emb) como con ajuste fino LoRA sin Deepspeed ZeRO 3 (puedes pasar `--deepspeed finetune/ds_config_zero3.json` a [`finetune/finetune_lora_ds.sh`](finetune/finetune_lora_ds.sh) para activar DeepSpeed ZeRO 3).
 
-Les statistiques sont listées ci-dessous :
+Las estadísticas se enumeran a continuación:
 
 <table>
     <tr>
@@ -773,33 +772,33 @@ Les statistiques sont listées ci-dessous :
 </table>
 <br>
 
-## Déploiement
+## Despliegue
 
 ### vLLM 
-Pour le déploiement et l'inférence rapide, nous suggérons d'utiliser vLLM avec FastChat. Installez d'abord les paquets:
+Para el despliegue y la inferencia rápida, sugerimos utilizar vLLM con FastChat. Instale primero los paquetes:
 ```bash
-pip install vllm
-pip install "fschat[model_worker,webui]"
+pip install vllm fastchat
 ```
-Ou vous pouvez les installer à partir des sources par `git clone` et `pip install -e .`. Nous vous conseillons de lire leurs documents si vous rencontrez des problèmes lors de l'installation.
+O puede instalarlos desde el código fuente mediante `git clone` y `pip install -e .`. Le aconsejamos que lea sus documentos si encuentra problemas en la instalación.
 
-Pour faire fonctionner Qwen avec vLLM et FastChat, vous devez d'abord lancer un contrôleur par:
+Para ejecutar Qwen con vLLM y FastChat, primero necesitas lanzar un controlador por:
 ```bash
 python -m fastchat.serve.controller
 ```
 
-Ensuite, vous pouvez lancer le travailleur de modèle, ce qui signifie charger votre modèle pour l'inférence. Pour l'inférence sur un seul GPU, vous pouvez directement lancer:
+A continuación, puede iniciar el model worker, lo que significa cargar su modelo para la inferencia. Para la inferencia de una sola GPU, puede ejecutar directamente:
+
 ```bash
 python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code
 ```
-Cependant, si vous souhaitez exécuter le modèle sur plusieurs GPU pour une inférence plus rapide ou une mémoire plus importante, vous pouvez utiliser le parallélisme tensoriel pris en charge par vLLM. Supposons que vous exécutiez le modèle sur 4 GPU, la commande est présentée ci-dessous:
+Sin embargo, si desea ejecutar el modelo en varias GPU para acelerar la inferencia o disponer de más memoria, puede utilizar el paralelismo tensorial soportado por vLLM. Supongamos que ejecutas el modelo en 4 GPUs, el comando se muestra a continuación:
 ```bash
 python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --tensor-parallel-size 4
 ```
 
-Après avoir lancé votre model worker, vous pouvez lancer :
+Después de lanzar tu model worker, puedes lanzar:
 
-* Démonstration de l'interface web
+* Web UI Demo
 ```bash
 python -m fastchat.serve.gradio_web_server
 ```
@@ -809,17 +808,14 @@ python -m fastchat.serve.gradio_web_server
 python -m fastchat.serve.openai_api_server --host localhost --port 8000
 ```
 
-Cependant, si vous avez des difficultés à utiliser vLLM et FastChat, vous pouvez essayer nos méthodes les plus simples pour déployer une démo web, une démo CLI et une API.
+### Interfaz Web
 
-### Interface Web
-
-Nous fournissons du code pour que les utilisateurs puissent construire une démo d'interface web (merci à @wysaid). Avant de commencer, assurez-vous d'installer les paquets suivants:
-
+Proporcionamos código para que los usuarios construyan una web UI demo (gracias a @wysaid). Antes de empezar, asegúrate de instalar los siguientes paquetes:
 ```
 pip install -r requirements_web_demo.txt
 ```
 
-Exécutez ensuite la commande ci-dessous et cliquez sur le lien généré:
+A continuación, ejecute el siguiente comando y haga clic en el enlace generado:
 
 ```bash
 python web_demo.py
@@ -831,9 +827,11 @@ python web_demo.py
     <br>
 <p>
 
-### Démo CLI
+Sin embargo, si le resulta difícil utilizar vLLM y FastChat, puede probar los métodos más sencillos que le proporcionamos para desplegar una demo web, una demo CLI y una API.
 
-Nous fournissons un exemple de démonstration CLI dans `cli_demo.py`, qui prend en charge la sortie en continu pour la génération. Les utilisateurs peuvent interagir avec Qwen-7B-Chat en saisissant des invites, et le modèle renvoie les sorties du modèle en mode streaming. Exécutez la commande ci-dessous:
+### Demo CLI
+
+Proporcionamos un ejemplo de demostración CLI en `cli_demo.py`, que soporta la salida de streaming para la generación. Los usuarios pueden interactuar con Qwen-7B-Chat introduciendo mensajes, y el modelo devuelve los resultados del modelo en modo streaming. Ejecute el siguiente comando:
 
 ```bash
 python cli_demo.py
@@ -848,21 +846,21 @@ python cli_demo.py
 
 ### API
 
-Nous fournissons des méthodes pour déployer une API locale basée sur l'API OpenAI (merci à @hanpenggit). Avant de commencer, installez les paquets nécessaires:
+Proporcionamos métodos para desplegar la API local basada en la API de OpenAI (gracias a @hanpenggit). Antes de empezar, instala los paquetes necesarios:
 
 ```bash
 pip install fastapi uvicorn openai "pydantic>=2.3.0" sse_starlette
 ```
 
-Exécutez ensuite la commande pour déployer votre API:
+A continuación, ejecute el comando para desplegar su API:
 
 ```bash
 python openai_api.py
 ```
 
-Vous pouvez modifier vos arguments, par exemple, `-c` pour le nom ou le chemin du poids, `--cpu-only` pour le déploiement CPU, etc. Si vous rencontrez des problèmes lors du lancement du déploiement de l'API, la mise à jour des paquets vers la dernière version peut probablement les résoudre.
+Puede cambiar sus argumentos, por ejemplo, `-c` para el nombre o la ruta del punto de control, `--cpu-only` para el despliegue en CPU, etc. Si tienes problemas al iniciar el despliegue de tu API, probablemente puedas solucionarlos actualizando los paquetes a la última versión.
 
-L'utilisation de l'API est simple. Voir l'exemple ci-dessous:
+Utilizar la API también es sencillo. Vea el siguiente ejemplo:
 
 ```python
 import openai
@@ -899,22 +897,21 @@ print(response.choices[0].message.content)
     <br>
 <p>
 
-**Function calling** est aussi supporté (mais seulement quand `stream=False` pour le moment). Voir [l'exemple d'utilisation](examples/function_call_examples.py) ici.
+**Function calling** también está soportada (pero sólo cuando `stream=False` por el momento). Ver el [ejemplo de uso](examples/function_call_examples.py) aquí.
 <br><br>
-
 
 ## 🐳 Docker
 
-Pour simplifier le processus de déploiement, nous fournissons des images docker avec des environnements préconstruits : [qwenllm/qwen] (https://hub.docker.com/r/qwenllm/qwen). Il vous suffit d'installer le pilote et de télécharger les fichiers de modèle pour lancer les démonstrations, déployer l'API OpenAI et affiner le modèle.
+Para simplificar el proceso de despliegue, proporcionamos imágenes Docker con entornos preconstruidos: [qwenllm/qwen](https://hub.docker.com/r/qwenllm/qwen). Solo tienes que instalar el controlador y descargar los archivos del modelo para lanzar demos, desplegar la API de OpenAI y ajustar el modelo.
 
-### Préparation
+### Preparación
 
-1. Installez la version correcte du pilote Nvidia en fonction de l'image à utiliser :
-  - `qwenllm/qwen:cu117` (**recommandé**): `>= 515.48.07`
+1. Instale la versión correcta del controlador Nvidia en función de la imagen que vaya a utilizar:
+  - `qwenllm/qwen:cu117` (**recomendado**): `>= 515.48.07`
   - `qwenllm/qwen:cu114` (w/o flash-attention): `>= 470.82.01`
-  - `qwenllm/qwen:latest`: même que `qwenllm/qwen:cu117`
+  - `qwenllm/qwen:latest`: igual que `qwenllm/qwen:cu117`
 
-2. Installer et configurer [docker](https://docs.docker.com/engine/install/) et [nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) :
+2. Instale y configure [docker](https://docs.docker.com/engine/install/) y [nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html):
 
 ```bash
 # configure docker
@@ -929,37 +926,37 @@ sudo systemctl restart docker
 sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 ```
 
-3. Téléchargez les checkpoints et les codes du modèle dans votre environnement (voir [ici](#DownloadModel)).
+3. Descargue los checkpoints y los códigos del modelo a su entorno (véase [aquí](#DownloadModel)).
 
-### Déploiement
+### Despliegue
 
-Nous utilisons ici Qwen-7B-Chat comme exemple. Avant de lancer une démo web ou une API, vous pouvez établir la configuration comme indiqué ci-dessous :
+Aquí usamos Qwen-7B-Chat como ejemplo. Antes de lanzar una demo web o API, puede establecer la configuración como se muestra a continuación:
 
 ```bash
 IMAGE_NAME=qwenllm/qwen:cu117
 PORT=8901
 CHECKPOINT_PATH=/path/to/Qwen-7B-Chat   # Path to downloaded model checkpoints and codes
 ```
-Les scripts suivants peuvent vous aider à construire :
+Los siguientes scripts pueden ayudarte a construir:
 
 * API OpenAI
 ```bash
 bash docker/docker_openai_api.sh -i ${IMAGE_NAME} -c ${CHECKPOINT_PATH} --port ${PORT}
 ```
 
-* Interface Web
+* Interfaz Web
 ```bash
 bash docker/docker_web_demo.sh -i ${IMAGE_NAME} -c ${CHECKPOINT_PATH} --port ${PORT}
 ```
 
-* Démo CLI
+* Demo CLI
 ```bash
 bash docker/docker_cli_demo.sh -i ${IMAGE_NAME} -c ${CHECKPOINT_PATH}
 ```
 
-Les commandes ci-dessus téléchargeront automatiquement l'image requise et lanceront une démo d'interface Web en arrière-plan (le service redémarrera automatiquement). Vous pouvez ouvrir `http://localhost:${PORT}` sur l'hôte pour utiliser la démo.
+Los comandos anteriores descargarán automáticamente la imagen requerida y lanzarán una demo Web UI en segundo plano (el servicio se reiniciará automáticamente). Puede abrir `http://localhost:${PORT}` en el host para utilizar la demo.
 
-La démo est lancée avec succès si vous obtenez le résultat suivant :
+La demostración se ha iniciado correctamente si ve la siguiente salida:
 
 ```text
 Successfully started web demo. Open '...' to try!
@@ -967,16 +964,16 @@ Run `docker logs ...` to check demo status.
 Run `docker rm -f ...` to stop and remove the demo.
 ```
 
-Si vous voulez vérifier le statut de la démo, vous pouvez utiliser `docker logs qwen` pour afficher les résultats.
+Si quieres comprobar el estado de la demo, puedes usar `docker logs qwen` para mostrar los resultados.
 
-Vous pouvez utiliser `docker rm -f qwen` pour arrêter le service et supprimer le conteneur.
+Puede utilizar `docker rm -f qwen` para detener el servicio y eliminar el contenedor.
 
 
 ### Finetuning
 
-La méthode de finetuning utilisant l'image Docker préconstruite est fondamentalement la même que [le chapitre ci-dessus](#Finetuning) (nous avons déjà installé les dépendances dans l'image) :
+El método de finetuning utilizando la imagen Docker pre-construida es básicamente el mismo que [el capítulo anterior](#Finetuning) (ya hemos instalado dependencias en la imagen):
 
-Voici un exemple de LoRA à une seule GPU :
+A continuación se muestra un ejemplo de LoRA de GPU única:
 ```bash
 IMAGE_NAME=qwenllm/qwen:cu117
 CHECKPOINT_PATH=/path/to/Qwen-7B                # Path to downloaded model checkpoints and codes
@@ -1001,31 +998,31 @@ docker run --gpus ${DEVICE} --rm --name qwen \
     bash finetune/finetune_lora_single_gpu.sh -m /data/shared/Qwen/Qwen-7B/ -d /data/shared/Qwen/data/example.json
 ```
 
-Pour faire un changement vers Q-LoRA à GPU unique par exemple, il suffit de modifier la commande bash à l'intérieur de `docker run` :
+Para realizar un cambio a Q-LoRA de una sola GPU, por ejemplo, basta con modificar el comando bash dentro de `docker run`:
 ```bash
 bash finetune/finetune_qlora_single_gpu.sh -m /data/shared/Qwen/Qwen-7B-Chat-Int4/ -d /data/shared/Qwen/data/example.json
 ```
 <br>
 
-## 🔥 Invite du système
-Qwen-1.8-Chat et Qwen-72B-Chat ont été entièrement formés à diverses invites de système avec plusieurs séries d'interactions complexes, de sorte qu'ils peuvent suivre une variété d'invites de système et réaliser la personnalisation du modèle dans le contexte, améliorant ainsi l'évolutivité de Qwen-chat.
+## 🔥 Indicaciones del sistema
+Qwen-1.8-Chat y Qwen-72B-Chat han sido completamente entrenados en diversas indicaciones del sistema con múltiples rondas de interacciones complejas, para que puedan seguir una variedad de indicaciones del sistema y realizar la personalización del modelo en contexto, mejorando aún más la escalabilidad de Qwen-chat.
 
-Grâce aux messages-guides du système, Qwen-Chat peut **jouer avec enthousiasme**, **transférer le style de langage**, **fixer des tâches** et **fixer des comportements**.
+Gracias a las instrucciones del sistema, Qwen-Chat puede realizar **juegos de rol**, **transferencia de estilos de lenguaje**, **configuración de tareas** y **configuración de comportamientos**.
 
 ![](assets/system_prompt_language_style.png)
 
 ![](assets/system_prompt_role_play_en.png)
 
-Pour plus d'informations, veuillez vous référer à la [documentation d'exemple](examples/system_prompt.md).
+Para más información, consulta la [documentación de ejemplo](examples/system_prompt.md).
 
 
-## Utilisation des outils
+## Uso de Herramientas
 
-Qwen-Chat a été optimisé pour l'utilisation d'outils et les capacités d'appel de fonctions. Les utilisateurs peuvent développer des agents, des applications LangChain, et même augmenter Qwen avec un Code Interpreter.
+Qwen-Chat ha sido optimizado para el uso de herramientas y capacidades de llamada a funciones. Los usuarios pueden desarrollar agentes, aplicaciones LangChain e incluso aumentar Qwen con un intérprete de código Python.
 
-Nous fournissons une documentation sur la manière d'implémenter les appels d'outils basés sur le principe de ReAct Prompting, veuillez vous référer à [l'exemple ReAct](examples/react_prompt.md). Sur la base de ce principe, nous fournissons un support pour function calling dans [openai_api.py](openai_api.py).
+Proporcionamos documentación sobre cómo implementar llamadas a herramientas basadas en el principio de ReAct Prompting, por favor consulte [the ReAct example](examples/react_prompt.md). Basándonos en este principio, proporcionamos soporte para llamadas a funciones en [openai_api.py](openai_api.py).
 
-Nous avons testé les capacités d'appel d'outil du modèle sur notre benchmark d'évaluation chinois à source ouverte et nous avons constaté que Qwen-Chat obtient systématiquement de bons résultats:
+Hemos probado las capacidades de llamada de la herramienta del modelo en nuestro punto de referencia de evaluación chino de código abierto y hemos descubierto que Qwen-Chat obtiene siempre buenos resultados:
 
 <table>
     <tr>
@@ -1048,9 +1045,9 @@ Nous avons testé les capacités d'appel d'outil du modèle sur notre benchmark 
     </tr>
 </table>
 
-Pour évaluer la capacité de Qwen à utiliser l'interpréteur de code Python pour des tâches telles que la résolution de problèmes mathématiques, la visualisation de données et d'autres tâches générales telles que la manipulation de fichiers et l'exploration du Web, nous avons créé et mis en libre accès un test de référence spécialement conçu pour évaluer ces capacités. Vous pouvez trouver le benchmark sur ce [lien](https://github.com/QwenLM/Qwen-Agent/tree/main/benchmark).
+Para evaluar la capacidad de Qwen para utilizar el intérprete de código Python en tareas como la resolución de problemas matemáticos, la visualización de datos y otras tareas de propósito general como el manejo de archivos y el web scraping, hemos creado y puesto a disposición del público un benchmark específicamente diseñado para evaluar estas capacidades. Puede encontrar el punto de referencia en este [enlace](https://github.com/QwenLM/Qwen-Agent/tree/main/benchmark).
 
-Nous avons observé que Qwen est performant en termes d'exécutabilité du code et de précision des résultats lors de la génération du code:
+Hemos observado que Qwen funciona bien en términos de ejecutabilidad del código y precisión de los resultados al generar código:
 
 <table>
     <tr>
@@ -1184,7 +1181,7 @@ Nous avons observé que Qwen est performant en termes d'exécutabilité du code 
     <br>
 <p>
 
-En outre, nous fournissons également des résultats expérimentaux démontrant que notre modèle est capable d'agir en tant qu'agent Hugging Face. Pour plus d'informations, veuillez vous référer à la [documentation de l'exemple](examples/transformers_agent.md). Les performances du modèle sur l'ensemble des données d'évaluation fournies par Hugging Face sont les suivantes:
+Además, también proporcionamos resultados experimentales que demuestran que nuestro modelo es capaz de actuar como un Agente HuggingFace. Para más información, consulte la [documentación del ejemplo](examples/transformers_agent.md). El rendimiento del modelo en el conjunto de datos de evaluación proporcionado por Hugging Face es el siguiente:
 
 <table>
     <tr>
@@ -1242,13 +1239,13 @@ En outre, nous fournissons également des résultats expérimentaux démontrant 
 
 <br>
 
-## Compréhension du Contexte Long
+## Comprensión del Contexto Largo
 
-Pour augmenter la longueur du contexte et éliminer le goulot d'étranglement que constitue la longueur de la séquence d'entraînement, nous introduisons plusieurs techniques, notamment l'interpolation tenant compte des NTK, l'attention par fenêtre et la mise à l'échelle de l'attention LogN, afin d'augmenter la longueur du contexte de Qwen-14B de 2K à plus de 8K tokens, et de Qwen-1.8B/7B de 8K à 32K tokens. 
+Para ampliar la longitud del contexto y romper el cuello de botella de la longitud de la secuencia de entrenamiento, introducimos varias técnicas, como la interpolación NTK, la atención de ventana y el escalado de atención LogN, para ampliar la longitud del contexto de Qwen-14B de 2K a más de 8K tokens, y Qwen-1.8B/7B de 8K a 32K tokens. 
 
-Pour Qwen-72B, nous adaptons RoPE à des contextes plus longs avec une base rotative plus importante. Qwen-72B prend en charge la longueur de contexte maximale de 32K tokens.
+Para Qwen-72B, adaptamos RoPE a contextos más largos con una base rotatoria mayor. Qwen-72B admite una longitud máxima de contexto de 32K tokens.
 
-Nous menons des expériences de modélisation du langage sur l'ensemble de données arXiv avec l'évaluation PPL et nous constatons que Qwen peut atteindre des performances exceptionnelles dans le scénario d'un contexte long. Les résultats sont présentés ci-dessous :
+Realizamos experimentos de modelado lingüístico en el conjunto de datos arXiv con la evaluación PPL y descubrimos que Qwen puede alcanzar un rendimiento sobresaliente en el escenario de contextos largos. Los resultados se muestran a continuación:
 
 <table>
     <tr>
@@ -1294,37 +1291,37 @@ Nous menons des expériences de modélisation du langage sur l'ensemble de donn�
     </tr>
 </table>
 
-En outre, pour vérifier la capacité de Qwen-72B-Chat à comprendre des textes longs, nous l'avons testé sur [L-Eval] (https://arxiv.org/abs/2307.11088) (tâches fermées). Les résultats sont les suivants :
+Furthermore, to verify the ability of Qwen-72B-Chat on long text understanding, we tested it on [L-Eval](https://arxiv.org/abs/2307.11088) (closed-ended tasks). The results are as follows:
 
 | Model             | Input Length | Average   |  Coursera  |    GSM     |   QuALITY  |    TOEFL   |   CodeU    |  SFcition  |
 |:------------------|:------------:|:---------:|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|
 | ChatGPT-3.5-16k   |     16K      |   60.73   | **63.51**  | **84.00**  |   61.38    |    78.43   | **12.22**  |    64.84   |
 | **Qwen-72B-Chat** |     32K      | **62.30** |   58.13    |   76.00    | **77.22**  |  **86.24** |    6.66    |  **69.53** |
 
-Nous avons réalisé l'expérience de "l'aiguille dans une botte de foin" (l'idée vient de [@Greg Kamradt](https://twitter.com/GregKamradt/status/1727018183608193393)) pour tester si le modèle peut récupérer des informations à différentes positions dans les entrées de différentes longueurs, le résultat est le suivant :
+Hemos realizado el experimento de la "aguja en el pajar" (la idea procede de [@Greg Kamradt](https://twitter.com/GregKamradt/status/1727018183608193393)) para comprobar si el modelo puede recuperar información en distintas posiciones de las entradas de distintas longitudes, el resultado es el siguiente:
 
 ![](assets/qwen_72b_needle_in_a_haystack.png)
 
-Les résultats ci-dessus montrent que Qwen-72B-Chat peut récupérer avec précision des informations placées dans différentes positions dans une longueur d'entrée de 32K, ce qui prouve ses excellentes capacités de compréhension de textes longs.
+Los resultados anteriores muestran que Qwen-72B-Chat puede recuperar con precisión información situada en varias posiciones dentro de una longitud de entrada de 32K, lo que demuestra su excelente capacidad de comprensión de textos largos.
 
 
-## Tokenizer
+## Tokenizador
 
-Notre tokenizer basé sur tiktoken est différent des autres tokenizers, par exemple le tokenizer sentencepiece. Vous devez faire attention aux tokens spéciaux, en particulier lors de la mise au point. Pour des informations plus détaillées sur le tokenizer et son utilisation dans le cadre du finetuning, veuillez vous référer à la [documentation](tokenization_note.md).
+Nuestro tokenizador basado en tiktoken es diferente de otros tokenizadores, por ejemplo, el tokenizador sentencepiece. Es necesario prestar atención a los tokens especiales, especialmente en el finetuning. Para obtener información más detallada sobre el tokenizador y su uso en el ajuste fino, consulte la [documentación](tokenization_note.md).
 <br><br>
 
-## Reproduction
+## Reproducción
 
-Pour reproduire les performances du modèle sur des ensembles de données de référence, nous fournissons des scripts permettant de reproduire les résultats. Consultez [eval/EVALUATION.md](eval/EVALUATION.md) pour plus d'informations. Notez que la reproduction peut entraîner de légères différences par rapport à nos résultats.
+Para que pueda reproducir el rendimiento del modelo en conjuntos de datos de referencia, le proporcionamos secuencias de comandos para que reproduzca los resultados. Consulte [eval/EVALUATION.md](eval/EVALUATION.md) para obtener más información. Tenga en cuenta que la reproducción puede dar lugar a ligeras diferencias con respecto a nuestros resultados.
 <br><br>
 
 ## FAQ
 
-Si vous rencontrez des problèmes, veuillez vous référer à la [FAQ](FAQ.md) et aux problèmes pour trouver une solution avant de lancer un nouveau problème.
+Si tiene problemas, consulte primero [FAQ](FAQ.md) y las incidencias para buscar una solución antes de lanzar una nueva incidencia.
 <br><br>
 
-## Citation
-Si vous trouvez notre travail utile, n'hésitez pas à nous citer.
+## Cita
+Si nuestro trabajo le resulta útil, no dude en citarnos.
 
 ```
 @article{qwen,
@@ -1336,18 +1333,18 @@ Si vous trouvez notre travail utile, n'hésitez pas à nous citer.
 ```
 <br>
 
-## Accord de Licence
+## Acuerdo de Licencia
 
-Le code source fourni à l'adresse <https://github.com/QwenLM/Qwen> est soumis à la licence [Apache 2.0 License](./LICENSE) qui se trouve dans le répertoire racine.
+El código fuente proporcionado en <https://github.com/QwenLM/Qwen> está licenciado bajo la [Licencia Apache 2.0](./LICENSE) que puede encontrarse en el directorio raíz.
 
-Les chercheurs et les développeurs sont libres d'utiliser les codes et les poids des modèles de Qwen et de Qwen-Chat. Pour leur utilisation commerciale, veuillez consulter l'accord de licence accompagnant chaque modèle.
+Los investigadores y desarrolladores son libres de utilizar los códigos y los pesos de los modelos tanto de Qwen como de Qwen-Chat. Para su uso comercial, consulte el Acuerdo de Licencia que acompaña a cada modelo.
 
-- Qwen-72B, Qwen-14B et Qwen-7B sont sous licence [Tongyi Qianwen LICENSE AGREEMENT](./Tongyi%20Qianwen%20LICENSE%20AGREEMENT) que l'on peut trouver dans les dépôts HuggingFace et ModelScope correspondants. Pour une utilisation commerciale, veuillez remplir le formulaire ([72B](https://dashscope.console.aliyun.com/openModelApply/Qwen-72B-Chat), [14B](https://dashscope.console.aliyun.com/openModelApply/Qwen-14B-Chat), et [7B](https://dashscope.console.aliyun.com/openModelApply/qianwen)) pour en faire la demande.
+- Qwen-72B, Qwen-14B, y Qwen-7B están licenciados bajo el [Tongyi Qianwen LICENSE AGREEMENT](./Tongyi%20Qianwen%20LICENSE%20AGREEMENT) que se puede encontrar en el repositorio correspondiente de HuggingFace y ModelScope. Para uso comercial, rellene el formulario ([72B](https://dashscope.console.aliyun.com/openModelApply/Qwen-72B-Chat), [14B](https://dashscope.console.aliyun.com/openModelApply/Qwen-14B-Chat), y [7B](https://dashscope.console.aliyun.com/openModelApply/qianwen)) para solicitarlo.
 
-- Qwen-1.8B est sous licence [Tongyi Qianwen RESEARCH LICENSE AGREEMENT](./Tongyi%20Qianwen%20RESEARCH%20LICENSE%20AGREEMENT) qui peut être trouvé dans les dépôts HuggingFace et ModelScope correspondants. Pour une utilisation commerciale, veuillez nous contacter.
+- Qwen-1.8B está licenciado bajo el [Tongyi Qianwen RESEARCH LICENSE AGREEMENT](./Tongyi%20Qianwen%20RESEARCH%20LICENSE%20AGREEMENT) que puede encontrarse en el repositorio correspondiente de HuggingFace y ModelScope. Para uso comercial, póngase en contacto con nosotros.
 <br><br>
 
-## Contactez-nous
+## Contacte con Nosotros
 
-Si vous souhaitez laisser un message à notre équipe de recherche ou à notre équipe produit, rejoignez nos groupes Discord ou WeChat! N'hésitez pas non plus à envoyer un courriel à qianwen_opensource@alibabacloud.com.
+Si estás interesado en dejar un mensaje a nuestro equipo de investigación o de producto, únete a nuestros grupos de Discord o WeChat. También puedes enviar un correo electrónico a qianwen_opensource@alibabacloud.com.
 

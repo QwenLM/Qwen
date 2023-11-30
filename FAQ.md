@@ -81,3 +81,10 @@ However, temporarily we do not support RLHF. We will provide the code in the nea
 
 In our training, we only use `<|endoftext|>` as the separator and padding token. You can set bos_id, eos_id, and pad_id to tokenizer.eod_id. Learn more about our tokenizer from our documents about the tokenizer.
 
+
+
+## Docker
+
+#### Download official docker image is very slow
+
+When downloading our official docker image, you may have a slow download speed due to some network issues. You can refer to [Alibaba Cloud Container Image Service](https://help.aliyun.com/zh/acr/user-guide/accelerate-the-pulls-of-docker-official-images) to accelerate the download of official images.

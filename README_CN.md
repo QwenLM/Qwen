@@ -1,5 +1,5 @@
 <p align="left">
-    中文</a>&nbsp ｜ &nbsp<a href="README.md">English</a>&nbsp ｜ &nbsp<a href="README_JA.md">日本語</a> ｜ &nbsp<a href="README_FR.md">Français</a>
+    中文</a>&nbsp ｜ &nbsp<a href="README.md">English</a>&nbsp ｜ &nbsp<a href="README_JA.md">日本語</a> ｜ &nbsp<a href="README_FR.md">Français</a> ｜ &nbsp<a href="README_ES.md">Español</a>
 </p>
 <br><br>
 
@@ -9,21 +9,33 @@
 <br>
 
 <p align="center">
-    🤗 <a href="https://huggingface.co/Qwen">Hugging Face</a>&nbsp&nbsp | &nbsp&nbsp🤖 <a href="https://modelscope.cn/organization/qwen">魔搭社区</a>&nbsp&nbsp | &nbsp&nbsp 📑 <a href="https://arxiv.org/abs/2309.16609">论文</a> &nbsp&nbsp ｜ &nbsp&nbsp🖥️ <a href="https://modelscope.cn/studios/qwen/Qwen-14B-Chat-Demo/summary">Demo</a>
+        🤗 <a href="https://huggingface.co/Qwen">Hugging Face</a>&nbsp&nbsp | &nbsp&nbsp🤖 <a href="https://modelscope.cn/organization/qwen">ModelScope</a>&nbsp&nbsp | &nbsp&nbsp 📑 <a href="https://arxiv.org/abs/2309.16609">Paper</a> &nbsp&nbsp ｜ &nbsp&nbsp🖥️ <a href="https://modelscope.cn/studios/qwen/Qwen-72B-Chat-Demo/summary">Demo</a>
 <br>
-<a href="assets/wechat.png">微信</a>&nbsp&nbsp ｜ &nbsp&nbsp 钉钉 &nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/z3GAxXZ9Ce">Discord</a>&nbsp&nbsp
+<a href="assets/wechat.png">WeChat (微信)</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/z3GAxXZ9Ce">Discord</a>&nbsp&nbsp ｜  &nbsp&nbsp<a href="https://dashscope.aliyun.com">API</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://qianwen.aliyun.com">Web</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://apps.apple.com/cn/app/%E9%80%9A%E4%B9%89%E5%8D%83%E9%97%AE/id6466733523">APP</a>
 </p>
 <br><br>
 
 |     |                                                              Qwen-Chat                                                               |                                                                Qwen-Chat (Int4)                                                                |                        Qwen-Chat (Int8)                         |                                                            Qwen                                                            |
 |-----|:------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------:|
+| 1.8B  |  <a href="https://modelscope.cn/models/qwen/Qwen-1_8B-Chat/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-1_8B-Chat">🤗</a>  |  <a href="https://modelscope.cn/models/qwen/Qwen-1_8B-Chat-Int4/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-1_8B-Chat-Int4">🤗</a>  | <a href="https://modelscope.cn/models/qwen/Qwen-1_8B-Chat-Int8/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-1_8B-Chat-Int8">🤗</a>  |  <a href="https://modelscope.cn/models/qwen/Qwen-1_8B/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-1_8B">🤗</a>  |
 | 7B  |  <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-7B-Chat">🤗</a>  |  <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat-Int4/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-7B-Chat-Int4">🤗</a>  | <a href="https://modelscope.cn/models/qwen/Qwen-7B-Chat-Int8/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-7B-Chat-Int8">🤗</a>  |  <a href="https://modelscope.cn/models/qwen/Qwen-7B/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-7B">🤗</a>  |
 | 14B | <a href="https://modelscope.cn/models/qwen/Qwen-14B-Chat/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-14B-Chat">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-14B-Chat-Int4/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-14B-Chat-Int4">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-14B-Chat-Int8/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-14B-Chat-Int8">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-14B/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-14B">🤗</a> |
+| 72B | <a href="https://modelscope.cn/models/qwen/Qwen-72B-Chat/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-72B-Chat">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-72B-Chat-Int4/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-72B-Chat-Int4">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-72B-Chat-Int8/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-72B-Chat-Int8">🤗</a> | <a href="https://modelscope.cn/models/qwen/Qwen-72B/summary">🤖</a>  <a href="https://huggingface.co/Qwen/Qwen-72B">🤗</a> |
 
-我们开源了**Qwen**（通义千问）系列工作，当前开源模型的参数规模为70亿（7B）和140亿（14B）。本次开源包括基础模型**Qwen**，即**Qwen-7B**和**Qwen-14B**，以及对话模型**Qwen-Chat**，即**Qwen-7B-Chat**和**Qwen-14B-Chat**。模型链接在表格中，请点击了解详情。同时，我们公开了我们的<b><a href="https://arxiv.org/abs/2309.16609">技术报告</a></b>，请点击上方论文链接查看。
 
-当前基础模型已经稳定训练了大规模高质量且多样化的数据，覆盖多语言（当前以中文和英文为主），总量高达3万亿token。在相关基准评测中，Qwen系列模型拿出非常有竞争力的表现，显著超出同规模模型并紧追一系列最强的闭源模型。此外，我们利用SFT和RLHF技术实现对齐，从基座模型训练得到对话模型。Qwen-Chat具备聊天、文字创作、摘要、信息抽取、翻译等能力，同时还具备一定的代码生成和简单数学推理的能力。在此基础上，我们针对LLM对接外部系统等方面针对性地做了优化，当前具备较强的工具调用能力，以及最近备受关注的Code Interpreter的能力和扮演Agent的能力。
+  
+我们开源了**Qwen**（通义千问）系列工作，当前开源模型的参数规模为18亿（1.8B）、70亿（7B）、140亿（14B）和720亿（72B）。本次开源包括基础模型**Qwen**，即**Qwen-1.8B**、**Qwen-7B**、**Qwen-14B**、**Qwen-72B**，以及对话模型**Qwen-Chat**，即**Qwen-1.8B-Chat**、**Qwen-7B-Chat**、**Qwen-14B-Chat**和**Qwen-72B-Chat**。模型链接在表格中，请点击了解详情。同时，我们公开了我们的<b><a href="https://arxiv.org/abs/2309.16609">技术报告</a></b>，请点击上方论文链接查看。
 
+当前基础模型已经稳定训练了大规模高质量且多样化的数据，覆盖多语言（当前以中文和英文为主），总量高达3万亿token。在相关基准评测中，Qwen系列模型拿出非常有竞争力的表现，显著超出同规模模型并紧追一系列最强的闭源模型。此外，我们利用SFT和RLHF技术实现对齐，从基座模型训练得到对话模型。Qwen-Chat具备聊天、文字创作、摘要、信息抽取、翻译等能力，同时还具备一定的代码生成和简单数学推理的能力。在此基础上，我们针对LLM对接外部系统等方面针对性地做了优化，当前具备较强的工具调用能力，以及最近备受关注的Code Interpreter的能力和扮演Agent的能力。我们将各个大小模型的特点列到了下表。
+
+| 模型        |   开源日期   | 最大上下文长度 | System Prompt强化 | 预训练token数 | 微调（Q-Lora）最小GPU用量 | 生成2048个token的最小显存占用 | 工具调用 |
+|:----------|:--------:|:-------:|:---------------:|:---------:|:-----------------:|:-------------------:|:----:|
+| Qwen-1.8B | 23.11.30 |   32K   |        √        |   2.2T    |       5.8GB       |        2.9GB        |  √   |  
+| Qwen-7B   | 23.08.03 |   32K   |        ×        |   2.4T    |      11.5GB       |        8.2GB        |  √   |   
+| Qwen-14B  | 23.09.25 |   8K    |        ×        |   3.0T    |      18.7GB       |       13.0GB        |  √   |
+| Qwen-72B  | 23.11.30 |   32K   |        √        |   3.0T    |      61.4GB       |       48.9GB        |  √   |   
+
+  
 在这个项目中，你可以了解到以下内容
 
 * 快速上手Qwen-Chat教程，玩转大模型推理
@@ -45,8 +57,9 @@
 
 ## 新闻
 
+* 2023.11.30 🔥 我们推出 **Qwen-72B** 和 **Qwen-72B-Chat**，它们在 3T tokens上进行训练，并支持 32k 上下文。同时也发布了 **Qwen-1.8B** 和 **Qwen-1.8B-Chat**。我们还增强了 Qwen-72B-Chat 和 Qwen-1.8B-Chat 的系统指令（System Prompt）功能，请参阅[示例文档](examples/system_prompt.md)。此外，我们还对**昇腾910**以及**海光DCU**实现了推理的支持，详情请查看`ascend-support`及`dcu-support`文件夹。
 * 2023年10月17日 我们推出了Int8量化模型**Qwen-7B-Chat-Int8**和**Qwen-14B-Chat-Int8**。
-* 2023年9月25日 🔥 在魔搭社区（ModelScope）和Hugging Face推出**Qwen-14B**和**Qwen-14B-Chat**模型，并开源 [qwen.cpp](https://github.com/QwenLM/qwen.cpp) 和 [Qwen-Agent](https://github.com/QwenLM/Qwen-Agent)。**Qwen-7B**和**Qwen-7B-Chat**的代码和模型也同步得到更新。**请使用最新的代码和模型！**
+* 2023年9月25日 在魔搭社区（ModelScope）和Hugging Face推出**Qwen-14B**和**Qwen-14B-Chat**模型，并开源 [qwen.cpp](https://github.com/QwenLM/qwen.cpp) 和 [Qwen-Agent](https://github.com/QwenLM/Qwen-Agent)。**Qwen-7B**和**Qwen-7B-Chat**的代码和模型也同步得到更新。**请使用最新的代码和模型！**
     - 相比原版Qwen-7B，新版用了更多训练数据（从2.2T增加到2.4T tokens），序列长度从2048扩展至8192。整体中文能力以及代码能力均有所提升。
 * 2023年9月12日 支持Qwen-7B和Qwen-7B-Chat的微调，其中包括全参数微调、LoRA以及Q-LoRA。
 * 2023年8月21日 发布Qwen-7B-Chat的Int4量化模型，Qwen-7B-Chat-Int4。该模型显存占用低，推理速度相比半精度模型显著提升，在基准评测上效果损失较小。
@@ -55,27 +68,30 @@
 
 ## 评测表现
 
-Qwen-14B及Qwen-7B (最新版本使用更大量的token进行预训练)相比同规模模型均实现了效果的显著提升。我们评测的数据集包括MMLU、C-Eval、 GSM8K、 MATH、HumanEval、MBPP、BBH等数据集，考察的能力包括自然语言理解、知识、数学计算和推理、代码生成、逻辑推理等。当然，即便Qwen-14B相比GPT-3.5和GPT-4仍有差距。 
+Qwen系列模型相比同规模模型均实现了效果的显著提升。我们评测的数据集包括MMLU、C-Eval、 GSM8K、 MATH、HumanEval、MBPP、BBH等数据集，考察的能力包括自然语言理解、知识、数学计算和推理、代码生成、逻辑推理等。Qwen-72B在所有任务上均超越了LLaMA2-70B的性能，同时在10项任务中的7项任务中超越GPT-3.5.
 
 <p align="left">
-    <img src="assets/radar_14b.jpg" width="600"/>
+    <img src="assets/radar_72b.jpg" width="600"/>
 <p>
 <br>
 
-| Model                  |   MMLU   |  C-Eval  |  GSM8K   |   MATH   | HumanEval |   MBPP   |   BBH    |  CMMLU   |
-|:-----------------------|:--------:|:--------:|:--------:|:--------:|:---------:|:--------:|:--------:|:--------:|
-|                        |  5-shot  |  5-shot  |  8-shot  |  4-shot  |  0-shot   |  3-shot  |  3-shot  |  5-shot  |
-| LLaMA2-7B              |   46.8   |   32.5   |   16.7   |   3.3    |   12.8    |   20.8   |   38.2   |   31.8   |
-| LLaMA2-13B             |   55.0   |   41.4   |   29.6   |   5.0    |   18.9    |   30.3   |   45.6   |   38.4   |
-| LLaMA2-34B             |   62.6   |    -     |   42.2   |   6.2    |   22.6    |   33.0   |   44.1   |    -     |
-| ChatGLM2-6B            |   47.9   |   51.7   |   32.4   |   6.5    |     -     |    -     |   33.7   |    -     |
-| InternLM-7B            |   51.0   |   53.4   |   31.2   |   6.3    |   10.4    |   14.0   |   37.0   |   51.8   |
-| InternLM-20B           |   62.1   |   58.8   |   52.6   |   7.9    |   25.6    |   35.6   |   52.5   |   59.0   |
-| Baichuan2-7B           |   54.7   |   56.3   |   24.6   |   5.6    |   18.3    |   24.2   |   41.6   |   57.1   |
-| Baichuan2-13B          |   59.5   |   59.0   |   52.8   |   10.1   |   17.1    |   30.2   |   49.0   |   62.0   |
-| **Qwen-7B (original)** |   56.7   |   59.6   |   51.6   |   10.4   |   24.4    |   31.2   |   40.6   |   58.8   |
-| **Qwen-7B**            |   58.2   |   63.5   |   51.7   |   11.6   |   29.9    |   31.6   |   45.0   |   62.2   |
-| **Qwen-14B**           | **66.3** | **72.1** | **61.3** | **24.8** | **32.3**  | **40.8** | **53.4** | **71.0** |
+| Model              |   MMLU   |  C-Eval  |  GSM8K   |   MATH   | HumanEval |   MBPP   |   BBH    |  CMMLU   |
+|:-------------------|:--------:|:--------:|:--------:|:--------:|:---------:|:--------:|:--------:|:--------:|
+|                    |  5-shot  |  5-shot  |  8-shot  |  4-shot  |  0-shot   |  3-shot  |  3-shot  |  5-shot  |
+| LLaMA2-7B          |   46.8   |   32.5   |   16.7   |   3.3    |   12.8    |   20.8   |   38.2   |   31.8   |
+| LLaMA2-13B         |   55.0   |   41.4   |   29.6   |   5.0    |   18.9    |   30.3   |   45.6   |   38.4   |
+| LLaMA2-34B         |   62.6   |    -     |   42.2   |   6.2    |   22.6    |   33.0   |   44.1   |    -     |
+| ChatGLM2-6B        |   47.9   |   51.7   |   32.4   |   6.5    |     -     |    -     |   33.7   |    -     |
+| InternLM-7B        |   51.0   |   53.4   |   31.2   |   6.3    |   10.4    |   14.0   |   37.0   |   51.8   |
+| InternLM-20B       |   62.1   |   58.8   |   52.6   |   7.9    |   25.6    |   35.6   |   52.5   |   59.0   |
+| Baichuan2-7B       |   54.7   |   56.3   |   24.6   |   5.6    |   18.3    |   24.2   |   41.6   |   57.1   |
+| Baichuan2-13B      |   59.5   |   59.0   |   52.8   |   10.1   |   17.1    |   30.2   |   49.0   |   62.0   |
+| Yi-34B      	  	 |   76.3   |   81.8   |   67.9   |   15.9   |   26.2    |   38.2   |   66.4   |   82.6   |
+| XVERSE-65B      	 |   70.8   |   68.6   |   60.3   |   -      |   26.3    |   -      |  -       |   -      |
+| **Qwen-1.8B**      |   45.3   |   56.1   |   32.3   |   2.3    |   15.2    |   14.2   |   22.3   |   52.1   |
+| **Qwen-7B**        |   58.2   |   63.5   |   51.7   |   11.6   |   29.9    |   31.6   |   45.0   |   62.2   |
+| **Qwen-14B**       |   66.3   |   72.1   |   61.3   |   24.8   |   32.3    |   40.8   |   53.4   |   71.0   |
+| **Qwen-72B**       | **77.4** | **83.3** | **78.9** | **35.2** | **35.4**  | **52.2** | **67.7** | **83.6** |
 
 
 对于以上所有对比模型，我们列出了其官方汇报结果与[OpenCompass](https://opencompass.org.cn/leaderboard-llm)结果之间的最佳分数。
@@ -87,6 +103,7 @@ Qwen-14B及Qwen-7B (最新版本使用更大量的token进行预训练)相比同
 
 * python 3.8及以上版本
 * pytorch 1.12及以上版本，推荐2.0及以上版本
+* transformers 4.32及以上版本
 * 建议使用CUDA 11.4及以上（GPU用户、flash-attention用户等需考虑此选项）
 <br>
 
@@ -94,7 +111,9 @@ Qwen-14B及Qwen-7B (最新版本使用更大量的token进行预训练)相比同
 
 我们提供简单的示例来说明如何利用🤖 ModelScope和🤗 Transformers快速使用Qwen-7B和Qwen-7B-Chat。
 
-在开始前，请确保你已经配置好环境并安装好相关的代码包。最重要的是，确保你满足上述要求，然后安装相关的依赖库。
+你可以使用我们预构建好的Docker镜像，省去大部分配置环境的操作，详情见[“使用预构建的docker镜像”](#-使用预构建的docker镜像)一节。
+
+如不使用Docker，请确保你已经配置好环境并安装好相关的代码包。最重要的是，确保你满足上述要求，然后安装相关的依赖库。
 
 ```bash
 pip install -r requirements.txt
@@ -107,6 +126,7 @@ git clone https://github.com/Dao-AILab/flash-attention
 cd flash-attention && pip install .
 # 下方安装可选，安装可能比较缓慢。
 # pip install csrc/layer_norm
+# 如果flash-attn版本高于2.1.1，下方无需安装。
 # pip install csrc/rotary
 ```
 
@@ -189,7 +209,9 @@ print(tokenizer.decode(pred.cpu()[0], skip_special_tokens=True))
 
 </details>
 
+<p id="DownloadModel">
 若在使用上述代码时由于各种原因无法从 HuggingFace 拉取模型和代码，可以先从 ModelScope 下载模型及代码至本地，再从本地加载模型：
+</p>
 
 ```python
 from modelscope import snapshot_download
@@ -316,6 +338,60 @@ model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cp
 如果你遇到显存不足的问题而希望使用多张GPU进行推理，可以使用上述的默认的使用方法读取模型。此前提供的脚本`utils.py`已停止维护。
 
 尽管这个方法很简单，但它的效率相对较低。我们建议使用vLLM和FastChat并请阅读部署章节。
+
+### 阿里云灵积（DashScope）API服务
+最简单的使用Qwen模型API服务的方法就是通过DashScope（阿里云灵积API模型服务）。我们提供了简单介绍说明使用方法。同时，我们还提供了自己部署OpenAI格式的API的方法。
+
+DashScope是阿里云提供的大语言模型的API服务，目前支持Qwen。但请注意，目前提供服务的Qwen模型为内部模型，暂无更多具体细节对外透露。模型服务包括`qwen-turbo`、`qwen-plus`和`qwen-max`，`qwen-turbo`速度更快，`qwen-plus`效果更优，`qwen-max`是最新发布的千亿级通义千问2.0模型。详情请查看[文档](https://dashscope.aliyun.com)。
+
+请首先前往[官网](https://help.aliyun.com/zh/dashscope/developer-reference/activate-dashscope-and-create-an-api-key?spm=a2c4g.11186623.0.0.6c2774fahtfXdn)开通DashScope，获得API Key（AK）。建议通过环境变量设置AK：
+```bash
+export DASHSCOPE_API_KEY="YOUR_DASHSCOPE_API_KEY"
+```
+随后安装相关代码包，点击[此处](https://help.aliyun.com/zh/dashscope/developer-reference/install-dashscope-sdk)查看安装文档。如使用python，则直接通过pip安装：
+```bash
+pip install dashscope
+```
+如安装JAVA SDK，则通过如下命令安装：
+```xml
+<!-- https://mvnrepository.com/artifact/com.alibaba/dashscope-sdk-java -->
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>dashscope-sdk-java</artifactId>
+    <version>the-latest-version</version>
+</dependency>
+```
+最简单的使用方法就是通过messages调用，用法类似OpenAI API。示例如下：
+```python
+import random
+from http import HTTPStatus
+from dashscope import Generation
+
+
+def call_with_messages():
+    messages = [{'role': 'system', 'content': 'You are a helpful assistant.'},
+                {'role': 'user', 'content': '如何做西红柿鸡蛋？'}]
+    gen = Generation()
+    response = gen.call(
+        Generation.Models.qwen_turbo,
+        messages=messages,
+        seed=random.randint(1, 10000),  # set the random seed, optional, default to 1234 if not set
+        result_format='message',  # set the result to be "message" format.
+    )
+    return response
+
+
+if __name__ == '__main__':
+    response = call_with_messages()
+    if response.status_code == HTTPStatus.OK:
+        print(response)
+    else:
+        print('Request id: %s, Status code: %s, error code: %s, error message: %s' % (
+            response.request_id, response.status_code,
+            response.code, response.message
+        ))
+```
+更多用法请查看官方文档了解详情。
 <br><br>
 
 
@@ -323,7 +399,7 @@ model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cp
 
 ### GPTQ
 
-**请注意：我们更新量化方案为基于 [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ) 的量化，提供Int4量化模型。该方案在模型评测效果几乎无损，且存储需求更低，推理速度更优。**
+我们提供了基于[AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ)的量化方案，并开源了Int4和Int8量化模型。量化模型的效果损失很小，但能显著降低显存占用并提升推理速度。
 
 以下我们提供示例说明如何使用Int4量化模型。在开始使用前，请先保证满足要求（如torch 2.0及以上，transformers版本为4.32.0及以上，等等），并安装所需安装包：
 
@@ -332,6 +408,12 @@ pip install auto-gptq optimum
 ```
 
 如安装`auto-gptq`遇到问题，我们建议您到官方[repo](https://github.com/PanQiWei/AutoGPTQ)搜索合适的wheel。
+
+> 注意：预编译的`auto-gptq`版本对`torch`版本及其CUDA版本要求严格。同时，由于
+> 其近期更新，你可能会遇到`transformers`、`optimum`或`peft`抛出的版本错误。
+> 我们建议使用符合以下要求的最新版本：
+> - torch==2.1 auto-gptq>=0.5.1 transformers>=4.35.0 optimum>=1.14.0 peft>=0.6.1
+> - torch>=2.0,<2.1 auto-gptq<0.5.0 transformers<4.35.0 optimum<1.14.0 peft>=0.5.0,<0.6.0
 
 随后即可使用和上述一致的用法调用量化模型：
 
@@ -349,12 +431,18 @@ response, history = model.chat(tokenizer, "Hi", history=None)
 
 | Quantization         | MMLU | CEval (val) | GSM8K | Humaneval |
 |----------------------|:----:|:-----------:|:-----:|:---------:|
+| Qwen-1.8B-Chat (BF16)| 43.3 |    55.6     | 33.7  |   26.2    |
+| Qwen-1.8B-Chat (Int8)| 43.1 |    55.8     | 33.0  |   27.4    |
+| Qwen-1.8B-Chat (Int4)| 42.9 |    52.8     | 31.2  |   25.0    |
 | Qwen-7B-Chat (BF16)  | 55.8 |    59.7     | 50.3  |   37.2    |
 | Qwen-7B-Chat (Int8)  | 55.4 |    59.4     | 48.3  |   34.8    |
 | Qwen-7B-Chat (Int4)  | 55.1 |    59.2     | 49.7  |   29.9    |
 | Qwen-14B-Chat (BF16) | 64.6 |    69.8     | 60.1  |   43.9    |
-| Qwen-14B-Chat (Int8) | 63.6 |    68.6     | 60.0	 |   48.2    |
+| Qwen-14B-Chat (Int8) | 63.6 |    68.6     | 60.0  |   48.2    |
 | Qwen-14B-Chat (Int4) | 63.3 |    69.0     | 59.8  |   45.7    |
+| Qwen-72B-Chat (BF16) | 74.4 |    80.1     | 76.4  |   64.6    |
+| Qwen-72B-Chat (Int8) | 73.5 |    80.1     | 73.5  |   62.2    |
+| Qwen-72B-Chat (Int4) | 73.4 |    80.1     | 75.3  |   61.6    |
 <br>
 
 
@@ -362,9 +450,9 @@ response, history = model.chat(tokenizer, "Hi", history=None)
 
 > 注意：由于Hugging Face的内部实现，本功能的支持文件`cache_autogptq_cuda_356.cpp`与`cache_autogptq_cuda_kernel_245.cu`可能没被下载。如需开启使用，请手动从相关位置下载，并放置到相应文件中。
 
-在模型infer时，可以将中间结果key以及value的值量化后压缩存储，这样便可以在相同的卡上存储更多的key以及value，增加样本吞吐。
+在模型推理时，我们可以将中间结果key以及value的值量化后压缩存储，这样便可以在相同的卡上存储更多的key以及value，增加样本吞吐。
 
-提供use_cache_quantization以及use_cache_kernel两个参数对模型控制，当use_cache_quantization以及use_cache_kernel均开启时，将启动kv-cache量化的功能。具体使用如下：
+我们在`config.json`里提供了`use_cache_quantization`和`use_cache_kernel`两个参数来控制是否启用KV cache量化，具体使用方法如下：
 ```python
 model = AutoModelForCausalLM.from_pretrained(
     "Qwen/Qwen-7B-Chat",
@@ -375,43 +463,46 @@ model = AutoModelForCausalLM.from_pretrained(
      use_flash_attn=False
 )
 ```
-注意：当前该功能目前不支持与flash attn同时开启，如果你开了kv cache量化的同时又开了flash attn（use_flash_attn=True， use_cache_quantization=True, use_cache_kernel=True），会默认将use_flash_attn关闭。
+注意：当前该功能不支持与flash attention同时开启，如果你开了KV cache量化的同时又开了flash attention（`use_flash_attn=True`， `use_cache_quantization=True`, `use_cache_kernel=True`），程序默认将关闭`use_flash_attn`。
 
-效果方面，我们验证过Int8 kv-cache的使用对模型整体的精度指标基本无损。我们做了针对显存占用的性能测试。评测运行于单张A100-SXM4-80G GPU，模型默认使用BF16格式，默认生成的seq-length=1024（生成1024个token），其中oom表示out of memory。
+效果方面，我们验证过Int8 KV Cache的使用对模型整体的精度指标基本无损。我们做了针对显存占用的性能测试。评测运行于单张A100-SXM4-80G GPU，模型默认使用BF16格式，默认生成1024个token，其中OOM表示内存不足。
 
-开启了kv-cache量化之后，模型在infer的时候可以开启更大的batch size(bs)
+开启了KV cache量化之后，模型在推理的时候可以开启更大的batch size (bs)。
 
-| USE KVCache |  bs=1  |  bs=4  | bs=16  | bs=32  | bs=64  | bs=100 |
-|-------------|:------:|:------:|:------:|:------:|:------:|:------:|
-| no          | 16.3GB | 24.1GB | 31.7GB | 48.7GB |  oom   |  oom   |
-| yes         | 15.5GB | 17.2GB | 22.3GB | 30.2GB | 48.2GB | 72.4GB |
-
-
-开启了kv-cache量化之后，模型在infer时预测更长的seq-length（sl，生成的token数）结果时，可以节约更多的显存。
-
-| USE KVCache | sl=512 | sl=1024 | sl=2048 | sl=4096 | sl=8192 |
-|-------------|:------:|:-------:|:-------:|:-------:|:-------:|
-| no          | 15.2GB | 16.3GB  | 17.6GB  | 19.5GB  | 23.2GB  |
-| yes         |  15GB  | 15.5GB  | 15.8GB  | 16.6GB  | 17.6GB  |
+| USE KV Cache |  bs=1  |  bs=4  | bs=16  | bs=32  | bs=64  | bs=100 |
+|--------------|:------:|:------:|:------:|:------:|:------:|:------:|
+| No           | 16.3GB | 24.1GB | 31.7GB | 48.7GB |  oom   |  oom   |
+| Yes          | 15.5GB | 17.2GB | 22.3GB | 30.2GB | 48.2GB | 72.4GB |
 
 
-模型开启kv cache量化后再模型infer的时候，会将原始存进layer_past的float格式的key/value变成int8格式的qkey/qvalue和相对应的量化参数。
+开启了KV cache量化之后，模型在推理时可在生成更长的序列（sl，生成的token数）时，节约更多的显存。
+
+| USE KV Cache | sl=512 | sl=1024 | sl=2048 | sl=4096 | sl=8192 |
+|--------------|:------:|:-------:|:-------:|:-------:|:-------:|
+| no           | 15.2GB | 16.3GB  | 17.6GB  | 19.5GB  | 23.2GB  |
+| yes          |  15GB  | 15.5GB  | 15.8GB  | 16.6GB  | 17.6GB  |
+
+
+开启KV cache量化后，模型在推理时会将原始存进`layer-past`的float格式的key/value转换成int8格式，同时存储量化部分的参数。
+
 具体操作如下：
-1、将key/value进行量化操作
+
+1. 将key/value进行量化操作
 ```
     qv,scale,zero_point=quantize_cache_v(v)
 ```
-2、存入layer_past中:
-量化格式的layer_past:
+2. 存入`layer_past`中:
+
+量化格式的`layer-past`:
 ```
     layer_past=((q_key,key_scale,key_zero_point),
                 (q_value,value_scale,value_zero_point))
 ```
-原始格式的layer_past:
+原始格式的`layer-past`:
 ```
     layer_past=(key,value)
 ```
-如果需要将layer_past中存好的key，value直接取出使用，可以使用反量化操作将int8格式的key/value转回float格式：
+如果需要将`layer-past`中存好的key，value直接取出使用，可以使用反量化操作将Int8格式的key/value转回float格式：
 ```
     v=dequantize_cache_torch(qv,scale,zero_point)
 ```
@@ -420,118 +511,100 @@ model = AutoModelForCausalLM.from_pretrained(
 ### 推理性能
 这一部分将介绍模型推理的速度和显存占用的相关数据。下文的性能测算使用 [此脚本](https://qianwen-res.oss-cn-beijing.aliyuncs.com/profile.py) 完成。
 
-### 推理速度
-
-我们测算了BF16、Int8和Int4模型在使用flash attention v2、v1或不使用时生成2048和8192个token的平均推理速度（tokens/s）。结果如下所示：
+我们测算了BF16、Int8和Int4模型在生成2048个token时的平均推理速度（tokens/s）和显存使用。结果如下所示：
 
 <table>
     <tr>
-      <th rowspan="2">Model Size</th><th rowspan="2">Precision</th><th rowspan="2">FlashAttn</th><th colspan="2" align="center">Sequence Length</th>
+        <td>Model Size</td>
+        <td>Quantization</td>
+        <td>Speed (Tokens/s)</td>
+        <td>GPU Memory Usage</td>
     </tr>
     <tr>
-        <th align="center">2048</th><th align="center">8192</th>
-    </tr>
-    </tr>
-    </tr>
-    <tr>
-        <th rowspan="9">7B</th><td align="center" rowspan="3">BF16</td><td align="center">v2</td><td align="center">40.93</td><td align="center">36.14</td>
+        <td rowspan="3">1.8B</td>
+        <td>BF16</td>
+        <td>54.09</td>
+        <td>4.23GB</td>
     </tr>
     <tr>
-        <td align="center">v1</td><td align="center">40.75</td><td align="center">35.34
+        <td>Int8</td>
+        <td>55.56</td>
+        <td>3.48GB</td>
     </tr>
     <tr>
-        <td align="center">Disabled</td><td align="center">37.55</td><td align="center">33.56
+        <td>Int4</td>
+        <td>71.07</td>
+        <td>2.91GB</td>
     </tr>
     <tr>
-        <td align="center" rowspan="3">Int8</td><td align="center">v2</td><td align="center">37.47</td><td align="center">32.54</td>
+        <td rowspan="3">7B</td>
+        <td>BF16</td>
+        <td>40.93</td>
+        <td>16.99GB</td>
     </tr>
     <tr>
-        <td align="center">v1</td><td align="center">37.51</td><td align="center">32.39
+        <td>Int8</td>
+        <td>37.47</td>
+        <td>11.20GB</td>
     </tr>
     <tr>
-        <td align="center">Disabled</td><td align="center">37.84</td><td align="center">32.65
+        <td>Int4</td>
+        <td>50.09</td>
+        <td>8.21GB</td>
     </tr>
     <tr>
-        <td align="center" rowspan="3">Int4</td><td align="center">v2</td><td align="center">50.09</td><td align="center">38.61</td>
+        <td rowspan="3">14B</td>
+        <td>BF16</td>
+        <td>32.22</td>
+        <td>30.15GB</td>
     </tr>
     <tr>
-        <td align="center">v1</td><td align="center">45.98</td><td align="center">36.47
+        <td>Int8</td>
+        <td>29.28</td>
+        <td>18.81GB</td>
     </tr>
     <tr>
-        <td align="center">Disabled</td><td align="center">48.12</td><td align="center">36.70
+        <td>Int4</td>
+        <td>38.72</td>
+        <td>13.01GB</td>
     </tr>
     <tr>
-        <th rowspan="9">14B</th><td align="center" rowspan="3">BF16</td><td align="center">v2</td><td align="center">32.88</td><td align="center">24.87</td>
+        <td rowspan="3">72B</td>
+        <td>BF16</td>
+        <td>8.48</td>
+        <td>144.69GB (2xA100)</td>
     </tr>
     <tr>
-        <td align="center">v1</td><td align="center">32.76</td><td align="center">28.89
+        <td>Int8</td>
+        <td>9.05</td>
+        <td>81.27GB (2xA100)</td>
     </tr>
     <tr>
-        <td align="center">Disabled</td><td align="center">29.32</td><td align="center">22.91
+        <td>Int4</td>
+        <td>11.32</td>
+        <td>48.86GB</td>
     </tr>
     <tr>
-        <td align="center" rowspan="3">Int8</td><td align="center">v2</td><td align="center">29.28</td><td align="center">24.22</td>
-    </tr>
-    <tr>
-        <td align="center">v1</td><td align="center">28.31</td><td align="center">23.87
-    </tr>
-    <tr>
-        <td align="center">Disabled</td><td align="center">31.12</td><td align="center">24.60
-    </tr>
-    <tr>
-        <td align="center" rowspan="3">Int4</td><td align="center">v2</td><td align="center">38.72</td><td align="center">27.33</td>
-    </tr>
-    <tr>
-        <td align="center">v1</td><td align="center">37.81</td><td align="center">26.46
-    </tr>
-    <tr>
-        <td align="center">Disabled</td><td align="center">37.65</td><td align="center">26.00
+        <td>72B + vLLM</td>
+        <td>BF16</td>
+        <td>17.60</td>
+        <td>2xA100</td>
     </tr>
 </table>
 
-评测运行于单张A100-SXM4-80G GPU，使用PyTorch 2.0.1和CUDA 11.4。推理速度是编码2048个token和生成8192个token的速度均值。
+评测运行于单张A100-SXM4-80G GPU（除非提到使用2xA100），使用PyTorch 2.0.1、CUDA 11.8和Flash-Attention2。(72B + vLLM 使用 PyTorch 2.1.0和Cuda 11.8.)推理速度是生成2048个token的速度均值。
 
 注意：以上Int4/Int8模型生成速度使用autogptq库给出，当前``AutoModelForCausalLM.from_pretrained``载入的模型生成速度会慢大约20%。我们已经将该问题汇报给HuggingFace团队，若有解决方案将即时更新。
 
-### 显存使用
-
-我们还测算了BF16、Int8和Int4模型编码2048个token及生成8192个token的峰值显存占用情况。结果（GB）如下所示：
-
-<table>
-    <tr>
-      <th rowspan="2">Model Size</th><th rowspan="2">Precision</th><th colspan="2" align="center">Sequence Length</th>
-    </tr>
-    <tr>
-        <th align="center">2048</th><th align="center">8192</th>
-    </tr>
-    </tr>
-    </tr>
-    <tr>
-        <th rowspan="3">7B</th><td align="center">BF16</td><td align="center">16.99</td><td align="center">22.53</td>
-    </tr>
-    <tr>
-        <td align="center">Int8</td><td align="center">11.20</td><td align="center">16.62
-    </tr>
-    <tr>
-        <td align="center">Int4</td><td align="center">8.21</td><td align="center">13.63</td>
-    </tr>
-    <tr>
-        <th rowspan="3">14B</th><td align="center">BF16</td><td align="center">30.15</td><td align="center">38.94</td>
-    </tr>
-    <tr>
-        <td align="center">Int8</td><td align="center">18.81</td><td align="center">27.54
-    </tr>
-    <tr>
-        <td align="center">Int4</td><td align="center">13.01</td><td align="center">21.79</td>
-    </tr>
-</table>
-
-<br>
+我们还测量了不同上下文长度、生成长度、Flash-Attention版本的推理速度和 GPU 内存使用情况。可以在 Hugging Face 或 ModelScope 上的相应的模型介绍页面找到结果。
 
 ## 微调
 
 ### 使用方法
-我们提供了`finetune.py`这个脚本供用户实现在自己的数据上进行微调的功能，以接入下游任务。此外，我们还提供了shell脚本减少用户的工作量。这个脚本支持 [DeepSpeed](https://github.com/microsoft/DeepSpeed) 和 [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/) 。我们提供的shell脚本使用了DeepSpeed，因此建议您确保已经安装DeepSpeed。
+我们提供了`finetune.py`这个脚本供用户实现在自己的数据上进行微调的功能，以接入下游任务。此外，我们还提供了shell脚本减少用户的工作量。这个脚本支持 [DeepSpeed](https://github.com/microsoft/DeepSpeed) 和 [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/) 。我们提供的shell脚本使用了DeepSpeed，因此建议您确保已经安装DeepSpeed和Peft（注意：DeepSpeed可能不兼容最新的pydantic版本，请确保`pydantic<2.0`）。你可以使用如下命令安装：
+```bash
+pip install peft deepspeed
+```
 
 首先，你需要准备你的训练数据。你需要将所有样本放到一个列表中并存入json文件中。每个样本对应一个字典，包含id和conversation，其中后者为一个列表。示例如下所示：
 ```json
@@ -641,7 +714,12 @@ tokenizer.save_pretrained(new_model_directory)
 注意：分布式训练需要根据你的需求和机器指定正确的分布式训练超参数。此外，你需要根据你的数据、显存情况和训练速度预期，使用`--model_max_length`设定你的数据长度。
 
 ### 显存占用及训练速度
-下面记录7B和14B模型在单GPU使用LoRA（LoRA (emb)指的是embedding和输出层参与训练，而LoRA则不优化这部分参数）和QLoRA时处理不同长度输入的显存占用和训练速度的情况。本次评测运行于单张A100-SXM4-80G GPU，使用CUDA 11.8和Pytorch 2.0，并使用了flash attention 2。我们统一使用batch size为1，gradient accumulation为8的训练配置，记录输入长度分别为256、512、1024、2048、4096和8192的显存占用（GB）和训练速度（s/iter）。我们还使用2张A100测了Qwen-7B的全参数微调。受限于显存大小，我们仅测试了256、512和1024token的性能。具体数值如下所示：
+下面记录7B和14B模型在单GPU使用LoRA（LoRA (emb)指的是embedding和输出层参与训练，而LoRA则不优化这部分参数）和QLoRA时处理不同长度输入的显存占用和训练速度的情况。本次评测运行于单张A100-SXM4-80G GPU，使用CUDA 11.8和Pytorch 2.0，并使用了flash attention 2。我们统一使用batch size为1，gradient accumulation为8的训练配置，记录输入长度分别为256、512、1024、2048、4096和8192的显存占用（GB）和训练速度（s/iter）。我们还使用2张A100测了Qwen-7B的全参数微调。受限于显存大小，我们仅测试了256、512和1024token的性能。
+
+对于 Qwen-72B，我们测试了两种方案：1）使用4个 A100-SXM4-80G GPUs，通过 Lora + DeepSpeed ZeRO 3 微调和2）使用单张A100-SXM4-80G GPU，通过 QLora (int4) 微调。请注意，使用 LoRA (emb) 微调和不带 DeepSpeed ZeRO 3 的 LoRA 微调在4个A100-SXM4-80G GPUs 上都会出现OOM（你可以通过将`--deepspeed finetune/ds_config_zero3.json`参数传给[`finetune/finetune_lora_ds.sh`](finetune/finetune_lora_ds.sh)来打开 DeepSpeed ZeRO 3 配置）。
+
+具体数值如下所示：
+
 
 <table>
     <tr>
@@ -651,6 +729,18 @@ tokenizer.save_pretrained(new_model_directory)
         <th align="center">256</th><th align="center">512</th><th align="center">1024</th><th align="center">2048</th><th align="center">4096</th><th align="center">8192</th>
     </tr>
     </tr>
+    </tr>
+    <tr>
+        <th rowspan="4">1.8B</th><td>LoRA</td><td align="center">6.7G / 1.0s/it</td><td align="center">7.4G / 1.0s/it</td><td align="center">8.4G / 1.1s/it</td><td align="center">11.0G / 1.7s/it</td><td align="center">16.2G / 3.3s/it</td><td align="center">21.8G / 6.8s/it</td>
+    </tr>
+    <tr>
+        <td>LoRA (emb)</td><td align="center">13.7G / 1.0s/it</td><td align="center">14.0G / 1.0s/it</td><td align="center">14.0G / 1.1s/it</td><td align="center">15.1G / 1.8s/it</td><td align="center">19.7G / 3.4s/it</td><td align="center">27.7G / 7.0s/it</td>
+    </tr>
+    <tr>
+        <td>Q-LoRA</td><td align="center">5.8G / 1.4s/it</td><td align="center">6.0G / 1.4s/it</td><td align="center">6.6G / 1.4s/it</td><td align="center">7.8G / 2.0s/it</td><td align="center">10.2G / 3.4s/it</td><td align="center">15.8G / 6.5s/it</td>
+    </tr>
+    <tr>
+        <td>Full-parameter</td><td align="center">43.5G / 2.1s/it</td><td align="center">43.5G / 2.2s/it</td><td align="center">43.5G / 2.2s/it</td><td align="center">43.5G / 2.3s/it</td><td align="center">47.1G / 2.8s/it</td><td align="center">48.3G / 5.6s/it</td>
     </tr>
     <tr>
         <th rowspan="4">7B</th><td>LoRA</td><td align="center">20.1G / 1.2s/it</td><td align="center">20.4G / 1.5s/it</td><td align="center">21.5G / 2.8s/it</td><td align="center">23.8G / 5.2s/it</td><td align="center">29.7G / 10.1s/it</td><td align="center">36.6G / 21.3s/it</td>
@@ -673,6 +763,12 @@ tokenizer.save_pretrained(new_model_directory)
     <tr>
         <td>Q-LoRA</td><td align="center">18.7G / 5.3s/it</td><td align="center">18.4G / 6.3s/it</td><td align="center">18.9G / 8.2s/it</td><td align="center">19.9G / 11.8s/it</td><td align="center">23.0G / 20.1s/it</td><td align="center">27.9G / 38.3s/it</td>
     </tr>
+    <tr>
+        <th rowspan="2">72B</th><td>LoRA + Deepspeed Zero3</td><td align="center">215.4G / 17.6s/it</td><td align="center">217.7G / 20.5s/it</td><td align="center">222.6G / 29.4s/it</td><td align="center">228.8G / 45.7s/it</td><td align="center">249.0G / 83.4s/it</td><td align="center">289.2G / 161.5s/it</td>
+    </tr>
+    <tr>
+        <td>Q-LoRA</td><td align="center">61.4G / 27.4s/it</td><td align="center">61.4G / 31.5s/it</td><td align="center">62.9G / 41.4s/it</td><td align="center">64.1G / 59.5s/it</td><td align="center">68.0G / 97.7s/it</td><td align="center">75.6G / 179.8s/it</td>
+    </tr>
 </table>
 
 <br>
@@ -680,12 +776,40 @@ tokenizer.save_pretrained(new_model_directory)
 ## 部署
 
 ### vLLM
-如希望部署及加速推理，我们建议你使用vLLM和FastChat。首先安装相应的代码库：
+如希望部署及加速推理，我们建议你使用vLLM。
+
+如果你使用cuda12.1和pytorch2.1，可以直接使用以下命令安装vLLM。
+
 ```bash
 pip install vllm
+```
+
+否则请参考vLLM官方的[安装说明](https://docs.vllm.ai/en/latest/getting_started/installation.html)。
+
+#### vLLM + 类Transformer接口
+
+请下载[接口封装代码](examples/vllm_wrapper.py)到当前文件夹，并执行以下命令进行多轮对话交互。（注意：该方法当前只支持``model.chat()``接口。）
+
+```python
+from vllm_wrapper import vLLMWrapper
+
+model = vLLMWrapper('Qwen/Qwen-7B-Chat', tensor_parallel_size=1)
+
+response, history = model.chat(query="你好", history=None)
+print(response)
+response, history = model.chat(query="给我讲一个年轻人奋斗创业最终取得成功的故事。", history=history)
+print(response)
+response, history = model.chat(query="给这个故事起一个标题", history=history)
+print(response)
+```
+
+#### vLLM + 网页Demo / 类OpenAI API
+
+你可以使用FastChat去搭建一个网页Demo或类OpenAI API服务器。首先，请安装FastChat：
+
+```bash
 pip install "fschat[model_worker,webui]"
 ```
-你也可以通过`git clone`和`pip install -e .`的方式通过源码安装。如果遇到安装问题，请阅读它们的官方文档。
 
 使用vLLM和FastChat运行Qwen之前，首先启动一个controller：
 ```bash
@@ -694,24 +818,30 @@ python -m fastchat.serve.controller
 
 然后启动model worker读取模型。如使用单卡推理，运行如下命令：
 ```bash
-python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code
+python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --dtype bfloat16
 ```
 然而，如果你希望使用多GPU加速推理或者增大显存，你可以使用vLLM支持的模型并行机制。假设你需要在4张GPU上运行你的模型，命令如下所示：
 ```bash
-python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --tensor-parallel-size 4
+python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --tensor-parallel-size 4 --dtype bfloat16
 ```
 
-启动model worker后，你可以启动一个web demo或者OpenAI API。启动web demo的命令如下：
+启动model worker后，你可以启动一个：
+
+* Web UI Demo
 ```bash
 python -m fastchat.serve.gradio_web_server
 ```
+
+* OpenAI API
+
 使用OpenAI API前，请阅读我们的API章节配置好环境，然后运行如下命令：
 ```bash
 python -m fastchat.serve.openai_api_server --host localhost --port 8000
 ```
+
+然而，如果你觉得使用vLLM和FastChat比较困难，你也可以尝试以下我们提供的最简单的方式部署Web Demo、CLI Demo和OpenAI API。
 <br>
 
-## Demo
 
 ### Web UI
 
@@ -748,68 +878,12 @@ python cli_demo.py
 <p>
 <br>
 
-## API
-
-最简单的使用Qwen模型API服务的方法就是通过DashScope（阿里云灵积模型服务）。我们提供了简单介绍说明使用方法。同时，我们还提供了自己部署OpenAI格式的API的方法。
-
-### DashScope
-DashScope是阿里云提供的大语言模型的API服务，目前支持Qwen。但请注意，目前提供服务的Qwen模型为内部模型，暂无更多具体细节对外透露。模型服务包括`qwen-turbo`和`qwen-plus`。前者速度更快，后者效果更优。详情请查看[文档](https://dashscope.aliyun.com)。
-
-请首先前往[官网](https://help.aliyun.com/zh/dashscope/developer-reference/activate-dashscope-and-create-an-api-key?spm=a2c4g.11186623.0.0.6c2774fahtfXdn)开通DashScope，获得API Key（AK）。建议通过环境变量设置AK：
-```bash
-export DASHSCOPE_API_KEY="YOUR_DASHSCOPE_API_KEY"
-```
-随后安装相关代码包，点击[此处](https://help.aliyun.com/zh/dashscope/developer-reference/install-dashscope-sdk)查看安装文档。如使用python，则直接通过pip安装：
-```bash
-pip install dashscope
-```
-如安装JAVA SDK，则通过如下命令安装：
-```xml
-<!-- https://mvnrepository.com/artifact/com.alibaba/dashscope-sdk-java -->
-<dependency>
-    <groupId>com.alibaba</groupId>
-    <artifactId>dashscope-sdk-java</artifactId>
-    <version>the-latest-version</version>
-</dependency>
-```
-最简单的使用方法就是通过messages调用，用法类似OpenAI API。示例如下：
-```python
-import random
-from http import HTTPStatus
-from dashscope import Generation
-
-
-def call_with_messages():
-    messages = [{'role': 'system', 'content': 'You are a helpful assistant.'},
-                {'role': 'user', 'content': '如何做西红柿鸡蛋？'}]
-    gen = Generation()
-    response = gen.call(
-        Generation.Models.qwen_turbo,
-        messages=messages,
-        seed=random.randint(1, 10000),  # set the random seed, optional, default to 1234 if not set
-        result_format='message',  # set the result to be "message" format.
-    )
-    return response
-
-
-if __name__ == '__main__':
-    response = call_with_messages()
-    if response.status_code == HTTPStatus.OK:
-        print(response)
-    else:
-        print('Request id: %s, Status code: %s, error code: %s, error message: %s' % (
-            response.request_id, response.status_code,
-            response.code, response.message
-        ))
-```
-更多用法请查看官方文档了解详情。
-
-### OpenAI API
+### API
 
 我们提供了OpenAI API格式的本地API部署方法（感谢@hanpenggit）。在开始之前先安装必要的代码库：
 
 ```bash
-pip install fastapi uvicorn openai "pydantic>=2.3.0" sse_starlette
+pip install fastapi uvicorn openai pydantic sse_starlette
 ```
 
 随后即可运行以下命令部署你的本地API：
@@ -859,6 +933,86 @@ print(response.choices[0].message.content)
 
 该接口也支持函数调用（**Function Calling**），但暂时仅限 `stream=False` 时能生效。用法见[函数调用示例](examples/function_call_examples.py)。
 <br><br>
+
+## 🐳 使用预构建的Docker镜像
+
+为简化部署流程，我们提供了预配置好相应环境的Docker镜像：[qwenllm/qwen](https://hub.docker.com/r/qwenllm/qwen)，只需安装驱动、下载模型文件即可启动Demo、部署OpenAI API以及进行微调。
+
+### 准备操作
+
+1. 根据需要使用的镜像版本，安装相应版本的Nvidia驱动：
+  - `qwenllm/qwen:cu117`（**推荐**）：`>= 515.48.07`
+  - `qwenllm/qwen:cu114`（不支持flash-attention）：`>= 470.82.01`
+  - `qwenllm/qwen:latest`：与`qwenllm/qwen:cu117`相同
+
+2. 安装并配置[docker](https://docs.docker.com/engine/install/)和[nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)：
+
+```bash
+# 配置docker
+sudo systemctl start docker
+# 测试docker是否安装正确
+sudo docker run hello-world
+
+# 配置nvidia-container-toolkit
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
+# 测试nvidia-container-toolkit是否安装正确
+sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+```
+
+3. 下载模型及代码至本地（参考[此处说明](#DownloadModel)）
+
+### 部署
+
+下面我们以Qwen-7B-Chat为例。在启动Web Demo或者部署API前，请先参照下方代码完成配置工作：
+
+```bash
+IMAGE_NAME=qwenllm/qwen:cu117
+PORT=8901
+CHECKPOINT_PATH=/path/to/Qwen-7B-Chat   # 下载到本地的模型及代码路径
+```
+
+如下脚本可以帮你部署:
+
+* OpenAI API
+```bash
+bash docker/docker_openai_api.sh -i ${IMAGE_NAME} -c ${CHECKPOINT_PATH} --port ${PORT}
+```
+
+* Web UI
+```bash
+bash docker/docker_web_demo.sh -i ${IMAGE_NAME} -c ${CHECKPOINT_PATH} --port ${PORT}
+```
+
+* 交互式Demo
+```bash
+bash docker/docker_cli_demo.sh -i ${IMAGE_NAME} -c ${CHECKPOINT_PATH}
+```
+
+这些命令将自动下载所需镜像以及后台启动Web UI Demo。你可以打开`http://localhost:${PORT}` 来使用该Demo。
+
+如果输出如下内容，则说明Demo启动成功：
+
+```text
+Successfully started web demo. Open '...' to try!
+Run `docker logs ...` to check demo status.
+Run `docker rm -f ...` to stop and remove the demo.
+```
+
+如果你想查看Demo的状态，你可以使用这个命令来展示输出结果：`docker logs qwen`。
+
+你可以使用这个命令`docker rm -f qwen`来停止服务并删除容器。
+
+## 🔥 系统指令 (System Prompt)
+Qwen-1.8-Chat 和 Qwen-72B-Chat 通义千问在多样且存在多轮复杂交互的系统指令上进行了充分训练，使模型可以跟随多样的系统指令，实现上下文(in-context)中的模型定制化，进一步提升了通义千问的可扩展性。
+
+通过系统指令，Qwen-Chat能够实现**角色扮演**，**语言风格迁移**，**任务设定**，和**行为设定**等能力。
+
+![](assets/system_prompt_language_style.png)
+
+![](assets/system_prompt_role_play_en.png)
+
+更多关于系统指令的介绍信息可以参考[示例文档](examples/system_prompt.md).
 
 
 ## 工具调用
@@ -1084,7 +1238,11 @@ Qwen-Chat针对工具使用、函数调用能力进行了优化。用户可以�
 
 ## 长文本理解
 
-我们引入了NTK插值、窗口注意力、LogN注意力缩放等技术来提升模型的上下文长度并突破训练序列长度的限制。通过arXiv数据集上的语言模型实验，我们的原生长度为2K的Qwen-7B/14B在8K的序列长度下依然表现不错，而原生长度扩展到8K的Qwen-7B能够在32K长序列的设置下取得不错的表现。
+我们引入了NTK插值、窗口注意力、LogN注意力缩放等技术来提升模型的上下文长度并突破训练序列长度的限制，原生长度为2K的Qwen-14B可以扩展到8K的序列长度，而原生长度8K的Qwen-1.8B/7B能够在32K长序列的设置下取得不错的表现。
+
+对于Qwen-72B，我们基于RoPE采用更大的旋转Base来适应更长的上下文。Qwen-72B支持32K的上下文长度。
+
+通过arXiv数据集上的语言模型实验，发现 Qwen 在长上下文场景下可以达到出色的性能。结果如下：
 
 <table>
     <tr>
@@ -1100,12 +1258,11 @@ Qwen-Chat针对工具使用、函数调用能力进行了优化。用户可以�
         <td>+ dynamic_ntk</td><td align="center">4.23</td><td align="center">3.78</td><td align="center">3.59</td><td align="center">3.66</td><td align="center">5.71</td><td align="center">-</td>
     </tr>
     <tr>
-        <td>+ dynamic_ntk + logn</td><td align="center">4.23</td><td align="center">3.78</td><td align="center">3.58</td><td align="center">3.56</td><td align="center">4.62</td><td align="center">-</td>
+            <td>Qwen-1.8B</td><td align="center"><b>5.00</b></td><td align="center"><b>4.48</b></td><td align="center"><b>4.13</b></td><td align="center"><b>3.89</b></td><td align="center">17.42</td><td align="center">433.85</td>
     </tr>
     <tr>
-        <td>+ dynamic_ntk + logn + window_attn</td><td align="center">4.23</td><td align="center">3.78</td><td align="center">3.58</td><td align="center">3.49</td><td align="center">4.32</td><td align="center">-</td>
+        <td>+ dynamic_ntk + logn + window_attn</td><td align="center"><b>5.00</b></td><td align="center"><b>4.48</b></td><td align="center"><b>4.14</b></td><td align="center"><b>3.93</b></td><td align="center"><b>3.82</b></td><td align="center"><b>3.83</b></td>
     </tr>
-    <tr>
     <tr>
         <td>Qwen-7B</td><td align="center"><b>4.23</b></td><td align="center"><b>3.81</b></td><td align="center"><b>3.52</b></td><td align="center"><b>3.31</b></td><td align="center">7.27</td><td align="center">181.49</td>
     </tr>
@@ -1121,11 +1278,28 @@ Qwen-Chat针对工具使用、函数调用能力进行了优化。用户可以�
     <tr>
         <td>+ dynamic_ntk + logn + window_attn</td><td align="center"><b>-</b></td><td align="center"><b>3.46</b></td><td align="center"><b>3.29</b></td><td align="center"><b>3.18</b></td><td align="center">3.42</td><td align="center">-</td>
     </tr>
+    <tr>
+        <td>Qwen-72B</td><td align="center"><b>-</b></td><td align="center"><b>-</b></td><td align="center">-</td><td align="center"><b>2.83</b></td><td align="center"><b>2.73</b></td><td align="center"><b>2.72</b></td>
+    </tr>
 </table>
 
-## Tokenization
+进一步，我们为了验证Qwen-72B-Chat在长文本任务上的能力，在[L-Eval](https://arxiv.org/abs/2307.11088)客观题上进行了测试，评分结果如下：
 
-> 注：作为术语的“tokenization”在中文中尚无共识的概念对应，本文档采用英文表达以利说明。
+| Model             | Input Length | Average   |  Coursera  |    GSM     |   QuALITY  |    TOEFL   |   CodeU    |  SFcition  |
+|:------------------|:------------:|:---------:|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|
+| ChatGPT-3.5-16k   |     16K      |   60.73   | **63.51**  | **84.00**  |   61.38    |    78.43   | **12.22**  |    64.84   |
+| **Qwen-72B-Chat** |     32K      | **62.30** |   58.13    |   76.00    | **77.22**  |  **86.24** |    6.66    |  **69.53** |
+
+
+我们进一步进行了“大海捞针”实验（想法来自于[@Greg Kamradt](https://twitter.com/GregKamradt/status/1727018183608193393)），测试模型在不同长度的输入下，是否能检索到文章不同位置的信息，结果如下：
+
+![](assets/qwen_72b_needle_in_a_haystack.png)
+
+以上结果说明，Qwen-72B-Chat可以能准确检索到32K以内的输入长度中放在各种位置的信息，证明了其具有优秀的长文本处理能力。
+
+## Tokenizer
+
+> 注：作为术语的“tokenizer”在中文中尚无共识的概念对应，本文档采用英文表达以利说明。
 
 基于tiktoken的tokenizer有别于其他分词器，比如sentencepiece tokenizer。尤其在微调阶段，需要特别注意特殊token的使用。关于tokenizer的更多信息，以及微调时涉及的相关使用，请参阅[文档](tokenization_note_zh.md)。
 <br><br>
@@ -1155,7 +1329,14 @@ Qwen-Chat针对工具使用、函数调用能力进行了优化。用户可以�
 
 ## 使用协议
 
-研究人员与开发者可使用Qwen和Qwen-Chat或进行二次开发。我们同样允许商业使用，具体细节请查看[LICENSE](LICENSE)。如需商用，请填写问卷([7B](https://dashscope.console.aliyun.com/openModelApply/qianwen), [14B](https://dashscope.console.aliyun.com/openModelApply/Qwen-14B-Chat))申请。
+<https://github.com/QwenLM/Qwen>中的源代码采用[Apache 2.0协议](./LICENSE)授权，您可在该仓库根目录找到协议全文。
+
+研究人员与开发者可使用Qwen和Qwen-Chat或进行二次开发。对于商业使用，请查看模型各自的LICENSE。
+
+- Qwen-72B、Qwen-14B和Qwen-7B采用[Tongyi Qianwen LICENSE AGREEMENT](./Tongyi%20Qianwen%20LICENSE%20AGREEMENT)授权，您可在相应模型的HuggingFace或ModelScope仓库找到协议原文。如需商用，您只需遵循使用协议进行商用即可，我们欢迎您填写问卷([72B](https://dashscope.console.aliyun.com/openModelApply/Qwen-72B-Chat)、[14B](https://dashscope.console.aliyun.com/openModelApply/Qwen-14B-Chat)、[7B](https://dashscope.console.aliyun.com/openModelApply/qianwen))。
+
+- Qwen-1.8B采用[Tongyi Qianwen RESEARCH LICENSE AGREEMENT](./Tongyi%20Qianwen%20RESEARCH%20LICENSE%20AGREEMENT)授权，您可在相应模型的HuggingFace或ModelScope仓库找到协议原文。如需商用，请联系我们。
+
 <br><br>
 
 ## 联系我们

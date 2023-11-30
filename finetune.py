@@ -278,11 +278,11 @@ def train():
 
     local_rank = training_args.local_rank
 
-    device_map = None
+    device_map = "auto"
     world_size = int(os.environ.get("WORLD_SIZE", 1))
     ddp = world_size != 1
     if lora_args.q_lora:
-        device_map = {"": int(os.environ.get("LOCAL_RANK") or 0)} if ddp else None
+        device_map = {"": int(os.environ.get("LOCAL_RANK") or 0)} if ddp else "auto"
         if len(training_args.fsdp) > 0 or deepspeed.is_deepspeed_zero3_enabled():
             logging.warning(
                 "FSDP or ZeRO3 are not incompatible with QLoRA."

@@ -1,0 +1,9 @@
+transformers==4.32.0
+tiktoken
+streamlit>=1.24.0
+sentencepiece
+urllib3==1.26.16
+transformers_stream_generator==0.0.4
+accelerate
+einops
+#scipy

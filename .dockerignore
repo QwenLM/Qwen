@@ -1,0 +1,14 @@
+__pycache__
+*.so
+build
+.coverage_*
+*.egg-info
+*~
+.vscode/
+.idea/
+.git/
+.github/
+.DS_Store
+
+/private/
+/README-docker.md

@@ -7,6 +7,34 @@ MODEL="Qwen/Qwen-7B-Chat-Int4" # Set the path if you do not want to load from hu
 # See the section for finetuning in README for more information.
 DATA="path_to_data"
 
+function usage() {
+    echo '
+Usage: bash finetune/finetune_qlora_single_gpu.sh [-m MODEL_PATH] [-d DATA_PATH]
+'
+}
+
+while [[ "$1" != "" ]]; do
+    case $1 in
+        -m | --model )
+            shift
+            MODEL=$1
+            ;;
+        -d | --data )
+            shift
+            DATA=$1
+            ;;
+        -h | --help )
+            usage
+            exit 0
+            ;;
+        * )
+            echo "Unknown argument ${1}"
+            exit 1
+            ;;
+    esac
+    shift
+done
+
 export CUDA_VISIBLE_DEVICES=0
 
 # Remember to use --fp16 instead of --bf16 due to autogptq

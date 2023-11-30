@@ -109,7 +109,7 @@ def eval_subject(
         print(f"{result_path} existed, skip!")
         score = []
         for (_, datarow), (_, resultrow) in zip(
-            test_df.iterrows(), pd.read_csv(result_path).iterrows()
+            test_df.iterrows(), pd.read_csv(result_path).astype(str).iterrows()
         ):
             # pred = extract_answer(resultrow['model_response'], datarow)
             pred = resultrow["model_output"]
@@ -201,7 +201,7 @@ def main(args):
         # dev_df = pd.read_csv(dev_file_path, names=['question','A','B','C','D','answer'])
         test_df = pd.read_csv(
             test_file_path, names=["question", "A", "B", "C", "D", "answer"]
-        )
+        ).astype(str)
 
         score = eval_subject(
             model,
