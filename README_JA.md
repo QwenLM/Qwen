@@ -111,7 +111,7 @@ Qwenモデルは、MMLU、C-Eval、GSM8K、MATH、HumanEval、MBPP、BBHなど�
 
 以下では、Qwen-Chat と 🤖 ModelScope と 🤗 Transformers の簡単な使用例を示します。
 
-詳しくはセクション["ビルド済みDockerイメージの使用"](#-using-pre-built-docker-images)を参照してください。
+詳しくはセクション["ビルド済みDockerイメージの使用"](#-docker)を参照してください。
 
 Dockerを使用しない場合は、環境のセットアップと必要なパッケージのインストールが済んでいることを確認してください。上記の要件を満たしていることを確認してから、依存するライブラリをインストールしてください。
 

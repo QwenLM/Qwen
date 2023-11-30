@@ -109,7 +109,7 @@ Para más resultados experimentales (rendimiento detallado del modelo en más co
 
 A continuación, proporcionamos ejemplos sencillos para mostrar cómo utilizar Qwen-Chat con 🤖 ModelScope y 🤗 Transformers.
 
-Puedes usar nuestras imágenes docker pre-construidas para saltarte la mayoría de los pasos de configuración del entorno, mira la Sección ["Usando Imágenes Docker Pre-construidas"](#-using-pre-built-docker-images) para más detalles. 
+Puedes usar nuestras imágenes docker pre-construidas para saltarte la mayoría de los pasos de configuración del entorno, mira la Sección ["Usando Imágenes Docker Pre-construidas"](#-docker) para más detalles. 
 
 Si no utiliza Docker, asegúrese de haber configurado el entorno e instalado los paquetes necesarios. Asegúrese de que cumple los requisitos anteriores y, a continuación, instale las bibliotecas dependientes.
 
