@@ -285,7 +285,7 @@ def train():
         device_map = {"": int(os.environ.get("LOCAL_RANK") or 0)} if ddp else "auto"
         if len(training_args.fsdp) > 0 or deepspeed.is_deepspeed_zero3_enabled():
             logging.warning(
-                "FSDP or ZeRO3 are not incompatible with QLoRA."
+                "FSDP or ZeRO3 are incompatible with QLoRA."
             )
 
     # Set RoPE scaling factor
