@@ -35,9 +35,9 @@ In brief, we have strong base language models, which have been stably pretrained
 | Qwen-14B  |   23.09.25   |     8K     |             ❎             |          3.0T          |                     18.7GB                      |                       13.0GB                       |     ✅      |
 | Qwen-72B  |   23.11.30   |    32K     |             ✅             |          3.0T          |                     61.4GB                      |                       48.9GB                       |     ✅      |   
 
-In this repo, you can figure out:
+In this repo, you will find:
 
-* Quickstart with Qwen, and enjoy the simple inference.
+* Quickstart inference code for running Qwen models.
 * Details about the quantization models, including GPTQ and KV cache quantization.
 * Statistics of inference performance, including speed and memory.
 * Tutorials on finetuning, including full-parameter tuning, LoRA, and Q-LoRA.
@@ -49,9 +49,9 @@ In this repo, you can figure out:
 * License agreement
 * ...
 
-Also, if you meet problems, turn to [FAQ](FAQ.md) for help first. Still feeling struggled? Feel free to shoot us issues (better in English so that more people can understand you)! If you would like to help us, send us pull requests with no hesitation! We are always excited about PR! 
+Also, if you meet problems, turn to [FAQ](FAQ.md) for help first. Still struggling? Feel free to shoot us issues (better in English so that more people can understand you)! If you would like to help us, send us pull requests with no hesitation! We are always excited about PR! 
 
-Would like to chat with us or date us coffee time? Welcome to our Discord or WeChat! 
+Would like to chat with us or have coffee with us? Welcome to our Discord or WeChat! 
 <br><br>
 
 ## News and Updates
