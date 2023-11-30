@@ -30,10 +30,10 @@ En resumen, disponemos de modelos lingüísticos sólidos, que han sido preentre
 
 | Modelo    | Fecha de Publicación | Longitud Máx. | Mejora del Sistema de Avisos | # de Fichas Preentrenadas | Uso Mínimo de Memoria GPU de Finetuning (Q-Lora) | Uso Mínimo de la GPU para Generar 2048 Tokens (Int4) | Uso de Herramientas |
 |:----------|:--------------------:|:-------------:|:----------------------------:|:-------------------------:|:------------------------------------------------:|:----------------------------------------------------:|:-------------------:|
-| Qwen-1.8B |       23.11.30       |      32K      |              √               |           2.2T            |                      5.8GB                       |                        2.9GB                         |          √          |  
-| Qwen-7B   |       23.08.03       |      32K      |              ×               |           2.4T            |                      11.5GB                      |                        8.2GB                         |          √          |   
-| Qwen-14B  |       23.09.25       |      8K       |              ×               |           3.0T            |                      18.7GB                      |                        13.0GB                        |          √          |
-| Qwen-72B  |       23.11.30       |      32K      |              √               |           3.0T            |                      61.4GB                      |                        48.9GB                        |          √          |   
+| Qwen-1.8B |       23.11.30       |      32K      |              ✅               |           2.2T            |                      5.8GB                       |                        2.9GB                         |          ✅          |  
+| Qwen-7B   |       23.08.03       |      32K      |              ❎               |           2.4T            |                      11.5GB                      |                        8.2GB                         |          ✅          |   
+| Qwen-14B  |       23.09.25       |      8K       |              ❎               |           3.0T            |                      18.7GB                      |                        13.0GB                        |          ✅          |
+| Qwen-72B  |       23.11.30       |      32K      |              ✅               |           3.0T            |                      61.4GB                      |                        48.9GB                        |          ✅          |   
 
 En este repo, usted puede averiguar:
 

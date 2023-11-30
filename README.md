@@ -30,10 +30,10 @@ In brief, we have strong base language models, which have been stably pretrained
 
 | Model     | Release Date | Max Length | System Prompt Enhancement | # of Pretrained Tokens | Minimum GPU Memory Usage of Finetuning (Q-Lora) | Minimum GPU Usage of Generating 2048 Tokens (Int4) | Tool Usage |
 |:----------|:------------:|:----------:|:-------------------------:|:----------------------:|:-----------------------------------------------:|:--------------------------------------------------:|:----------:|
-| Qwen-1.8B |   23.11.30   |    32K     |             √             |          2.2T          |                      5.8GB                      |                       2.9GB                        |     √      |  
-| Qwen-7B   |   23.08.03   |    32K     |             ×             |          2.4T          |                     11.5GB                      |                       8.2GB                        |     √      |   
-| Qwen-14B  |   23.09.25   |     8K     |             ×             |          3.0T          |                     18.7GB                      |                       13.0GB                       |     √      |
-| Qwen-72B  |   23.11.30   |    32K     |             √             |          3.0T          |                     61.4GB                      |                       48.9GB                       |     √      |   
+| Qwen-1.8B |   23.11.30   |    32K     |             ✅             |          2.2T          |                      5.8GB                      |                       2.9GB                        |     ✅      |  
+| Qwen-7B   |   23.08.03   |    32K     |             ❎             |          2.4T          |                     11.5GB                      |                       8.2GB                        |     ✅      |   
+| Qwen-14B  |   23.09.25   |     8K     |             ❎             |          3.0T          |                     18.7GB                      |                       13.0GB                       |     ✅      |
+| Qwen-72B  |   23.11.30   |    32K     |             ✅             |          3.0T          |                     61.4GB                      |                       48.9GB                       |     ✅      |   
 
 In this repo, you can figure out:
 
