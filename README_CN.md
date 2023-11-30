@@ -1003,6 +1003,41 @@ Run `docker rm -f ...` to stop and remove the demo.
 
 你可以使用这个命令`docker rm -f qwen`来停止服务并删除容器。
 
+### 微调
+
+使用预配置好的Docker镜像进行微调的方法与[上一章](#微调)基本一致（我们已经在镜像中安装了相关依赖）：
+
+以下是一个单卡LoRA微调的示例：
+```bash
+IMAGE_NAME=qwenllm/qwen:cu117
+CHECKPOINT_PATH=/path/to/Qwen-7B                # 下载的模型和代码路径
+#CHECKPOINT_PATH=/path/to/Qwen-7B-Chat-Int4     # 下载的模型和代码路径 (Q-LoRA)
+DATA_PATH=/path/to/data/root                    # 准备微调数据放在 ${DATA_PATH}/example.json
+OUTPUT_PATH=/path/to/output/checkpoint          # 微调输出路径
+
+# 默认使用主机所有GPU
+DEVICE=all
+# 如果需要指定用于训练的GPU，按照以下方式设置device（注意：内层的引号不可省略）
+#DEVICE='"device=0,1,2,3"'
+
+mkdir -p ${OUTPUT_PATH}
+
+# 单卡LoRA微调
+docker run --gpus ${DEVICE} --rm --name qwen \
+    --mount type=bind,source=${CHECKPOINT_PATH},target=/data/shared/Qwen/Qwen-7B \
+    --mount type=bind,source=${DATA_PATH},target=/data/shared/Qwen/data \
+    --mount type=bind,source=${OUTPUT_PATH},target=/data/shared/Qwen/output_qwen \
+    --shm-size=2gb \
+    -it ${IMAGE_NAME} \
+    bash finetune/finetune_lora_single_gpu.sh -m /data/shared/Qwen/Qwen-7B/ -d /data/shared/Qwen/data/example.json
+```
+
+如需修改为单卡Q-LoRA微调示例，只要修改`docker run`中的bash命令：
+```bash
+bash finetune/finetune_qlora_single_gpu.sh -m /data/shared/Qwen/Qwen-7B-Chat-Int4/ -d /data/shared/Qwen/data/example.json
+```
+<br>
+
 ## 🔥 系统指令 (System Prompt)
 Qwen-1.8-Chat 和 Qwen-72B-Chat 通义千问在多样且存在多轮复杂交互的系统指令上进行了充分训练，使模型可以跟随多样的系统指令，实现上下文(in-context)中的模型定制化，进一步提升了通义千问的可扩展性。
 
