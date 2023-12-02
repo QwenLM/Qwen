@@ -11,7 +11,7 @@
 <p align="center">
         🤗 <a href="https://huggingface.co/Qwen">Hugging Face</a>&nbsp&nbsp | &nbsp&nbsp🤖 <a href="https://modelscope.cn/organization/qwen">ModelScope</a>&nbsp&nbsp | &nbsp&nbsp 📑 <a href="https://arxiv.org/abs/2309.16609">Paper</a> &nbsp&nbsp ｜ &nbsp&nbsp🖥️ <a href="https://modelscope.cn/studios/qwen/Qwen-72B-Chat-Demo/summary">Demo</a>
 <br>
-<a href="assets/wechat.png">WeChat (微信)</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/z3GAxXZ9Ce">Discord</a>&nbsp&nbsp ｜  &nbsp&nbsp<a href="https://dashscope.aliyun.com">API</a> 
+<a href="assets/wechat.png">WeChat (微信)</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/z3GAxXZ9Ce">Discord</a>&nbsp&nbsp ｜  &nbsp&nbsp<a href="https://dashscope.aliyun.com">API</a>
 </p>
 <br><br>
 
@@ -24,50 +24,50 @@
 
 
 
-**Qwen-1.8B**、**Qwen-7B**、**Qwen-14B**、**Qwen-72B**の基本言語モデルである**Qwen**と、**Qwen-1.8B-Chat**、**Qwen-7B-Chat**、**Qwen-14B-Chat**、**Qwen-72B-Chat**のチャットモデルである**Qwen-Chat**をオープンソース化します。上の表にリンクがあります。リンクをクリックして、モデルカードをご確認ください。また、**[テクニカルレポート](https://arxiv.org/abs/2309.16609)**も公開しています。論文リンクをクリックしてご覧ください！
+**Qwen-1.8B**、**Qwen-7B**、**Qwen-14B**、**Qwen-72B** の基本言語モデルである **Qwen** と、**Qwen-1.8B-Chat**、**Qwen-7B-Chat**、**Qwen-14B-Chat**、**Qwen-72B-Chat** のチャットモデルである **Qwen-Chat** をオープンソース化します。上の表にリンクがあります。リンクをクリックして、モデルカードをご確認ください。また、**[テクニカルレポート](https://arxiv.org/abs/2309.16609)** も公開しています。論文リンクをクリックしてご覧ください！
 
-簡単に説明すると、私たちは、ドメインや言語（中国語と英語を中心に）などを幅広くカバーする最大3兆トークンの多言語データに対して安定的に事前学習された強力なベース言語モデルを持っています。これらのモデルは、ベンチマークデータセットにおいて競争力のあるパフォーマンスを達成することができます。さらに、SFTとRLHFに基づく人間の嗜好に沿ったチャットモデル（まだリリースされていません）があり、チャット、コンテンツ作成、情報抽出、要約、翻訳、コーディング、数学の問題を解くなどが可能で、ツールを使ったり、エージェントとして遊んだり、コードインタプリタとして遊んだりすることもできます。
+簡単に説明すると、私たちは、ドメインや言語（中国語と英語を中心に）などを幅広くカバーする最大3兆トークンの多言語データに対して安定的に事前学習された強力なベース言語モデルを持っています。これらのモデルは、ベンチマークデータセットにおいて競争力のあるパフォーマンスを達成することができます。さらに、SFT と RLHF に基づく人間の嗜好に沿ったチャットモデル（まだリリースされていません）があり、チャット、コンテンツ作成、情報抽出、要約、翻訳、コーディング、数学の問題を解くなどが可能で、ツールを使ったり、エージェントとして遊んだり、コードインタプリタとして遊んだりすることもできます。
 
 
-| モデル       |   発行日    | コンテキストの最大長 | システムプロンプトの強化 | 预训练されたトークンの数 | Finetuning（Q-Lora）の最小GPUメモリ使用量 | 2048トークン生成時の最小GPUメモリ使用量（Int4） | ツールの使用能力 |
+| モデル       |   発行日    | コンテキストの最大長 | システムプロンプトの強化 | 事前学習済みトークンの数 | Finetuning（Q-Lora）の最小 GPU メモリ使用量 | 2048トークン生成時の最小 GPU メモリ使用量（Int4） | ツールの使用能力 |
 |:----------|:--------:|:----------:|:------------:|:------------:|:------------------------------:|:-----------------------------:|:--------:|
-| Qwen-1.8B | 23.11.30 |    32K     |      ✅       |     2.2T     |             5.8GB              |             2.9GB             |    ✅     |  
-| Qwen-7B   | 23.08.03 |    32K     |      ❎       |     2.4T     |             11.5GB             |             8.2GB             |    ✅     |   
+| Qwen-1.8B | 23.11.30 |    32K     |      ✅       |     2.2T     |             5.8GB              |             2.9GB             |    ✅     |
+| Qwen-7B   | 23.08.03 |    32K     |      ❎       |     2.4T     |             11.5GB             |             8.2GB             |    ✅     |
 | Qwen-14B  | 23.09.25 |     8K     |      ❎       |     3.0T     |             18.7GB             |            13.0GB             |    ✅     |
-| Qwen-72B  | 23.11.30 |    32K     |      ✅       |     3.0T     |             61.4GB             |            48.9GB             |    ✅     |   
+| Qwen-72B  | 23.11.30 |    32K     |      ✅       |     3.0T     |             61.4GB             |            48.9GB             |    ✅     |
 
 
 このレポでは、それを把握することができる：
 
-* Qwenのクイックスタート。
-* 量子化モデルの詳細（使用量、メモリ、推論速度など）。比較のために、BF16モデルの統計も提供します。
-* フルパラメーターチューニング、LoRA、Q-LoRAを含む、微調整に関するチュートリアル。
-* vLLMとFastChatを例に、デプロイメントについて説明します。
-* WebUI、CLIデモなど、デモの構築に関する説明。
-* あなたのモデルのためのOpenAIスタイルのAPIを構築する手順。
+* Qwen のクイックスタート。
+* 量子化モデルの詳細（使用量、メモリ、推論速度など）。比較のために、BF16 モデルの統計も提供します。
+* フルパラメーターチューニング、LoRA、Q-LoRA を含む、ファインチューニングに関するチュートリアル。
+* vLLM と FastChat を例に、デプロイメントについて説明します。
+* WebUI、CLI デモなど、デモの構築に関する説明。
+* あなたのモデルのための OpenAI スタイルの API を構築する手順。
 * ツール使用、エージェント、コードインタプリタの Qwen の詳細。
 * ロングコンテクスト理解評価の統計
 * ライセンス契約
 * ...
 
-また、困ったことがあれば、まずは[FAQ](FAQ.md)を参照してほしい。まだ悩んでいますか？遠慮なく私たちに問題を送ってください（より多くの人が理解できるように、英語で）！私たちを助けたいなら、遠慮なくプルリクエストを送ってください！
+また、困ったことがあれば、まずは [FAQ](FAQ.md) を参照して下さい。まだ悩んでいますか？遠慮なく私たちに問題を送ってください（より多くの人が理解できるように、英語で）！私たちを助けたいなら、遠慮なくプルリクエストを送ってください！
 
-私たちとチャットしたいですか？私たちのDiscordまたはWeChatグループへようこそ！
+私たちとチャットしたいですか？私たちの Discord または WeChat グループへようこそ！
 <br><br>
 
 ## ニュースとアップデート
 
 * 2023.11.30 🔥 3T トークンで学習し、32k コンテキストをサポートする **Qwen-72B** と **Qwen-72B-Chat** を、 **Qwen-1.8B** と **Qwen-1.8B-Chat** とともに、ModelScope と Hugging Face 上でリリースしました。また、Qwen-72B-ChatとQwen-1.8B-Chatのシステム・プロンプト機能を強化しました。[サンプル・ドキュメント](examples/system_prompt.md)を参照してください。さらに、**Ascend 910** と **Hygon DCU** での推論をサポートしました。詳細は `ascend-support` と `dcu-support` を参照してください。
-* 2023.10.17 Int8量子化モデル**Qwen-7B-Chat-Int8**と**Qwen-14B-Chat-Int8**をリリースしました。
+* 2023.10.17 Int8 量子化モデル **Qwen-7B-Chat-Int8** と **Qwen-14B-Chat-Int8** をリリースしました。
 * 2023.9.25 🔥 Qwen-14BとQwen-14B-ChatをModelScopeとHugging Faceでリリースしました。[qwen.cpp](https://github.com/QwenLM/qwen.cpp) と [Qwen-Agent](https://github.com/QwenLM/Qwen-Agent) もリリースされました。同時に、Qwen-7B と Qwen-7B-Chat も更新しました。Qwen-7B（オリジナル）と比較して、Qwen-7Bはより多くの学習トークンを使用し、2.2Tトークンから2.4Tトークンに増加し、コンテキスト長は2048から8192に拡張された。Qwen-7Bの中国語知識とコーディング能力はさらに向上しています。最新のコードとチェックポイントをお使いください！
-* 2023.9.12 Qwen-7Bモデルにおいて、フルパラメーター・ファインチューニング、LoRA、Q-LoRAを含むファインチューニングをサポートしました。
+* 2023.9.12 Qwen-7B モデルにおいて、フルパラメーター・ファインチューニング、LoRA、Q-LoRAを含むファインチューニングをサポートしました。
 * 2023.8.21 Qwen-7B-Chat 用 Int4 量子化モデル **Qwen-7B-Chat-Int4** をリリースしました。また、ベンチマーク評価においても大きな性能低下は見られませんでした。
 * 2023.8.3 ModelScope と Hugging Face 上で **Qwen-7B** と **Qwen-7B-Chat** をリリースしました。また、トレーニングの詳細やモデルの性能など、モデルの詳細については技術メモを提供しています。
 <br>
 
 ## 性能
 
-Qwenモデルは、MMLU、C-Eval、GSM8K、MATH、HumanEval、MBPP、BBHなど、自然言語理解、数学的問題解決、コーディングなどに関するモデルの能力を評価する一連のベンチマークデータセットにおいて、同様のモデルサイズを持つベースラインモデルを上回る性能を発揮する。Qwen-72Bは全てのタスクでLLaMA2-70Bを上回り、10タスク中7タスクでGPT-3.5を上回った。
+Qwen モデルは、MMLU、C-Eval、GSM8K、MATH、HumanEval、MBPP、BBH など、自然言語理解、数学的問題解決、コーディングなどに関するモデルの能力を評価する一連のベンチマークデータセットにおいて、同様のモデルサイズを持つベースラインモデルを上回る性能を発揮します。Qwen-72B は全てのタスクで LLaMA2-70B を上回り、10 タスク中 7 タスクで GPT-3.5 を上回りました。
 
 
 <p align="left">
@@ -94,7 +94,7 @@ Qwenモデルは、MMLU、C-Eval、GSM8K、MATH、HumanEval、MBPP、BBHなど�
 | **Qwen-72B**      | **77.4** | **83.3** | **78.9** | **35.2** | **35.4**  | **52.2** | **67.7** | **83.6** |
 
 
-比較されたすべてのモデルについて、公式に報告された結果と[OpenCompass](https://opencompass.org.cn/leaderboard-llm) の間の最高スコアを報告します。
+比較されたすべてのモデルについて、公式に報告された結果と [OpenCompass](https://opencompass.org.cn/leaderboard-llm) の間の最高スコアを報告します。
 
 より詳細な実験結果（より多くのベンチマークデータセットでの詳細なモデル性能）や詳細については、[こちら](TODO)をクリックして技術メモを参照してください。
 <br><br>
@@ -113,13 +113,13 @@ Qwenモデルは、MMLU、C-Eval、GSM8K、MATH、HumanEval、MBPP、BBHなど�
 
 詳しくはセクション["ビルド済みDockerイメージの使用"](#-docker)を参照してください。
 
-Dockerを使用しない場合は、環境のセットアップと必要なパッケージのインストールが済んでいることを確認してください。上記の要件を満たしていることを確認してから、依存するライブラリをインストールしてください。
+Docker を使用しない場合は、環境のセットアップと必要なパッケージのインストールが済んでいることを確認してください。上記の要件を満たしていることを確認してから、依存するライブラリをインストールしてください。
 
 ```bash
 pip install -r requirements.txt
 ```
 
-お使いのデバイスが fp16 または bf16 をサポートしている場合、[flash-attention](https://github.com/Dao-AILab/flash-attention) （flash attention 2に対応しました）をインストールすることで、より高い効率とメモリ使用量を抑えることができます。(**flash-attention はオプションであり、インストールしなくてもプロジェクトは正常に実行できます**)
+お使いのデバイスが fp16 または bf16 をサポートしている場合、[flash-attention](https://github.com/Dao-AILab/flash-attention) （flash attention 2 に対応しました）をインストールすることで、より高い効率とメモリ使用量を抑えることができます。(**flash-attention はオプションであり、インストールしなくてもプロジェクトは正常に実行できます**)
 
 ```bash
 git clone https://github.com/Dao-AILab/flash-attention
@@ -134,13 +134,13 @@ cd flash-attention && pip install .
 
 ### 🤗 Transformers
 
-Qwen-Chat を推論に使用するには、以下のように数行のコードを入力するだけです。Qwen/Qwen-7B-Chat "や "Qwen/Qwen-14B-Chat "のように、正しいモデル名やパスを渡すことを忘れないでください。**最新のコードを使用していることを確認してください。**
+Qwen-Chat を推論に使用するには、以下のように数行のコードを入力するだけです。"Qwen/Qwen-7B-Chat" や "Qwen/Qwen-14B-Chat" のように、正しいモデル名やパスを渡すことを忘れないでください。**最新のコードを使用していることを確認してください。**
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
-# Model names："Qwen/Qwen-7B-Chat"、"Qwen/Qwen-14B-Chat"
+# Model 名："Qwen/Qwen-7B-Chat"、"Qwen/Qwen-14B-Chat"
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
 # bf16 を使用
@@ -152,7 +152,7 @@ tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code
 # オートモードを使用すると、デバイスに応じて自動的に精度が選択されます。
 model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True).eval()
 
-# 生成のためのハイパーパラメータを指定。ただし、4.32.0 以上のトTransformerを使用している場合は、これを行う必要はありません。
+# 生成のためのハイパーパラメータを指定。ただし、4.32.0 以上の Transformer を使用している場合は、これを行う必要はありません。
 # model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
 # 第一回対話ターン
@@ -185,7 +185,7 @@ Qwen の学習済みベースモデルの実行も簡単です。
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
-# Model names："Qwen/Qwen-7B"、"Qwen/Qwen-14B"
+# Model 名："Qwen/Qwen-7B"、"Qwen/Qwen-14B"
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
 # bf16 を使用
 # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True, bf16=True).eval()
@@ -196,7 +196,7 @@ tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True
 # オートモードを使用すると、デバイスに応じて自動的に精度が選択されます。
 model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B", device_map="auto", trust_remote_code=True).eval()
 
-# 生成のためのハイパーパラメータを指定。ただし、4.32.0 以上のトTransformerを使用している場合は、これを行う必要はありません。
+# 生成のためのハイパーパラメータを指定。ただし、4.32.0 以上の Transformer を使用している場合は、これを行う必要はありません。
 # model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True)
 
 inputs = tokenizer('蒙古国的首都是乌兰巴托（Ulaanbaatar）\n冰岛的首都是雷克雅未克（Reykjavik）\n埃塞俄比亚的首都是', return_tensors='pt')
@@ -216,14 +216,14 @@ HuggingFaceからモデルのチェックポイントとコードをダウンロ
 from modelscope import snapshot_download
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-# Downloading model checkpoint to a local dir model_dir
+# モデルのチェックポイントをローカルディレクトリ model_dir にダウンロード
 # model_dir = snapshot_download('qwen/Qwen-7B')
 # model_dir = snapshot_download('qwen/Qwen-7B-Chat')
 # model_dir = snapshot_download('qwen/Qwen-14B')
 model_dir = snapshot_download('qwen/Qwen-14B-Chat')
 
-# Loading local checkpoints
-# trust_remote_code is still set as True since we still load codes from local dir instead of transformers
+# ローカルチェックポイントのロード
+# トランスフォーマーではなくローカルディレクトリからコードをロードするため、trust_remote_code は True のままです
 tokenizer = AutoTokenizer.from_pretrained(model_dir, trust_remote_code=True)
 model = AutoModelForCausalLM.from_pretrained(
     model_dir,
@@ -240,21 +240,21 @@ ModelScope は、MaaS（Model-as-a-Service） のためのオープンソース�
 from modelscope import AutoModelForCausalLM, AutoTokenizer
 from modelscope import GenerationConfig
 
-# Model names："Qwen/Qwen-7B-Chat"、"Qwen/Qwen-14B-Chat"
+# Model 名："Qwen/Qwen-7B-Chat"、"Qwen/Qwen-14B-Chat"
 tokenizer = AutoTokenizer.from_pretrained("qwen/Qwen-7B-Chat", trust_remote_code=True)
 model = AutoModelForCausalLM.from_pretrained("qwen/Qwen-7B-Chat", device_map="auto", trust_remote_code=True, fp16=True).eval()
-model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True) # 可指定不同的生成长度、top_p等相关超参
+model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-7B-Chat", trust_remote_code=True) # 異なる世代の長さ、top_p、その他の関連するハイパーパラメータを指定することができます
 
 response, history = model.chat(tokenizer, "你好", history=None)
 print(response)
-response, history = model.chat(tokenizer, "浙江的省会在哪里？", history=history) 
+response, history = model.chat(tokenizer, "浙江的省会在哪里？", history=history)
 print(response)
 response, history = model.chat(tokenizer, "它有什么好玩的景点", history=history)
 print(response)
 ```
 
 ### バッチ推論
-Qwenはバッチ推論をサポートしている。フラッシュ・アテンションを有効にした場合、バッチ推論を使用することで40%のスピードアップが期待できる。以下にコード例を示す：
+Qwen はバッチ推論をサポートしており、フラッシュアテンションを有効にした場合、バッチ推論を使用することで 40% のスピードアップが期待できます。以下にコード例を示す:
 ```python
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -322,9 +322,9 @@ print(response)
 
 ### CPU
 
-Qwenとtiktokenの純粋なC++実装である [qwen.cpp](https://github.com/QwenLM/qwen.cpp) を使用することを強くお勧めします。詳細はレポを確認してください！
+Qwen と tiktoken の純粋な C++ 実装である [qwen.cpp](https://github.com/QwenLM/qwen.cpp) を使用することを強くお勧めします。詳細はリポジトリを確認してください！
 
-また、CPU上でモデルを直接実行することも簡単ですが、その場合はデバイスの指定が必要です：
+また、CPU 上でモデルを直接実行することも簡単ですが、その場合はデバイスの指定が必要です:
 
 
 ```python
@@ -333,27 +333,27 @@ model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cp
 
 ただし、推論効率が極端に低下する可能性があります。
 
-### 複数のGPU
+### 複数の GPU
 
-GPUメモリ不足に悩まされ、1つ以上のGPUでモデルを実行したい場合、Transformersでサポートされるようになったデフォルトのロード方法を直接使うことができます。以前の `utils.py` に基づく方法は非推奨です。
+GPU メモリ不足に悩まされ、1つ以上の GPU でモデルを実行したい場合、Transformers でサポートされるようになったデフォルトのロード方法を直接使うことができます。以前の `utils.py` に基づく方法は非推奨です。
 
-しかし、この方法は簡単ですが、ネイティブ・パイプライン並列の効率は低いです。FastChatでvLLMを使用することをお勧めします。
+しかし、この方法は簡単ですが、ネイティブ・パイプライン並列の効率は低いです。FastChat で vLLM を使用することをお勧めします。
 
 ### DashScope
 
-APIを通じてQwenを利用する最も簡単な方法は、Alibaba Cloudを通じたDashScope APIサービスです。その使い方を紹介します。さらに、OpenAIスタイルのAPIをご自身のサーバーにデプロイするためのスクリプトも提供しています。
+API を通じて Qwen を利用する最も簡単な方法は、Alibaba Cloud を通じた DashScope API サービスです。その使い方を紹介します。さらに、OpenAI スタイルの API をご自身のサーバーにデプロイするためのスクリプトも提供しています。
 
-DashScopeはAlibaba Cloudが提供する大規模言語モデルAPIサービスで、今回Qwenに対応した。DashScopeの背後にあるモデルは、詳細が提供されていない一時的な社内バージョンであることに注意してください。サービスには `qwen-turbo` と `qwen-plus` があり、前者はより高速に動作し、後者はより優れたパフォーマンスを実現している。詳細はドキュメント [こちら](https://dashscope.aliyun.com) を参照。
+DashScope は Alibaba Cloud が提供する大規模言語モデル API サービスで、今回 Qwen に対応した。DashScope の背後にあるモデルは、詳細が提供されていない一時的な社内バージョンであることに注意してください。サービスには `qwen-turbo` と `qwen-plus` があり、前者はより高速に動作し、後者はより優れたパフォーマンスを実現しています。詳細はドキュメント [こちら](https://dashscope.aliyun.com) を参照。
 
 公式サイト [link](https://help.aliyun.com/zh/dashscope/developer-reference/activate-dashscope-and-create-an-api-key?spm=a2c4g.11186623.0.0.6c2774fahtfXdn) で DashScope アカウントを作成し、API キー (AK) を取得してください。AK は環境変数で設定することをお勧めします：
 ```bash
 export DASHSCOPE_API_KEY="YOUR_DASHSCOPE_API_KEY"
 ```
-その後、パッケージをインストールし、ドキュメントは [こちら](https://help.aliyun.com/zh/dashscope/developer-reference/install-dashscope-sdk) をクリックしてください。Python をお使いの場合は、pip で DashScope をインストールできます：
+その後、パッケージをインストールし、ドキュメントは[こちら](https://help.aliyun.com/zh/dashscope/developer-reference/install-dashscope-sdk)をクリックしてください。Python をお使いの場合は、pip で DashScope をインストールできます：
 ```bash
 pip install dashscope
 ```
-JAVA SDKを使用する場合は、この方法でインストールできます：
+JAVA SDK を使用する場合は、この方法でインストールできます：
 ```xml
 <!-- https://mvnrepository.com/artifact/com.alibaba/dashscope-sdk-java -->
 <dependency>
@@ -362,7 +362,7 @@ JAVA SDKを使用する場合は、この方法でインストールできます
     <version>the-latest-version</version>
 </dependency>
 ```
-DashScope を使用する最も簡単な方法は、OpenAI API と同様のメッセージを使用する方法です。以下にその例を示す：
+DashScope を使用する最も簡単な方法は、OpenAI API と同様のメッセージを使用する方法です。以下にその例を示します:
 ```python
 import random
 from http import HTTPStatus
@@ -376,8 +376,8 @@ def call_with_messages():
     response = gen.call(
         Generation.Models.qwen_turbo,
         messages=messages,
-        seed=random.randint(1, 10000),  # set the random seed, optional, default to 1234 if not set
-        result_format='message',  # set the result to be "message" format.
+        seed=random.randint(1, 10000),  # ランダムシードを設定する、オプションであり、設定しない場合のデフォルトは 1234
+        result_format='message',  # 結果を "message" 形式にする。
     )
     return response
 
@@ -400,17 +400,17 @@ if __name__ == '__main__':
 
 ### GPTQ
 
-我々は、[AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ)に基づいた解決策を提供し、Int4とInt8の量子化モデルをリリースすることで、ほぼ無損失なモデル効果を達成しつつ、メモリコストと推論速度の両方で性能を向上させた。
+我々は、[AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ) に基づいた解決策を提供し、Int4 と Int8 の量子化モデルをリリースすることで、ほぼ無損失なモデル効果を達成しつつ、メモリコストと推論速度の両方で性能を向上させた。
 
-ここでは、量子化されたモデルを推論に使用する方法を説明する。始める前に、auto-gptqの要件を満たしていることを確認し（例：torch 2.0以上、transformers 4.32.0以上など）、必要なパッケージをインストールしてください：
+ここでは、量子化されたモデルを推論に使用する方法を説明する。始める前に、auto-gptq の要件を満たしていることを確認し（例：torch 2.0 以上、transformers 4.32.0 以上など）、必要なパッケージをインストールしてください：
 
 ```bash
 pip install auto-gptq optimum
 ```
 
-auto-gptq`のインストールに問題がある場合は、公式の[repo](https://github.com/PanQiWei/AutoGPTQ)をチェックして、ホイールを見つけることをお勧めする。
+`auto-gptq` のインストールに問題がある場合は、公式の[リポジトリ](https://github.com/PanQiWei/AutoGPTQ)をチェックして、ホイールを見つけることをお勧めします。
 
-> 注意：コンパイル済みの `auto-gptq` パッケージは `torch` のバージョンと CUDA バージョンに強く依存しています。さらに、最近のアップデートにより 
+> 注意：コンパイル済みの `auto-gptq` パッケージは `torch` のバージョンと CUDA バージョンに強く依存しています。さらに、最近のアップデートにより
 > さらに、最近のアップデートにより、`transformers`、`optimum`、`peft` でサポートされていないバージョンのエラーが発生する可能性があります。
 > 以下の要件を満たす最新バージョンの使用をお勧めします：
 > - torch==2.1 auto-gptq>=0.5.1 transformers>=4.35.0 optimum>=1.14.0 peft>=0.6.1 > - torch==2.1 auto-gptq>=0.5.1 transformers>=4.35.0 optimum>=1.14.0 peft>=0.6.1
@@ -446,9 +446,9 @@ response, history = model.chat(tokenizer, "Hi", history=None)
 
 ### KVキャッシュ量子化
 
-> 注意: Hugging Faceの内部メカニズムにより、この機能のサポートファイル 
-> (すなわち、`cache_autogptq_cuda_256.cpp`と`cache_autogptq_cuda_kernel_245.cu`)が欠落している可能性があります。以下を手動でダウンロードしてください。
-> Hugging Face Hubから手動でダウンロードし、他のモジュールファイルと同じフォルダに入れてください。
+> 注意: Hugging Face の内部メカニズムにより、この機能のサポートファイル
+> (すなわち、`cache_autogptq_cuda_256.cpp` と `cache_autogptq_cuda_kernel_245.cu`)が欠落している可能性があります。以下を手動でダウンロードしてください。
+> Hugging Face Hub から手動でダウンロードし、他のモジュールファイルと同じフォルダに入れてください。
 
 アテンション KV キャッシュを量子化して圧縮して保存すると、サンプルのスループットが向上する。この機能を有効にするには、`config.json` に `use_cache_quantization` と `use_cache_kernel` という引数を指定する。
 具体的な使用方法は以下の通りである：
@@ -464,49 +464,49 @@ model = AutoModelForCausalLM.from_pretrained(
 )
 ```
 
-注意： 現在、KVキャッシュの量子化とフラッシュ・アテンションを同時に使用することはできない。
-KV キャッシュの量子化とフラッシュ・アテンションを同時に有効にした場合（`use_flash_attn=True`, `use_cache_quantization=True`, `use_cache_kernel=True`）、デフォルトでは `use_flash_attn` は無効になる（`use_flash_attn=false`）。
+注意： 現在、KV キャッシュの量子化とフラッシュ・アテンションを同時に使用することはできません。
+KV キャッシュの量子化とフラッシュ・アテンションを同時に有効にした場合（`use_flash_attn=True`, `use_cache_quantization=True`、`use_cache_kernel=True`）、デフォルトでは `use_flash_attn` は無効になる（`use_flash_attn=false`）。
 
-量子化されたint8-kvcacheモデルを使用しても、下流の評価で大幅な性能低下がないことを確認しました。以下では、さまざまな条件下でのメモリフットプリントのプロファイリングに焦点を当てます。
-プロファイリングは、PyTorch 2.0.1とCUDA 11.4を搭載したシングルA100-SXM4-80G GPUで実行しました。
-デフォルトで1024トークンを生成するためにBF16モデルを使用し、"OOM "はメモリ不足エラーを示します。
+量子化された int8-kvcache モデルを使用しても、下流の評価で大幅な性能低下がないことを確認しました。以下では、さまざまな条件下でのメモリフットプリントのプロファイリングに焦点を当てます。
+プロファイリングは、PyTorch 2.0.1 と CUDA 11.4 を搭載したシングル A100-SXM4-80G GPU で実行しました。
+デフォルトで 1024 トークンを生成するために BF16 モデルを使用し、"OOM" はメモリ不足エラーを示します。
 
-KVキャッシュの量子化により、モデルはより大きなバッチサイズ（bs）で推論することができる。
+KV キャッシュの量子化により、モデルはより大きなバッチサイズ（bs）で推論することができる。
 
 | USE KV Cache |  bs=1  |  bs=4  | bs=16  | bs=32  | bs=64  | bs=100 |
 |--------------|:------:|:------:|:------:|:------:|:------:|:------:|
 | No           | 16.3GB | 24.1GB | 31.7GB | 48.7GB |  OOM   |  OOM   |
 | Yes          | 15.5GB | 17.2GB | 22.3GB | 30.2GB | 48.2GB | 72.4GB |
 
-KVキャッシュ量子化により、推論段階でより長いシーケンス（`sl`, シーケンス長、生成されるトークン数を指す）を生成する際、モデルはより多くのメモリを節約することができる。
+KV キャッシュ量子化により、推論段階でより長いシーケンス（`sl`、シーケンス長、生成されるトークン数を指す）を生成する際、モデルはより多くのメモリを節約することができる。
 
 | USE KV Cache | sl=512 | sl=1024 | sl=2048 | sl=4096 | sl=8192 |
 |--------------|:------:|:-------:|:-------:|:-------:|:-------:|
 | No           | 15.2GB | 16.3GB  | 17.6GB  | 19.5GB  | 23.2GB  |
 | Yes          |  15GB  | 15.5GB  | 15.8GB  | 16.6GB  | 17.6GB  |
 
-KVキャッシュ量子化モデルでは、layer-pastのフォーマットをfloatからint8に変換し、量子化された `layer-past` には量子化パラメータも格納される。
+KV キャッシュ量子化モデルでは、layer-past のフォーマットを float から int8 に変換し、量子化された `layer-past` には量子化パラメータも格納される。
 
-具体的な手順は以下の通り：
+具体的な手順は以下の通りです:
 
-1. key/valueの量子化を行います。
+1. key/value の量子化を行います。
 ```
     qv,scale,zero_point=quantize_cache_v(v)
 ```
 
-2. `layer_past`に保存します。
+2. `layer_past` に保存します。
 
-量子化されたの`layer-past`は:
+量子化された `layer-past` は:
 ```
     layer_past=((q_key,key_scale,key_zero_point),
                 (q_value,value_scale,value_zero_point))
 ```
-`layer_past`の元のフォーマットは以下の通りである：
+`layer_past` の元のフォーマットは以下の通りである：
 ```
     layer_past=(key,value)
 ```
-量子化されたアテンションKVを使用したい場合、 
-Int8のkey/valueをfloatフォーマットに戻すには、以下のように逆量子化操作を使用します：
+量子化されたアテンション KV を使用したい場合、
+Int8 の key/value を float フォーマットに戻すには、以下のように逆量子化操作を使用します：
 ```
     v=dequantize_cache_torch(qv,scale,zero_point)
 ```
@@ -599,19 +599,19 @@ BF16、Int8、および Int4 のモデルを使用して 2048 を生成する際
 
 プロファイリングは、PyTorch 2.0.1、CUDA 11.8、および Flash-Attendant 2 を備えた単一の A100-SXM4-80G GPU (2xA100 について言及されている場合を除く) で実行されます。(72B + vLLM は PyTorch 2.1.0 および Cuda 11.8 を使用します。) 推論速度 は、エンコードされ生成されたトークンの平均である。
 
-注意：上記のInt4/Int8モデルの推論速度は、autogptqを使用しています。現在、``AutoModelForCausalLM.from_pretrained``で読み込まれるモデルの推論速度は約20%遅くなります。この問題はHuggingFaceチームに報告済みであり、解決策があれば即座に更新されます。
+注意：上記の Int4/Int8 モデルの推論速度は、autogptq を使用しています。現在、``AutoModelForCausalLM.from_pretrained`` で読み込まれるモデルの推論速度は約20%遅くなります。この問題は Hugging Face チームに報告済みであり、解決策があれば即座に更新されます。
 
 また、コンテキストと生成の長さ、Flash Attention バージョンのさまざまな設定で推論速度と GPU メモリ使用量も測定します。 結果は、Hugging Face または ModelScope の対応するモデルカードで確認できます。
 
 ## ファインチューニング
 
 ### 使用方法
-現在、公式のトレーニングスクリプト `finetune.py` を提供しています。さらに、finetune.pyのシェルスクリプトを提供し、finetune.pyを実行することで、finetune.pyを起動することができる。さらに、安心してファインチューニングを開始するためのシェルスクリプトも提供しています。このスクリプトは、[DeepSpeed](https://github.com/microsoft/DeepSpeed) (注意：これはpydanticの最新バージョンとコンフリクトする可能性があるので、`pydantic<2.0`にする必要があります) および [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/) を使用したトレーニングをサポートします。弊社が提供するシェル・スクリプトは DeepSpeed と Peft を使用するため、事前に DeepSpeed と Peft をインストールすることをお勧めします：
+現在、公式のトレーニングスクリプト `finetune.py` を提供しています。さらに、finetune.py のシェルスクリプトを提供し、finetune.py を実行することで、finetune.py を起動することができる。さらに、安心してファインチューニングを開始するためのシェルスクリプトも提供しています。このスクリプトは、[DeepSpeed](https://github.com/microsoft/DeepSpeed) (注意：これは pydantic の最新バージョンとコンフリクトする可能性があるので、`pydantic<2.0`にする必要があります) および [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/) を使用したトレーニングをサポートします。私達が提供するシェルスクリプトは DeepSpeed と Peft を使用するため、事前に DeepSpeed と Peft をインストールすることをお勧めします：
 ```bash
 pip install -r requirements_finetune.txt
 ```
 
-学習データを準備するには、すべてのサンプルをリストにまとめ、jsonファイルに保存する必要があります。各サンプルはidと会話リストで構成される辞書です。以下は1つのサンプルを含む単純なリストの例です：
+学習データを準備するには、すべてのサンプルをリストにまとめ、json ファイルに保存する必要があります。各サンプルはidと会話リストで構成される辞書です。以下は1つのサンプルを含む単純なリストの例です：
 
 ```json
 [
@@ -631,7 +631,7 @@ pip install -r requirements_finetune.txt
 ]
 ```
 
-データ準備の後、提供されているシェルスクリプトを使って微調整を実行することができる。データファイルのパス `$DATA` を忘れずに指定してください。
+データ準備の後、提供されているシェルスクリプトを使ってファインチューニングを実行することができる。データファイルのパス `$DATA` を忘れずに指定してください。
 
 ファインチューニングのスクリプトを使用することで、以下のことが可能になる：
 - フルパラメーター・ファインチューニング
@@ -641,13 +641,13 @@ pip install -r requirements_finetune.txt
 フルパラメータパラメータのファインチューニングを行うには、トレーニングプロセス全体ですべてのパラメータを更新する必要があります。トレーニングを開始するには、以下のスクリプトを実行します：
 
 ```bash
-# 分散トレーニング。GPUメモリが不足するとトレーニングが破綻するため、シングルGPUのトレーニングスクリプトは提供していません。
+# 分散トレーニング。GPU メモリが不足するとトレーニングが破綻するため、シングル GPU のトレーニングスクリプトは提供していません。
 sh finetune/finetune_ds.sh
 ```
 
-シェルスクリプトでは、正しいモデル名またはパス、データパス、出力ディレクトリを指定することを忘れないでください。このスクリプトでは DeepSpeed ZeRO 3 を使用しています。変更したい場合は、引数 `--deepspeed` を削除するか、要件に基づいて DeepSpeed 設定 json ファイルを変更してください。さらに、このスクリプトは混合精度のトレーニングに対応しており、`--bf16 True` または `--fp16 True` を使用することができます。fp16を使用する場合は、混合精度のトレーニングのため、DeepSpeedを使用することを忘れないこと。経験的に、あなたのマシンがbf16をサポートしている場合、私たちのプリトレーニングとアライメントを整合させるためにbf16を使用することをお勧めします。
+シェルスクリプトでは、正しいモデル名またはパス、データパス、出力ディレクトリを指定することを忘れないでください。このスクリプトでは DeepSpeed ZeRO 3 を使用しています。変更したい場合は、引数 `--deepspeed` を削除するか、要件に基づいて DeepSpeed 設定 json ファイルを変更してください。さらに、このスクリプトは混合精度のトレーニングに対応しており、`--bf16 True` または `--fp16 True` を使用することができます。fp16 を使用する場合は、混合精度のトレーニングのため、DeepSpeed を使用することを忘れないこと。経験的に、あなたのマシンが bf16 をサポートしている場合、私たちのプリトレーニングとアライメントを整合させるために bf16 を使用することをお勧めします。
 
-同様に、LoRAを実行するには、以下のように別のスクリプトを使って実行する。始める前に、`peft`がインストールされていることを確認してください。また、モデル、データ、出力へのパスを指定する必要があります。学習済みモデルには絶対パスを使用することをお勧めします。なぜなら、LoRAはアダプタのみを保存し、アダプタ設定jsonファイルの絶対パスは、ロードする事前学習済みモデルを見つけるために使用されるからです。また、このスクリプトはbf16とfp16の両方をサポートしている。
+同様に、LoRA を実行するには、以下のように別のスクリプトを使って実行する。始める前に、`peft` がインストールされていることを確認してください。また、モデル、データ、出力へのパスを指定する必要があります。学習済みモデルには絶対パスを使用することをお勧めします。なぜなら、LoRA はアダプタのみを保存し、アダプタ設定 json ファイルの絶対パスは、ロードする事前学習済みモデルを見つけるために使用されるからです。また、このスクリプトは bf16 と fp16 の両方をサポートしている。
 
 ```bash
 # シングルGPUトレーニング
@@ -656,9 +656,9 @@ sh finetune/finetune_lora_single_gpu.sh
 sh finetune/finetune_lora_ds.sh
 ```
 
-LoRA ([論文](https://arxiv.org/abs/2106.09685)) は、フルパラメーターによるファインチューニングと比較して、adapterのパラメーターを更新するだけで、元の大きな言語モデル層は凍結されたままである。そのため、メモリコストが大幅に削減でき、計算コストも削減できる。
+LoRA ([論文](https://arxiv.org/abs/2106.09685)) は、フルパラメーターによるファインチューニングと比較して、adapter のパラメーターを更新するだけで、元の大きな言語モデル層は凍結されたままである。そのため、メモリコストが大幅に削減でき、計算コストも削減できる。
 
-なお、チャットモデル（Qwen-7B-Chatなど）ではなく、ベース言語モデル（Qwen-7Bなど）の微調整にLoRAを使用した場合、スクリプトは自動的に学習可能なパラメータとして埋め込み層と出力層を切り替えます。これは、ベースとなる言語モデルには、ChatMLフォーマットによってもたらされる特殊なトークンに関する知識がないためです。したがって、これらのレイヤーは、モデルがトークンを理解し予測するために更新される必要があります。別の言い方をすれば、もしLoRAで特殊なトークンを学習するのであれば、コード内で `modules_to_save` を設定することで、レイヤーを学習可能なパラメータに設定する必要があります。また、これらのパラメータが学習可能な場合、ZeRO 3 を使用することはできません。新しいトレーニング可能なパラメータがない場合は、DeepSpeed 設定ファイルを変更することで ZeRO 3 に切り替えることができます。さらに、LoRAのメモリフットプリントは、このような学習可能なパラメータがある場合とない場合で、大きな開きがあることがわかります。そのため、メモリに問題がある場合は、LoRAのChatモデルを微調整することをお勧めします。詳細は以下のプロファイルを参照してください。
+なお、チャットモデル（Qwen-7B-Chat など）ではなく、ベース言語モデル（Qwen-7B など）のファインチューニングに LoRA を使用した場合、スクリプトは自動的に学習可能なパラメータとして埋め込み層と出力層を切り替えます。これは、ベースとなる言語モデルには、ChatMLフォーマットによってもたらされる特殊なトークンに関する知識がないためです。したがって、これらのレイヤーは、モデルがトークンを理解し予測するために更新される必要があります。別の言い方をすれば、もしLoRAで特殊なトークンを学習するのであれば、コード内で `modules_to_save` を設定することで、レイヤーを学習可能なパラメータに設定する必要があります。また、これらのパラメータが学習可能な場合、ZeRO 3 を使用することはできません。新しいトレーニング可能なパラメータがない場合は、DeepSpeed 設定ファイルを変更することで ZeRO 3 に切り替えることができます。さらに、LoRAのメモリフットプリントは、このような学習可能なパラメータがある場合とない場合で、大きな開きがあることがわかります。そのため、メモリに問題がある場合は、LoRAのChatモデルをファインチューニングすることをお勧めします。詳細は以下のプロファイルを参照してください。
 
 しかし、それでもメモリ不足に悩む場合は、Q-LoRA（[論文](https://arxiv.org/abs/2305.14314)）を検討することができます。これは、量子化されたラージ言語モデルと、ページド・アテンションなどの他のテクニックを使用し、さらに少ないメモリコストで実行することができます。
 
@@ -667,7 +667,7 @@ LoRA ([論文](https://arxiv.org/abs/2106.09685)) は、フルパラメーター
 Q-LoRAを実行するには、以下のスクリプトを直接実行してください：
 
 ```bash
-# シングルGPUトレーニング
+# シングル GPU トレーニング
 sh finetune/finetune_qlora_single_gpu.sh
 # 分散トレーニング
 sh finetune/finetune_qlora_ds.sh
@@ -681,26 +681,26 @@ LoRAとQ-LoRAの学習は、フルパラメータによるファインチュー�
 from peft import AutoPeftModelForCausalLM
 
 model = AutoPeftModelForCausalLM.from_pretrained(
-    path_to_adapter, # path to the output directory
+    path_to_adapter, # 出力ディレクトリのパス
     device_map="auto",
     trust_remote_code=True
 ).eval()
 ```
 
-アダプターをマージし、微調整したモデルをスタンドアロンモデルとして保存したい場合は（これは LoRA でのみ可能で、Q-LoRA からパラメータをマージすることはできません）、以下のコードを実行します：
+アダプターをマージし、ファインチューニングしたモデルをスタンドアロンモデルとして保存したい場合は（これは LoRA でのみ可能で、Q-LoRA からパラメータをマージすることはできません）、以下のコードを実行します：
 
 ```python
 from peft import AutoPeftModelForCausalLM
 
 model = AutoPeftModelForCausalLM.from_pretrained(
-    path_to_adapter, # path to the output directory
+    path_to_adapter, # 出力ディレクトリのパス
     device_map="auto",
     trust_remote_code=True
 ).eval()
 
 merged_model = model.merge_and_unload()
-# max_shard_size and safe serialization are not necessary. 
-# They respectively work for sharding checkpoint and save the model to safetensors
+# max_shard_size と安全なシリアル化は必要ありません。
+# これらはそれぞれ、シャーディングのチェックポイントとセーフティセンサーへのモデルの保存のために機能する
 merged_model.save_pretrained(new_model_directory, max_shard_size="2048MB", safe_serialization=True)
 ```
 
@@ -709,7 +709,7 @@ merged_model.save_pretrained(new_model_directory, max_shard_size="2048MB", safe_
 from transformers import AutoTokenizer
 
 tokenizer = AutoTokenizer.from_pretrained(
-    path_to_adapter, # path to the output directory
+    path_to_adapter, # 出力ディレクトリのパス
     trust_remote_code=True
 )
 
@@ -719,10 +719,10 @@ tokenizer.save_pretrained(new_model_directory)
 注意：マルチGPUトレーニングの場合、分散トレーニング用の適切なハイパーパラメータをマシンに応じて指定する必要があります。また、データ、メモリフットプリント、トレーニング速度を考慮して、引数 `--model_max_length` で最大シーケンス長を指定することをお勧めします。
 
 ### メモリと速度のプロファイリング
-シングルGPUトレーニングのセットアップにおいて、LoRA (LoRA(emb)はembeddingと出力層を学習させるが、LoRAはembeddingと出力層を学習させない) とQ-LoRAのGPUメモリとトレーニング速度をプロファイリングする。このテストでは、シングルA100-SXM4-80G GPUで実験し、CUDA 11.8とPytorch 2.0を使用します。Flash attention 2を使用します。256、512、1024、2048、4096、8192という異なる長さの入力のメモリ（GB）と速度（s/iter）をプロファイリングします。また、2台のA100 GPUを用いたQwen-7Bによるフルパラメータ・ファインチューニングの統計量も報告する。GPUメモリの制限のため、256、512、1024トークンの統計のみを報告する。
+シングル GPU トレーニングのセットアップにおいて、LoRA (LoRA(emb)は embedding と出力層を学習させるが、LoRA は embedding と出力層を学習させない) とQ-LoRAのGPUメモリとトレーニング速度をプロファイリングする。このテストでは、シングルA100-SXM4-80G GPU で実験し、CUDA 11.8 と Pytorch 2.0 を使用します。Flash attention 2 を使用します。256、512、1024、2048、4096、8192という異なる長さの入力のメモリ（GB）と速度（s/iter）をプロファイリングします。また、2台のA100 GPUを用いたQwen-7Bによるフルパラメータ・ファインチューニングの統計量も報告する。GPUメモリの制限のため、256、512、1024トークンの統計のみを報告する。
 
 
-Qwen-72B については、2 つの方法で実験します。1) 4 つの A100-SXM4-80G GPU での Lora 微調整 + DeepSpeed ZeRO 3、および 2) 1 つの A100-SXM4-80G GPU での QLora (int4) 微調整。 OOM は、LoRA (emb) 微調整と Deepspeed ZeRO 3 を使用しない LoRA 微調整の両方で 4 つの A100-SXM4-80G GPU で発生することに注意してください (`--deepspeedfinetune/ds_config_zero3.json` を [`finetune/finetune_lora_ds に渡すことができます) .sh`](finetune/finetune_lora_ds.sh) を使用して DeepSpeed ZeRO 3 を有効にします)。
+Qwen-72B については、2 つの方法で実験します。1) 4 つの A100-SXM4-80G GPU での Lora ファインチューニング + DeepSpeed ZeRO 3、および 2) 1 つの A100-SXM4-80G GPU での QLora (int4) ファインチューニング。 OOM は、LoRA (emb) ファインチューニングと Deepspeed ZeRO 3 を使用しない LoRA ファインチューニングの両方で 4 つの A100-SXM4-80G GPU で発生することに注意してください (`--deepspeedfinetune/ds_config_zero3.json` を [`finetune/finetune_lora_ds.sh`](finetune/finetune_lora_ds.sh) を使用して DeepSpeed ZeRO 3 を有効にします)。
 
 統計量を以下に示す：
 
@@ -779,7 +779,7 @@ Qwen-72B については、2 つの方法で実験します。1) 4 つの A100-S
 
 ## デプロイ
 
-### vLLM 
+### vLLM
 デプロイメントと高速推論のためには、vLLMを使用することをお勧めします。
 
 cuda 12.1 および pytorch 2.1 を使用している場合は、次のコマンドを直接使用して vLLM をインストールできます。
@@ -928,32 +928,32 @@ print(response.choices[0].message.content)
     <br>
 <p>
 
-**Function Calling** もサポートされています(ただし、今のところ `stream=False` の場合のみ)。使用例](examples/function_call_examples.py) を参照してください。
+**Function Calling** もサポートされています(ただし、今のところ `stream=False` の場合のみ)。[使用例](examples/function_call_examples.py) を参照してください。
 <br><br>
 
 ## 🐳 Docker
 
-デプロイプロセスを簡素化するために、あらかじめ環境を構築した docker イメージを提供しています： [qwenllm/qwen](https://hub.docker.com/r/qwenllm/qwen)。ドライバを導入し、モデルファイルをダウンロードするだけで、デモを起動し、OpenAI APIをデプロイし、モデルを微調整することができます。
+デプロイプロセスを簡素化するために、あらかじめ環境を構築した docker イメージを提供しています： [qwenllm/qwen](https://hub.docker.com/r/qwenllm/qwen)。ドライバを導入し、モデルファイルをダウンロードするだけで、デモを起動し、OpenAI API をデプロイし、モデルをファインチューニングすることができます。
 
 ### 準備
 
 1. 使用するイメージに応じて、正しいバージョンのNvidiaドライバをインストールしてください：
-  - `qwenllm/qwen:cu117` (**recommend**): `>= 515.48.07`
-  - `qwenllm/qwen:cu114` (w/o flash-attention): `>= 470.82.01`
-  - `qwenllm/qwen:latest`: same as `qwenllm/qwen:cu117`
+  - `qwenllm/qwen:cu117` (**推奨**): `>= 515.48.07`
+  - `qwenllm/qwen:cu114` (flash-attention 無し): `>= 470.82.01`
+  - `qwenllm/qwen:latest`: `qwenllm/qwen:cu117` と同じ
 
 2. [Docker](https://docs.docker.com/engine/install/) と [nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) をインストールして設定します：
 
 ```bash
-# configure docker
+# docker を設定する
 sudo systemctl start docker
-# test if docker is correctly installed
+# docker が正しくインストールされているかテストする
 sudo docker run hello-world
 
-# configure nvidia-container-toolkit
+# nvidia-container-toolkit を設定する
 sudo nvidia-ctk runtime configure --runtime=docker
 sudo systemctl restart docker
-# test if nvidia-container-toolkit is correctly installed
+# nvidia-container-toolkit が正しくインストールされているか確認する
 sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 ```
 
@@ -966,7 +966,7 @@ sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 ```bash
 IMAGE_NAME=qwenllm/qwen:cu117
 PORT=8901
-CHECKPOINT_PATH=/path/to/Qwen-7B-Chat   # Path to downloaded model checkpoints and codes
+CHECKPOINT_PATH=/path/to/Qwen-7B-Chat   # ダウンロードしたモデルのチェックポイントとコードへのパス
 ```
 以下のスクリプトがビルドに役立つ：
 
@@ -985,7 +985,7 @@ bash docker/docker_web_demo.sh -i ${IMAGE_NAME} -c ${CHECKPOINT_PATH} --port ${P
 bash docker/docker_cli_demo.sh -i ${IMAGE_NAME} -c ${CHECKPOINT_PATH}
 ```
 
-上記のコマンドは自動的に必要なイメージをダウンロードし、バックグラウンドでWeb UIデモを起動します（サービスは自動で再起動します）。デモを使用するには、ホスト上で `http://localhost:${PORT}` を開いてください。
+上記のコマンドは自動的に必要なイメージをダウンロードし、バックグラウンドで Web UI デモを起動します（サービスは自動で再起動します）。デモを使用するには、ホスト上で `http://localhost:${PORT}` を開いてください。
 
 以下の出力が表示されれば、デモは正常に起動しています：
 
@@ -997,7 +997,7 @@ Run `docker rm -f ...` to stop and remove the demo.
 
 デモの状態を確認したい場合は、`docker logs qwen` を使って出力を表示できる。
 
-docker rm -f qwen` でサービスを停止し、コンテナを削除できる。
+`docker rm -f qwen` でサービスを停止し、コンテナを削除できる。
 
 
 ### ファインチューニング
@@ -1007,19 +1007,19 @@ docker rm -f qwen` でサービスを停止し、コンテナを削除できる�
 以下はシングルGPUのLoRAの例です：
 ```bash
 IMAGE_NAME=qwenllm/qwen:cu117
-CHECKPOINT_PATH=/path/to/Qwen-7B                # Path to downloaded model checkpoints and codes
-#CHECKPOINT_PATH=/path/to/Qwen-7B-Chat-Int4     # Path to downloaded model checkpoints and codes (Q-LoRA)
-DATA_PATH=/path/to/data/root                    # Prepare finetune data at ${DATA_PATH}/example.json
-OUTPUT_PATH=/path/to/output/checkpoint          # Path to finetune outputs
+CHECKPOINT_PATH=/path/to/Qwen-7B                # ダウンロードしたモデルのチェックポイントとコードへのパス
+#CHECKPOINT_PATH=/path/to/Qwen-7B-Chat-Int4     # ダウンロードしたモデルのチェックポイントとコードへのパス (Q-LoRA)
+DATA_PATH=/path/to/data/root                    # ${DATA_PATH}/example.json にファインチューニングデータを準備する
+OUTPUT_PATH=/path/to/output/checkpoint          # アウトプットをファインチューニングするパス
 
-# Use all host devices by default
+# デフォルトですべてのホストデバイスを使用する
 DEVICE=all
-# If you need to specify GPUs for training, set device as follow (NOTE: internal quotation marks cannot be omitted)
+# トレーニング用に GPU を指定する必要がある場合は、以下のようにデバイスを設定してください（注：内部引用符は省略できません
 #DEVICE='"device=0,1,2,3"'
 
 mkdir -p ${OUTPUT_PATH}
 
-# Single-GPU LoRA finetuning
+# シングル GPU LoRA のファインチューニング
 docker run --gpus ${DEVICE} --rm --name qwen \
     --mount type=bind,source=${CHECKPOINT_PATH},target=/data/shared/Qwen/Qwen-7B \
     --mount type=bind,source=${DATA_PATH},target=/data/shared/Qwen/data \
@@ -1029,7 +1029,7 @@ docker run --gpus ${DEVICE} --rm --name qwen \
     bash finetune/finetune_lora_single_gpu.sh -m /data/shared/Qwen/Qwen-7B/ -d /data/shared/Qwen/data/example.json
 ```
 
-例えばシングルGPUのQ-LoRAに変更するには、`docker run`内のbashコマンドを変更するだけでいい：
+例えばシングル GPU の Q-LoRA に変更するには、`docker run` 内の bash コマンドを変更するだけで良い:
 ```bash
 bash finetune/finetune_qlora_single_gpu.sh -m /data/shared/Qwen/Qwen-7B-Chat-Int4/ -d /data/shared/Qwen/data/example.json
 ```
@@ -1040,7 +1040,7 @@ Qwen-1.8-Chat と Qwen-72B-Chat は、複数回の複雑な対話を伴う多様
 
 システム プロンプトを使用すると、Qwen-Chat は **ローリー プレイ**、**言語スタイルの転送**、**タスク設定**、**動作設定**を実現できます。
 
-![](assets/system_prompt_ language_style.png)
+![](assets/system_prompt_language_style.png)
 
 ![](assets/system_prompt_role_play_en.png)
 
@@ -1075,7 +1075,7 @@ ReAct プロンプトの原則に基づいてツール呼び出しを実装す�
     </tr>
 </table>
 
-数学的問題解決、データ視覚化、ファイル処理や Web スクレイピングなどのその他の汎用タスクに Python コード インタープリターを使用する Qwen の能力を評価するために、これらの能力を評価するために特別に設計されたベンチマークを作成し、オープンソース化しました。 。 ベンチマークはこの [リンク](https://github.com/QwenLM/Qwen-Agent/tree/main/benchmark) で見つけることができます。
+数学的問題解決、データ視覚化、ファイル処理や Web スクレイピングなどのその他の汎用タスクに Python コード インタープリターを使用する Qwen の能力を評価するために、これらの能力を評価するために特別に設計されたベンチマークを作成し、オープンソース化しました。ベンチマークはこの [リンク](https://github.com/QwenLM/Qwen-Agent/tree/main/benchmark) で見つけることができます。
 
 Qwen は、コード生成時のコードの実行可能性と結果の精度の点で優れたパフォーマンスを発揮することがわかりました。
 
@@ -1211,7 +1211,7 @@ Qwen は、コード生成時のコードの実行可能性と結果の精度の
     <br>
 <p>
 
-さらに、Qwenが HuggingFace Agent として機能できることを実証する実験結果も提供します。 詳細については、[ドキュメント例](examples/transformers_agent.md) を参照してください。 Hugging Face が提供する評価データセットにおけるモデルのパフォーマンスは次のとおりです。
+さらに、Qwen が HuggingFace Agent として機能できることを実証する実験結果も提供します。 詳細については、[ドキュメント例](examples/transformers_agent.md) を参照してください。 Hugging Face が提供する評価データセットにおけるモデルのパフォーマンスは次のとおりです。
 
 <table>
     <tr>
@@ -1363,13 +1363,13 @@ tiktoken に基づくトークナイザーは、他のトークナイザー、�
 
 ## ライセンス契約
 
-<https://github.com/QwenLM/Qwen>で提供されるソースコードは、ルートディレクトリにある[Apache 2.0 License](./LICENSE)の下でライセンスされています。
+<https://github.com/QwenLM/Qwen>で提供されるソースコードは、ルートディレクトリにある [Apache 2.0 License](./LICENSE) の下でライセンスされています。
 
-研究者や開発者は、QwenとQwen-Chatのコードとモデルウェイトを自由に使用することができます。商用利用については、各モデルに添付されている使用許諾契約書をご確認ください。
+研究者や開発者は、Qwen と Qwen-Chat のコードとモデルウェイトを自由に使用することができます。商用利用については、各モデルに添付されている使用許諾契約書をご確認ください。
 
-- Qwen-72B、Qwen-14B、Qwen-7Bは、対応するHuggingFaceとModelScopeのリポジトリにある[Tongyi Qianwen LICENSE AGREEMENT](./Tongyi%20Qianwen%20LICENSE%20AGREEMENT)に基づいてライセンスされています。商用利用の場合は、フォーム([72B](https://dashscope.console.aliyun.com/openModelApply/Qwen-72B-Chat), [14B](https://dashscope.console.aliyun.com/openModelApply/Qwen-14B-Chat), [7B](https://dashscope.console.aliyun.com/openModelApply/qianwen))に記入して申請してください。
+- Qwen-72B、Qwen-14B、Qwen-7B は、対応する Hugging Face と ModelScope のリポジトリにある [Tongyi Qianwen LICENSE AGREEMENT](./Tongyi%20Qianwen%20LICENSE%20AGREEMENT) に基づいてライセンスされています。商用利用の場合は、フォーム([72B](https://dashscope.console.aliyun.com/openModelApply/Qwen-72B-Chat), [14B](https://dashscope.console.aliyun.com/openModelApply/Qwen-14B-Chat), [7B](https://dashscope.console.aliyun.com/openModelApply/qianwen)) に記入して申請してください。
 
-- Qwen-1.8Bは、対応するHuggingFaceとModelScopeのリポジトリにある[Tongyi Qianwen RESEARCH LICENSE AGREEMENT](./Tongyi%20Qianwen%20RESEARCH%20LICENSE%20AGREEMENT)に基づいてライセンスされています。商用利用については、私たちにご連絡ください。
+- Qwen-1.8Bは、対応する Hugging Face と ModelScope のリポジトリにある [Tongyi Qianwen RESEARCH LICENSE AGREEMENT](./Tongyi%20Qianwen%20RESEARCH%20LICENSE%20AGREEMENT) に基づいてライセンスされています。商用利用については、私たちにご連絡ください。
 <br><br>
 
 ## お問い合わせ
