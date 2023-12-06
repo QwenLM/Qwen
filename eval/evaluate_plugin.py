@@ -46,7 +46,7 @@ def process_res(response):
         )
     except:
         # print("JSON Load Error:", action_input)
-        pass
+        action_input = ""
     res_dict = {
         "thought": thought,
         "action": action,
@@ -80,7 +80,7 @@ def eval_action(job):
     response = job["gen"][0]
     golden = job["response"]
 
-    if "Action:" in response:
+    if "\nAction: " in response:
         response, golden = process_res(response), process_res(golden)
         if is_callable(response, golden):
             return True
@@ -263,7 +263,7 @@ def main(args):
             filename=args.eval_react_negative_filename, model=model, tokenizer=tokenizer
         )
         for job in jobs:
-            if "\nAction:" in job["gen"][0]:
+            if "\nAction: " in job["gen"][0]:
                 bad_count += 1
         scores = {"bad_rate": bad_count / len(jobs)}
         result.update({"react_negative": scores})

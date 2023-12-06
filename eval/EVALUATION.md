@@ -85,9 +85,12 @@ This script is used to reproduce the results of the ReAct and Hugging Face Agent
 # Qwen-7B-Chat
 mkdir data;
 cd data;
-wget https://qianwen-res.oss-cn-beijing.aliyuncs.com/opensource_data/exam_plugin_v1/exam_plugin_v1_react_positive.jsonl;
-wget https://qianwen-res.oss-cn-beijing.aliyuncs.com/opensource_data/exam_plugin_v1/exam_plugin_v1_react_negative.jsonl;
-cd ..;
+## Old Evaluation Dataset (Version 20230803)
+# wget https://qianwen-res.oss-cn-beijing.aliyuncs.com/opensource_data/exam_plugin_v1/exam_plugin_v1_react_positive.jsonl;
+# wget https://qianwen-res.oss-cn-beijing.aliyuncs.com/opensource_data/exam_plugin_v1/exam_plugin_v1_react_negative.jsonl;
+## New Evaluation Dataset (Version 20231206)
+wget https://qianwen-res.oss-cn-beijing.aliyuncs.com/opensource_data/exam_plugin_v20231206/exam_plugin_v20231206_react_positive.jsonl;
+wget https://qianwen-res.oss-cn-beijing.aliyuncs.com/opensource_data/exam_plugin_v20231206/exam_plugin_v20231206_react_negative.jsonl;cd ..;
 pip install json5;
 pip install jsonlines;
 pip install rouge_score;
