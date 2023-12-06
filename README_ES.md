@@ -1026,22 +1026,28 @@ Hemos probado las capacidades de llamada de la herramienta del modelo en nuestro
 
 <table>
     <tr>
-        <th colspan="4" align="center">Chinese Tool-Use Benchmark</th>
+        <th colspan="4" align="center">Chinese Tool-Use Benchmark (Version 20231206)</th>
     </tr>
     <tr>
         <th align="center">Model</th><th align="center">Tool Selection (Acc.↑)</th><th align="center">Tool Input (Rouge-L↑)</th><th align="center">False Positive Error↓</th>
     </tr>
     <tr>
-        <td>GPT-4</td><td align="center">95%</td><td align="center">0.90</td><td align="center">15.0%</td>
+        <td>GPT-4</td><td align="center">98.0%</td><td align="center">0.953</td><td align="center">23.9%</td>
     </tr>
     <tr>
-        <td>GPT-3.5</td><td align="center">85%</td><td align="center">0.88</td><td align="center">75.0%</td>
+        <td>GPT-3.5</td><td align="center">74.5%</td><td align="center">0.807</td><td align="center">80.6%</td>
     </tr>
     <tr>
-        <td>Qwen-7B-Chat</td><td align="center">98%</td><td align="center">0.91</td><td align="center">7.3%</td>
+        <td>Qwen-1_8B-Chat</td><td align="center">85.0%</td><td align="center">0.839</td><td align="center">27.6%</td>
     </tr>
     <tr>
-        <td>Qwen-14B-Chat</td><td align="center">98%</td><td align="center">0.93</td><td align="center">2.4%</td>
+        <td>Qwen-7B-Chat</td><td align="center">95.5%</td><td align="center">0.900</td><td align="center">11.6%</td>
+    </tr>
+    <tr>
+        <td>Qwen-14B-Chat</td><td align="center">96.9%</td><td align="center">0.917</td><td align="center">5.6%</td>
+    </tr>
+    <tr>
+        <td>Qwen-72B-Chat</td><td align="center">98.2%</td><td align="center">0.927</td><td align="center">1.1%</td>
     </tr>
 </table>
 
@@ -1051,127 +1057,85 @@ Hemos observado que Qwen funciona bien en términos de ejecutabilidad del códig
 
 <table>
     <tr>
-        <th colspan="4" align="center">Executable Rate of Generated Code (%)</th>
+        <th colspan="5" align="center">Code Interpreter Benchmark (Version 20231206)</th>
     </tr>
     <tr>
-        <th align="center">Model</th><th align="center">Math↑</th><th align="center">Visualization↑</th><th align="center">General↑</th>
+        <th rowspan="2" align="center">Model</th>
+        <th colspan="3" align="center">Accuracy of Code Execution Results (%)</th>
+        <th colspan="1" align="center">Executable Rate of Code (%)</th>
     </tr>
     <tr>
-        <td>GPT-4</td><td align="center">91.9</td><td align="center">85.9</td><td align="center">82.8</td>
+        <th align="center">Math↑</th><th align="center">Visualization-Hard↑</th><th align="center">Visualization-Easy↑</th><th align="center">General↑</th>
     </tr>
     <tr>
-        <td>GPT-3.5</td><td align="center">89.2</td><td align="center">65.0</td><td align="center">74.1</td>
+        <td>GPT-4</td>
+        <td align="center">82.8</td>
+        <td align="center">66.7</td>
+        <td align="center">60.8</td>
+        <td align="center">82.8</td>
     </tr>
     <tr>
-        <td>LLaMA2-7B-Chat</td>
-        <td align="center">41.9</td>
-        <td align="center">33.1</td>
-        <td align="center">24.1 </td>
-    </tr>
-    <tr>
-        <td>LLaMA2-13B-Chat</td>
-        <td align="center">50.0</td>
-        <td align="center">40.5</td>
-        <td align="center">48.3 </td>
-    </tr>
-    <tr>
-        <td>CodeLLaMA-7B-Instruct</td>
-        <td align="center">85.1</td>
-        <td align="center">54.0</td>
-        <td align="center">70.7 </td>
-    </tr>
-    <tr>
-        <td>CodeLLaMA-13B-Instruct</td>
-        <td align="center">93.2</td>
-        <td align="center">55.8</td>
-        <td align="center">74.1 </td>
-    </tr>
-    <tr>
-        <td>InternLM-7B-Chat-v1.1</td>
-        <td align="center">78.4</td>
-        <td align="center">44.2</td>
-        <td align="center">62.1 </td>
-    </tr>
-    <tr>
-        <td>InternLM-20B-Chat</td>
-        <td align="center">70.3</td>
-        <td align="center">44.2</td>
-        <td align="center">65.5 </td>
-    </tr>
-    <tr>
-        <td>Qwen-7B-Chat</td>
-        <td align="center">82.4</td>
-        <td align="center">64.4</td>
-        <td align="center">67.2 </td>
-    </tr>
-    <tr>
-        <td>Qwen-14B-Chat</td>
-        <td align="center">89.2</td>
-        <td align="center">84.1</td>
-        <td align="center">65.5</td>
-    </tr>
-</table>
-
-<table>
-    <tr>
-        <th colspan="4" align="center">Accuracy of Code Execution Results (%)</th>
-    </tr>
-    <tr>
-        <th align="center">Model</th><th align="center">Math↑</th><th align="center">Visualization-Hard↑</th><th align="center">Visualization-Easy↑</th>
-    </tr>
-    <tr>
-        <td>GPT-4</td><td align="center">82.8</td><td align="center">66.7</td><td align="center">60.8</td>
-    </tr>
-    <tr>
-        <td>GPT-3.5</td><td align="center">47.3</td><td align="center">33.3</td><td align="center">55.7</td>
-    </tr>
-    <tr>
-        <td>LLaMA2-7B-Chat</td>
-        <td align="center">3.9</td>
-        <td align="center">14.3</td>
-        <td align="center">39.2 </td>
+        <td>GPT-3.5</td>
+        <td align="center">47.3</td>
+        <td align="center">33.3</td>
+        <td align="center">55.7</td>
+        <td align="center">74.1</td>
     </tr>
     <tr>
         <td>LLaMA2-13B-Chat</td>
         <td align="center">8.3</td>
-        <td align="center">8.3</td>
-        <td align="center">40.5 </td>
-    </tr>
-    <tr>
-        <td>CodeLLaMA-7B-Instruct</td>
-        <td align="center">14.3</td>
-        <td align="center">26.2</td>
-        <td align="center">60.8 </td>
+        <td align="center">1.2</td>
+        <td align="center">15.2</td>
+        <td align="center">48.3</td>
     </tr>
     <tr>
         <td>CodeLLaMA-13B-Instruct</td>
         <td align="center">28.2</td>
-        <td align="center">27.4</td>
-        <td align="center">62.0 </td>
-    </tr>
-    <tr>
-        <td>InternLM-7B-Chat-v1.1</td>
-        <td align="center">28.5</td>
-        <td align="center">4.8</td>
-        <td align="center">40.5 </td>
+        <td align="center">15.5</td>
+        <td align="center">21.5</td>
+        <td align="center">74.1</td>
     </tr>
     <tr>
         <td>InternLM-20B-Chat</td>
         <td align="center">34.6</td>
+        <td align="center">10.7</td>
+        <td align="center">25.1</td>
+        <td align="center">65.5</td>
+    </tr>
+    <tr>
+        <td>ChatGLM3-6B</td>
+        <td align="center">54.2</td>
+        <td align="center">4.8</td>
+        <td align="center">15.2</td>
+        <td align="center">67.1</td>
+    </tr>
+    <tr>
+        <td>Qwen-1.8B-Chat</td>
+        <td align="center">25.6</td>
         <td align="center">21.4</td>
-        <td align="center">45.6 </td>
+        <td align="center">22.8</td>
+        <td align="center">65.5</td>
     </tr>
     <tr>
         <td>Qwen-7B-Chat</td>
         <td align="center">41.9</td>
-        <td align="center">40.5</td>
-        <td align="center">54.4 </td>
+        <td align="center">23.8</td>
+        <td align="center">38.0</td>
+        <td align="center">67.2</td>
     </tr>
     <tr>
         <td>Qwen-14B-Chat</td>
         <td align="center">58.4</td>
-        <td align="center">53.6</td>
-        <td align="center">59.5</td>
+        <td align="center">31.0</td>
+        <td align="center">45.6</td>
+        <td align="center">65.5</td>
+    </tr>
+    <tr>
+        <td>Qwen-72B-Chat</td>
+        <td align="center">72.7</td>
+        <td align="center">41.7</td>
+        <td align="center">43.0</td>
+        <td align="center">82.8</td>
     </tr>
 </table>
 
@@ -1180,62 +1144,6 @@ Hemos observado que Qwen funciona bien en términos de ejecutabilidad del códig
     <img src="assets/code_interpreter_showcase_001.jpg" />
     <br>
 <p>
-
-Además, también proporcionamos resultados experimentales que demuestran que nuestro modelo es capaz de actuar como un Agente HuggingFace. Para más información, consulte la [documentación del ejemplo](examples/transformers_agent.md). El rendimiento del modelo en el conjunto de datos de evaluación proporcionado por Hugging Face es el siguiente:
-
-<table>
-    <tr>
-        <th colspan="4" align="center">HuggingFace Agent Benchmark- Run Mode</th>
-    </tr>
-    <tr>
-        <th align="center">Model</th><th align="center">Tool Selection↑</th><th align="center">Tool Used↑</th><th align="center">Code↑</th>
-    </tr>
-    <tr>
-        <td>GPT-4</td><td align="center">100</td><td align="center">100</td><td align="center">97.4</td>
-    </tr>
-    <tr>
-        <td>GPT-3.5</td><td align="center">95.4</td><td align="center">96.3</td><td align="center">87.0</td>
-    </tr>
-    <tr>
-        <td>StarCoder-Base-15B</td><td align="center">86.1</td><td align="center">87.0</td><td align="center">68.9</td>
-    </tr>
-    <tr>
-        <td>StarCoder-15B</td><td align="center">87.0</td><td align="center">88.0</td><td align="center">68.9</td>
-    </tr>
-    <tr>
-        <td>Qwen-7B-Chat</td><td align="center">87.0</td><td align="center">87.0</td><td align="center">71.5</td>
-    </tr>
-    <tr>
-        <td>Qwen-14B-Chat</td><td align="center">93.5</td><td align="center">94.4</td><td align="center">87.0</td>
-    </tr>
-</table>
-
-<table>
-    <tr>
-        <th colspan="4" align="center">HuggingFace Agent Benchmark - Chat Mode</th>
-    </tr>
-    <tr>
-        <th align="center">Model</th><th align="center">Tool Selection↑</th><th align="center">Tool Used↑</th><th align="center">Code↑</th>
-    </tr>
-    <tr>
-        <td>GPT-4</td><td align="center">97.9</td><td align="center">97.9</td><td align="center">98.5</td>
-    </tr>
-    <tr>
-        <td>GPT-3.5</td><td align="center">97.3</td><td align="center">96.8</td><td align="center">89.6</td>
-    </tr>
-    <tr>
-        <td>StarCoder-Base-15B</td><td align="center">97.9</td><td align="center">97.9</td><td align="center">91.1</td>
-    </tr>
-    <tr>
-        <td>StarCoder-15B</td><td align="center">97.9</td><td align="center">97.9</td><td align="center">89.6</td>
-    </tr>
-    <tr>
-        <td>Qwen-7B-Chat</td><td align="center">94.7</td><td align="center">94.7</td><td align="center">85.1</td>
-    </tr>
-    <tr>
-        <td>Qwen-14B-Chat</td><td align="center">97.9</td><td align="center">97.9</td><td align="center">95.5</td>
-    </tr>
-</table>
 
 <br>
 
