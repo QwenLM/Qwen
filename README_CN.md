@@ -1137,8 +1137,8 @@ Qwen-Chat针对工具使用、函数调用能力进行了优化。用户可以�
     <tr>
         <td>ChatGLM3-6B</td>
         <td align="center">54.2</td>
-        <td align="center">15.5</td>
-        <td align="center">21.5</td>
+        <td align="center">4.8</td>
+        <td align="center">15.2</td>
         <td align="center">67.1</td>
     </tr>
     <tr>

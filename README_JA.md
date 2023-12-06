@@ -1135,8 +1135,8 @@ Qwen は、コード生成時のコードの実行可能性と結果の精度の
     <tr>
         <td>ChatGLM3-6B</td>
         <td align="center">54.2</td>
-        <td align="center">15.5</td>
-        <td align="center">21.5</td>
+        <td align="center">4.8</td>
+        <td align="center">15.2</td>
         <td align="center">67.1</td>
     </tr>
     <tr>
