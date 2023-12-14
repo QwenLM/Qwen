@@ -791,10 +791,15 @@ For deployment and fast inference, we suggest using vLLM.
 If you use cuda 12.1 and pytorch 2.1, you can directly use the following command to install vLLM.
 
 ```bash
-pip install vllm
+# pip install vllm  # This line is faster but it does not support quantization models.
+
+# The below lines support int4 quantization (int8 will be supported soon). The installation are slower (~10 minutes).
+git clone https://github.com/QwenLM/vllm-gptq
+cd vllm-gptq
+pip install -e .
 ```
 
-Otherwise, please refer to the official vLLM [Installation Instructions](https://docs.vllm.ai/en/latest/getting_started/installation.html).
+Otherwise, please refer to the official vLLM [Installation Instructions](https://docs.vllm.ai/en/latest/getting_started/installation.html), or our [vLLM repo for GPTQ quantization](https://github.com/QwenLM/vllm-gptq).
 
 #### vLLM + Transformer-like Wrapper
 
@@ -804,6 +809,7 @@ You can download the [wrapper codes](examples/vllm_wrapper.py) and execute the f
 from vllm_wrapper import vLLMWrapper
 
 model = vLLMWrapper('Qwen/Qwen-7B-Chat', tensor_parallel_size=1)
+# model = vLLMWrapper('Qwen/Qwen-7B-Chat-Int4', tensor_parallel_size=1, dtype="float16")
 
 response, history = model.chat(query="你好", history=None)
 print(response)
@@ -829,10 +835,12 @@ python -m fastchat.serve.controller
 Then you can launch the model worker, which means loading your model for inference. For single GPU inference, you can directly run:
 ```bash
 python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --dtype bfloat16
+# python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --dtype float16 # run int4 model
 ```
 However, if you hope to run the model on multiple GPUs for faster inference or larger memory, you can use tensor parallelism supported by vLLM. Suppose you run the model on 4 GPUs, the command is shown below:
 ```bash
 python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --tensor-parallel-size 4 --dtype bfloat16
+# python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --tensor-parallel-size 4 --dtype float16 # run int4 model
 ```
 
 After launching your model worker, you can launch a:
