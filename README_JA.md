@@ -784,10 +784,15 @@ Qwen-72B については、2 つの方法で実験します。1) 4 つの A100-S
 
 cuda 12.1 および pytorch 2.1 を使用している場合は、次のコマンドを直接使用して vLLM をインストールできます。
 ```bash
-pip install vllm
+# pip install vllm  # この行はより速いですが、量子化モデルをサポートしていません。
+
+# 以下のはINT4の量子化をサポートします（INT8はまもなくサポートされます）。 インストールは遅くなります（〜10分）。
+git clone https://github.com/QwenLM/vllm-gptq
+cd vllm-gptq
+pip install -e .
 ```
 
-それ以外の場合は、公式 vLLM [インストール手順](https://docs.vllm.ai/en/latest/getting_started/installation.html) を参照してください。
+それ以外の場合は、公式 vLLM [インストール手順](https://docs.vllm.ai/en/latest/getting_started/installation.html) 、または[GPTQの量子化 vLLM レポ](https://github.com/QwenLM/vllm-gptq)を参照してください。
 
 #### vLLM + Transformer Wrapper
 
@@ -797,6 +802,7 @@ pip install vllm
 from vllm_wrapper import vLLMWrapper
 
 model = vLLMWrapper('Qwen/Qwen-7B-Chat', tensor_parallel_size=1)
+# model = vLLMWrapper('Qwen/Qwen-7B-Chat-Int4', tensor_parallel_size=1, dtype="float16")
 
 response, history = model.chat(query="你好", history=None)
 print(response)
@@ -819,10 +825,12 @@ python -m fastchat.serve.controller
 それからmodel workerを起動し、推論のためにモデルをロードします。シングルGPU推論の場合は、直接実行できます：
 ```bash
 python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --dtype bfloat16
+# python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --dtype float16 # INT4モデルを実行します
 ```
 しかし、より高速な推論や大容量メモリーのために複数のGPUでモデルを実行したい場合は、vLLMがサポートするテンソル並列を使用することができます。モデルを4GPUで実行するとすると、コマンドは以下のようになります：
 ```bash
 python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --tensor-parallel-size 4 --dtype bfloat16
+# python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --tensor-parallel-size 4 --dtype float16 # run int4 model # INT4モデルを実行します
 ```
 
 モデルワーカーを起動した後、起動することができます：

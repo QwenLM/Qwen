@@ -781,10 +781,15 @@ tokenizer.save_pretrained(new_model_directory)
 如果你使用cuda12.1和pytorch2.1，可以直接使用以下命令安装vLLM。
 
 ```bash
-pip install vllm
+# pip install vllm  # 该方法安装较快，但官方版本不支持量化模型
+
+# 下面方法支持int4量化 (int8量化模型支持将近期更新)，但安装更慢 (约~10分钟)。
+git clone https://github.com/QwenLM/vllm-gptq
+cd vllm-gptq
+pip install -e .
 ```
 
-否则请参考vLLM官方的[安装说明](https://docs.vllm.ai/en/latest/getting_started/installation.html)。
+否则请参考vLLM官方的[安装说明](https://docs.vllm.ai/en/latest/getting_started/installation.html)，或者安装我们[vLLM分支仓库](https://github.com/QwenLM/vllm-gptq)。
 
 #### vLLM + 类Transformer接口
 
@@ -819,10 +824,12 @@ python -m fastchat.serve.controller
 然后启动model worker读取模型。如使用单卡推理，运行如下命令：
 ```bash
 python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --dtype bfloat16
+# python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --dtype float16 # 运行int4模型
 ```
 然而，如果你希望使用多GPU加速推理或者增大显存，你可以使用vLLM支持的模型并行机制。假设你需要在4张GPU上运行你的模型，命令如下所示：
 ```bash
 python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --tensor-parallel-size 4 --dtype bfloat16
+# python -m fastchat.serve.vllm_worker --model-path $model_path --trust-remote-code --tensor-parallel-size 4 --dtype float16 # 运行int4模型
 ```
 
 启动model worker后，你可以启动一个：
