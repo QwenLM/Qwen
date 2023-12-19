@@ -121,7 +121,7 @@ If your device supports fp16 or bf16, we recommend installing [flash-attention](
 
 ```bash
 git clone https://github.com/Dao-AILab/flash-attention
-cd flash-attention && pip install .
+cd flash-attention && pip install packaging ninja flash-attn --no-build-isolation.
 # Below are optional. Installing them might be slow.
 # pip install csrc/layer_norm
 # If the version of flash-attn is higher than 2.1.1, the following is not needed.
