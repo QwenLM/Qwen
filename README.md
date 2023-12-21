@@ -643,7 +643,7 @@ Full-parameter finetuning requires updating all parameters in the whole training
 
 ```bash
 # Distributed training. We do not provide single-GPU training script as the insufficient GPU memory will break down the training.
-sh finetune/finetune_ds.sh
+bash finetune/finetune_ds.sh
 ```
 
 Remember to specify the correct model name or path, the data path, as well as the output directory in the shell scripts. Another thing to notice is that we use DeepSpeed ZeRO 3 in this script. If you want to make changes, just remove the argument `--deepspeed` or make changes in the DeepSpeed configuration json file based on your requirements. Additionally, this script supports mixed-precision training, and thus you can use `--bf16 True` or `--fp16 True`. Remember to use DeepSpeed when you use fp16 due to mixed precision training. Empirically we advise you to use bf16 to make your training consistent with our pretraining and alignment if your machine supports bf16, and thus we use it by default.
@@ -652,9 +652,9 @@ Similarly, to run LoRA, use another script to run as shown below. Before you sta
 
 ```bash
 # Single GPU training
-sh finetune/finetune_lora_single_gpu.sh
+bash finetune/finetune_lora_single_gpu.sh
 # Distributed training
-sh finetune/finetune_lora_ds.sh
+bash finetune/finetune_lora_ds.sh
 ```
 
 In comparison with full-parameter finetuning, LoRA ([paper](https://arxiv.org/abs/2106.09685)) only updates the parameters of adapter layers but keeps the original large language model layers frozen. This allows much fewer memory costs and thus fewer computation costs. 
@@ -669,9 +669,9 @@ To run Q-LoRA, directly run the following script:
 
 ```bash
 # Single GPU training
-sh finetune/finetune_qlora_single_gpu.sh
+bash finetune/finetune_qlora_single_gpu.sh
 # Distributed training
-sh finetune/finetune_qlora_ds.sh
+bash finetune/finetune_qlora_ds.sh
 ```
 
 For Q-LoRA, we advise you to load our provided quantized model, e.g., Qwen-7B-Chat-Int4. You **SHOULD NOT** use the bf16 models. Different from full-parameter finetuning and LoRA, only fp16 is supported for Q-LoRA. For single-GPU training, we have to use DeepSpeed for mixed-precision training due to our observation of errors caused by torch amp. Besides, for Q-LoRA, the troubles with the special tokens in LoRA still exist. However, as we only provide the Int4 models for chat models, which means the language model has learned the special tokens of ChatML format, you have no worry about the layers. Note that the layers of the Int4 model should not be trainable, and thus if you introduce special tokens in your training, Q-LoRA might not work.
@@ -898,7 +898,7 @@ python cli_demo.py
 We provide methods to deploy local API based on OpenAI API (thanks to @hanpenggit). Before you start, install the required packages:
 
 ```bash
-pip install fastapi uvicorn openai pydantic sse_starlette
+pip install fastapi uvicorn "openai<1.0" pydantic sse_starlette
 ```
 
 Then run the command to deploy your API:
