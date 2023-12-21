@@ -636,7 +636,7 @@ pip install peft deepspeed
 
 ```bash
 # 分布式训练。由于显存限制将导致单卡训练失败，我们不提供单卡训练脚本。
-sh finetune/finetune_ds.sh
+bash finetune/finetune_ds.sh
 ```
 
 尤其注意，你需要在脚本中指定正确的模型名称或路径、数据路径、以及模型输出的文件夹路径。在这个脚本中我们使用了DeepSpeed ZeRO 3。如果你想修改这个配置，可以删除掉`--deepspeed`这个输入或者自行根据需求修改DeepSpeed配置json文件。此外，我们支持混合精度训练，因此你可以设置`--bf16 True`或者`--fp16 True`。在使用fp16时，请使用DeepSpeed支持混合精度训练。经验上，如果你的机器支持bf16，我们建议使用bf16，这样可以和我们的预训练和对齐训练保持一致，这也是为什么我们把默认配置设为它的原因。
@@ -645,9 +645,9 @@ sh finetune/finetune_ds.sh
 
 ```bash
 # 单卡训练
-sh finetune/finetune_lora_single_gpu.sh
+bash finetune/finetune_lora_single_gpu.sh
 # 分布式训练
-sh finetune/finetune_lora_ds.sh
+bash finetune/finetune_lora_ds.sh
 ```
 
 与全参数微调不同，LoRA ([论文](https://arxiv.org/abs/2106.09685)) 只更新adapter层的参数而无需更新原有语言模型的参数。这种方法允许用户用更低的显存开销来训练模型，也意味着更小的计算开销。
@@ -662,9 +662,9 @@ sh finetune/finetune_lora_ds.sh
 
 ```bash
 # 单卡训练
-sh finetune/finetune_qlora_single_gpu.sh
+bash finetune/finetune_qlora_single_gpu.sh
 # 分布式训练
-sh finetune/finetune_qlora_ds.sh
+bash finetune/finetune_qlora_ds.sh
 ```
 
 我们建议你使用我们提供的Int4量化模型进行训练，即Qwen-7B-Chat-Int4。请**不要使用**非量化模型！与全参数微调以及LoRA不同，Q-LoRA仅支持fp16。注意，由于我们发现torch amp支持的fp16混合精度训练存在问题，因此当前的单卡训练Q-LoRA必须使用DeepSpeed。此外，上述LoRA关于特殊token的问题在Q-LoRA依然存在。并且，Int4模型的参数无法被设为可训练的参数。所幸的是，我们只提供了Chat模型的Int4模型，因此你不用担心这个问题。但是，如果你执意要在Q-LoRA中引入新的特殊token，很抱歉，我们无法保证你能成功训练。
@@ -890,7 +890,7 @@ python cli_demo.py
 我们提供了OpenAI API格式的本地API部署方法（感谢@hanpenggit）。在开始之前先安装必要的代码库：
 
 ```bash
-pip install fastapi uvicorn openai pydantic sse_starlette
+pip install fastapi uvicorn "openai<1.0" pydantic sse_starlette
 ```
 
 随后即可运行以下命令部署你的本地API：
