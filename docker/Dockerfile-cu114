@@ -40,7 +40,7 @@ ARG BUNDLE_REQUIREMENTS=true
 RUN <<EOF
 if [ "$BUNDLE_REQUIREMENTS" = "true" ]; then 
     cd /data/shared/Qwen
-    pip3 install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113
+    pip3 install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2
     pip3 install -r requirements.txt
     pip3 install -r requirements_web_demo.txt
 fi
@@ -49,7 +49,7 @@ EOF
 FROM bundle_req as bundle_flash_attention
 ARG BUNDLE_FLASH_ATTENTION=true
 
-RUN <<EOF 
+RUN <<EOF
 if [ "$BUNDLE_FLASH_ATTENTION" = "true" ]; then
     echo "CUDA 11.4 does not support flash-attention, please try other images."
 fi
@@ -69,7 +69,7 @@ if [ "$BUNDLE_FINETUNE" = "true" ]; then
     apt update -y && DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
         libopenmpi-dev openmpi-bin \
         && rm -rf /var/lib/apt/lists/*
-    pip3 install optimum auto-gptq mpi4py
+    pip3 install "optimum==1.12.0" "auto-gptq==0.4.2" mpi4py
 fi
 EOF
 
