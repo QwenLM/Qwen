@@ -2,11 +2,26 @@
 export CUDA_DEVICE_MAX_CONNECTIONS=1
 DIR=`pwd`
 
+# Guide:
+# This script supports distributed training on multi-gpu workers (as well as single-worker training).
+# Please set the options below according to the comments.
+# For multi-gpu workers training, these options should be manually set for each worker.
+# After setting the options, please run the script on each worker.
+
+# Number of GPUs per GPU worker
 GPUS_PER_NODE=$(python -c 'import torch; print(torch.cuda.device_count())')
-NNODES=1
-NODE_RANK=0
-MASTER_ADDR=localhost
-MASTER_PORT=6001
+
+# Number of GPU workers, for single-worker training, please set to 1
+NNODES=${NNODES:-1}
+
+# The rank of this worker, should be in {0, ..., WORKER_CNT-1}, for single-worker training, please set to 0
+NODE_RANK=${NODE_RANK:-0}
+
+# The ip address of the rank-0 worker, for single-worker training, please set to localhost
+MASTER_ADDR=${MASTER_ADDR:localhost}
+
+# The port for communication
+MASTER_PORT=${MASTER_PORT:-6001}
 
 MODEL="Qwen/Qwen-7B-Chat-Int4" # Set the path if you do not want to load from huggingface directly
 # ATTENTION: specify the path to your training data, which should be a json file consisting of a list of conversations.
