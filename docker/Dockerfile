@@ -73,7 +73,7 @@ if [ "$BUNDLE_FINETUNE" = "true" ]; then
     apt update -y && DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
         libopenmpi-dev openmpi-bin \
         && rm -rf /var/lib/apt/lists/*
-    pip3 install optimum auto-gptq mpi4py
+    pip3 install "optimum==1.12.0" "auto-gptq==0.4.2" mpi4py
 fi
 EOF
 
