@@ -39,7 +39,6 @@ from openai.types.chat import (
     ChatCompletion,
     ChatCompletionChunk,
     ChatCompletionMessageParam,
-    ChatCompletionToolChoiceOptionParam,
 )
 
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -842,10 +841,6 @@ if __name__ == "__main__":
         resume_download=True,
     ).to(device).eval()
 
-    # Multi-GPU support, use the following two lines instead of the above line, num gpus to your actual number of graphics cards
-    # from utils import load_model_on_gpus
-    # model = load_model_on_gpus(args.checkpoint_path, num_gpus=2)
-    
     model.generation_config = GenerationConfig.from_pretrained(
         args.checkpoint_path,
         trust_remote_code=True,

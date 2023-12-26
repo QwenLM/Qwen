@@ -296,10 +296,10 @@ def test_4():
 
 
 if __name__ == "__main__":
-    print("### Test Case 1 - No Function Calling (普通问答、无函数调用) ###")
-    test_1()
-    print("### Test Case 2 - Use Qwen-Style Functions (函数调用，千问格式) ###")
-    test_2()
+    # print("### Test Case 1 - No Function Calling (普通问答、无函数调用) ###")
+    # test_1()
+    # print("### Test Case 2 - Use Qwen-Style Functions (函数调用，千问格式) ###")
+    # test_2()
     print("### Test Case 3 - Use GPT-Style Functions (函数调用，GPT格式) ###")
     test_3()
     # # Qwen has not optimized parallel tool calls, often unable to parse a parallel call instruction into multiple tool_calls

@@ -747,7 +747,7 @@ def process_qwen_messages(
     messages = []
     for m_idx, m in enumerate(_messages):
         role, content = m["role"], m["content"]
-        func_call, tools_call = m.get("function_call", None), m.get("tools_call", None)
+        func_call, tool_calls = m.get("function_call", None), m.get("tool_calls", None)
         if content:
             content = content.lstrip("\n").rstrip()
         if role in [Role.FUNCTION, Role.TOOL]:
@@ -768,19 +768,21 @@ def process_qwen_messages(
             last_msg = messages[-1]["content"]
             last_msg_has_zh = len(re.findall(r"[\u4e00-\u9fff]+", last_msg)) > 0
 
-            if func_call is None and tools_call is None:
-                if functions or tools_call:
+            if func_call is None and tool_calls is None:
+                if functions or tool_calls:
                     content = dummy_thought["zh" if last_msg_has_zh else "en"] + content
             else:
                 if func_call:
                     f_name, f_args = func_call.get("name"), func_call.get("arguments")
                 else:
-                    f_name, f_args = tools_call[0]["function"]["name"], tools_call[0]["function"]["arguments"]
+                    f_name, f_args = tool_calls[0]["function"]["name"], tool_calls[0]["function"]["arguments"]
                 if not content:
                     if last_msg_has_zh:
                         content = f"Thought: 我可以使用 {f_name} API。"
                     else:
                         content = f"Thought: I can use {f_name}."
+                if func_call:
+                    content = f"\n{content}\nAction: {f_name}\nAction Input: {f_args}"
 
             if messages[-1]["role"] == Role.USER:
                 messages.append(
