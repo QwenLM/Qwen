@@ -713,6 +713,55 @@ tokenizer.save_pretrained(new_model_directory)
 
 注意：分布式训练需要根据你的需求和机器指定正确的分布式训练超参数。此外，你需要根据你的数据、显存情况和训练速度预期，使用`--model_max_length`设定你的数据长度。
 
+### 量化微调后模型
+
+这一小节用于量化全参/LoRA微调后的模型。（注意：你不需要量化Q-LoRA模型因为它本身就是量化过的。）
+如果你需要量化LoRA微调后的模型，请先根据上方说明去合并你的模型权重。
+
+我们推荐使用[auto_gptq](https://github.com/PanQiWei/AutoGPTQ)去量化你的模型。
+
+```bash
+pip install auto-gptq optimum
+```
+
+注意: 当前AutoGPTQ有个bug，可以在该[issue](https://github.com/PanQiWei/AutoGPTQ/issues/370)查看。这里有个[修改PR](https://github.com/PanQiWei/AutoGPTQ/pull/495)，你可以使用该分支从代码进行安装。
+
+首先，准备校准集。你可以重用微调你的数据，或者按照微调相同的方式准备其他数据。
+
+第二步，运行以下命令：
+
+```bash
+python run_gptq.py \
+    --model_name_or_path $YOUR_LORA_MODEL_PATH \
+    --data_path $DATA \
+    --out_path $OUTPUT_PATH \
+    --bits 4 # 4 for int4; 8 for int8
+```
+
+这一步需要使用GPU，根据你的校准集大小和模型大小，可能会消耗数个小时。
+
+接下来, 将原模型中所有 `*.py`, `*.cu`, `*.cpp` 文件和 `generation_config.json` 文件复制到输出模型目录下。同时，使用官方对应版本的量化模型的 `config.json` 文件覆盖输出模型目录下的文件
+(例如, 如果你微调了 `Qwen-7B-Chat`和`--bits 4`, 那么你可以从 [Qwen-7B-Chat-Int4](https://huggingface.co/Qwen/Qwen-7B-Chat-Int4/blob/main/config.json) 仓库中找到对应的`config.json` )。
+并且，你需要将 ``gptq.safetensors`` 重命名为 ``model.safetensors``。
+
+最后，像官方量化模型一样测试你的模型。例如：
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers.generation import GenerationConfig
+
+tokenizer = AutoTokenizer.from_pretrained("/path/to/your/model", trust_remote_code=True)
+
+model = AutoModelForCausalLM.from_pretrained(
+    "/path/to/your/model",
+    device_map="auto",
+    trust_remote_code=True
+).eval()
+
+response, history = model.chat(tokenizer, "你好", history=None)
+print(response)
+```
+
 ### 显存占用及训练速度
 下面记录7B和14B模型在单GPU使用LoRA（LoRA (emb)指的是embedding和输出层参与训练，而LoRA则不优化这部分参数）和QLoRA时处理不同长度输入的显存占用和训练速度的情况。本次评测运行于单张A100-SXM4-80G GPU，使用CUDA 11.8和Pytorch 2.0，并使用了flash attention 2。我们统一使用batch size为1，gradient accumulation为8的训练配置，记录输入长度分别为256、512、1024、2048、4096和8192的显存占用（GB）和训练速度（s/iter）。我们还使用2张A100测了Qwen-7B的全参数微调。受限于显存大小，我们仅测试了256、512和1024token的性能。
 
