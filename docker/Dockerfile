@@ -67,7 +67,7 @@ if [ "$BUNDLE_FINETUNE" = "true" ]; then
     cd /data/shared/Qwen
 
     # Full-finetune / LoRA.
-    pip3 install deepspeed peft
+    pip3 install deepspeed "peft==0.5.0"
 
     # Q-LoRA.
     apt update -y && DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
