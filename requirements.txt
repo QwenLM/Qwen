@@ -1,5 +1,5 @@
 transformers==4.32.0
-accelerate
+accelerate>=0.21.0
 tiktoken
 einops
 transformers_stream_generator==0.0.4
