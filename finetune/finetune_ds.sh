@@ -18,7 +18,7 @@ NNODES=${NNODES:-1}
 NODE_RANK=${NODE_RANK:-0}
 
 # The ip address of the rank-0 worker, for single-worker training, please set to localhost
-MASTER_ADDR=${MASTER_ADDR:localhost}
+MASTER_ADDR=${MASTER_ADDR:-localhost}
 
 # The port for communication
 MASTER_PORT=${MASTER_PORT:-6001}

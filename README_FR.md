@@ -912,6 +912,7 @@ Pour simplifier le processus de déploiement, nous fournissons des images docker
 1. Installez la version correcte du pilote Nvidia en fonction de l'image à utiliser :
   - `qwenllm/qwen:cu117` (**recommandé**): `>= 515.48.07`
   - `qwenllm/qwen:cu114` (w/o flash-attention): `>= 470.82.01`
+  - `qwenllm/qwen:cu121`: `>= 530.30.02`
   - `qwenllm/qwen:latest`: même que `qwenllm/qwen:cu117`
 
 2. Installer et configurer [docker](https://docs.docker.com/engine/install/) et [nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) :
