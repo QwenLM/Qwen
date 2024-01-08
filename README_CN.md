@@ -1040,6 +1040,7 @@ print(response.choices[0].message.content)
 1. 根据需要使用的镜像版本，安装相应版本的Nvidia驱动：
   - `qwenllm/qwen:cu117`（**推荐**）：`>= 515.48.07`
   - `qwenllm/qwen:cu114`（不支持flash-attention）：`>= 470.82.01`
+  - `qwenllm/qwen:cu121`：`>= 530.30.02`
   - `qwenllm/qwen:latest`：与`qwenllm/qwen:cu117`相同
 
 2. 安装并配置[docker](https://docs.docker.com/engine/install/)和[nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)：

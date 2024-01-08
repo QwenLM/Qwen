@@ -948,6 +948,7 @@ print(response.choices[0].message.content)
 1. 使用するイメージに応じて、正しいバージョンのNvidiaドライバをインストールしてください：
   - `qwenllm/qwen:cu117` (**recommend**): `>= 515.48.07`
   - `qwenllm/qwen:cu114` (w/o flash-attention): `>= 470.82.01`
+  - `qwenllm/qwen:cu121`: `>= 530.30.02`
   - `qwenllm/qwen:latest`: same as `qwenllm/qwen:cu117`
 
 2. [Docker](https://docs.docker.com/engine/install/) と [nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) をインストールして設定します：

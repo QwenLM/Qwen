@@ -1,0 +1,122 @@
+ARG CUDA_VERSION=12.1.0
+ARG from=nvidia/cuda:${CUDA_VERSION}-cudnn8-devel-ubuntu20.04
+
+FROM ${from} as base
+
+ARG from
+
+RUN <<EOF
+apt update -y && apt upgrade -y && apt install -y --no-install-recommends  \
+    git \
+    git-lfs \
+    python3 \
+    python3-pip \
+    python3-dev \
+    wget \
+    vim \
+&& rm -rf /var/lib/apt/lists/*
+EOF
+
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+RUN git lfs install
+
+FROM base as dev
+
+WORKDIR /
+
+RUN mkdir -p /data/shared/Qwen
+
+WORKDIR /data/shared/Qwen/
+
+# Users can also mount '/data/shared/Qwen/' to keep the data
+COPY ../requirements.txt ./
+COPY ../requirements_web_demo.txt ./
+
+FROM dev as bundle_req
+
+ARG BUNDLE_REQUIREMENTS=true
+
+RUN <<EOF
+if [ "$BUNDLE_REQUIREMENTS" = "true" ]; then 
+    cd /data/shared/Qwen
+    pip3 install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cu121
+    pip3 install -r requirements.txt
+    pip3 install -r requirements_web_demo.txt
+
+    pip3 install transformers==4.36.0
+fi
+EOF
+
+FROM bundle_req as bundle_flash_attention
+ARG BUNDLE_FLASH_ATTENTION=true
+
+RUN <<EOF 
+if [ "$BUNDLE_FLASH_ATTENTION" = "true" ]; then
+    cd /data/shared/Qwen 
+    test -d flash-attention || git clone -b v2.3.3 https://github.com/Dao-AILab/flash-attention
+    cd /data/shared/Qwen/flash-attention &&
+        pip3 install . &&
+        pip3 install csrc/layer_norm
+fi
+EOF
+
+FROM bundle_flash_attention as bundle_finetune
+ARG BUNDLE_FINETUNE=true
+
+RUN <<EOF
+if [ "$BUNDLE_FINETUNE" = "true" ]; then
+    cd /data/shared/Qwen
+
+    # Full-finetune / LoRA.
+    pip3 install "deepspeed==0.12.6" "peft==0.7.1"
+
+    # Q-LoRA.
+    apt update -y && DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
+        libopenmpi-dev openmpi-bin \
+        && rm -rf /var/lib/apt/lists/*
+    pip3 install "optimum==1.14.0" "auto-gptq==0.5.0" mpi4py
+fi
+EOF
+
+FROM bundle_finetune as bundle_openai_api
+ARG BUNDLE_OPENAI_API=true
+
+RUN <<EOF
+if [ "$BUNDLE_OPENAI_API" = "true" ]; then
+    cd /data/shared/Qwen
+
+    pip3 install fastapi uvicorn "openai<1.0.0" sse_starlette "pydantic<=1.10.13"
+fi
+EOF
+
+FROM bundle_openai_api as bundle_vllm
+ARG BUNDLE_VLLM=true
+
+RUN <<EOF
+if [ "$BUNDLE_VLLM" = "true" ]; then
+    cd /data/shared/Qwen
+
+    pip3 install vllm==0.2.7 "fschat[model_worker,webui]==0.2.34"
+fi
+EOF
+
+FROM bundle_vllm as final
+ARG from
+
+COPY ../requirements.txt ./
+COPY ../requirements_web_demo.txt ./
+COPY ../cli_demo.py ./
+COPY ../web_demo.py ./
+COPY ../openai_api.py ./
+COPY ../finetune.py ./
+COPY ../utils.py ./
+COPY ./examples/* ./examples/
+COPY ./eval/* ./eval/
+COPY ./finetune/* ./finetune/
+
+EXPOSE 80
+
+WORKDIR /data/shared/Qwen/
+
+CMD ["python3", "web_demo.py", "--server-port", "80", "--server-name", "0.0.0.0", "-c", "/data/shared/Qwen/Qwen-Chat/"]
