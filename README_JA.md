@@ -447,7 +447,7 @@ response, history = model.chat(tokenizer, "Hi", history=None)
 ### KVキャッシュ量子化
 
 > 注意: Hugging Faceの内部メカニズムにより、この機能のサポートファイル 
-> (すなわち、`cache_autogptq_cuda_256.cpp`と`cache_autogptq_cuda_kernel_245.cu`)が欠落している可能性があります。以下を手動でダウンロードしてください。
+> (すなわち、`cache_autogptq_cuda_256.cpp`と`cache_autogptq_cuda_kernel_256.cu`)が欠落している可能性があります。以下を手動でダウンロードしてください。
 > Hugging Face Hubから手動でダウンロードし、他のモジュールファイルと同じフォルダに入れてください。
 
 アテンション KV キャッシュを量子化して圧縮して保存すると、サンプルのスループットが向上する。この機能を有効にするには、`config.json` に `use_cache_quantization` と `use_cache_kernel` という引数を指定する。

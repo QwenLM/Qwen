@@ -451,7 +451,7 @@ Nous illustrons les performances des modèles BF16, Int8 et Int4 sur le benchmar
 ### Quantization du cache KV
 
 > NOTE : Veuillez noter qu'en raison du mécanisme interne de Hugging Face, les fichiers de support pour cette fonctionnalité 
-> (i.e., `cache_autogptq_cuda_256.cpp` et `cache_autogptq_cuda_kernel_245.cu`) peuvent être manquants. 
+> (i.e., `cache_autogptq_cuda_256.cpp` et `cache_autogptq_cuda_kernel_256.cu`) peuvent être manquants. 
 > Veuillez les télécharger manuellement manuellement depuis le Hugging Face Hub et placez-les dans le même dossier que les autres fichiers du module.
 
 Le cache KV de l'attention peut être quantifié et compressé pour le stockage, afin d'obtenir un débit d'échantillonnage plus élevé. Les arguments `use_cache_quantization` et `use_cache_kernel` dans `config.json` sont fournis pour activer la quantification du cache KV. 

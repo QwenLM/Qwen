@@ -450,7 +450,7 @@ Ilustramos el rendimiento de los modelos BF16, Int8 e Int4 en la prueba de refer
 ### Cuantización de la caché KV
 
 > NOTA: Por favor, ten en cuenta que debido al mecanismo interno de Hugging Face, los archivos de soporte para esta funcionalidad
-> (es decir, `cache_autogptq_cuda_256.cpp` y `cache_autogptq_cuda_kernel_245.cu`). 
+> (es decir, `cache_autogptq_cuda_256.cpp` y `cache_autogptq_cuda_kernel_256.cu`). 
 > Por favor, descárguelos manualmente del Hugging Face Hub y colóquelos en la misma carpeta que los demás archivos del módulo.
 
 La caché KV de atención puede cuantificarse y comprimirse para su almacenamiento, con el fin de obtener un mayor rendimiento de la muestra. Los argumentos `use_cache_quantization` y `use_cache_kernel` en `config.json` se proporcionan para habilitar la cuantización de la caché KV. 

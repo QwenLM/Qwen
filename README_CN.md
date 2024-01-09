@@ -448,7 +448,7 @@ response, history = model.chat(tokenizer, "Hi", history=None)
 
 ### KV cache量化
 
-> 注意：由于Hugging Face的内部实现，本功能的支持文件`cache_autogptq_cuda_356.cpp`与`cache_autogptq_cuda_kernel_245.cu`可能没被下载。如需开启使用，请手动从相关位置下载，并放置到相应文件中。
+> 注意：由于Hugging Face的内部实现，本功能的支持文件`cache_autogptq_cuda_256.cpp`与`cache_autogptq_cuda_kernel_256.cu`可能没被下载。如需开启使用，请手动从相关位置下载，并放置到相应文件中。
 
 在模型推理时，我们可以将中间结果key以及value的值量化后压缩存储，这样便可以在相同的卡上存储更多的key以及value，增加样本吞吐。
 

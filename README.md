@@ -451,7 +451,7 @@ We illustrate the model performance of both BF16, Int8 and Int4 models on the be
 ### Quantization of KV cache
 
 > NOTE: Please be aware that due to the internal mechanism of Hugging Face, the support files for this functionality 
-> (i.e., `cache_autogptq_cuda_256.cpp` and `cache_autogptq_cuda_kernel_245.cu`) may be missing. Please manually download
+> (i.e., `cache_autogptq_cuda_256.cpp` and `cache_autogptq_cuda_kernel_256.cu`) may be missing. Please manually download
 > them from the Hugging Face Hub and place them into the same folder as the other module files.
 
 The attention KV cache can be quantized and compressed for storage, to get a higher sample throughput. The arguments `use_cache_quantization` and `use_cache_kernel` in `config.json` are provided to enable KV cache quantization. The specific use method is as follows:
@@ -779,7 +779,6 @@ Our provided scripts support multinode finetuning. You can refer to the comments
 Note: DeepSpeed ZeRO 3 requires much greater inter-node communication rate than ZeRO 2, which will significantly reduce the training speed in the case of multinode finetuning. Therefore, we do not recommend using DeepSpeed ZeRO 3 configurations in multinode finetuning scripts.
 
 ### Profiling of Memory and Speed
-
 We profile the GPU memory and training speed of both LoRA (LoRA (emb) refers to training the embedding and output layer, while LoRA has no trainable embedding and output layer) and Q-LoRA in the setup of single-GPU training. In this test, we experiment on a single A100-SXM4-80G GPU, and we use CUDA 11.8 and Pytorch 2.0. Flash attention 2 is applied. We uniformly use a batch size of 1 and gradient accumulation of 8. We profile the memory (GB) and speed (s/iter) of inputs of different lengths, namely 256, 512, 1024, 2048, 4096, and 8192. We also report the statistics of full-parameter finetuning with Qwen-7B on 2 A100 GPUs. We only report the statistics of 256, 512, and 1024 tokens due to the limitation of GPU memory. 
 
 For Qwen-7B, we also test the performance of multinode finetuning. We experiment using two servers, each containing two A100-SXM4-80G GPUs, and the rest of configurations are the same as other Qwen-7B experiments. The results of multinode finetuning are marked as LoRA (multinode) in the table.
@@ -871,7 +870,6 @@ The statistics are listed below:
 </table>
 
 <br>
-
 
 ## Deployment
 
