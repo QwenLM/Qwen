@@ -97,7 +97,7 @@ RUN <<EOF
 if [ "$BUNDLE_VLLM" = "true" ]; then
     cd /data/shared/Qwen
 
-    pip3 install vllm==0.2.7 "fschat[model_worker,webui]==0.2.34"
+    pip3 install vllm==0.2.7 "fschat[model_worker,webui]==0.2.33"
 fi
 EOF
 
