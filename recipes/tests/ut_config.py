@@ -9,7 +9,7 @@ DOCKER_MOUNT_DIR = "/qwen-recipes"
 DOCKER_TEST_DIR = os.path.join(DOCKER_MOUNT_DIR, "recipes/tests")
 
 # finetune
-DATA_DIR = os.path.join(DOCKER_MOUNT_DIR, "recipes/tests/assets/Belle_sampled_qwen.json")
+DATA_DIR = os.path.join(DOCKER_MOUNT_DIR, "recipes/tests/assets/test_sampled_qwen.json")
 DS_CONFIG_ZERO2_DIR = os.path.join(
     DOCKER_MOUNT_DIR, "finetune/ds_config_zero2.json"
 )
