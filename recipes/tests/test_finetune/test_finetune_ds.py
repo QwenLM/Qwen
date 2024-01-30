@@ -48,7 +48,7 @@ parametrize_list = (
     "num_gpus,train_type,is_chat,docker_version,deepspeed", parametrize_list
 )
 def test_finetune(num_gpus, train_type, is_chat, docker_version, deepspeed):
-    cmd_docker = f"docker run --gpus all --ipc=host --network=host --rm -v {os.getcwd()}/../../qwen-recipes:{DOCKER_MOUNT_DIR} {docker_version} /bin/bash -c "
+    cmd_docker = f"docker run --gpus all --ipc=host --network=host --rm -v {os.getcwd()}/../../../Qwen:{DOCKER_MOUNT_DIR} {docker_version} /bin/bash -c "
     cmd = ""
     # for GPUs SM < 80
     is_ampere = torch.cuda.get_device_capability()[0] >= 8
@@ -57,7 +57,7 @@ def test_finetune(num_gpus, train_type, is_chat, docker_version, deepspeed):
 
     model_type = f"{MODEL_TYPE}-Chat" if is_chat == "chat" else MODEL_TYPE
     model_type = f"{model_type}-Int4" if train_type == "qlora" else model_type
-    cmd += f"""torchrun --nproc_per_node {num_gpus} --nnodes 1 --node_rank 0 --master_addr localhost --master_port 12345 {DOCKER_MOUNT_DIR}/Qwen/finetune.py \
+    cmd += f"""torchrun --nproc_per_node {num_gpus} --nnodes 1 --node_rank 0 --master_addr localhost --master_port 12345 {DOCKER_MOUNT_DIR}/finetune.py \
     --model_name_or_path "{DOCKER_TEST_DIR}/{model_type}/" \
     --data_path  {DATA_DIR} \
     --output_dir "{DOCKER_TEST_DIR}/output_qwen" \

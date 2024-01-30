@@ -34,14 +34,14 @@ from ut_config import (
 def test_inference_api(docker_version, use_cpu, use_int4):
     container_name = "test_inference_api"
     model_type = f"{MODEL_TYPE}-Chat-Int4" if use_int4 else f"{MODEL_TYPE}-Chat"
-    cmd_docker = f'docker run --gpus all --ipc=host --network=host --rm --name="{container_name}" -p 8000:8000 -v {os.getcwd()}/../../qwen-recipes:{DOCKER_MOUNT_DIR} {docker_version} /bin/bash -c '
+    cmd_docker = f'docker run --gpus all --ipc=host --network=host --rm --name="{container_name}" -p 8000:8000 -v {os.getcwd()}/../../../Qwen:{DOCKER_MOUNT_DIR} {docker_version} /bin/bash -c '
     cmd = ""
     # for GPUs SM < 80
     is_ampere = torch.cuda.get_device_capability()[0] >= 8
     if not is_ampere:
         cmd += f"pip uninstall -y flash-attn && "
 
-    cmd += f"""python {DOCKER_MOUNT_DIR}/Qwen/openai_api.py -c {DOCKER_TEST_DIR}/{model_type}"""
+    cmd += f"""python {DOCKER_MOUNT_DIR}/openai_api.py -c {DOCKER_TEST_DIR}/{model_type}"""
 
     if use_cpu:
         cmd += " --cpu-only"

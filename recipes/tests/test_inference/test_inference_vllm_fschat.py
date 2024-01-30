@@ -29,7 +29,7 @@ from ut_config import (
 def test_inference_vllm_fschat(num_gpus, use_int4):
     model_type = f"{MODEL_TYPE}-Chat-Int4" if use_int4 else f"{MODEL_TYPE}-Chat"
     container_name = "test_inference_vllm_fschat"
-    cmd_docker = f'docker run --gpus all --ipc=host --network=host --rm --name="{container_name}" -p 8000:8000 -v {os.getcwd()}/../../qwen-recipes:{DOCKER_MOUNT_DIR} {DOCKER_VERSION_CU121} /bin/bash -c '
+    cmd_docker = f'docker run --gpus all --ipc=host --network=host --rm --name="{container_name}" -p 8000:8000 -v {os.getcwd()}/../../../Qwen:{DOCKER_MOUNT_DIR} {DOCKER_VERSION_CU121} /bin/bash -c '
     cmd = ""
 
     cmd += f"""nohup python -m fastchat.serve.controller > /dev/null 2>&1 \
