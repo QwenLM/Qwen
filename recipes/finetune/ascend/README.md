@@ -1,5 +1,5 @@
 # Fine-tuning Qwen by Ascend NPU
-Below, we provide a simple example to show how to finetune Qwen by Ascend NPU. You can also refer to the official [mindformers](https://gitee.com/mindspore/mindformers/blob/dev/research/qwen/qwen.md) for detailed usage.
+Below, we provide a simple example to show how to finetune Qwen by Ascend NPU. Currently, fine-tuning and inference are supported for Qwen 7B and 14B models. You can also refer to the official [mindformers](https://gitee.com/mindspore/mindformers/blob/dev/research/qwen/qwen.md) for detailed usage.
 
 ## Environment Requirement
 
@@ -137,6 +137,7 @@ python research/qwen/run_qwen.py \
     --predict_data '比较适合深度学习入门的书籍有' \
     --run_mode predict \
     --load_checkpoint output/merged_model/rank_0/checkpoint_0.ckpt \
+    --vocab_file Qwen/Qwen-7B-Chat/qwen.tiktoken \
     --auto_trans_ckpt False \
     --device_id 0
 ```
