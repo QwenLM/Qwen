@@ -683,6 +683,9 @@ model = AutoPeftModelForCausalLM.from_pretrained(
 ).eval()
 ```
 
+> 注意: 如果`peft>=0.8.0`，加载模型同时会尝试加载tokenizer，但peft内部未相应设置`trust_remote_code=True`，导致`ValueError: Tokenizer class QWenTokenizer does not exist or is not currently imported.`要避过这一问题，你可以降级`peft<0.8.0`或将tokenizer相关文件移到其它文件夹。
+
+
 如果你觉得这样一步到位的方式让你很不安心或者影响你接入下游应用，你可以选择先合并并存储模型（LoRA支持合并，Q-LoRA不支持），再用常规方式读取你的新模型，示例如下：
 
 ```python
