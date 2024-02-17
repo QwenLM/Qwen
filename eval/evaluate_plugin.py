@@ -300,7 +300,7 @@ if __name__ == "__main__":
     group.add_argument(
         "--eval-react-positive-filename",
         type=str,
-        default="exam_plugin_v1_react_positive.jsonl",
+        default="exam_plugin_v20231206_react_positive.jsonl",
         help="Eval react positive filename.",
     )
     group.add_argument(
@@ -312,7 +312,7 @@ if __name__ == "__main__":
     group.add_argument(
         "--eval-react-negative-filename",
         type=str,
-        default="exam_plugin_v1_react_negative.jsonl",
+        default="exam_plugin_v20231206_react_negative.jsonl",
         help="Eval react negative filename.",
     )
     group.add_argument(
