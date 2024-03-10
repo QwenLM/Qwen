@@ -347,6 +347,10 @@ model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-7B-Chat", device_map="cp
 
 尽管这个方法很简单，但它的效率相对较低。我们建议使用vLLM和FastChat并请阅读部署章节。
 
+### x86 平台
+在 酷睿™/至强® 可扩展处理器或 Arc™ GPU 上部署量化模型时，建议使用 [OpenVINO™ Toolkit](https://docs.openvino.ai/2023.3/gen_ai_guide.html) 以充分利用硬件，实现更好的推理性能。您可以安装并运行此[example notebook] (https://github.com/openvinotoolkit/openvino_notebooks/tree/main/notebooks/254-llm-chatbot)。
+
+
 ### 阿里云灵积（DashScope）API服务
 最简单的使用Qwen模型API服务的方法就是通过DashScope（阿里云灵积API模型服务）。我们提供了简单介绍说明使用方法。同时，我们还提供了自己部署OpenAI格式的API的方法。
 
