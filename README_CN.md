@@ -879,18 +879,13 @@ print(response)
 ### vLLM
 如希望部署及加速推理，我们建议你使用vLLM。
 
-如果你使用cuda12.1和pytorch2.1，可以直接使用以下命令安装vLLM。
+如果你使用**CUDA 12.1和PyTorch 2.1**，可以直接使用以下命令安装vLLM。
 
 ```bash
-# pip install vllm  # 该方法安装较快，但官方版本不支持量化模型
-
-# 下面方法支持int4量化 (int8量化模型支持将近期更新)，但安装更慢 (约~10分钟)。
-git clone https://github.com/QwenLM/vllm-gptq
-cd vllm-gptq
-pip install -e .
+# pip install vllm
 ```
 
-否则请参考vLLM官方的[安装说明](https://docs.vllm.ai/en/latest/getting_started/installation.html)，或者安装我们[vLLM分支仓库](https://github.com/QwenLM/vllm-gptq)。
+否则请参考vLLM官方的[安装说明](https://docs.vllm.ai/en/latest/getting_started/installation.html)。
 
 #### vLLM + 类Transformer接口
 
