@@ -614,7 +614,7 @@ Nous mesurons également la vitesse d'inférence et l'utilisation de la mémoire
 ### Utilisation
 Nous fournissons maintenant le script d'entraînement officiel, `finetune.py`, pour que les utilisateurs puissent ajuster le modèle pré-entraîné pour les applications en aval de manière simple. De plus, nous fournissons des scripts shell pour lancer le finetune sans soucis. Ce script prend en charge l'entraînement avec [DeepSpeed](https://github.com/microsoft/DeepSpeed) et [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/). Les scripts que nous fournissons utilisent DeepSpeed (Note : il peut y avoir des conflits avec la dernière version de pydantic et vous devriez utiliser make sure `pydantic<2.0`) et Peft. Vous pouvez les installer en procédant comme suit :
 ```bash
-pip install peft deepspeed
+pip install "peft<0.8.0" deepspeed
 ```
 
 Pour préparer vos données d'entraînement, vous devez rassembler tous les échantillons dans une liste et l'enregistrer dans un fichier json. Chaque échantillon est un dictionnaire composé d'un identifiant et d'une liste de conversation. Voici un exemple simple de liste avec 1 échantillon :
