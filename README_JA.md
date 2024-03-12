@@ -608,7 +608,7 @@ BF16、Int8、および Int4 のモデルを使用して 2048 を生成する際
 ### 使用方法
 現在、公式のトレーニングスクリプト `finetune.py` を提供しています。さらに、finetune.pyのシェルスクリプトを提供し、finetune.pyを実行することで、finetune.pyを起動することができる。さらに、安心してファインチューニングを開始するためのシェルスクリプトも提供しています。このスクリプトは、[DeepSpeed](https://github.com/microsoft/DeepSpeed) (注意：これはpydanticの最新バージョンとコンフリクトする可能性があるので、`pydantic<2.0`にする必要があります) および [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/) を使用したトレーニングをサポートします。弊社が提供するシェル・スクリプトは DeepSpeed と Peft を使用するため、事前に DeepSpeed と Peft をインストールすることをお勧めします：
 ```bash
-pip install -r requirements_finetune.txt
+pip install "peft<0.8.0" deepspeed
 ```
 
 学習データを準備するには、すべてのサンプルをリストにまとめ、jsonファイルに保存する必要があります。各サンプルはidと会話リストで構成される辞書です。以下は1つのサンプルを含む単純なリストの例です：
@@ -782,17 +782,12 @@ Qwen-72B については、2 つの方法で実験します。1) 4 つの A100-S
 ### vLLM 
 デプロイメントと高速推論のためには、vLLMを使用することをお勧めします。
 
-cuda 12.1 および pytorch 2.1 を使用している場合は、次のコマンドを直接使用して vLLM をインストールできます。
+**CUDA 12.1** および **PyTorch 2.1** を使用している場合は、次のコマンドを直接使用して vLLM をインストールできます。
 ```bash
-# pip install vllm  # この行はより速いですが、量子化モデルをサポートしていません。
-
-# 以下のはINT4の量子化をサポートします（INT8はまもなくサポートされます）。 インストールは遅くなります（〜10分）。
-git clone https://github.com/QwenLM/vllm-gptq
-cd vllm-gptq
-pip install -e .
+pip install vllm
 ```
 
-それ以外の場合は、公式 vLLM [インストール手順](https://docs.vllm.ai/en/latest/getting_started/installation.html) 、または[GPTQの量子化 vLLM レポ](https://github.com/QwenLM/vllm-gptq)を参照してください。
+それ以外の場合は、公式 vLLM [インストール手順](https://docs.vllm.ai/en/latest/getting_started/installation.html) を参照してください。
 
 #### vLLM + Transformer Wrapper
 

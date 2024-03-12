@@ -612,7 +612,7 @@ También medimos la velocidad de inferencia y el uso de memoria de la GPU con di
 ### Utilización
 Ahora proporcionamos el script de entrenamiento oficial, `finetune.py`, para que los usuarios puedan ajustar el modelo preentrenado para aplicaciones posteriores de forma sencilla. Además, proporcionamos scripts de shell para lanzar el ajuste fino sin preocupaciones. Este script soporta el entrenamiento con [DeepSpeed](https://github.com/microsoft/DeepSpeed) y [FSDP](https://engineering.fb.com/2021/07/15/open-source/fsdp/). Los shell scripts que proporcionamos utilizan DeepSpeed (Nota: esto puede tener conflictos con la última versión de pydantic y debe utilizar make sure `pydantic<2.0`) y Peft. Puede instalarlos de la siguiente manera:
 ```bash
-pip install peft deepspeed
+pip install "peft<0.8.0" deepspeed
 ```
 
 Para preparar tus datos de entrenamiento, necesitas poner todas las muestras en una lista y guardarla en un archivo json. Cada muestra es un diccionario que consiste en un id y una lista para la conversación. A continuación se muestra una lista de ejemplo simple con 1 muestra:
