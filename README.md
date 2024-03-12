@@ -355,7 +355,7 @@ If you suffer from lack of GPU memory and you would like to run the model on mor
 However, though this method is simple, the efficiency of the native pipeline parallelism is low. We advise you to use vLLM with FastChat and please read the section for deployment.
 
 ### x86 Platforms
-When deploy on Core™/Xeon® Scalable Processors or with Arc™ GPU, [OpenVINO™ Toolkit](https://docs.openvino.ai/2023.3/gen_ai_guide.html) is recommended. You can install and run this [example notebook] ( https://github.com/openvinotoolkit/openvino_notebooks/tree/main/notebooks/254-llm-chatbot).  
+When deploy on Core™/Xeon® Scalable Processors or with Arc™ GPU, [OpenVINO™ Toolkit](https://docs.openvino.ai/2023.3/gen_ai_guide.html) is recommended. You can install and run this [example notebook] ( https://github.com/openvinotoolkit/openvino_notebooks/tree/main/notebooks/254-llm-chatbot). For related issues, you are welcome to file an issue at [OpenVINO repo] ( https://github.com/openvinotoolkit/openvino_notebooks/issues). 
 
 ### DashScope
 The most simple way to use Qwen through APIs is DashScope API service through Alibaba Cloud. We give an introduction to the usage. Additionally, we provide a script for you to deploy an OpenAI-style API on your own servers.
