@@ -882,7 +882,7 @@ print(response)
 如果你使用**CUDA 12.1和PyTorch 2.1**，可以直接使用以下命令安装vLLM。
 
 ```bash
-# pip install vllm
+pip install vllm
 ```
 
 否则请参考vLLM官方的[安装说明](https://docs.vllm.ai/en/latest/getting_started/installation.html)。
