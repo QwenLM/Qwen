@@ -889,18 +889,13 @@ The statistics are listed below:
 
 For deployment and fast inference, we suggest using vLLM. 
 
-If you use cuda 12.1 and pytorch 2.1, you can directly use the following command to install vLLM.
+If you use **CUDA 12.1 and PyTorch 2.1**, you can directly use the following command to install vLLM.
 
 ```bash
-# pip install vllm  # This line is faster but it does not support quantization models.
-
-# The below lines support int4 quantization (int8 will be supported soon). The installation are slower (~10 minutes).
-git clone https://github.com/QwenLM/vllm-gptq
-cd vllm-gptq
-pip install -e .
+pip install vllm
 ```
 
-Otherwise, please refer to the official vLLM [Installation Instructions](https://docs.vllm.ai/en/latest/getting_started/installation.html), or our [vLLM repo for GPTQ quantization](https://github.com/QwenLM/vllm-gptq).
+Otherwise, please refer to the official vLLM [Installation Instructions](https://docs.vllm.ai/en/latest/getting_started/installation.html).
 
 #### vLLM + Transformer-like Wrapper
 
