@@ -782,17 +782,12 @@ Qwen-72B については、2 つの方法で実験します。1) 4 つの A100-S
 ### vLLM 
 デプロイメントと高速推論のためには、vLLMを使用することをお勧めします。
 
-cuda 12.1 および pytorch 2.1 を使用している場合は、次のコマンドを直接使用して vLLM をインストールできます。
+**CUDA 12.1** および **PyTorch 2.1** を使用している場合は、次のコマンドを直接使用して vLLM をインストールできます。
 ```bash
-# pip install vllm  # この行はより速いですが、量子化モデルをサポートしていません。
-
-# 以下のはINT4の量子化をサポートします（INT8はまもなくサポートされます）。 インストールは遅くなります（〜10分）。
-git clone https://github.com/QwenLM/vllm-gptq
-cd vllm-gptq
-pip install -e .
+pip install vllm
 ```
 
-それ以外の場合は、公式 vLLM [インストール手順](https://docs.vllm.ai/en/latest/getting_started/installation.html) 、または[GPTQの量子化 vLLM レポ](https://github.com/QwenLM/vllm-gptq)を参照してください。
+それ以外の場合は、公式 vLLM [インストール手順](https://docs.vllm.ai/en/latest/getting_started/installation.html) を参照してください。
 
 #### vLLM + Transformer Wrapper
 
