@@ -484,7 +484,7 @@ async def predict(
     stop_words_ids = [tokenizer.encode(s)
                       for s in stop_words] if stop_words else None
 
-    delay_token_num = max([len(x) for x in stop_words])
+    delay_token_num = max([len(x) for x in stop_words]) if stop_words_ids else 0
     response_generator = model.chat_stream(tokenizer,
                                            query,
                                            history=history,
@@ -493,8 +493,8 @@ async def predict(
                                            **gen_kwargs)
     for _new_response in response_generator:
         if len(_new_response) <= delay_token_num:
-            continue 
-        new_response = _new_response[:-delay_token_num]
+            continue
+        new_response = _new_response[:-delay_token_num] if delay_token_num else _new_response
 
         if len(new_response) == current_length:
             continue
