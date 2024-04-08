@@ -16,17 +16,17 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 from transformers.trainer_utils import set_seed
 
-DEFAULT_CKPT_PATH = 'Qwen/Qwen-7B-Chat'
+DEFAULT_CKPT_PATH = "Qwen/Qwen-4B-Chat"
 
-_WELCOME_MSG = '''\
+_WELCOME_MSG = """\
 Welcome to use Qwen-Chat model, type text to start chat, type :h to show command help.
 (欢迎使用 Qwen-Chat 模型，输入内容即可进行对话，:h 显示命令帮助。)
 
 Note: This demo is governed by the original license of Qwen.
 We strongly advise users not to knowingly generate or allow others to knowingly generate harmful content, including hate speech, violence, pornography, deception, etc.
 (注：本演示受Qwen的许可协议限制。我们强烈建议，用户不应传播及不应允许他人传播以下内容，包括但不限于仇恨言论、暴力、色情、欺诈相关的有害信息。)
-'''
-_HELP_MSG = '''\
+"""
+_HELP_MSG = """\
 Commands:
     :help / :h          Show this help message              显示帮助信息
     :exit / :quit / :q  Exit the demo                       退出Demo
@@ -38,12 +38,14 @@ Commands:
     :conf               Show current generation config      显示生成配置
     :conf <key>=<value> Change generation config            修改生成配置
     :reset-conf         Reset generation config             重置生成配置
-'''
+"""
 
 
 def _load_model_tokenizer(args):
     tokenizer = AutoTokenizer.from_pretrained(
-        args.checkpoint_path, trust_remote_code=True, resume_download=True,
+        args.checkpoint_path,
+        trust_remote_code=True,
+        resume_download=True,
     )
 
     if args.cpu_only:
@@ -59,7 +61,9 @@ def _load_model_tokenizer(args):
     ).eval()
 
     config = GenerationConfig.from_pretrained(
-        args.checkpoint_path, trust_remote_code=True, resume_download=True,
+        args.checkpoint_path,
+        trust_remote_code=True,
+        resume_download=True,
     )
 
     return model, tokenizer, config
@@ -67,6 +71,7 @@ def _load_model_tokenizer(args):
 
 def _gc():
     import gc
+
     gc.collect()
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
@@ -81,37 +86,45 @@ def _clear_screen():
 
 def _print_history(history):
     terminal_width = shutil.get_terminal_size()[0]
-    print(f'History ({len(history)})'.center(terminal_width, '='))
+    print(f"History ({len(history)})".center(terminal_width, "="))
     for index, (query, response) in enumerate(history):
-        print(f'User[{index}]: {query}')
-        print(f'QWen[{index}]: {response}')
-    print('=' * terminal_width)
+        print(f"User[{index}]: {query}")
+        print(f"QWen[{index}]: {response}")
+    print("=" * terminal_width)
 
 
 def _get_input() -> str:
     while True:
         try:
-            message = input('User> ').strip()
+            message = input("User> ").strip()
         except UnicodeDecodeError:
-            print('[ERROR] Encoding error in input')
+            print("[ERROR] Encoding error in input")
             continue
         except KeyboardInterrupt:
             exit(1)
         if message:
             return message
-        print('[ERROR] Query is empty')
+        print("[ERROR] Query is empty")
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description='QWen-Chat command-line interactive chat demo.')
-    parser.add_argument("-c", "--checkpoint-path", type=str, default=DEFAULT_CKPT_PATH,
-                        help="Checkpoint name or path, default to %(default)r")
+        description="QWen-Chat command-line interactive chat demo."
+    )
+    parser.add_argument(
+        "-c",
+        "--checkpoint-path",
+        type=str,
+        default=DEFAULT_CKPT_PATH,
+        help="Checkpoint name or path, default to %(default)r",
+    )
     parser.add_argument("-s", "--seed", type=int, default=1234, help="Random seed")
-    parser.add_argument("--cpu-only", action="store_true", help="Run demo with CPU only")
+    parser.add_argument(
+        "--cpu-only", action="store_true", help="Run demo with CPU only"
+    )
     args = parser.parse_args()
 
-    history, response = [], ''
+    history, response = [], ""
 
     model, tokenizer, config = _load_model_tokenizer(args)
     orig_gen_config = deepcopy(model.generation_config)
@@ -125,66 +138,73 @@ def main():
         query = _get_input()
 
         # Process commands.
-        if query.startswith(':'):
+        if query.startswith(":"):
             command_words = query[1:].strip().split()
             if not command_words:
-                command = ''
+                command = ""
             else:
                 command = command_words[0]
 
-            if command in ['exit', 'quit', 'q']:
+            if command in ["exit", "quit", "q"]:
                 break
-            elif command in ['clear', 'cl']:
+            elif command in ["clear", "cl"]:
                 _clear_screen()
                 print(_WELCOME_MSG)
                 _gc()
                 continue
-            elif command in ['clear-history', 'clh']:
-                print(f'[INFO] All {len(history)} history cleared')
+            elif command in ["clear-history", "clh"]:
+                print(f"[INFO] All {len(history)} history cleared")
                 history.clear()
                 _gc()
                 continue
-            elif command in ['help', 'h']:
+            elif command in ["help", "h"]:
                 print(_HELP_MSG)
                 continue
-            elif command in ['history', 'his']:
+            elif command in ["history", "his"]:
                 _print_history(history)
                 continue
-            elif command in ['seed']:
+            elif command in ["seed"]:
                 if len(command_words) == 1:
-                    print(f'[INFO] Current random seed: {seed}')
+                    print(f"[INFO] Current random seed: {seed}")
                     continue
                 else:
                     new_seed_s = command_words[1]
                     try:
                         new_seed = int(new_seed_s)
                     except ValueError:
-                        print(f'[WARNING] Fail to change random seed: {new_seed_s!r} is not a valid number')
+                        print(
+                            f"[WARNING] Fail to change random seed: {new_seed_s!r} is not a valid number"
+                        )
                     else:
-                        print(f'[INFO] Random seed changed to {new_seed}')
+                        print(f"[INFO] Random seed changed to {new_seed}")
                         seed = new_seed
                     continue
-            elif command in ['conf']:
+            elif command in ["conf"]:
                 if len(command_words) == 1:
                     print(model.generation_config)
                 else:
                     for key_value_pairs_str in command_words[1:]:
-                        eq_idx = key_value_pairs_str.find('=')
+                        eq_idx = key_value_pairs_str.find("=")
                         if eq_idx == -1:
-                            print('[WARNING] format: <key>=<value>')
+                            print("[WARNING] format: <key>=<value>")
                             continue
-                        conf_key, conf_value_str = key_value_pairs_str[:eq_idx], key_value_pairs_str[eq_idx + 1:]
+                        conf_key, conf_value_str = (
+                            key_value_pairs_str[:eq_idx],
+                            key_value_pairs_str[eq_idx + 1 :],
+                        )
                         try:
                             conf_value = eval(conf_value_str)
                         except Exception as e:
                             print(e)
                             continue
                         else:
-                            print(f'[INFO] Change config: model.generation_config.{conf_key} = {conf_value}')
+                            print(
+                                f"[INFO] Change config: model.generation_config.{conf_key} = {conf_value}"
+                            )
                             setattr(model.generation_config, conf_key, conf_value)
                 continue
-            elif command in ['reset-conf']:
-                print('[INFO] Reset generation config')
+            elif command in ["reset-conf"]:
+                print("[INFO] Reset generation config")
                 model.generation_config = deepcopy(orig_gen_config)
                 print(model.generation_config)
                 continue
@@ -195,12 +215,14 @@ def main():
         # Run chat.
         set_seed(seed)
         try:
-            for response in model.chat_stream(tokenizer, query, history=history, generation_config=config):
+            for response in model.chat_stream(
+                tokenizer, query, history=history, generation_config=config
+            ):
                 _clear_screen()
                 print(f"\nUser: {query}")
                 print(f"\nQwen-Chat: {response}")
         except KeyboardInterrupt:
-            print('[WARNING] Generation interrupted')
+            print("[WARNING] Generation interrupted")
             continue
 
         history.append((query, response))
