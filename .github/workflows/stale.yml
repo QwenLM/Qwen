@@ -1,0 +1,23 @@
+name: Close stale issues
+on:
+  schedule:
+    - cron: "0 8 * * *"
+
+jobs:
+  close-issues:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/stale@v9
+        with:
+          days-before-issue-stale: 30
+          days-before-issue-close: 7
+          stale-issue-label: inactive
+          stale-issue-message: This issue has been automatically marked as inactive due to lack of recent activity. 
+            Should you believe it remains unresolved and warrants attention, kindly leave a comment on this thread. 
+            
+            此问题由于长期未有新进展而被系统自动标记为不活跃。如果您认为它仍有待解决，请在此帖下方留言以补充信息。
+          days-before-pr-stale: -1
+          days-before-pr-close: -1
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
