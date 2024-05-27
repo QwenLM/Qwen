@@ -139,7 +139,7 @@ def main():
                 print(_WELCOME_MSG)
                 _gc()
                 continue
-            elif command in ['clear-history', 'clh']:
+            elif command in ['clear-his', 'clh']:
                 print(f'[INFO] All {len(history)} history cleared')
                 history.clear()
                 _gc()
