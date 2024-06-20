@@ -15,7 +15,7 @@
 </p>
 <br><br>
 
-> [!Importante]
+> [!Important]
 > ¡Qwen2 está aquí! Estás invitado a seguir [QwenLM/Qwen2](https://github.com/QwenLM/Qwen2) y compartir tu experiencia allí.
 >
 > Este repositorio ([QwenLM/Qwen](https://github.com/QwenLM/Qwen)) ya no se mantiene activamente, debido a diferencias sustanciales en la base de código.
