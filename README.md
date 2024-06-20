@@ -15,12 +15,11 @@
 </p>
 <br><br>
 
-> [!Warning]
-> <div align="center">
-> <b>
-> 🚨 You are welcome to follow <a href="https://github.com/QwenLM/Qwen1.5">Qwen1.5</a> as the codes and usages for our latest models are significantly different. We will not keep the maintenance of this repo and we will focus more on the Qwen1.5 repo.
-> </b>
-> </div>
+> [!Important]
+> Qwen2 is here! You are welcome to follow [QwenLM/Qwen2](https://github.com/QwenLM/Qwen2) and share your experience there.
+>
+> This repo ([QwenLM/Qwen](https://github.com/QwenLM/Qwen)) is no longer actively maintained, due to substantial codebase differences.
+
 <br>
 
 |     |                                                              Qwen-Chat                                                               |                                                                Qwen-Chat (Int4)                                                                |                        Qwen-Chat (Int8)                         |                                                            Qwen                                                            |

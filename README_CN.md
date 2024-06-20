@@ -15,12 +15,10 @@
 </p>
 <br><br>
 
-> [!Warning]
-> <div align="center">
-> <b>
-> 🚨 建议您关注<a href="https://github.com/QwenLM/Qwen1.5">Qwen1.5</a>。当前我们Qwen1.5的模型代码和用法相比此前版本有较大不同，因此我们使用新的repo进行维护。未来我们将不再维护此repo。
-> </b>
-> </div>
+> [!Important]
+> Qwen2已开，欢迎关注！看这里：[QwenLM/Qwen2](https://github.com/QwenLM/Qwen2)
+>
+> Qwen2模型代码和用法相比此前版本有较大不同，因此我们使用新的repo进行维护。此repo ([QwenLM/Qwen](https://github.com/QwenLM/Qwen)) 已停止主要更新维护。
 <br>
 
 |     |                                                              Qwen-Chat                                                               |                                                                Qwen-Chat (Int4)                                                                |                        Qwen-Chat (Int8)                         |                                                            Qwen                                                            |
