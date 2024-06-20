@@ -15,7 +15,7 @@
 </p>
 <br><br>
 
-> [!重要]
+> [!Important]
 > Qwen2 が登場しました！[QwenLM/Qwen2](https://github.com/QwenLM/Qwen2) のフォローと、そこであなたの体験を共有することをお待ちしております。
 >
 > このリポジトリ ([QwenLM/Qwen](https://github.com/QwenLM/Qwen)) は、コードベースに大幅な違いがあるため、今後アクティブにメンテナンスされなくなります。
