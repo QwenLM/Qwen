@@ -397,6 +397,8 @@ async def create_chat_completion(request: ChatCompletionRequest):
             gen_kwargs['temperature'] = request.temperature
     if request.top_p is not None:
         gen_kwargs['top_p'] = request.top_p
+    if request.max_length is not None:
+        gen_kwargs['max_length'] = request.max_length
 
     stop_words = add_extra_stop_words(request.stop)
     if request.functions:
