@@ -19,6 +19,9 @@
 > Qwen2已开，欢迎关注！看这里：[QwenLM/Qwen2](https://github.com/QwenLM/Qwen2)
 >
 > Qwen2模型代码和用法相比此前版本有较大不同，因此我们使用新的repo进行维护。此repo ([QwenLM/Qwen](https://github.com/QwenLM/Qwen)) 已停止主要更新维护。
+
+> [!Warning]
+> 请勿混用[Qwen](https://github.com/QwenLM/Qwen)和[Qwen2](https://github.com/QwenLM/Qwen2)代码，两者并不兼容。
 <br>
 
 |     |                                                              Qwen-Chat                                                               |                                                                Qwen-Chat (Int4)                                                                |                        Qwen-Chat (Int8)                         |                                                            Qwen                                                            |
@@ -34,7 +37,7 @@
 
 当前基础模型已经稳定训练了大规模高质量且多样化的数据，覆盖多语言（当前以中文和英文为主），总量高达3万亿token。在相关基准评测中，Qwen系列模型拿出非常有竞争力的表现，显著超出同规模模型并紧追一系列最强的闭源模型。此外，我们利用SFT和RLHF技术实现对齐，从基座模型训练得到对话模型。Qwen-Chat具备聊天、文字创作、摘要、信息抽取、翻译等能力，同时还具备一定的代码生成和简单数学推理的能力。在此基础上，我们针对LLM对接外部系统等方面针对性地做了优化，当前具备较强的工具调用能力，以及最近备受关注的Code Interpreter的能力和扮演Agent的能力。我们将各个大小模型的特点列到了下表。
 
-| 模型        |   开源日期   | 最大上下文长度 | System Prompt强化 | 预训练token数 | 微调（Q-Lora）最小GPU用量 | 生成2048个token的最小显存占用 | 工具调用 |
+| 模型        |   开源日期   | 最大上下文长度 | System Prompt强化 | 预训练token数 | 微调（Q-Lora）最小GPU用量 | 生成2048个token的最小显存占用（Int4） | 工具调用 |
 |:----------|:--------:|:-------:|:---------------:|:---------:|:-----------------:|:-------------------:|:----:|
 | Qwen-1.8B | 23.11.30 |   32K   |        ✅        |   2.2T    |       5.8GB       |        2.9GB        |  ✅   |  
 | Qwen-7B   | 23.08.03 |   32K   |        ❎        |   2.4T    |      11.5GB       |        8.2GB        |  ✅   |   
