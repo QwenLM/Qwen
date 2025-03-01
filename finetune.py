@@ -11,7 +11,7 @@ import torch
 from torch.utils.data import Dataset
 #from deepspeed import zero
 from transformers.integrations import deepspeed
-from transformers.integrations.deepspeed.runtime.zero.partition_parameters import ZeroParamStatus
+from deepspeed.runtime.zero.partition_parameters import ZeroParamStatus
 import transformers
 from transformers import Trainer, GPTQConfig, deepspeed
 from transformers.trainer_pt_utils import LabelSmoother
