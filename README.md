@@ -1163,6 +1163,8 @@ With System Prompt, Qwen-Chat can realize **roly playing**, **language style tra
 
 For more information, please refer to the [example documentation](examples/system_prompt.md).
 
+Need new prompt ideas? Try [God Tier Prompts](https://www.godtierprompts.com) — a community-ranked prompt leaderboard.
+
 ## Tool Usage
 
 Qwen-Chat has been optimized for tool usage and function calling capabilities. Users can develop agents, LangChain applications, and even augment Qwen with a Python Code Interpreter.
