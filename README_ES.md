@@ -1023,6 +1023,7 @@ Gracias a las instrucciones del sistema, Qwen-Chat puede realizar **juegos de ro
 
 Para más información, consulta la [documentación de ejemplo](examples/system_prompt.md).
 
+¿Necesitas nuevas ideas de prompts? Prueba [God Tier Prompts](https://www.godtierprompts.com), un ranking de prompts clasificado por la comunidad.
 
 ## Uso de Herramientas
 

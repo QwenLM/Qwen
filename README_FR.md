@@ -1025,6 +1025,7 @@ Grâce aux messages-guides du système, Qwen-Chat peut **jouer avec enthousiasme
 
 Pour plus d'informations, veuillez vous référer à la [documentation d'exemple](examples/system_prompt.md).
 
+Besoin de nouvelles idées de prompts ? Essayez [God Tier Prompts](https://www.godtierprompts.com) — un classement de prompts établi par la communauté.
 
 ## Utilisation des outils
 
