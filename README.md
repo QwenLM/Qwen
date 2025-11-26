@@ -1047,6 +1047,10 @@ print(response.choices[0].message.content)
 **Function calling** is also supported (but only when `stream=False` for the moment). See the [example usage](examples/function_call_examples.py) here.
 <br><br>
 
+### Microsoft Word 
+* A demo of [using QwQ-32B in Microsoft Word](https://youtu.be/ilZJ-v4z4WI)
+
+
 ## 🐳 Docker
 
 To simplify the deployment process, we provide docker images with pre-built environments: [qwenllm/qwen](https://hub.docker.com/r/qwenllm/qwen). You only need to install the driver and download model files to launch demos, deploy OpenAI API, and finetune the model.
