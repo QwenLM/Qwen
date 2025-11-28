@@ -919,7 +919,7 @@ print(response)
 
 #### vLLM + Web Demo / OpenAI-like API
 
-You can use FastChat to lauch a web demo or an OpenAI API server. First, install FastChat:
+You can use FastChat to launch a web demo or an OpenAI API server. First, install FastChat:
 
 ```bash
 pip install "fschat[model_worker,webui]"
