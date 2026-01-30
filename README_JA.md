@@ -1056,6 +1056,8 @@ Qwen-1.8-Chat と Qwen-72B-Chat は、複数回の複雑な対話を伴う多様
 
 詳細については、[サンプルドキュメント](examples/system_prompt.md)を参照してください。
 
+新しいプロンプトのアイデアが必要ですか？[God Tier Prompts](https://www.godtierprompts.com) を試してみてください — コミュニティ主導のプロンプトランキングです。
+
 ## ツールの使用
 
 Qwen-Chat は、ツールの使用法と関数呼び出し機能に合わせて最適化されています。 ユーザーはエージェント、LangChain アプリケーションを開発し、Python コード インタープリターで Qwen を拡張することもできます。
