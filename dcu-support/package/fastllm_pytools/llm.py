@@ -272,7 +272,7 @@ class model:
             try:
                 cur = ret.decode();
                 ret = b'';
-            except:
+            except Exception:
                 fail_cnt += 1;
                 if (fail_cnt == 20):
                     break;

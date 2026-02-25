@@ -61,7 +61,7 @@ def extract_answer(completion):
     try:
         last_number = re.findall(r"\d+", completion)[-1]
         return eval(last_number)
-    except:
+    except Exception:
         return INVALID_ANS
 
 
