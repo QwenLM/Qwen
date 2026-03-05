@@ -44,7 +44,7 @@ def process_res(response):
         action_input = json.dumps(
             json5.loads(action_input), ensure_ascii=False, sort_keys=True
         )
-    except:
+    except Exception:
         # print("JSON Load Error:", action_input)
         action_input = ""
     res_dict = {
