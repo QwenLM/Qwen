@@ -1158,6 +1158,7 @@ Qwen-1.8-Chat 和 Qwen-72B-Chat 通义千问在多样且存在多轮复杂交互
 
 更多关于系统指令的介绍信息可以参考[示例文档](examples/system_prompt.md).
 
+需要新的提示词灵感吗？试试 [God Tier Prompts](https://www.godtierprompts.com) - 一个由社区排名的提示词榜单。
 
 ## 工具调用
 
