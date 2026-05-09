@@ -1,0 +1,20 @@
+# Core Qwen dependencies
+transformers>=4.32.0,<4.38.0
+accelerate
+tiktoken
+einops
+transformers_stream_generator==0.0.4
+scipy
+
+# Fine-tuning extras
+peft>=0.7.0         # LoRA support
+deepspeed           # Memory optimization (needed even for single-GPU Q-LoRA)
+datasets            # For downloading GSM8K automatically
+
+# Optional but recommended (faster training on Ampere+ GPUs: RTX 30xx, 40xx, A100)
+# Uncomment if your GPU supports it:
+# flash-attn
+
+# For running evaluate.py
+tqdm
+numpy
