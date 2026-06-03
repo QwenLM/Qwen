@@ -2,6 +2,7 @@ import argparse
 import json
 import os
 import pprint
+import re
 
 import json5
 import jsonlines
@@ -19,34 +20,63 @@ def is_callable(response, golden):
     return response["action"].strip().lower() == golden["action"].strip().lower()
 
 
+_ACTION_BLOCK_RE = re.compile(
+    r"^Action:\s*(.*?)\s*^Action Input:\s*(.*?)\s*(?:^Observation:\s*(.*?))?(?=^Thought:|^Action:|^Final Answer:|\Z)",
+    re.MULTILINE | re.DOTALL,
+)
+
+
+def _normalize_action_input(action_input):
+    try:
+        return json.dumps(
+            json5.loads(action_input), ensure_ascii=False, sort_keys=True
+        )
+    except Exception:
+        return ""
+
+
+def _extract_action_blocks(response):
+    blocks = []
+    for match in _ACTION_BLOCK_RE.finditer(response):
+        blocks.append(
+            {
+                "action": match.group(1).strip(),
+                "action_input": _normalize_action_input(match.group(2).strip()),
+                "observation": (match.group(3) or "").strip(),
+            }
+        )
+    return blocks
+
+
 def process_res(response):
     # parse response
     response += "\n"  # fix not-find bug
-    thought = response[: response.find("Action:")].strip()
-    action = response[
-        response.find("Action:") + len("Action:") : response.find("Action Input:")
-    ].strip()
-    action_input = response[
-        response.find("Action Input:")
-        + len("Action Input:") : response.find("Observation:")
-    ].strip()
-    # TODO: This parsing result is incorrect if the response contains multiple Actions. To be fixed in the future.
-    observation = response[
-        response.find("Observation:") + len("Observation:") : response.rfind("Thought:")
-    ].strip()
-    thought_last = response[
-        response.rfind("Thought:") + len("Thought:") : response.find("Final Answer:")
-    ].strip()
-    final_answer = response[
-        response.find("Final Answer:") + len("Final Answer:") :
-    ].strip()
-    try:
-        action_input = json.dumps(
-            json5.loads(action_input), ensure_ascii=False, sort_keys=True
-        )
-    except:
-        # print("JSON Load Error:", action_input)
-        action_input = ""
+    actions = _extract_action_blocks(response)
+
+    first_action_idx = response.find("Action:")
+    final_idx = response.rfind("Final Answer:")
+    if first_action_idx != -1:
+        thought = response[:first_action_idx].strip()
+    elif final_idx != -1:
+        thought = response[:final_idx].strip()
+    else:
+        thought = response.strip()
+
+    action = actions[-1]["action"] if actions else ""
+    action_input = actions[-1]["action_input"] if actions else ""
+    observation = actions[-1]["observation"] if actions else ""
+
+    thought_last = ""
+    if final_idx != -1:
+        last_thought_idx = response.rfind("Thought:", 0, final_idx)
+        if last_thought_idx != -1:
+            thought_last = response[
+                last_thought_idx + len("Thought:") : final_idx
+            ].strip()
+
+    final_answer = ""
+    if final_idx != -1:
+        final_answer = response[final_idx + len("Final Answer:") :].strip()
     res_dict = {
         "thought": thought,
         "action": action,
@@ -54,6 +84,7 @@ def process_res(response):
         "observation": observation,
         "thought_last": thought_last,
         "final_answer": final_answer,
+        "actions": actions,
     }
     return res_dict
 
