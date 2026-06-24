@@ -14,6 +14,8 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
+os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
+os.environ["GRADIO_ANALYTICS_ENABLED"] = "False"
 
 DEFAULT_CKPT_PATH = 'Qwen/Qwen-7B-Chat'
 
