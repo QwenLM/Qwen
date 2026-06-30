@@ -1,5 +1,5 @@
 <p align="left">
-    <a href="README_CN.md">中文</a>&nbsp ｜ &nbspEnglish&nbsp ｜ &nbsp<a href="README_JA.md">日本語</a> ｜ &nbsp<a href="README_FR.md">Français</a> ｜ &nbsp<a href="README_ES.md">Español</a>
+    <a href="README_CN.md">中文</a>&nbsp; ｜ &nbsp;English&nbsp; ｜ &nbsp;<a href="README_JA.md">日本語</a> ｜ &nbsp;<a href="README_FR.md">Français</a> ｜ &nbsp;<a href="README_ES.md">Español</a>
 </p>
 <br><br>
 
@@ -9,9 +9,9 @@
 <br>
 
 <p align="center">
-        🤗 <a href="https://huggingface.co/Qwen">Hugging Face</a>&nbsp&nbsp | &nbsp&nbsp🤖 <a href="https://modelscope.cn/organization/qwen">ModelScope</a>&nbsp&nbsp | &nbsp&nbsp 📑 <a href="https://arxiv.org/abs/2309.16609">Paper</a> &nbsp&nbsp ｜ &nbsp&nbsp🖥️ <a href="https://modelscope.cn/studios/qwen/Qwen-72B-Chat-Demo/summary">Demo</a>
+        🤗 <a href="https://huggingface.co/Qwen">Hugging Face</a>&nbsp;&nbsp; | &nbsp;&nbsp;🤖 <a href="https://modelscope.cn/organization/qwen">ModelScope</a>&nbsp;&nbsp; | &nbsp;&nbsp; 📑 <a href="https://arxiv.org/abs/2309.16609">Paper</a> &nbsp;&nbsp; ｜ &nbsp;&nbsp;🖥️ <a href="https://modelscope.cn/studios/qwen/Qwen-72B-Chat-Demo/summary">Demo</a>
 <br>
-<a href="assets/wechat.png">WeChat (微信)</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://discord.gg/CV4E9rpNSD">Discord</a>&nbsp&nbsp ｜  &nbsp&nbsp<a href="https://dashscope.aliyun.com">API</a> 
+<a href="assets/wechat.png">WeChat (微信)</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="https://discord.gg/CV4E9rpNSD">Discord</a>&nbsp;&nbsp; ｜  &nbsp;&nbsp;<a href="https://dashscope.aliyun.com">API</a> 
 </p>
 <br><br>
 
