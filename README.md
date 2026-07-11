@@ -1402,3 +1402,6 @@ Researchers and developers are free to use the codes and model weights of both Q
 
 If you are interested to leave a message to either our research team or product team, join our Discord or WeChat groups! Also, feel free to send an email to qianwen_opensource@alibabacloud.com.
 
+---
+
+*[Mukller](https://github.com/Mukller)*
