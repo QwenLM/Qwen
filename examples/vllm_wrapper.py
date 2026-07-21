@@ -130,7 +130,7 @@ class vLLMWrapper:
         else:
             self.__vllm_support_repetition_penalty = False
 
-        quantization = getattr(kwargs, 'quantization', None)
+        quantization = kwargs.get('quantization', None)
 
         self.model = LLM(model=model_dir,
                             tokenizer=model_dir,
@@ -174,7 +174,11 @@ class vLLMWrapper:
 
         from vllm.sampling_params import SamplingParams
         sampling_kwargs = {
-            "stop_token_ids": self.stop_words_ids,
+            "stop_token_ids": self.stop_words_ids + [
+                stop_id
+                for stop_word_ids in extra_stop_words_ids
+                for stop_id in stop_word_ids
+            ],
             "early_stopping": False,
             "top_p": generation_config.top_p,
             "top_k": -1 if generation_config.top_k == 0 else generation_config.top_k,
@@ -215,7 +219,7 @@ class vLLMWrapper:
             req_sample_output_strs.append(prompt_str + output_str)
         assert len(req_sample_output_strs) == 1
         response = req_sample_output_strs[0][len(prompt_str):]
-        history.append((prompt_str, response))
+        history.append((query, response))
 
         return response, history
 
