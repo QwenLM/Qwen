@@ -114,7 +114,7 @@ def main():
     history, response = [], ''
 
     model, tokenizer, config = _load_model_tokenizer(args)
-    orig_gen_config = deepcopy(model.generation_config)
+    orig_gen_config = deepcopy(config)
 
     _clear_screen()
     print(_WELCOME_MSG)
@@ -166,7 +166,7 @@ def main():
                     continue
             elif command in ['conf']:
                 if len(command_words) == 1:
-                    print(model.generation_config)
+                    print(config)
                 else:
                     for key_value_pairs_str in command_words[1:]:
                         eq_idx = key_value_pairs_str.find('=')
@@ -180,13 +180,13 @@ def main():
                             print(e)
                             continue
                         else:
-                            print(f'[INFO] Change config: model.generation_config.{conf_key} = {conf_value}')
-                            setattr(model.generation_config, conf_key, conf_value)
+                            print(f'[INFO] Change config: config.{conf_key} = {conf_value}')
+                            setattr(config, conf_key, conf_value)
                 continue
             elif command in ['reset-conf']:
                 print('[INFO] Reset generation config')
-                model.generation_config = deepcopy(orig_gen_config)
-                print(model.generation_config)
+                config = deepcopy(orig_gen_config)
+                print(config)
                 continue
             else:
                 # As normal query.
