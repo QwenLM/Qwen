@@ -125,7 +125,7 @@ def _launch_demo(args, model, tokenizer, config):
             _chatbot[-1] = (_parse_text(_query), _parse_text(response))
 
             yield _chatbot
-            full_response = _parse_text(response)
+            full_response = response
 
         print(f"History: {_task_history}")
         _task_history.append((_query, full_response))
