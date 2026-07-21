@@ -111,7 +111,7 @@ class ChatCompletionRequest(BaseModel):
     top_k: Optional[int] = None
     max_length: Optional[int] = None
     stream: Optional[bool] = False
-    stop: Optional[List[str]] = None
+    stop: Optional[Union[str, List[str]]] = None
 
 
 class ChatCompletionResponseChoice(BaseModel):
@@ -143,6 +143,8 @@ async def list_models():
 
 # To work around that unpleasant leading-\n tokenization issue!
 def add_extra_stop_words(stop_words):
+    if isinstance(stop_words, str):
+        stop_words = [stop_words]
     if stop_words:
         _stop_words = []
         _stop_words.extend(stop_words)
@@ -397,6 +399,8 @@ async def create_chat_completion(request: ChatCompletionRequest):
             gen_kwargs['temperature'] = request.temperature
     if request.top_p is not None:
         gen_kwargs['top_p'] = request.top_p
+    if request.max_length is not None:
+        gen_kwargs['max_length'] = request.max_length
 
     stop_words = add_extra_stop_words(request.stop)
     if request.functions:
