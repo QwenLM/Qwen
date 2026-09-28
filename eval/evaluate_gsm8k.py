@@ -59,7 +59,7 @@ def extract_answer_hf(completion):
 
 def extract_answer(completion):
     try:
-        last_number = re.findall(r"\d+", completion)[-1]
+        last_number = re.findall(r"\d+", completion.replace(",", ""))[-1]
         return eval(last_number)
     except:
         return INVALID_ANS
