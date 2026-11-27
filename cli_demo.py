@@ -6,6 +6,7 @@
 """A simple command-line interactive chat demo."""
 
 import argparse
+import ast
 import os
 import platform
 import shutil
@@ -114,6 +115,7 @@ def main():
     history, response = [], ''
 
     model, tokenizer, config = _load_model_tokenizer(args)
+    model.generation_config = config
     orig_gen_config = deepcopy(model.generation_config)
 
     _clear_screen()
@@ -175,7 +177,7 @@ def main():
                             continue
                         conf_key, conf_value_str = key_value_pairs_str[:eq_idx], key_value_pairs_str[eq_idx + 1:]
                         try:
-                            conf_value = eval(conf_value_str)
+                            conf_value = ast.literal_eval(conf_value_str)
                         except Exception as e:
                             print(e)
                             continue
@@ -195,7 +197,7 @@ def main():
         # Run chat.
         set_seed(seed)
         try:
-            for response in model.chat_stream(tokenizer, query, history=history, generation_config=config):
+            for response in model.chat_stream(tokenizer, query, history=history, generation_config=model.generation_config):
                 _clear_screen()
                 print(f"\nUser: {query}")
                 print(f"\nQwen-Chat: {response}")
